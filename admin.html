@@ -275,7 +275,7 @@ window.loadStudents = async function() {
       const s = d.data();
       html += `<tr>
         <td><strong>${s.name}</strong></td>
-        <td style="font-size:.78rem;color:#64748b;">${s.email || s.code || '—'}</td>
+        <td style="font-size:.78rem;color:#64748b;">${s.email || s.code || '--'}</td>
         <td>${(s.levels || (s.level ? [s.level] : ['A1'])).map(l => `<span class="badge-level">${l}</span>`).join(' ')}</td>
         <td>
           <button class="btn-view" onclick="viewActivity('${d.id}','${s.name}','${s.email || s.code || ''}')">Activity</button>

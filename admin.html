@@ -237,7 +237,7 @@ window.loadStudents = async function() {
         <td><span class="badge-level">${s.level || 'A1'}</span></td>
         <td>
           <button class="btn-view" onclick="viewActivity('${d.id}','${s.name}','${s.code}')">View Activity</button>
-          <button class="btn-del" onclick="deleteStudent('${d.id}','${s.name}')">Delete</button>
+          <button class="btn-del" data-del-id="${d.id}" onclick="deleteStudent('${d.id}','${s.name}')">Delete</button>
         </td>
       </tr>`;
     });
@@ -249,11 +249,31 @@ window.loadStudents = async function() {
 };
 
 window.deleteStudent = async function(id, name) {
-  if (!confirm('Delete student "' + name + '"? This cannot be undone.')) return;
+  const btn = document.querySelector(`[data-del-id="${id}"]`);
+  if (btn && btn.dataset.confirming !== 'yes') {
+    btn.dataset.confirming = 'yes';
+    btn.textContent = 'Sure?';
+    btn.style.background = '#dc2626';
+    btn.style.color = '#fff';
+    setTimeout(() => {
+      btn.dataset.confirming = '';
+      btn.textContent = 'Delete';
+      btn.style.background = '';
+      btn.style.color = '';
+    }, 3000);
+    return;
+  }
   try {
+    if (btn) { btn.disabled = true; btn.textContent = '...'; }
     await deleteDoc(doc(db, 'students', id));
     loadStudents();
-  } catch(e) { alert('Error: ' + e.message); }
+  } catch(e) {
+    const el = document.getElementById('student-list');
+    const errDiv = document.createElement('div');
+    errDiv.style.cssText = 'color:red;padding:8px;font-size:.8rem;font-weight:700;';
+    errDiv.textContent = 'Delete error: ' + e.message;
+    el.prepend(errDiv);
+  }
 };
 
 window.viewActivity = async function(id, name, code) {

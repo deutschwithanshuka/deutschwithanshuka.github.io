@@ -19,33 +19,44 @@
 html{scroll-behavior:smooth;font-size:16px;}
 body{background:var(--bg);color:var(--text);font-family:'Nunito',sans-serif;overflow-x:hidden;min-height:100vh;}
 
-/* ── PASSWORD GATE ── */
-#gate{position:fixed;inset:0;z-index:9999;background:linear-gradient(135deg,#1e40af,#6d28d9,#be185d);display:flex;align-items:center;justify-content:center;padding:24px;}
-#gate.hidden{display:none;}
+/* ── GATES (shared) ── */
+.gate-overlay{position:fixed;inset:0;z-index:9999;background:linear-gradient(135deg,#1e40af,#6d28d9,#be185d);display:flex;align-items:center;justify-content:center;padding:24px;}
+.gate-overlay.hidden{display:none;}
 .gate-box{background:#fff;border-radius:24px;padding:36px 28px;max-width:360px;width:100%;text-align:center;box-shadow:0 24px 80px rgba(0,0,0,.3);}
 .gate-flag{font-size:3rem;margin-bottom:8px;}
 .gate-title{font-size:1.5rem;font-weight:900;color:var(--navy);margin-bottom:2px;}
 .gate-by{font-size:.7rem;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:22px;}
 .gate-label{font-size:.8rem;font-weight:800;color:var(--navy);text-align:left;margin-bottom:6px;}
-.gate-inp{width:100%;padding:12px 16px;border:2px solid var(--border);border-radius:12px;font-family:'Nunito',sans-serif;font-size:1rem;font-weight:700;color:var(--navy);outline:none;margin-bottom:10px;letter-spacing:2px;}
+.gate-inp{width:100%;padding:12px 16px;border:2px solid var(--border);border-radius:12px;font-family:'Nunito',sans-serif;font-size:1rem;font-weight:700;color:var(--navy);outline:none;margin-bottom:10px;}
 .gate-inp:focus{border-color:var(--blue);}
 .gate-inp.shake{animation:shake .4s ease;}
 @keyframes shake{0%,100%{transform:translateX(0);}20%,60%{transform:translateX(-8px);}40%,80%{transform:translateX(8px);}}
 .gate-btn{width:100%;padding:13px;background:linear-gradient(135deg,var(--blue),var(--purple));color:#fff;border:none;border-radius:12px;font-family:'Nunito',sans-serif;font-size:1rem;font-weight:900;cursor:pointer;margin-bottom:10px;}
 .gate-btn:active{opacity:.9;}
+.gate-btn:disabled{opacity:.6;cursor:not-allowed;}
 .gate-err{color:var(--red);font-size:.78rem;font-weight:800;min-height:18px;}
 .gate-hint{font-size:.7rem;color:var(--muted);font-weight:600;margin-top:8px;line-height:1.5;}
+.gate-loading{font-size:.8rem;color:var(--blue);font-weight:700;margin-top:8px;min-height:20px;}
 
 /* ── NAV ── */
-nav{background:rgba(255,255,255,.97);backdrop-filter:blur(12px);border-bottom:2px solid var(--border);display:flex;align-items:center;justify-content:center;padding:12px 16px;}
+nav{background:rgba(255,255,255,.97);backdrop-filter:blur(12px);border-bottom:2px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:12px 16px;}
 .nav-inner{display:flex;align-items:center;gap:10px;}
 .nav-flag{font-size:1.6rem;}
 .nav-brand{text-align:center;}
 .nav-title{font-size:1.05rem;font-weight:900;color:var(--navy);line-height:1.1;}
 .nav-sub{font-size:.62rem;color:var(--muted);font-weight:700;letter-spacing:.5px;}
+.nav-student{font-size:.7rem;font-weight:800;background:#eff6ff;color:var(--blue);border:1.5px solid var(--border);border-radius:50px;padding:4px 12px;display:none;}
+.nav-student.visible{display:block;}
 
 /* ── MAIN ── */
 .main{padding:20px 16px 60px;max-width:480px;margin:0 auto;}
+
+/* ── STUDENT WELCOME STRIP ── */
+.student-strip{background:linear-gradient(135deg,#eff6ff,#f5f3ff);border:2px solid #c7d2fe;border-radius:14px;padding:12px 16px;margin-bottom:16px;display:none;align-items:center;gap:12px;}
+.student-strip.visible{display:flex;}
+.student-strip-icon{font-size:1.5rem;flex-shrink:0;}
+.student-strip-text{font-size:.82rem;color:var(--navy);font-weight:700;line-height:1.5;}
+.student-strip-name{font-size:1rem;font-weight:900;color:var(--blue);}
 
 /* ── HERO ── */
 .hero{background:linear-gradient(135deg,#1e40af,#6d28d9,#be185d);border-radius:20px;padding:28px 22px;text-align:center;color:#fff;margin-bottom:20px;position:relative;overflow:hidden;}
@@ -110,17 +121,36 @@ footer strong{color:var(--navy);}
 </head>
 <body>
 
-<!-- PASSWORD GATE -->
-<div id="gate">
+<!-- GATE 1: SITE PASSWORD -->
+<div class="gate-overlay" id="gate1">
   <div class="gate-box">
     <div class="gate-flag">🇩🇪</div>
     <div class="gate-title">Deutsch Meistern</div>
     <div class="gate-by">by Anshuka</div>
     <div class="gate-label">🔒 Enter your access password</div>
-    <input class="gate-inp" id="gate-inp" type="password" placeholder="Password…" maxlength="30" autocomplete="off" onkeydown="if(event.key==='Enter')checkPass()">
-    <button class="gate-btn" onclick="checkPass()">Enter ✈️</button>
-    <div class="gate-err" id="gate-err"></div>
+    <input class="gate-inp" id="gate1-inp" type="password" placeholder="Password…" maxlength="30" autocomplete="off" onkeydown="if(event.key==='Enter')checkSitePass()">
+    <button class="gate-btn" onclick="checkSitePass()">Enter ✈️</button>
+    <div class="gate-err" id="gate1-err"></div>
     <div class="gate-hint">Password provided by your teacher Anshuka.<br>Contact her if you don't have it yet.</div>
+  </div>
+</div>
+
+<!-- GATE 2: STUDENT LOGIN -->
+<div class="gate-overlay hidden" id="gate2">
+  <div class="gate-box">
+    <div class="gate-flag">👤</div>
+    <div class="gate-title">Student Login</div>
+    <div class="gate-by">Deutsch Meistern</div>
+    <div class="gate-label">Your Name</div>
+    <input class="gate-inp" id="s-name" type="text" placeholder="e.g. Priya Sharma" maxlength="60" autocomplete="off">
+    <div class="gate-label">Student Code</div>
+    <input class="gate-inp" id="s-code" type="text" placeholder="e.g. DM-001" maxlength="20" autocomplete="off" style="text-transform:uppercase;" onkeydown="if(event.key==='Enter')checkStudentLogin()">
+    <div class="gate-label">Password</div>
+    <input class="gate-inp" id="s-pass" type="password" placeholder="Your password" maxlength="30" autocomplete="off" onkeydown="if(event.key==='Enter')checkStudentLogin()">
+    <button class="gate-btn" id="s-btn" onclick="checkStudentLogin()">Login 🚀</button>
+    <div class="gate-err" id="gate2-err"></div>
+    <div class="gate-loading" id="gate2-loading"></div>
+    <div class="gate-hint">Your teacher Anshuka will give you your<br>student code and password.</div>
   </div>
 </div>
 
@@ -133,10 +163,20 @@ footer strong{color:var(--navy);}
       <div class="nav-sub">by Anshuka</div>
     </div>
   </div>
+  <div class="nav-student" id="nav-student"></div>
 </nav>
 
 <!-- MAIN -->
 <div class="main">
+
+  <!-- STUDENT WELCOME -->
+  <div class="student-strip" id="student-strip">
+    <span class="student-strip-icon">🎓</span>
+    <div>
+      <div class="student-strip-name" id="student-display-name"></div>
+      <div class="student-strip-text">Welcome back! Keep learning. Viel Erfolg!</div>
+    </div>
+  </div>
 
   <!-- HERO -->
   <div class="hero">
@@ -156,28 +196,28 @@ footer strong{color:var(--navy);}
   <div class="levels-label">📚 Choose Your Level</div>
   <div class="levels-grid">
 
-    <a class="lv-btn lv-a1" href="a1/index.html">
+    <a class="lv-btn lv-a1" href="a1/index.html" onclick="trackClick('A1')">
       <span class="lv-badge">A1</span>
       <span class="lv-name">Beginner</span>
       <span class="lv-desc">Numbers, greetings,<br>family, daily life</span>
       <span class="lv-tag">▶ Start Here</span>
     </a>
 
-    <a class="lv-btn lv-a2" href="a2/index.html">
+    <a class="lv-btn lv-a2" href="a2/index.html" onclick="trackClick('A2')">
       <span class="lv-badge">A2</span>
       <span class="lv-name">Elementary</span>
       <span class="lv-desc">Shopping, travel,<br>past tense</span>
       <span class="lv-tag">Coming Soon</span>
     </a>
 
-    <a class="lv-btn lv-b1" href="b1/index.html">
+    <a class="lv-btn lv-b1" href="b1/index.html" onclick="trackClick('B1')">
       <span class="lv-badge">B1</span>
       <span class="lv-name">Intermediate</span>
       <span class="lv-desc">Opinions, travel,<br>Konjunktiv II</span>
       <span class="lv-tag">Coming Soon</span>
     </a>
 
-    <a class="lv-btn lv-b21" href="b2/index.html">
+    <a class="lv-btn lv-b21" href="b2/index.html" onclick="trackClick('B2')">
       <span class="lv-badge">B2</span>
       <span class="lv-name">Upper Inter.</span>
       <span class="lv-desc">Complex grammar,<br>formal writing</span>
@@ -269,29 +309,129 @@ footer strong{color:var(--navy);}
   <strong>Deutsch Meistern · by Anshuka</strong> · Free forever · CEFR A1–C1 🇩🇪🇮🇳
 </footer>
 
-<script>
-const PASS = 'DeutschA1';
+<!-- Firebase SDK -->
+<script type="module">
+import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js';
+import { getFirestore, collection, query, where, getDocs, addDoc, serverTimestamp }
+  from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js';
 
-function checkPass(){
-  const v = document.getElementById('gate-inp').value.trim();
-  if(v === PASS){
-    document.getElementById('gate').classList.add('hidden');
+const firebaseConfig = {
+  apiKey: "AIzaSyCuMSWNpOIlnqqxFmy08CfIcbvAUpTXo1E",
+  authDomain: "deutschmeistern-abc4d.firebaseapp.com",
+  projectId: "deutschmeistern-abc4d",
+  storageBucket: "deutschmeistern-abc4d.firebasestorage.app",
+  messagingSenderId: "282075407369",
+  appId: "1:282075407369:web:4a5587b4eb391e768004d8"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+// ── SITE PASSWORD ──
+const SITE_PASS = 'DeutschA1';
+
+window.checkSitePass = function() {
+  const v = document.getElementById('gate1-inp').value.trim();
+  if (v === SITE_PASS) {
+    document.getElementById('gate1').classList.add('hidden');
+    document.getElementById('gate2').classList.remove('hidden');
+    setTimeout(() => document.getElementById('s-name').focus(), 100);
   } else {
-    const inp = document.getElementById('gate-inp');
-    document.getElementById('gate-err').textContent = '❌ Wrong password. Try again.';
-    inp.classList.remove('shake');
-    void inp.offsetWidth;
-    inp.classList.add('shake');
+    const inp = document.getElementById('gate1-inp');
+    document.getElementById('gate1-err').textContent = '❌ Wrong password. Try again.';
+    inp.classList.remove('shake'); void inp.offsetWidth; inp.classList.add('shake');
     inp.value = '';
-    setTimeout(()=>document.getElementById('gate-err').textContent='', 2500);
+    setTimeout(() => document.getElementById('gate1-err').textContent = '', 2500);
   }
+};
+
+// ── STUDENT LOGIN ──
+window.checkStudentLogin = async function() {
+  const name = document.getElementById('s-name').value.trim();
+  const code = document.getElementById('s-code').value.trim().toUpperCase();
+  const pass = document.getElementById('s-pass').value.trim();
+
+  if (!name || !code || !pass) {
+    document.getElementById('gate2-err').textContent = '❌ Please fill in all fields.';
+    setTimeout(() => document.getElementById('gate2-err').textContent = '', 2500);
+    return;
+  }
+
+  const btn = document.getElementById('s-btn');
+  btn.disabled = true;
+  document.getElementById('gate2-loading').textContent = '⏳ Checking...';
+  document.getElementById('gate2-err').textContent = '';
+
+  try {
+    const q = query(
+      collection(db, 'students'),
+      where('code', '==', code),
+      where('password', '==', pass)
+    );
+    const snap = await getDocs(q);
+
+    if (snap.empty) {
+      throw new Error('wrong');
+    }
+
+    const studentDoc = snap.docs[0];
+    const studentData = studentDoc.data();
+
+    // Name check (case-insensitive)
+    if (studentData.name.toLowerCase() !== name.toLowerCase()) {
+      throw new Error('wrong');
+    }
+
+    // Success — log the login
+    await addDoc(collection(db, 'students', studentDoc.id, 'activity'), {
+      type: 'login',
+      timestamp: serverTimestamp()
+    });
+
+    // Store session
+    sessionStorage.setItem('dm_student_id', studentDoc.id);
+    sessionStorage.setItem('dm_student_name', studentData.name);
+    sessionStorage.setItem('dm_student_code', code);
+
+    // Show main content
+    document.getElementById('gate2').classList.add('hidden');
+    showStudentUI(studentData.name);
+
+  } catch (e) {
+    document.getElementById('gate2-loading').textContent = '';
+    document.getElementById('gate2-err').textContent = '❌ Name, code or password is incorrect.';
+    const inp = document.getElementById('s-code');
+    inp.classList.remove('shake'); void inp.offsetWidth; inp.classList.add('shake');
+    btn.disabled = false;
+    setTimeout(() => document.getElementById('gate2-err').textContent = '', 3000);
+  }
+};
+
+function showStudentUI(name) {
+  document.getElementById('nav-student').textContent = '👤 ' + name;
+  document.getElementById('nav-student').classList.add('visible');
+  document.getElementById('student-display-name').textContent = 'Hallo, ' + name + '! 👋';
+  document.getElementById('student-strip').classList.add('visible');
 }
 
+// ── PROGRESS TRACKING ──
+window.trackClick = async function(level) {
+  const studentId = sessionStorage.getItem('dm_student_id');
+  if (!studentId) return;
+  try {
+    await addDoc(collection(db, 'students', studentId, 'activity'), {
+      type: 'level_visit',
+      level: level,
+      timestamp: serverTimestamp()
+    });
+  } catch(e) { /* silent fail — don't block navigation */ }
+};
 
-function comingSoon(e, level){
+// ── COMING SOON ──
+window.comingSoon = function(e, level) {
   e.preventDefault();
   alert('🔒 ' + level + ' is coming soon!\nCheck back later. Viel Geduld! 😊');
-}
+};
 </script>
 </body>
 </html>

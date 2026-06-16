@@ -637,13 +637,13 @@ nav{position:sticky;top:0;z-index:999;background:rgba(255,255,255,.98);backdrop-
 
 <!-- ══ LEADERBOARD ══ -->
 <div class="screen" id="s-leaderboard">
-  <div class="lb-header"><h2 style="font-size:1.4rem;font-weight:900;margin-bottom:4px;">🏆 Rangliste</h2><p style="font-size:.8rem;opacity:.85;">Top Lernende · A1 Kapitel 1</p></div>
-  <div class="podium">
-    <div class="pod pod-2"><div class="pod-inner"><div class="pod-rank">🥈</div><div class="pod-name">Lukas</div><div class="pod-pts">980</div></div></div>
-    <div class="pod pod-1"><div class="pod-inner"><div class="pod-rank">🥇</div><div class="pod-name">Sophie</div><div class="pod-pts">1150</div></div></div>
-    <div class="pod pod-3"><div class="pod-inner"><div class="pod-rank">🥉</div><div class="pod-name">Mei</div><div class="pod-pts">870</div></div></div>
+  <div class="lb-header"><h2 style="font-size:1.4rem;font-weight:900;margin-bottom:4px;">🏆 Rangliste</h2><p style="font-size:.8rem;opacity:.85;">Alle Kapitel · Gesamtpunktzahl</p></div>
+  <div class="podium" id="lb-podium">
+    <div class="pod pod-2"><div class="pod-inner"><div class="pod-rank">🥈</div><div class="pod-name" id="lb-p2-name">...</div><div class="pod-pts" id="lb-p2-pts">--</div></div></div>
+    <div class="pod pod-1"><div class="pod-inner"><div class="pod-rank">🥇</div><div class="pod-name" id="lb-p1-name">...</div><div class="pod-pts" id="lb-p1-pts">--</div></div></div>
+    <div class="pod pod-3"><div class="pod-inner"><div class="pod-rank">🥉</div><div class="pod-name" id="lb-p3-name">...</div><div class="pod-pts" id="lb-p3-pts">--</div></div></div>
   </div>
-  <div id="lb-list"></div>
+  <div id="lb-list"><div style="text-align:center;padding:24px;color:var(--muted);font-size:.85rem;">⏳ Lade Rangliste...</div></div>
 </div>
 
 <!-- ══ WÖRTERBUCH ══ -->
@@ -977,6 +977,7 @@ function goTo(id,btn){
   document.getElementById('s-'+id).classList.add('active');
   if(btn) btn.classList.add('active');
   if(id==='woerterbuch') setTimeout(buildWB,50);
+  if(id==='leaderboard' && window.loadLeaderboard) window.loadLeaderboard();
 }
 function navTo(id){
   const btn=document.querySelector(`.bn[onclick*="'${id}'"]`);
@@ -1417,22 +1418,7 @@ function filterVocab(){
   document.querySelectorAll('#vocab-container .vword').forEach(v=>{v.style.display=v.textContent.toLowerCase().includes(q)?'':'none';});
 }
 
-/* ── LEADERBOARD ── */
-const lbData=[
-  {name:'Sophie',pts:1150,level:'A2 Star'},{name:'Lukas',pts:980,level:'A1 Pro'},
-  {name:'Mei',pts:870,level:'A1 Champ'},{name:'Anshuka',pts:0,level:'A1 Rising',you:true},
-  {name:'Carlos',pts:720,level:'A1 Learner'},{name:'Lena',pts:650,level:'A1 Explorer'},{name:'Hamid',pts:580,level:'A1 Beginner'},
-];
-function buildLB(){
-  const sorted=[...lbData];sorted.find(p=>p.you).pts=score;sorted.sort((a,b)=>b.pts-a.pts);
-  const maxPts=1200;
-  document.getElementById('lb-list').innerHTML=sorted.map((p,i)=>`<div class="lb-row${p.you?' lb-you':''}">
-    <div class="lb-rank">${i+1}</div>
-    <div style="flex:1"><div class="lb-name">${p.name}${p.you?' 👈':''}</div><div class="lb-level">${p.level}</div>
-    <div class="lb-bar-wrap"><div class="lb-bar" style="width:${Math.round((p.pts/maxPts)*100)}%"></div></div></div>
-    <div class="lb-pts">${p.pts}</div>
-  </div>`).join('');
-}
+/* ── LEADERBOARD ── (real data loaded by Firebase module) */
 
 /* ── WÖRTERBUCH ── */
 var wbCurrentCat='all';
@@ -1490,17 +1476,101 @@ function generateCard(){
   document.getElementById('sr-date').textContent=now.toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'});
   document.getElementById('sc-modal').classList.add('hidden');
   document.getElementById('sr-card').classList.remove('hidden');
+  // Save to Firestore if student is logged in
+  const studentId=sessionStorage.getItem('dm_student_id');
+  if(studentId && window.saveKapitelScore) window.saveKapitelScore(studentId,'a1k1',score);
 }
 function closeCard(){document.getElementById('sc-overlay').classList.add('hidden');}
 
 /* ── INIT ── */
 renderAll();
 buildVocab();
-buildLB();
 window.addEventListener('load',function(){
   const ov=document.getElementById('sc-overlay');
   if(ov)ov.addEventListener('click',function(e){if(e.target===this)closeCard();});
 });
+</script>
+
+<!-- Firebase: Real Leaderboard -->
+<script type="module">
+import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js';
+import { getFirestore, collection, doc, getDoc, updateDoc, getDocs, query, orderBy, limit }
+  from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js';
+
+const app = initializeApp({
+  apiKey:"AIzaSyCuMSWNpOIlnqqxFmy08CfIcbvAUpTXo1E",
+  authDomain:"deutschmeistern-abc4d.firebaseapp.com",
+  projectId:"deutschmeistern-abc4d",
+  storageBucket:"deutschmeistern-abc4d.firebasestorage.app",
+  messagingSenderId:"282075407369",
+  appId:"1:282075407369:web:4a5587b4eb391e768004d8"
+});
+const db = getFirestore(app);
+
+window.saveKapitelScore = async function(studentId, kapitelKey, newScore) {
+  try {
+    const ref = doc(db, 'students', studentId);
+    const snap = await getDoc(ref);
+    if (!snap.exists()) return;
+    const scores = snap.data().scores || {};
+    if (newScore > (scores[kapitelKey] || 0)) {
+      scores[kapitelKey] = newScore;
+      const totalScore = Object.values(scores).reduce((a,b) => a+b, 0);
+      await updateDoc(ref, { scores, totalScore });
+    }
+  } catch(e) { console.log('Score save error:', e); }
+};
+
+window.loadLeaderboard = async function() {
+  const listEl = document.getElementById('lb-list');
+  const p1n = document.getElementById('lb-p1-name');
+  const p1p = document.getElementById('lb-p1-pts');
+  const p2n = document.getElementById('lb-p2-name');
+  const p2p = document.getElementById('lb-p2-pts');
+  const p3n = document.getElementById('lb-p3-name');
+  const p3p = document.getElementById('lb-p3-pts');
+  if (listEl) listEl.innerHTML = '<div style="text-align:center;padding:24px;color:var(--muted);font-size:.85rem;">⏳ Lade Rangliste...</div>';
+  try {
+    const myId = sessionStorage.getItem('dm_student_id');
+    const q = query(collection(db, 'students'), orderBy('totalScore', 'desc'), limit(20));
+    const snap = await getDocs(q);
+    const students = [];
+    snap.forEach(d => {
+      const data = d.data();
+      if ((data.totalScore || 0) > 0) students.push({ id:d.id, name:data.name, total:data.totalScore||0, you:d.id===myId });
+    });
+    // Include current user even if score=0 (so they see themselves)
+    if (myId && !students.find(s=>s.id===myId)) {
+      const mySelf = sessionStorage.getItem('dm_student_name');
+      if (mySelf) students.push({ id:myId, name:mySelf, total:0, you:true });
+    }
+    students.sort((a,b) => b.total - a.total);
+
+    // Update podium
+    const names = ['--','--','--'], pts = ['--','--','--'];
+    students.slice(0,3).forEach((s,i) => { names[i]=s.name; pts[i]=s.total+' Pts'; });
+    if(p1n) p1n.textContent=names[0]; if(p1p) p1p.textContent=pts[0];
+    if(p2n) p2n.textContent=names[1]; if(p2p) p2p.textContent=pts[1];
+    if(p3n) p3n.textContent=names[2]; if(p3p) p3p.textContent=pts[2];
+
+    if (students.length === 0) {
+      listEl.innerHTML = '<div style="text-align:center;padding:30px;color:var(--muted);font-size:.88rem;">Noch keine Punkte! Mach Übungen und gib deinen Score ab.</div>';
+      return;
+    }
+    const maxPts = Math.max(...students.map(s=>s.total), 1);
+    listEl.innerHTML = students.map((s,i) => `<div class="lb-row${s.you?' lb-you':''}">
+      <div class="lb-rank">${i+1}</div>
+      <div style="flex:1">
+        <div class="lb-name">${s.name}${s.you?' 👈':''}</div>
+        <div class="lb-bar-wrap"><div class="lb-bar" style="width:${Math.round((s.total/maxPts)*100)}%"></div></div>
+      </div>
+      <div class="lb-pts">${s.total}</div>
+    </div>`).join('');
+  } catch(e) {
+    console.log('Leaderboard error:', e);
+    if (listEl) listEl.innerHTML = '<div style="text-align:center;padding:20px;color:var(--muted);">Konnte Rangliste nicht laden.</div>';
+  }
+};
 </script>
 </body>
 </html>

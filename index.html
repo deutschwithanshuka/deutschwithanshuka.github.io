@@ -276,7 +276,6 @@ function checkPass(){
   const v = document.getElementById('gate-inp').value.trim();
   if(v === PASS){
     document.getElementById('gate').classList.add('hidden');
-    localStorage.setItem('dm_auth','1');
   } else {
     const inp = document.getElementById('gate-inp');
     document.getElementById('gate-err').textContent = '❌ Wrong password. Try again.';
@@ -288,9 +287,6 @@ function checkPass(){
   }
 }
 
-if(localStorage.getItem('dm_auth')==='1'){
-  document.getElementById('gate').classList.add('hidden');
-}
 
 function comingSoon(e, level){
   e.preventDefault();

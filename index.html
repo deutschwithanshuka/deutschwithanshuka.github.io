@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Deutsch Meistern · by Anshuka</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f0f4ff;--white:#fff;--navy:#0d1b6e;
+  --blue:#2563eb;--blue2:#60a5fa;--purple:#7c3aed;
+  --pink:#db2777;--orange:#ea580c;--yellow:#d97706;
+  --green:#16a34a;--red:#dc2626;--teal:#0f766e;
+  --text:#1e1b4b;--muted:#64748b;--border:#c7d2fe;
+  --sh:0 2px 12px rgba(37,99,235,.10);
+  --r:16px;--r2:10px;
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+html{scroll-behavior:smooth;font-size:16px;}
+body{background:var(--bg);color:var(--text);font-family:'Nunito',sans-serif;overflow-x:hidden;min-height:100vh;}
+
+/* ── PASSWORD GATE ── */
+#gate{position:fixed;inset:0;z-index:9999;background:linear-gradient(135deg,#1e40af,#6d28d9,#be185d);display:flex;align-items:center;justify-content:center;padding:24px;}
+#gate.hidden{display:none;}
+.gate-box{background:#fff;border-radius:24px;padding:36px 28px;max-width:360px;width:100%;text-align:center;box-shadow:0 24px 80px rgba(0,0,0,.3);}
+.gate-flag{font-size:3rem;margin-bottom:8px;}
+.gate-title{font-size:1.5rem;font-weight:900;color:var(--navy);margin-bottom:2px;}
+.gate-by{font-size:.7rem;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:22px;}
+.gate-label{font-size:.8rem;font-weight:800;color:var(--navy);text-align:left;margin-bottom:6px;}
+.gate-inp{width:100%;padding:12px 16px;border:2px solid var(--border);border-radius:12px;font-family:'Nunito',sans-serif;font-size:1rem;font-weight:700;color:var(--navy);outline:none;margin-bottom:10px;letter-spacing:2px;}
+.gate-inp:focus{border-color:var(--blue);}
+.gate-inp.shake{animation:shake .4s ease;}
+@keyframes shake{0%,100%{transform:translateX(0);}20%,60%{transform:translateX(-8px);}40%,80%{transform:translateX(8px);}}
+.gate-btn{width:100%;padding:13px;background:linear-gradient(135deg,var(--blue),var(--purple));color:#fff;border:none;border-radius:12px;font-family:'Nunito',sans-serif;font-size:1rem;font-weight:900;cursor:pointer;margin-bottom:10px;}
+.gate-btn:active{opacity:.9;}
+.gate-err{color:var(--red);font-size:.78rem;font-weight:800;min-height:18px;}
+.gate-hint{font-size:.7rem;color:var(--muted);font-weight:600;margin-top:8px;line-height:1.5;}
+
+/* ── NAV ── */
+nav{background:rgba(255,255,255,.97);backdrop-filter:blur(12px);border-bottom:2px solid var(--border);display:flex;align-items:center;justify-content:center;padding:12px 16px;}
+.nav-inner{display:flex;align-items:center;gap:10px;}
+.nav-flag{font-size:1.6rem;}
+.nav-brand{text-align:center;}
+.nav-title{font-size:1.05rem;font-weight:900;color:var(--navy);line-height:1.1;}
+.nav-sub{font-size:.62rem;color:var(--muted);font-weight:700;letter-spacing:.5px;}
+
+/* ── MAIN ── */
+.main{padding:20px 16px 60px;max-width:480px;margin:0 auto;}
+
+/* ── HERO ── */
+.hero{background:linear-gradient(135deg,#1e40af,#6d28d9,#be185d);border-radius:20px;padding:28px 22px;text-align:center;color:#fff;margin-bottom:20px;position:relative;overflow:hidden;}
+.hero::before{content:'🇩🇪';font-size:8rem;position:absolute;top:-12px;right:-12px;opacity:.08;}
+.hero-chip{display:inline-block;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.3);border-radius:50px;padding:4px 14px;font-size:.68rem;font-weight:800;text-transform:uppercase;letter-spacing:1.2px;margin-bottom:12px;}
+.hero-name{font-size:clamp(2rem,8vw,3rem);font-weight:900;line-height:1;margin-bottom:4px;}
+.hero-by{font-size:.8rem;font-weight:700;opacity:.8;letter-spacing:1px;text-transform:uppercase;margin-bottom:14px;}
+.hero-tagline{font-size:.85rem;opacity:.9;line-height:1.6;max-width:280px;margin:0 auto;}
+
+/* ── NOTICE STRIP ── */
+.notice{background:#fff;border:2px solid #bfdbfe;border-radius:12px;padding:10px 14px;margin-bottom:18px;display:flex;align-items:flex-start;gap:10px;font-size:.78rem;color:var(--navy);font-weight:700;line-height:1.5;}
+.notice-icon{font-size:1.1rem;flex-shrink:0;margin-top:1px;}
+
+/* ── LEVELS ── */
+.levels-label{font-size:.7rem;font-weight:900;color:var(--purple);text-transform:uppercase;letter-spacing:1.2px;margin-bottom:10px;text-align:center;}
+.levels-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:24px;}
+.lv-btn{border-radius:16px;padding:16px 12px 14px;text-align:center;cursor:pointer;border:2px solid transparent;text-decoration:none;display:flex;flex-direction:column;align-items:center;gap:4px;box-shadow:var(--sh);transition:transform .12s, box-shadow .12s;position:relative;overflow:hidden;}
+.lv-btn:active{transform:scale(.96);}
+.lv-btn.locked{opacity:.5;cursor:not-allowed;}
+.lv-btn.locked:active{transform:none;}
+.lv-badge{font-family:'Space Mono',monospace;font-size:1.5rem;font-weight:700;color:#fff;line-height:1;}
+.lv-name{font-size:.7rem;font-weight:800;color:#fff;opacity:.9;}
+.lv-desc{font-size:.6rem;color:rgba(255,255,255,.75);font-weight:600;line-height:1.3;margin-top:2px;text-align:center;}
+.lv-tag{font-size:.58rem;font-weight:800;background:rgba(255,255,255,.22);border-radius:50px;padding:2px 8px;color:#fff;margin-top:4px;}
+.lv-lock{position:absolute;top:8px;right:10px;font-size:.75rem;opacity:.7;}
+
+.lv-a1 {background:linear-gradient(135deg,#16a34a,#15803d);border-color:#bbf7d0;}
+.lv-a2 {background:linear-gradient(135deg,#0891b2,#0e7490);border-color:#a5f3fc;}
+.lv-b1 {background:linear-gradient(135deg,#2563eb,#1d4ed8);border-color:#bfdbfe;}
+.lv-b21{background:linear-gradient(135deg,#7c3aed,#6d28d9);border-color:#ddd6fe;}
+.lv-b22{background:linear-gradient(135deg,#9333ea,#7e22ce);border-color:#e9d5ff;}
+.lv-c1 {background:linear-gradient(135deg,#db2777,#be185d);border-color:#fbcfe8;}
+
+/* ── EXAM GUIDE ── */
+.exam-section{margin-bottom:24px;}
+.section-label{font-size:.7rem;font-weight:900;color:var(--purple);text-transform:uppercase;letter-spacing:1.2px;margin-bottom:10px;}
+.exam-card{background:#fff;border:2px solid var(--border);border-radius:14px;padding:14px 16px;display:flex;align-items:center;gap:12px;box-shadow:var(--sh);margin-bottom:8px;}
+.exam-icon{font-size:1.5rem;flex-shrink:0;}
+.exam-title{font-size:.88rem;font-weight:900;color:var(--navy);}
+.exam-sub{font-size:.72rem;color:var(--muted);font-weight:600;margin-top:1px;line-height:1.4;}
+.exam-badge{margin-left:auto;font-size:.6rem;font-weight:800;background:#eff6ff;color:var(--blue);border-radius:50px;padding:3px 9px;white-space:nowrap;flex-shrink:0;}
+
+/* ── ABOUT ── */
+.about-card{background:#fff;border:2px solid var(--border);border-radius:20px;padding:20px 18px;box-shadow:var(--sh);margin-bottom:18px;}
+.about-top{display:flex;align-items:center;gap:14px;margin-bottom:12px;}
+.about-avatar{width:54px;height:54px;border-radius:14px;background:linear-gradient(135deg,#2563eb,#7c3aed);display:flex;align-items:center;justify-content:center;font-size:1.8rem;flex-shrink:0;}
+.about-name{font-size:1rem;font-weight:900;color:var(--navy);}
+.about-role{font-size:.7rem;color:var(--muted);font-weight:700;margin-top:2px;line-height:1.4;}
+.about-desc{font-size:.82rem;color:var(--text);line-height:1.7;}
+.about-desc strong{color:var(--navy);}
+
+/* ── CONTACT ── */
+.contact-row{display:flex;gap:10px;margin-bottom:20px;}
+.contact-btn{flex:1;display:flex;align-items:center;justify-content:center;gap:7px;padding:11px 10px;border-radius:12px;font-family:'Nunito',sans-serif;font-size:.78rem;font-weight:800;text-decoration:none;border:none;cursor:pointer;}
+.contact-wa{background:#25d366;color:#fff;}
+.contact-mail{background:#fff;border:2px solid var(--border);color:var(--navy);}
+
+/* ── FOOTER ── */
+footer{text-align:center;padding:16px 14px;font-size:.7rem;color:var(--muted);font-weight:700;border-top:2px solid var(--border);background:#fff;}
+footer strong{color:var(--navy);}
+</style>
+</head>
+<body>
+
+<!-- PASSWORD GATE -->
+<div id="gate">
+  <div class="gate-box">
+    <div class="gate-flag">🇩🇪</div>
+    <div class="gate-title">Deutsch Meistern</div>
+    <div class="gate-by">by Anshuka</div>
+    <div class="gate-label">🔒 Enter your access password</div>
+    <input class="gate-inp" id="gate-inp" type="password" placeholder="Password…" maxlength="30" autocomplete="off" onkeydown="if(event.key==='Enter')checkPass()">
+    <button class="gate-btn" onclick="checkPass()">Enter ✈️</button>
+    <div class="gate-err" id="gate-err"></div>
+    <div class="gate-hint">Password provided by your teacher Anshuka.<br>Contact her if you don't have it yet.</div>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <span class="nav-flag">🇩🇪</span>
+    <div class="nav-brand">
+      <div class="nav-title">Deutsch Meistern</div>
+      <div class="nav-sub">by Anshuka</div>
+    </div>
+  </div>
+</nav>
+
+<!-- MAIN -->
+<div class="main">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-chip">🎓 Free German Learning Platform</div>
+    <div class="hero-name">Deutsch<br>Meistern</div>
+    <div class="hero-by">by Anshuka</div>
+    <div class="hero-tagline">CEFR A1 to C1 — specially made for Indian students 🇮🇳</div>
+  </div>
+
+  <!-- NOTICE -->
+  <div class="notice">
+    <span class="notice-icon">🚧</span>
+    <span>Platform is being built! <strong>A1</strong> lessons are live now. More levels coming soon — check back regularly.</span>
+  </div>
+
+  <!-- LEVELS -->
+  <div class="levels-label">📚 Choose Your Level</div>
+  <div class="levels-grid">
+
+    <a class="lv-btn lv-a1" href="a1/index.html">
+      <span class="lv-badge">A1</span>
+      <span class="lv-name">Beginner</span>
+      <span class="lv-desc">Numbers, greetings,<br>family, daily life</span>
+      <span class="lv-tag">▶ Start Here</span>
+    </a>
+
+    <a class="lv-btn lv-a2" href="a2/index.html">
+      <span class="lv-badge">A2</span>
+      <span class="lv-name">Elementary</span>
+      <span class="lv-desc">Shopping, travel,<br>past tense</span>
+      <span class="lv-tag">Coming Soon</span>
+    </a>
+
+    <a class="lv-btn lv-b1" href="b1/index.html">
+      <span class="lv-badge">B1</span>
+      <span class="lv-name">Intermediate</span>
+      <span class="lv-desc">Opinions, travel,<br>Konjunktiv II</span>
+      <span class="lv-tag">Coming Soon</span>
+    </a>
+
+    <a class="lv-btn lv-b21" href="b2/index.html">
+      <span class="lv-badge">B2</span>
+      <span class="lv-name">Upper Inter.</span>
+      <span class="lv-desc">Complex grammar,<br>formal writing</span>
+      <span class="lv-tag">Coming Soon</span>
+    </a>
+
+    <a class="lv-btn lv-b22 locked" href="#" onclick="comingSoon(event,'B2.2')">
+      <span class="lv-lock">🔒</span>
+      <span class="lv-badge">B2.2</span>
+      <span class="lv-name">Upper Inter. II</span>
+      <span class="lv-desc">Advanced texts,<br>debate & argument</span>
+      <span class="lv-tag">Coming Soon</span>
+    </a>
+
+    <a class="lv-btn lv-c1 locked" href="#" onclick="comingSoon(event,'C1')">
+      <span class="lv-lock">🔒</span>
+      <span class="lv-badge">C1</span>
+      <span class="lv-name">Advanced</span>
+      <span class="lv-desc">Fluency, academic<br>& professional German</span>
+      <span class="lv-tag">Coming Soon</span>
+    </a>
+
+  </div>
+
+  <!-- GOETHE EXAM GUIDE -->
+  <div class="exam-section">
+    <div class="section-label">🏅 Goethe-Zertifikat Exams</div>
+    <div class="exam-card">
+      <span class="exam-icon">📄</span>
+      <div>
+        <div class="exam-title">Goethe-Zertifikat A1</div>
+        <div class="exam-sub">Start Deutsch 1 · For complete beginners</div>
+      </div>
+      <span class="exam-badge">A1 ✅</span>
+    </div>
+    <div class="exam-card">
+      <span class="exam-icon">📄</span>
+      <div>
+        <div class="exam-title">Goethe-Zertifikat A2</div>
+        <div class="exam-sub">Everyday communication · Job & family topics</div>
+      </div>
+      <span class="exam-badge">A2</span>
+    </div>
+    <div class="exam-card">
+      <span class="exam-icon">📄</span>
+      <div>
+        <div class="exam-title">Goethe-Zertifikat B1</div>
+        <div class="exam-sub">Most popular · Required for German visa/PR</div>
+      </div>
+      <span class="exam-badge">B1</span>
+    </div>
+    <div class="exam-card">
+      <span class="exam-icon">📄</span>
+      <div>
+        <div class="exam-title">Goethe-Zertifikat B2</div>
+        <div class="exam-sub">University admission · Work in Germany</div>
+      </div>
+      <span class="exam-badge">B2</span>
+    </div>
+  </div>
+
+  <!-- ABOUT -->
+  <div class="about-card">
+    <div class="about-top">
+      <div class="about-avatar">👩‍🏫</div>
+      <div>
+        <div class="about-name">Anshuka</div>
+        <div class="about-role">German Professional<br>CEFR Specialist · A1 to B2+</div>
+      </div>
+    </div>
+    <div class="about-desc">
+      Hallo! I'm <strong>Anshuka</strong>, a German Professional helping Indian students master the language from scratch. I built <strong>Deutsch Meistern</strong> as a completely free platform — with interactive lessons, grammar guides, vocabulary and practice exercises, all in one place according to CEFR! Whether you are a complete beginner or preparing for your Goethe exam, I've got you covered. <strong>Viel Erfolg! 🌟</strong>
+    </div>
+  </div>
+
+  <!-- CONTACT -->
+  <div class="contact-row">
+    <a class="contact-btn contact-wa" href="https://wa.me/91XXXXXXXXXX" target="_blank">
+      💬 WhatsApp Anshuka
+    </a>
+    <a class="contact-btn contact-mail" href="mailto:ameckhouse@gmail.com">
+      ✉️ Email
+    </a>
+  </div>
+
+</div>
+
+<footer>
+  <strong>Deutsch Meistern · by Anshuka</strong> · Free forever · CEFR A1–C1 🇩🇪🇮🇳
+</footer>
+
+<script>
+const PASS = 'DeutschA1';
+
+function checkPass(){
+  const v = document.getElementById('gate-inp').value.trim();
+  if(v === PASS){
+    document.getElementById('gate').classList.add('hidden');
+    localStorage.setItem('dm_auth','1');
+  } else {
+    const inp = document.getElementById('gate-inp');
+    document.getElementById('gate-err').textContent = '❌ Wrong password. Try again.';
+    inp.classList.remove('shake');
+    void inp.offsetWidth;
+    inp.classList.add('shake');
+    inp.value = '';
+    setTimeout(()=>document.getElementById('gate-err').textContent='', 2500);
+  }
+}
+
+if(localStorage.getItem('dm_auth')==='1'){
+  document.getElementById('gate').classList.add('hidden');
+}
+
+function comingSoon(e, level){
+  e.preventDefault();
+  alert('🔒 ' + level + ' is coming soon!\nCheck back later. Viel Geduld! 😊');
+}
+</script>
+</body>
+</html>

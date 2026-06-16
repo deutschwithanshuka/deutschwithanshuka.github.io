@@ -1,0 +1,1372 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Deutsch Meistern · B1 Kapitel 1</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f4f6ff;--white:#fff;--navy:#0f1f6f;
+  --blue:#2563eb;--blue2:#60a5fa;--purple:#7c3aed;
+  --pink:#db2777;--orange:#ea580c;--yellow:#d97706;
+  --green:#16a34a;--red:#dc2626;--teal:#0f766e;
+  --text:#1a1a3e;--muted:#5a6a8a;--border:#c7d2fe;
+  --sh:0 2px 14px rgba(37,99,235,.09);
+  --r:18px;--r2:12px;
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+html{scroll-behavior:smooth;font-size:17px;}
+body{background:var(--bg);color:var(--text);font-family:'Nunito',sans-serif;overflow-x:hidden;line-height:1.6;}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:999;background:rgba(255,255,255,.98);backdrop-filter:blur(12px);border-bottom:2px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:12px 16px;}
+.nav-left{display:flex;align-items:center;gap:10px;}
+.nav-flag{font-size:1.5rem;}
+.nav-title{font-size:1rem;font-weight:900;color:var(--navy);}
+.nav-sub{font-size:.68rem;color:var(--muted);font-weight:700;display:block;margin-top:-1px;}
+.score-pill{background:linear-gradient(135deg,#f59e0b,#ef4444);color:#fff;border-radius:50px;padding:6px 15px;font-weight:900;font-size:.82rem;white-space:nowrap;}
+
+/* BOTTOM NAV */
+.bnav{position:fixed;bottom:0;left:0;right:0;z-index:999;background:rgba(255,255,255,.97);backdrop-filter:blur(10px);border-top:2px solid var(--border);display:flex;}
+.bn{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:8px 2px 11px;border:none;background:none;font-family:'Nunito',sans-serif;cursor:pointer;color:var(--muted);font-size:.63rem;font-weight:800;letter-spacing:.3px;gap:3px;transition:color .15s;}
+.bn-i{font-size:1.3rem;}
+.bn.active{color:var(--blue);}
+
+/* SCREENS */
+.screen{display:none;padding:18px 16px 96px;min-height:100vh;}
+.screen.active{display:block;}
+
+/* HERO */
+.hero{background:linear-gradient(135deg,#1e40af,#6d28d9,#be185d);border-radius:var(--r);padding:26px 18px 30px;text-align:center;color:#fff;margin-bottom:16px;position:relative;overflow:hidden;}
+.hero::before{content:'✈️';font-size:5rem;position:absolute;top:-5px;right:-5px;opacity:.12;}
+.hero-chip{display:inline-block;background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.3);border-radius:50px;padding:3px 12px;font-size:.68rem;font-weight:800;text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;}
+.hero h1{font-size:clamp(1.8rem,6vw,2.8rem);font-weight:900;line-height:1.05;margin-bottom:6px;}
+.hero p{font-size:.9rem;opacity:.9;line-height:1.65;max-width:320px;margin:0 auto;}
+.stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px;}
+.stat-card{background:#fff;border:2px solid var(--border);border-radius:var(--r2);padding:12px;text-align:center;box-shadow:var(--sh);}
+.stat-em{font-size:1.4rem;margin-bottom:2px;}
+.stat-n{font-family:'Space Mono',monospace;font-size:1.4rem;font-weight:700;color:var(--blue);}
+.stat-l{font-size:.66rem;color:var(--muted);text-transform:uppercase;letter-spacing:.7px;font-weight:800;}
+.topic-list{display:flex;flex-direction:column;gap:8px;}
+.t-row{background:#fff;border:2px solid var(--border);border-radius:var(--r2);padding:12px 14px;display:flex;align-items:center;gap:10px;box-shadow:var(--sh);cursor:pointer;transition:transform .12s;}
+.t-row:active{transform:scale(.98);}
+.t-ico{font-size:1.3rem;flex-shrink:0;}
+.t-main{flex:1;}
+.t-name{font-weight:900;color:var(--navy);font-size:.96rem;}
+.t-sub{font-size:.78rem;color:var(--muted);font-weight:600;margin-top:1px;}
+.t-badge{background:linear-gradient(135deg,var(--blue),var(--purple));color:#fff;border-radius:50px;padding:3px 9px;font-size:.62rem;font-weight:800;}
+
+/* GRAMMAR */
+.g-tabs{display:flex;gap:6px;overflow-x:auto;padding-bottom:4px;margin-bottom:14px;-ms-overflow-style:none;scrollbar-width:none;}
+.g-tabs::-webkit-scrollbar{display:none;}
+.g-tab{flex-shrink:0;padding:9px 18px;border-radius:50px;border:2px solid var(--border);background:#fff;color:var(--muted);font-family:'Nunito',sans-serif;font-size:.82rem;font-weight:800;cursor:pointer;transition:all .15s;white-space:nowrap;}
+.g-tab.active{background:linear-gradient(135deg,var(--blue),var(--purple));color:#fff;border-color:transparent;}
+.g-panel{display:none;}
+.g-panel.active{display:block;}
+.gcard{background:#fff;border:2px solid var(--border);border-radius:var(--r);padding:20px 18px;box-shadow:var(--sh);margin-bottom:14px;}
+.gcard-title{font-size:1.2rem;font-weight:900;color:var(--navy);margin-bottom:6px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+.gcard-badge{font-size:.66rem;background:linear-gradient(135deg,var(--blue),var(--purple));color:#fff;border-radius:50px;padding:3px 11px;font-weight:800;}
+.gcard-desc{font-size:.88rem;color:var(--muted);font-weight:600;margin-bottom:14px;line-height:1.65;}
+.rule-box{background:#eff6ff;border-left:4px solid var(--blue);border-radius:0 var(--r2) var(--r2) 0;padding:14px 16px;margin-bottom:12px;font-size:.9rem;font-weight:700;color:var(--navy);line-height:1.65;}
+.tip-box{background:#fef9e7;border-left:4px solid var(--yellow);border-radius:0 var(--r2) var(--r2) 0;padding:14px 16px;margin-bottom:12px;font-size:.88rem;font-weight:700;color:#78350f;line-height:1.65;}
+.warn-box{background:#fff4f4;border-left:4px solid var(--red);border-radius:0 var(--r2) var(--r2) 0;padding:14px 16px;margin-bottom:12px;font-size:.88rem;font-weight:700;color:#9f1239;line-height:1.65;}
+.struct{background:#f8faff;border:2px solid #e0e7ff;border-radius:var(--r2);padding:12px;margin-bottom:10px;}
+.struct-row{display:flex;gap:5px;flex-wrap:wrap;align-items:center;margin-bottom:6px;}
+.struct-row:last-child{margin-bottom:0;}
+.sb{border-radius:8px;padding:7px 11px;font-size:.82rem;font-weight:800;text-align:center;}
+.sb.s1{background:#dbeafe;color:#1e40af;}
+.sb.s2{background:#fce7f3;color:#9d174d;}
+.sb.s3{background:#dcfce7;color:#166534;}
+.sb.s4{background:#fef3c7;color:#92400e;}
+.sb.s5{background:#f3e8ff;color:#6b21a8;}
+.sb.slbl{background:none;color:var(--muted);font-size:.65rem;letter-spacing:.8px;text-transform:uppercase;padding-left:0;}
+.section-h{font-size:.78rem;font-weight:900;color:var(--purple);text-transform:uppercase;letter-spacing:1px;margin:18px 0 10px;border-bottom:2px solid #e0e7ff;padding-bottom:6px;}
+.ex-grid{display:flex;flex-direction:column;gap:8px;margin-bottom:12px;}
+.ex-item{background:#f8faff;border:1px solid #e0e7ff;border-radius:10px;padding:12px 14px;font-size:.88rem;line-height:1.6;}
+.ex-de{font-weight:700;color:var(--navy);margin-bottom:2px;}
+.ex-en{color:var(--muted);font-size:.82rem;font-style:italic;margin-top:2px;}
+.ex-note{color:var(--teal);font-size:.78rem;font-weight:700;margin-top:3px;}
+.vocab-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-bottom:10px;}
+@media(min-width:600px){.vocab-grid{grid-template-columns:repeat(3,1fr);}}
+.vword{background:#f8faff;border:1px solid #e0e7ff;border-radius:10px;padding:11px 12px;cursor:pointer;transition:border-color .15s;}
+.vword:active{border-color:var(--blue);}
+.vword.open{border-color:var(--blue);background:#eff6ff;}
+.vw-top{display:flex;align-items:center;gap:7px;}
+.vw-art{font-size:.64rem;font-weight:900;border-radius:4px;padding:2px 6px;}
+.art-m{background:#dbeafe;color:#1e40af;}
+.art-f{background:#fce7f3;color:#9d174d;}
+.art-n{background:#dcfce7;color:#166534;}
+.art-pl{background:#fef3c7;color:#92400e;}
+.art-v{background:#f3e8ff;color:#6b21a8;}
+.art-adj{background:#ffedd5;color:#9a3412;}
+.vw-word{font-weight:900;color:var(--navy);font-size:.9rem;}
+.vw-details{display:none;margin-top:7px;border-top:1px solid #e0e7ff;padding-top:7px;}
+.vword.open .vw-details{display:block;}
+.vw-en{font-weight:700;color:var(--green);font-size:.86rem;}
+.vw-ex{font-size:.8rem;color:var(--muted);font-style:italic;margin-top:4px;line-height:1.5;}
+
+/* EXERCISES */
+.ex-tabs{display:flex;gap:6px;margin-bottom:14px;}
+.ex-tab{flex:1;padding:10px 4px;border-radius:50px;border:2px solid var(--border);background:#fff;color:var(--muted);font-family:'Nunito',sans-serif;font-size:.8rem;font-weight:800;cursor:pointer;transition:all .15s;text-align:center;}
+.ex-tab.active{background:linear-gradient(135deg,var(--blue),var(--purple));color:#fff;border-color:transparent;}
+.ex-panel{display:none;}
+.ex-panel.active{display:block;}
+.qcard{background:#fff;border:2px solid var(--border);border-radius:var(--r);padding:18px 16px;margin-bottom:12px;box-shadow:var(--sh);}
+.q-meta{display:flex;align-items:center;gap:7px;margin-bottom:10px;flex-wrap:wrap;}
+.q-num{font-family:'Space Mono',monospace;font-size:.72rem;font-weight:700;background:#e0e7ff;color:var(--blue);border-radius:5px;padding:3px 8px;}
+.q-type{font-size:.66rem;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;}
+.q-status{margin-left:auto;font-size:1rem;}
+.q-text{font-weight:700;font-size:.95rem;color:var(--navy);margin-bottom:12px;line-height:1.6;}
+.passage{background:#f8faff;border:1px solid #e0e7ff;border-radius:10px;padding:14px 16px;font-size:.86rem;line-height:1.7;color:var(--text);margin-bottom:10px;}
+.opts{display:flex;flex-direction:column;gap:8px;}
+.opt{width:100%;padding:12px 16px;border-radius:11px;border:2px solid var(--border);background:#f8faff;font-family:'Nunito',sans-serif;font-size:.9rem;font-weight:700;color:var(--text);cursor:pointer;text-align:left;transition:all .15s;}
+.opt:active{transform:scale(.99);}
+.opt.correct{border-color:var(--green);background:#dcfce7;color:var(--green);}
+.opt.wrong{border-color:var(--red);background:#fff1f2;color:var(--red);}
+.opt.disabled{cursor:default;opacity:.7;}
+.word-bank{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;}
+.wchip{padding:9px 14px;border-radius:10px;border:2px solid var(--border);background:#f8faff;font-family:'Nunito',sans-serif;font-size:.88rem;font-weight:700;cursor:pointer;transition:all .15s;color:var(--navy);}
+.wchip:active{transform:scale(.97);}
+.wchip.used{opacity:.35;cursor:default;}
+.ans-area{min-height:46px;background:#eff6ff;border:2px dashed var(--blue2);border-radius:11px;padding:10px 14px;font-size:.9rem;font-weight:700;color:var(--navy);margin:10px 0;line-height:1.6;}
+.ans-area.empty-hint{color:var(--muted);font-weight:600;font-style:italic;}
+.inline-inp{border:none;border-bottom:2px solid var(--blue);background:transparent;font-family:'Nunito',sans-serif;font-size:.95rem;font-weight:700;color:var(--navy);padding:3px 5px;width:110px;outline:none;}
+.inline-inp.correct{border-color:var(--green);color:var(--green);}
+.inline-inp.wrong{border-color:var(--red);color:var(--red);}
+.fb{font-size:.85rem;font-weight:700;min-height:0;margin-top:8px;line-height:1.5;}
+.fb.ok{color:var(--green);}
+.fb.err{color:var(--red);}
+.q-actions{display:flex;gap:8px;margin-top:8px;}
+.btn-check{background:linear-gradient(135deg,var(--blue),var(--purple));color:#fff;border:none;border-radius:10px;padding:10px 20px;font-family:'Nunito',sans-serif;font-size:.86rem;font-weight:800;cursor:pointer;}
+.btn-reset{background:#f1f5f9;color:var(--muted);border:2px solid var(--border);border-radius:10px;padding:10px 14px;font-family:'Nunito',sans-serif;font-size:.86rem;font-weight:800;cursor:pointer;}
+.hint-t{font-size:.82rem;color:var(--muted);font-weight:600;margin-bottom:6px;}
+
+/* LEADERBOARD */
+.lb-header{background:linear-gradient(135deg,#1e40af,#6d28d9);border-radius:var(--r);padding:20px 16px;text-align:center;color:#fff;margin-bottom:14px;}
+.lb-header h2{font-size:1.4rem;font-weight:900;margin-bottom:4px;}
+.lb-header p{font-size:.8rem;opacity:.85;}
+.podium{display:flex;align-items:flex-end;justify-content:center;gap:8px;margin-bottom:16px;height:130px;}
+.pod{display:flex;flex-direction:column;align-items:center;justify-content:flex-end;border-radius:var(--r2) var(--r2) 0 0;}
+.pod-1{width:90px;height:110px;background:linear-gradient(135deg,#f59e0b,#d97706);}
+.pod-2{width:78px;height:85px;background:linear-gradient(135deg,#94a3b8,#64748b);}
+.pod-3{width:70px;height:65px;background:linear-gradient(135deg,#b45309,#92400e);}
+.pod-inner{padding:6px 4px 8px;text-align:center;color:#fff;}
+.pod-rank{font-size:1.2rem;}
+.pod-name{font-size:.65rem;font-weight:900;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:80px;}
+.pod-pts{font-family:'Space Mono',monospace;font-size:.7rem;font-weight:700;}
+.lb-row{background:#fff;border:2px solid var(--border);border-radius:var(--r2);padding:10px 12px;display:flex;align-items:center;gap:10px;margin-bottom:7px;box-shadow:var(--sh);}
+.lb-rank{font-family:'Space Mono',monospace;font-size:.75rem;font-weight:700;color:var(--muted);width:22px;}
+.lb-name{flex:1;font-weight:800;color:var(--navy);font-size:.92rem;}
+.lb-level{font-size:.65rem;font-weight:700;color:var(--purple);}
+.lb-pts{font-family:'Space Mono',monospace;font-size:.88rem;font-weight:700;color:var(--blue);}
+.lb-bar-wrap{width:100%;background:#e0e7ff;border-radius:50px;height:5px;margin-top:3px;}
+.lb-bar{height:5px;background:linear-gradient(90deg,var(--blue),var(--purple));border-radius:50px;transition:width .4s;}
+.lb-you{border-color:var(--blue);background:#eff6ff;}
+
+/* SEARCH */
+.search-wrap{position:relative;margin-bottom:12px;}
+.search-inp{width:100%;padding:12px 16px 12px 42px;border-radius:50px;border:2px solid var(--border);background:#fff;font-family:'Nunito',sans-serif;font-size:.92rem;font-weight:700;color:var(--navy);outline:none;}
+.search-inp:focus{border-color:var(--blue);}
+.search-icon{position:absolute;left:12px;top:50%;transform:translateY(-50%);font-size:.95rem;color:var(--muted);}
+
+/* FLOATING SCORE */
+.float-score{position:fixed;bottom:68px;right:14px;z-index:900;background:linear-gradient(135deg,#f59e0b,#ef4444);color:#fff;border-radius:50px;padding:8px 14px;font-weight:900;font-size:.8rem;box-shadow:0 4px 20px rgba(239,68,68,.4);display:flex;align-items:center;gap:6px;}
+
+/* CONFETTI */
+.conf-piece{position:fixed;width:8px;height:8px;border-radius:2px;z-index:9999;pointer-events:none;animation:fall 1.2s ease-in forwards;}
+@keyframes fall{0%{transform:translateY(-20px) rotate(0);opacity:1;}100%{transform:translateY(100vh) rotate(720deg);opacity:0;}}
+
+/* SECTION HEADER */
+.sec-h{font-size:1.05rem;font-weight:900;color:var(--navy);margin-bottom:14px;display:flex;align-items:center;gap:8px;}
+.sec-h::after{content:'';flex:1;height:2px;background:linear-gradient(90deg,var(--border),transparent);}
+
+/* RESPONSIVE */
+@media(min-width:900px){
+  .bnav{display:flex;max-width:820px;left:50%;transform:translateX(-50%);border-radius:16px 16px 0 0;border-left:2px solid var(--border);border-right:2px solid var(--border);}
+  .screen{padding:24px 28px 100px;max-width:820px;margin:0 auto;}
+  body{padding-top:0;}
+}
+
+
+/* WÖRTERBUCH */
+.wb-filter{padding:7px 14px;border-radius:50px;border:2px solid var(--border);background:#fff;color:var(--muted);font-family:'Nunito',sans-serif;font-size:.78rem;font-weight:800;cursor:pointer;transition:all .15s;white-space:nowrap;}
+.wb-filter.active{background:linear-gradient(135deg,var(--blue),var(--purple));color:#fff;border-color:transparent;}
+.wb-cat-title{font-size:.78rem;font-weight:900;color:var(--purple);text-transform:uppercase;letter-spacing:1px;margin:18px 0 10px;border-bottom:2px solid #e0e7ff;padding-bottom:6px;display:flex;align-items:center;gap:6px;}
+.wb-grid{display:flex;flex-direction:column;gap:8px;margin-bottom:4px;}
+.wb-item{background:#fff;border:2px solid var(--border);border-radius:12px;overflow:hidden;box-shadow:var(--sh);cursor:pointer;transition:border-color .15s;}
+.wb-item:active{transform:scale(.99);}
+.wb-item.open{border-color:var(--blue);}
+.wb-head{display:flex;align-items:center;gap:10px;padding:12px 14px;}
+.wb-art-badge{font-size:.64rem;font-weight:900;border-radius:5px;padding:3px 7px;flex-shrink:0;}
+.wb-word-text{font-weight:900;color:var(--navy);font-size:.95rem;flex:1;}
+.wb-short-en{font-size:.78rem;color:var(--muted);font-weight:600;}
+.wb-arrow{font-size:.8rem;color:var(--muted);transition:transform .2s;}
+.wb-item.open .wb-arrow{transform:rotate(90deg);}
+.wb-body{display:none;padding:0 14px 14px;border-top:1px solid var(--border);}
+.wb-item.open .wb-body{display:block;}
+.wb-en-full{font-size:.88rem;font-weight:700;color:var(--green);margin-bottom:6px;padding-top:10px;}
+.wb-ex-sent{font-size:.82rem;color:var(--muted);font-style:italic;line-height:1.6;margin-bottom:4px;}
+.wb-extra{font-size:.78rem;color:var(--teal);font-weight:700;}
+
+/* STUDENT SCORE CARD */
+.sc-overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:2000;display:flex;align-items:center;justify-content:center;padding:20px;}
+.sc-overlay.hidden{display:none;}
+.sc-modal{background:#fff;border-radius:20px;padding:28px 24px;max-width:360px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,.25);}
+.sc-modal h2{font-size:1.15rem;font-weight:900;color:var(--navy);margin-bottom:4px;}
+.sc-modal p{font-size:.82rem;color:var(--muted);margin-bottom:16px;line-height:1.5;}
+.sc-inp{width:100%;padding:11px 14px;border:2px solid var(--border);border-radius:10px;font-family:'Nunito',sans-serif;font-size:.95rem;font-weight:700;color:var(--navy);outline:none;margin-bottom:12px;}
+.sc-inp:focus{border-color:var(--blue);}
+.sc-btn{width:100%;padding:11px;background:linear-gradient(135deg,var(--blue),var(--purple));color:#fff;border:none;border-radius:10px;font-family:'Nunito',sans-serif;font-size:.9rem;font-weight:900;cursor:pointer;}
+.sc-btn:active{opacity:.9;}
+/* SCORE RESULT CARD */
+.sr-card{background:#fff;border-radius:20px;padding:28px 24px;max-width:360px;width:100%;text-align:center;}
+.sr-logo{display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:20px;}
+.sr-logo-icon{width:38px;height:38px;border-radius:9px;background:#1a1a1a;display:flex;align-items:center;justify-content:center;font-size:1.3rem;}
+.sr-logo-text{text-align:left;}
+.sr-logo-name{font-size:.95rem;font-weight:900;color:var(--navy);}
+.sr-logo-by{font-size:.6rem;color:var(--muted);text-transform:uppercase;letter-spacing:1.5px;font-weight:700;}
+.sr-divider{height:1px;background:var(--border);margin:0 0 20px;}
+.sr-student{font-size:1.1rem;font-weight:900;color:var(--navy);margin-bottom:2px;}
+.sr-label{font-size:.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:1px;font-weight:700;margin-bottom:16px;}
+.sr-score-ring{width:110px;height:110px;border-radius:50%;background:linear-gradient(135deg,var(--blue),var(--purple));display:flex;flex-direction:column;align-items:center;justify-content:center;margin:0 auto 16px;color:#fff;}
+.sr-pts{font-family:'Space Mono',monospace;font-size:1.6rem;font-weight:700;line-height:1;}
+.sr-pts-lbl{font-size:.6rem;text-transform:uppercase;letter-spacing:1px;opacity:.85;margin-top:2px;}
+.sr-chapter{display:inline-block;background:#eff6ff;color:var(--blue);border-radius:50px;padding:4px 14px;font-size:.72rem;font-weight:800;margin-bottom:14px;}
+.sr-stats{display:flex;gap:8px;justify-content:center;margin-bottom:18px;}
+.sr-stat{background:#f8faff;border:1px solid var(--border);border-radius:10px;padding:8px 14px;text-align:center;}
+.sr-stat-n{font-family:'Space Mono',monospace;font-size:1rem;font-weight:700;color:var(--navy);}
+.sr-stat-l{font-size:.6rem;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;font-weight:700;}
+.sr-footer{font-size:.7rem;color:var(--muted);border-top:1px solid var(--border);padding-top:12px;line-height:1.6;}
+.sr-footer strong{color:var(--navy);}
+.sr-actions{display:flex;gap:8px;margin-top:14px;}
+.sr-close-btn{flex:1;padding:10px;border-radius:10px;border:2px solid var(--border);background:#f8faff;font-family:'Nunito',sans-serif;font-size:.82rem;font-weight:800;color:var(--muted);cursor:pointer;}
+.sr-new-btn{flex:1;padding:10px;border-radius:10px;border:none;background:linear-gradient(135deg,var(--blue),var(--purple));font-family:'Nunito',sans-serif;font-size:.82rem;font-weight:800;color:#fff;cursor:pointer;}
+.mehr-overlay{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:1000;display:none;}
+.mehr-overlay.open{display:block;}
+.mehr-sheet{position:fixed;bottom:0;left:0;right:0;z-index:1001;background:#fff;border-radius:20px 20px 0 0;padding:14px 16px 30px;box-shadow:0 -4px 30px rgba(0,0,0,.15);transform:translateY(100%);transition:transform .28s cubic-bezier(.4,0,.2,1);}
+.mehr-sheet.open{transform:translateY(0);}
+.mehr-handle{width:36px;height:4px;background:var(--border);border-radius:2px;margin:0 auto 14px;}
+.mehr-title{font-size:.78rem;font-weight:900;color:var(--purple);text-transform:uppercase;letter-spacing:1.2px;margin-bottom:14px;}
+.mehr-grid{display:grid;gap:8px;margin-bottom:8px;}
+.mehr-btn{background:#f8faff;border:2px solid var(--border);border-radius:14px;padding:14px 8px;display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer;font-family:'Nunito',sans-serif;transition:border-color .15s;}
+.mehr-btn:active{border-color:var(--blue);}
+.mehr-btn-i{font-size:1.6rem;}
+.mehr-btn-l{font-size:.7rem;font-weight:800;color:var(--navy);}
+</style>
+</head>
+<body>
+
+<!-- TOP NAV -->
+<nav>
+  <div class="nav-left">
+    <div style="width:34px;height:34px;border-radius:8px;background:#1a1a1a;display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0;">🇩🇪</div>
+    <div>
+      <div class="nav-title">Deutsch Meistern</div>
+      <span class="nav-sub">by Anshuka · B1 Kapitel 1</span>
+    </div>
+  </div>
+  <div class="score-pill" id="score-pill">⭐ 0 Pts</div>
+</nav>
+
+<!-- FLOATING SCORE -->
+<div class="float-score" id="float-score">⭐ <span id="float-pts">0</span></div>
+
+<!-- BOTTOM NAV -->
+<div class="bnav">
+  <button class="bn active" onclick="goTo('home',this)"><span class="bn-i">🏠</span>Home</button>
+  <button class="bn" onclick="goTo('grammar',this)"><span class="bn-i">📚</span>Grammatik</button>
+  <button class="bn" onclick="goTo('exercises',this)"><span class="bn-i">✏️</span>Übungen</button>
+  <button class="bn" onclick="openSubmit()"><span class="bn-i">📋</span>Score</button>
+  <button class="bn" onclick="openMehr()"><span class="bn-i">•••</span>Mehr</button>
+</div>
+<div class="mehr-overlay" id="mehr-overlay" onclick="closeMehr()"></div>
+<div class="mehr-sheet" id="mehr-sheet">
+  <div class="mehr-handle"></div>
+  <div class="mehr-title">Mehr Inhalte</div>
+  <div class="mehr-grid" style="grid-template-columns:repeat(2,1fr);">
+    <button class="mehr-btn" onclick="closeMehr();goTo('woerterbuch',null)"><span class="mehr-btn-i">🔤</span><span class="mehr-btn-l">Vokabeln & Wb.</span></button>
+    <button class="mehr-btn" onclick="closeMehr();goTo('leaderboard',null)"><span class="mehr-btn-i">🏆</span><span class="mehr-btn-l">Rangliste</span></button>
+  </div>
+</div>
+
+<!-- ══════════════ HOME ══════════════ -->
+<div class="screen active" id="s-home">
+  <div class="hero">
+    <div class="hero-chip">Deutsch Meistern · by Anshuka</div>
+    <h1>Gute Reise! ✈️</h1>
+    <p>Lernen, üben & verstehen: Urlaub, Grammatik und mehr für deinen Weg zum C1!</p>
+  </div>
+  <div class="stat-grid">
+    <div class="stat-card"><div class="stat-em">📚</div><div class="stat-n">3</div><div class="stat-l">Grammatik</div></div>
+    <div class="stat-card"><div class="stat-em">✏️</div><div class="stat-n">120</div><div class="stat-l">Übungen</div></div>
+    <div class="stat-card"><div class="stat-em">🔤</div><div class="stat-n">60</div><div class="stat-l">Vokabeln</div></div>
+    <div class="stat-card"><div class="stat-em">📖</div><div class="stat-n">200+</div><div class="stat-l">Wörterbuch</div></div>
+    <div class="stat-card"><div class="stat-em">🏆</div><div class="stat-n">1200</div><div class="stat-l">Max Punkte</div></div>
+  </div>
+  <div class="sec-h">📖 Themen dieses Kapitels</div>
+  <div class="topic-list">
+    <div class="t-row" onclick="goToGram(0)"><span class="t-ico">🔧</span><div class="t-main"><div class="t-name">Infinitiv mit zu</div><div class="t-sub">nach Verben, Adjektiven, Nomen</div></div><span class="t-badge">Grammatik</span></div>
+    <div class="t-row" onclick="goToGram(1)"><span class="t-ico">💡</span><div class="t-main"><div class="t-name">Nebensatz mit da / weil</div><div class="t-sub">Kausale Nebensätze erklären</div></div><span class="t-badge">Grammatik</span></div>
+    <div class="t-row" onclick="goToGram(2)"><span class="t-ico">⚡</span><div class="t-main"><div class="t-name">Nebensatz mit obwohl</div><div class="t-sub">Konzessivsatz: Gegensätze</div></div><span class="t-badge">Grammatik</span></div>
+    <div class="t-row" onclick="goTo('exercises',document.querySelectorAll('.bn')[2])"><span class="t-ico">✈️</span><div class="t-main"><div class="t-name">Urlaubsplanung</div><div class="t-sub">Anna & Paula planen den Urlaub</div></div><span class="t-badge">Lesen</span></div>
+    <div class="t-row" onclick="goTo('exercises',document.querySelectorAll('.bn')[2])"><span class="t-ico">🏔️</span><div class="t-main"><div class="t-name">Timos Blog von der Alm</div><div class="t-sub">Urlaub oder Arbeit?</div></div><span class="t-badge">Lesen</span></div>
+    <div class="t-row" onclick="goTo('exercises',document.querySelectorAll('.bn')[2])"><span class="t-ico">🌲</span><div class="t-main"><div class="t-name">Ranger im Nationalpark</div><div class="t-sub">Florian Hofmann im Schwarzwald</div></div><span class="t-badge">Film</span></div>
+    <div class="t-row" onclick="goTo('vocab',document.querySelectorAll('.bn')[3])"><span class="t-ico">🗺️</span><div class="t-main"><div class="t-name">Reiseziele in Deutschland</div><div class="t-sub">Rothenburg, Rügen, Heringsdorf</div></div><span class="t-badge">Landeskunde</span></div>
+  </div>
+</div>
+
+<!-- ══════════════ GRAMMAR ══════════════ -->
+<div class="screen" id="s-grammar">
+  <div class="sec-h">📚 Grammatik</div>
+  <div class="g-tabs">
+    <button class="g-tab active" onclick="switchGTab(0,this)">🔧 Infinitiv mit zu</button>
+    <button class="g-tab" onclick="switchGTab(1,this)">💡 da / weil</button>
+    <button class="g-tab" onclick="switchGTab(2,this)">⚡ obwohl</button>
+  </div>
+
+  <!-- PANEL 0: Infinitiv mit zu -->
+  <div class="g-panel active" id="gp-0">
+    <div class="gcard">
+      <div class="gcard-title">Infinitiv mit zu <span class="gcard-badge">Infinitivkonstruktion</span></div>
+      <div class="gcard-desc">Der Infinitiv mit „zu" verbindet einen Hauptsatz mit einem Verb im Infinitiv. Man benutzt ihn nach bestimmten Verben, Adjektiven und Nomen+haben/machen.</div>
+      <div class="rule-box">📌 Regel: Hauptsatz + Komma + Infinitivphrase mit „zu" + Infinitiv am Ende<br><strong>Position: „zu" steht direkt vor dem Infinitiv.</strong></div>
+      <div class="struct">
+        <div class="struct-row"><span class="sb s1">Subjekt</span><span class="sb s2">Verb</span><span class="sb s3">Objekt/Rest</span><span class="sb s4">,</span><span class="sb s5">zu + Infinitiv</span></div>
+        <div class="struct-row"><span class="sb s1">Ich</span><span class="sb s2">habe</span><span class="sb s3">vergessen,</span><span class="sb s5">dich anzurufen.</span></div>
+        <div class="struct-row"><span class="sb s1">Es</span><span class="sb s2">ist</span><span class="sb s3">schön,</span><span class="sb s5">am Strand zu liegen.</span></div>
+      </div>
+      <div class="tip-box">💡 Trennbare Verben: „zu" steht ZWISCHEN dem Präfix und dem Verb!<br>anrufen → <strong>anzurufen</strong> | aufhören → <strong>aufzuhören</strong> | vorhaben → <strong>vorzuhaben</strong></div>
+      <div class="warn-box">⚠️ Kein Komma nötig wenn: Es gibt/ist + Adj + Infinitiv ist sehr kurz. In der Praxis oft Komma gesetzt.</div>
+
+      <div class="section-h">📌 Auslöser 1: nach bestimmten Verben</div>
+      <div class="gcard-desc">Diese Verben verlangen einen Infinitiv mit zu: anfangen, aufhören, sich entscheiden, planen, vergessen, versuchen, vorhaben, vorschlagen, empfehlen, versprechen</div>
+      <div class="ex-grid">
+        <div class="ex-item"><div class="ex-de">Anna <strong>schlägt vor</strong>, nach Berlin <strong>zu fahren</strong>.</div><div class="ex-en">Anna suggests going to Berlin.</div><div class="ex-note">vorschlagen → vorzuschlagen</div></div>
+        <div class="ex-item"><div class="ex-de">Ich <strong>habe vergessen</strong>, dich <strong>anzurufen</strong>.</div><div class="ex-en">I forgot to call you.</div><div class="ex-note">anrufen → anzurufen (trennbar)</div></div>
+        <div class="ex-item"><div class="ex-de">Paula <strong>versucht</strong>, jeden Tag Sport <strong>zu machen</strong>.</div><div class="ex-en">Paula tries to exercise every day.</div></div>
+        <div class="ex-item"><div class="ex-de">Wir <strong>haben vor</strong>, im Sommer ans Meer <strong>zu fahren</strong>.</div><div class="ex-en">We plan to go to the sea in summer.</div><div class="ex-note">vorhaben → vorzuhaben</div></div>
+        <div class="ex-item"><div class="ex-de">Er <strong>hört auf</strong>, so viel <strong>zu arbeiten</strong>.</div><div class="ex-en">He stops working so much.</div><div class="ex-note">aufhören → aufzuhören</div></div>
+        <div class="ex-item"><div class="ex-de">Sie <strong>entscheidet sich</strong>, in Heringsdorf <strong>zu bleiben</strong>.</div><div class="ex-en">She decides to stay in Heringsdorf.</div></div>
+        <div class="ex-item"><div class="ex-de">Ich <strong>empfehle</strong>, Rothenburg <strong>zu besuchen</strong>.</div><div class="ex-en">I recommend visiting Rothenburg.</div></div>
+        <div class="ex-item"><div class="ex-de">Er <strong>verspricht</strong>, pünktlich <strong>zu sein</strong>.</div><div class="ex-en">He promises to be on time.</div></div>
+        <div class="ex-item"><div class="ex-de">Sie <strong>fangen an</strong>, den Koffer <strong>zu packen</strong>.</div><div class="ex-en">They start packing the suitcase.</div><div class="ex-note">anfangen → anzufangen</div></div>
+        <div class="ex-item"><div class="ex-de">Ich <strong>plane</strong>, nächste Woche <strong>abzureisen</strong>.</div><div class="ex-en">I plan to depart next week.</div><div class="ex-note">abreisen → abzureisen</div></div>
+      </div>
+
+      <div class="section-h">📌 Auslöser 2: nach Adjektiv + sein/finden</div>
+      <div class="gcard-desc">Nach Adjektiven im Satz mit „sein" oder „finden" + Komma folgt der Infinitiv mit zu.</div>
+      <div class="ex-grid">
+        <div class="ex-item"><div class="ex-de">Es ist <strong>langweilig</strong>, den ganzen Tag am Strand <strong>zu liegen</strong>.</div><div class="ex-en">It is boring to lie on the beach all day.</div></div>
+        <div class="ex-item"><div class="ex-de">Es ist <strong>schön</strong>, in den Bergen <strong>zu wandern</strong>.</div><div class="ex-en">It is beautiful to hike in the mountains.</div></div>
+        <div class="ex-item"><div class="ex-de">Ich finde es <strong>anstrengend</strong>, jeden Tag früh <strong>aufzustehen</strong>.</div><div class="ex-en">I find it exhausting to get up early every day.</div></div>
+        <div class="ex-item"><div class="ex-de">Es ist <strong>wichtig</strong>, viel Wasser <strong>zu trinken</strong>.</div><div class="ex-en">It is important to drink lots of water.</div></div>
+        <div class="ex-item"><div class="ex-de">Es ist <strong>interessant</strong>, neue Kulturen <strong>kennenzulernen</strong>.</div><div class="ex-en">It is interesting to get to know new cultures.</div></div>
+        <div class="ex-item"><div class="ex-de">Es ist <strong>gut</strong>, sich im Urlaub <strong>auszuruhen</strong>.</div><div class="ex-en">It is good to rest during vacation.</div></div>
+        <div class="ex-item"><div class="ex-de">Es ist <strong>spannend</strong>, alleine <strong>zu reisen</strong>.</div><div class="ex-en">It is exciting to travel alone.</div></div>
+        <div class="ex-item"><div class="ex-de">Es ist <strong>schwierig</strong>, eine Ferienwohnung <strong>zu finden</strong>.</div><div class="ex-en">It is difficult to find a vacation apartment.</div></div>
+        <div class="ex-item"><div class="ex-de">Er findet es <strong>wunderbar</strong>, am Meer <strong>zu schlafen</strong>.</div><div class="ex-en">He finds it wonderful to sleep by the sea.</div></div>
+        <div class="ex-item"><div class="ex-de">Es ist <strong>teuer</strong>, nach New York <strong>zu fliegen</strong>.</div><div class="ex-en">It is expensive to fly to New York.</div></div>
+      </div>
+
+      <div class="section-h">📌 Auslöser 3: Nomen + haben/machen</div>
+      <div class="gcard-desc">Bestimmte Nomen mit „haben" oder „machen" werden mit Infinitiv+zu verbunden: Lust haben, Zeit haben, Spaß machen, Angst haben, Freude haben, Mut haben</div>
+      <div class="ex-grid">
+        <div class="ex-item"><div class="ex-de">Ich habe keine <strong>Lust</strong>, ins Reisebüro <strong>zu gehen</strong>.</div><div class="ex-en">I don't feel like going to the travel agency.</div></div>
+        <div class="ex-item"><div class="ex-de">Ich habe keine <strong>Zeit</strong>, die ganze Stadt <strong>zu besichtigen</strong>.</div><div class="ex-en">I don't have time to visit the whole city.</div></div>
+        <div class="ex-item"><div class="ex-de">Es macht <strong>Spaß</strong>, auf der Alm <strong>zu arbeiten</strong>.</div><div class="ex-en">It is fun to work on the alpine pasture.</div></div>
+        <div class="ex-item"><div class="ex-de">Er hat <strong>Angst</strong>, alleine in den Urlaub <strong>zu fahren</strong>.</div><div class="ex-en">He is afraid to travel alone on vacation.</div></div>
+        <div class="ex-item"><div class="ex-de">Sie hat <strong>Freude</strong> daran, Fotos <strong>zu machen</strong>.</div><div class="ex-en">She enjoys taking photos.</div></div>
+        <div class="ex-item"><div class="ex-de">Hast du <strong>Lust</strong>, heute Abend auszugehen?</div><div class="ex-en">Do you feel like going out tonight?</div></div>
+        <div class="ex-item"><div class="ex-de">Es macht (keinen) <strong>Sinn</strong>, früh <strong>abzureisen</strong>.</div><div class="ex-en">It makes (no) sense to leave early.</div></div>
+        <div class="ex-item"><div class="ex-de">Hast du <strong>Lust</strong>, eine Party <strong>zu feiern</strong>?</div><div class="ex-en">Do you feel like having a party?</div></div>
+        <div class="ex-item"><div class="ex-de">Es macht <strong>Spaß</strong>, jeden Tag neue Wörter <strong>zu lernen</strong>.</div><div class="ex-en">It is fun to learn new words every day.</div></div>
+        <div class="ex-item"><div class="ex-de">Ich habe keine <strong>Lust</strong>, das Gepäck <strong>aufzuheben</strong>.</div><div class="ex-en">I don't feel like picking up the luggage.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PANEL 1: da/weil -->
+  <div class="g-panel" id="gp-1">
+    <div class="gcard">
+      <div class="gcard-title">Nebensatz mit da / weil <span class="gcard-badge">Kausalsatz</span></div>
+      <div class="gcard-desc">Weil und da sind kausal: sie geben den Grund für etwas an. Beide bedeuten „because / since". Das Verb steht am Ende des Nebensatzes (Verbendstellung).</div>
+      <div class="rule-box">📌 Kausalsatz mit weil/da: Hauptsatz, <strong>weil/da</strong> + … + Verb am Ende!<br>Beispiel: Er bleibt zu Hause, <strong>weil</strong> er krank <strong>ist</strong>.</div>
+      <div class="struct">
+        <div class="struct-row"><span class="sb slbl">Hauptsatz</span><span class="sb s4">,</span><span class="sb slbl">Konjunktion</span><span class="sb slbl">Nebensatz</span><span class="sb s5">Verb-Ende</span></div>
+        <div class="struct-row"><span class="sb s1">Kommen viele Touristen</span><span class="sb s4">,</span><span class="sb s2">weil</span><span class="sb s3">Rothenburg bekannt</span><span class="sb s5">ist.</span></div>
+        <div class="struct-row"><span class="sb s1">Da Melina Heringsdorf mag,</span><span class="sb s3">fährt sie</span><span class="sb s5">dorthin.</span></div>
+      </div>
+      <div class="tip-box">💡 <strong>weil</strong> = antwortet auf „Warum?" (direkte Frage nach dem Grund)<br><strong>da</strong> = wenn der Grund schon bekannt ist oder am Satzanfang steht. Beide sind austauschbar, da ist etwas formeller.</div>
+      <div class="warn-box">⚠️ Nicht verwechseln: „weil" → Verb am Ende | „denn" (Koordination) → normale Wortstellung!<br>❌ Ich bleibe zu Hause, weil ich bin krank. ✅ weil ich krank bin.</div>
+
+      <div class="section-h">📘 10 Beispiele mit WEIL</div>
+      <div class="ex-grid">
+        <div class="ex-item"><div class="ex-de">Da die kleine Stadt <strong>bekannt ist</strong>, kommen viele Touristen.</div><div class="ex-en">Since the small town is well-known, many tourists come.</div></div>
+        <div class="ex-item"><div class="ex-de">Ich bleibe zu Hause, <strong>weil</strong> ich müde <strong>bin</strong>.</div><div class="ex-en">I stay at home because I am tired.</div></div>
+        <div class="ex-item"><div class="ex-de">Er empfiehlt Rügen, <strong>weil</strong> die Strände sehr schön <strong>sind</strong>.</div><div class="ex-en">He recommends Rügen because the beaches are very beautiful.</div></div>
+        <div class="ex-item"><div class="ex-de">Anna kann nicht kommen, <strong>weil</strong> sie arbeiten <strong>muss</strong>.</div><div class="ex-en">Anna can't come because she has to work.</div></div>
+        <div class="ex-item"><div class="ex-de">Timo fährt auf die Alm, <strong>weil</strong> Freunde ihm davon <strong>erzählt haben</strong>.</div><div class="ex-en">Timo goes to the alm because friends told him about it.</div></div>
+        <div class="ex-item"><div class="ex-de">Anton <strong>war</strong> enttäuscht, <strong>weil</strong> zu viele Touristen da <strong>waren</strong>.</div><div class="ex-en">Anton was disappointed because there were too many tourists.</div></div>
+        <div class="ex-item"><div class="ex-de">Florian mag seinen Job, <strong>weil</strong> er die Natur <strong>liebt</strong>.</div><div class="ex-en">Florian likes his job because he loves nature.</div></div>
+        <div class="ex-item"><div class="ex-de">Paula will ins Reisebüro, <strong>weil</strong> sie Hilfe <strong>braucht</strong>.</div><div class="ex-en">Paula wants to go to the travel agency because she needs help.</div></div>
+        <div class="ex-item"><div class="ex-de">Wir nehmen den Zug, <strong>weil</strong> das Fliegen teuer <strong>ist</strong>.</div><div class="ex-en">We take the train because flying is expensive.</div></div>
+        <div class="ex-item"><div class="ex-de">Er verpasst den Zug, <strong>weil</strong> er verschlafen <strong>hat</strong>.</div><div class="ex-en">He misses the train because he overslept.</div></div>
+      </div>
+
+      <div class="section-h">📗 10 Beispiele mit DA</div>
+      <div class="ex-grid">
+        <div class="ex-item"><div class="ex-de"><strong>Da</strong> Rothenburg sehr bekannt <strong>ist</strong>, kommen viele Touristen in die Stadt.</div><div class="ex-en">Since Rothenburg is very well-known, many tourists come to the city.</div><div class="ex-note">da am Satzanfang → Verb-Inversion im Hauptsatz</div></div>
+        <div class="ex-item"><div class="ex-de"><strong>Da</strong> das Wetter schlecht <strong>war</strong>, blieb er im Hotel.</div><div class="ex-en">Since the weather was bad, he stayed in the hotel.</div></div>
+        <div class="ex-item"><div class="ex-de"><strong>Da</strong> sie kein Geld <strong>hat</strong>, kann sie nicht reisen.</div><div class="ex-en">Since she has no money, she cannot travel.</div></div>
+        <div class="ex-item"><div class="ex-de"><strong>Da</strong> die Bahn Verspätung <strong>hat</strong>, warten wir am Bahnhof.</div><div class="ex-en">Since the train is delayed, we are waiting at the station.</div></div>
+        <div class="ex-item"><div class="ex-de"><strong>Da</strong> Florian Ranger <strong>ist</strong>, kennt er den Schwarzwald sehr gut.</div><div class="ex-en">Since Florian is a ranger, he knows the Black Forest very well.</div></div>
+        <div class="ex-item"><div class="ex-de"><strong>Da</strong> Timo auf der Alm <strong>arbeitet</strong>, hat er keinen Empfang.</div><div class="ex-en">Since Timo works on the alm, he has no reception.</div></div>
+        <div class="ex-item"><div class="ex-de"><strong>Da</strong> es regnet, <strong>bleiben</strong> wir drinnen.</div><div class="ex-en">Since it is raining, we stay inside.</div></div>
+        <div class="ex-item"><div class="ex-de"><strong>Da</strong> die Strände auf Rügen schön <strong>sind</strong>, fahren viele dorthin.</div><div class="ex-en">Since the beaches on Rügen are beautiful, many people go there.</div></div>
+        <div class="ex-item"><div class="ex-de"><strong>Da</strong> das Hotel zentral <strong>liegt</strong>, nehmen wir es.</div><div class="ex-en">Since the hotel is centrally located, we take it.</div></div>
+        <div class="ex-item"><div class="ex-de"><strong>Da</strong> Melina Heringsdorf mag, <strong>fährt</strong> sie jedes Jahr hin.</div><div class="ex-en">Since Melina likes Heringsdorf, she goes there every year.</div></div>
+      </div>
+
+      <div class="section-h">🔄 Vergleich: weil vs. da vs. denn</div>
+      <div class="ex-grid">
+        <div class="ex-item"><div class="ex-de"><strong>weil:</strong> Er bleibt zu Hause, <strong>weil</strong> er krank <strong>ist</strong>. → Verb am Ende</div><div class="ex-en">Answers „Warum?" directly</div></div>
+        <div class="ex-item"><div class="ex-de"><strong>da:</strong> <strong>Da</strong> er krank <strong>ist</strong>, bleibt er zu Hause. → Nebensatz vorne, Inversion</div><div class="ex-en">Grund schon bekannt, eher formell</div></div>
+        <div class="ex-item"><div class="ex-de"><strong>denn:</strong> Er bleibt zu Hause, <strong>denn</strong> er ist krank. → NORMALE Wortstellung!</div><div class="ex-en">Koordinierende Konjunktion, kein Verb-Ende</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PANEL 2: obwohl -->
+  <div class="g-panel" id="gp-2">
+    <div class="gcard">
+      <div class="gcard-title">Nebensatz mit obwohl <span class="gcard-badge">Konzessivsatz</span></div>
+      <div class="gcard-desc">„Obwohl" drückt einen Widerspruch aus, etwas passiert TROTZ eines Hindernisses. Auf Englisch: „although / even though". Wie weil und da → Verb am Ende!</div>
+      <div class="rule-box">📌 Konzessivsatz: <strong>obwohl</strong> + … + Verb am Ende<br>Erwartung ≠ Realität: Obwohl das Wetter schlecht <strong>war</strong>, machten wir einen Ausflug.</div>
+      <div class="struct">
+        <div class="struct-row"><span class="sb slbl">Hauptsatz</span><span class="sb s4">,</span><span class="sb s2">obwohl</span><span class="sb s3">Nebensatz (Kontrast)</span><span class="sb s5">Verb-Ende</span></div>
+        <div class="struct-row"><span class="sb s1">Melina hatte schöne Tage in Heringsdorf,</span><span class="sb s2">obwohl</span><span class="sb s3">das Wetter schlecht</span><span class="sb s5">war.</span></div>
+        <div class="struct-row"><span class="sb s2">Obwohl</span><span class="sb s3">die Geschäfte teuer</span><span class="sb s5">sind,</span><span class="sb s1">kommen viele Touristen.</span></div>
+      </div>
+      <div class="tip-box">💡 Wenn „obwohl" am Satzanfang steht → Inversion im Hauptsatz (Verb vor Subjekt)!<br>Obwohl es kalt ist, → <strong>geht</strong> er schwimmen. (nicht: er geht)</div>
+      <div class="warn-box">⚠️ Nicht „trotzdem" und „obwohl" verwechseln!<br>obwohl (Konj. → Nebensatz) vs. trotzdem (Adverb → Hauptsatz, Inversion)<br>✅ Es regnet, obwohl es Sommer ist. | ✅ Es regnet. Trotzdem gehen wir raus.</div>
+
+      <div class="section-h">⚡ 10 Beispiele mit OBWOHL</div>
+      <div class="ex-grid">
+        <div class="ex-item"><div class="ex-de">Melina hatte schöne Tage in Heringsdorf, <strong>obwohl</strong> das Wetter schlecht <strong>war</strong>.</div><div class="ex-en">Melina had nice days in Heringsdorf, even though the weather was bad.</div></div>
+        <div class="ex-item"><div class="ex-de"><strong>Obwohl</strong> die Geschäfte und Restaurants teuer <strong>sind</strong>, kommen viele Touristen nach Rothenburg.</div><div class="ex-en">Although the shops and restaurants are expensive, many tourists come to Rothenburg.</div></div>
+        <div class="ex-item"><div class="ex-de">Anton war ein bisschen enttäuscht, <strong>obwohl</strong> Rothenburg sehr schön <strong>ist</strong>.</div><div class="ex-en">Anton was a bit disappointed, even though Rothenburg is very beautiful.</div></div>
+        <div class="ex-item"><div class="ex-de">Timo hat weitergearbeitet, <strong>obwohl</strong> er krank <strong>war</strong>.</div><div class="ex-en">Timo kept working, even though he was sick.</div></div>
+        <div class="ex-item"><div class="ex-de"><strong>Obwohl</strong> es kalt <strong>ist</strong>, gehen viele Leute an den Strand.</div><div class="ex-en">Although it is cold, many people go to the beach.</div></div>
+        <div class="ex-item"><div class="ex-de">Er fährt mit dem Fahrrad, <strong>obwohl</strong> es regnet.</div><div class="ex-en">He cycles, even though it is raining.</div></div>
+        <div class="ex-item"><div class="ex-de">Sie findet den Job gut, <strong>obwohl</strong> er sehr anstrengend <strong>ist</strong>.</div><div class="ex-en">She likes the job, even though it is very exhausting.</div></div>
+        <div class="ex-item"><div class="ex-de"><strong>Obwohl</strong> Florian viel <strong>arbeitet</strong>, ist er sehr zufrieden.</div><div class="ex-en">Although Florian works a lot, he is very satisfied.</div></div>
+        <div class="ex-item"><div class="ex-de">Anna will die Ostsee besuchen, <strong>obwohl</strong> Paula lieber nach Berlin <strong>will</strong>.</div><div class="ex-en">Anna wants to visit the Baltic Sea, even though Paula would rather go to Berlin.</div></div>
+        <div class="ex-item"><div class="ex-de">Es macht Spaß auf der Alm, <strong>obwohl</strong> man hier wirklich viel <strong>arbeitet</strong>.</div><div class="ex-en">It is fun on the alm, even though one really works a lot here.</div></div>
+      </div>
+
+      <div class="section-h">🔄 Vergleich: weil / da / obwohl</div>
+      <div class="ex-grid">
+        <div class="ex-item"><div class="ex-de"><strong>weil/da</strong> = Grund (cause): Er schläft, <strong>weil</strong> er müde ist.</div><div class="ex-en">He sleeps because he is tired. → Erklärung / Begründung</div></div>
+        <div class="ex-item"><div class="ex-de"><strong>obwohl</strong> = Gegengrund (contrast): Er arbeitet, <strong>obwohl</strong> er müde ist.</div><div class="ex-en">He works, although he is tired. → Überraschung / Widerspruch</div></div>
+        <div class="ex-item"><div class="ex-de">Alle drei: Verb steht am Ende des Nebensatzes!</div><div class="ex-en">da/weil → because | obwohl → although | alle mit Verbendstellung ✅</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════ EXERCISES ══════════════ -->
+<div class="screen" id="s-exercises">
+  <div class="sec-h">✏️ Übungen</div>
+  <div class="ex-tabs">
+    <button class="ex-tab active" onclick="switchExTab(0,this)">📖 Lesen</button>
+    <button class="ex-tab" onclick="switchExTab(1,this)">🗣️ Sprechen</button>
+    <button class="ex-tab" onclick="switchExTab(2,this)">✍️ Schreiben</button>
+  </div>
+  <div class="ex-panel active" id="ep-0"><div id="lesen-set"></div></div>
+  <div class="ex-panel" id="ep-1"><div id="sprechen-set"></div></div>
+  <div class="ex-panel" id="ep-2"><div id="schreiben-set"></div></div>
+</div>
+
+<!-- ══════════════ VOCABULARY ══════════════ -->
+<div class="screen" id="s-vocab">
+  <div class="sec-h">🔤 Vokabeln</div>
+  <div class="search-wrap"><span class="search-icon">🔍</span><input class="search-inp" id="v-search" placeholder="Wort suchen…" oninput="filterVocab()" autocomplete="off"></div>
+  <div id="vocab-container"></div>
+</div>
+
+<!-- ══════════════ LEADERBOARD ══════════════ -->
+<div class="screen" id="s-leaderboard">
+  <div class="lb-header"><h2>🏆 Rangliste</h2><p>Top Lernende · Alle Kapitel</p></div>
+  <div class="podium">
+    <div class="pod pod-2"><div class="pod-inner"><div class="pod-rank">🥈</div><div class="pod-name" id="lb-p2-name">--</div><div class="pod-pts" id="lb-p2-pts">--</div></div></div>
+    <div class="pod pod-1"><div class="pod-inner"><div class="pod-rank">🥇</div><div class="pod-name" id="lb-p1-name">--</div><div class="pod-pts" id="lb-p1-pts">--</div></div></div>
+    <div class="pod pod-3"><div class="pod-inner"><div class="pod-rank">🥉</div><div class="pod-name" id="lb-p3-name">--</div><div class="pod-pts" id="lb-p3-pts">--</div></div></div>
+  </div>
+  <div id="lb-list"></div>
+</div>
+
+<script>
+/* ─── STATE ─── */
+let score=0, answered=new Set(), orderState={};
+
+/* ─── NAVIGATION ─── */
+function goTo(id,btn){
+  if(id==='woerterbuch') setTimeout(buildWB,50);
+  if(id==='leaderboard'&&window.loadLeaderboard) window.loadLeaderboard();
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.bn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('s-'+id).classList.add('active');
+  if(btn) btn.classList.add('active');
+}
+function openMehr(){document.getElementById('mehr-overlay').classList.add('open');document.getElementById('mehr-sheet').classList.add('open');}
+function closeMehr(){document.getElementById('mehr-overlay').classList.remove('open');document.getElementById('mehr-sheet').classList.remove('open');}
+function goToGram(idx){
+  goTo('grammar',document.querySelectorAll('.bn')[1]);
+  setTimeout(()=>switchGTab(idx,document.querySelectorAll('.g-tab')[idx]),50);
+}
+function switchGTab(idx,btn){
+  document.querySelectorAll('.g-panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.g-tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('gp-'+idx).classList.add('active');
+  if(btn) btn.classList.add('active');
+}
+function switchExTab(idx,btn){
+  document.querySelectorAll('.ex-panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.ex-tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('ep-'+idx).classList.add('active');
+  if(btn) btn.classList.add('active');
+}
+
+/* ─── SCORE ─── */
+function addScore(pts){
+  score+=pts;
+  document.getElementById('score-pill').textContent='⭐ '+score+' Pts';
+  document.getElementById('float-pts').textContent=score;
+  if(score%100===0&&score>0) confetti();
+  updateLB();
+}
+function confetti(){
+  const colors=['#ef4444','#f59e0b','#10b981','#3b82f6','#8b5cf6','#ec4899'];
+  for(let i=0;i<30;i++){
+    const d=document.createElement('div');
+    d.className='conf-piece';
+    d.style.cssText=`left:${Math.random()*100}vw;top:0;background:${colors[Math.floor(Math.random()*colors.length)]};animation-delay:${Math.random()*.5}s;animation-duration:${.8+Math.random()*.6}s;transform:rotate(${Math.random()*360}deg)`;
+    document.body.appendChild(d);
+    setTimeout(()=>d.remove(),1400);
+  }
+}
+
+/* ─── EXERCISES DATA ─── */
+const lesenQ=[
+  {t:'mc',q:'Was bedeutet „Infinitiv mit zu"?',opts:['Ein Verb steht am Satzende','Ein Infinitiv folgt mit der Partikel „zu"','Ein Nebensatz beginnt mit „zu"','Ein Adjektiv steht vor „zu"'],ans:1},
+  {t:'mc',q:'Welcher Satz ist korrekt?',opts:['Ich habe vergessen dich anzurufen.','Ich habe vergessen, dich anzurufen.','Ich habe vergessen, dich zu anrufen.','Ich habe vergessen dich zu rufen.'],ans:1},
+  {t:'mc',q:'Welches Wort passt? „Es ist schön, am Strand ___ liegen."',opts:['zu','zu zu','an zu','zu zu'],ans:0},
+  {t:'mc',q:'„Ich habe Lust, Party zu feiern." Was ist der Auslöser hier?',opts:['Ein Adjektiv','Ein Verb','Nomen + haben','Konjunktion'],ans:2},
+  {t:'mc',q:'„aufhören" : wie heißt der Infinitiv mit zu?',opts:['zu aufhören','aufzuhören','aufhören zu','zu hören auf'],ans:1},
+  {t:'passage',p:'Anna und Paula planen ihren Urlaub. Anna schlägt vor, nach Berlin zu fahren. Sie hat keine Lust, am Strand zu liegen. Paula findet es anstrengend, so weit zu reisen. Sie versucht, einen Kompromiss zu finden.',q:'Was schlägt Anna vor?',opts:['Am Strand liegen','Nach Berlin fahren','Ins Gebirge fahren','Zu Hause bleiben'],ans:1},
+  {t:'passage',p:'Anna und Paula planen ihren Urlaub. Anna schlägt vor, nach Berlin zu fahren. Sie hat keine Lust, am Strand zu liegen. Paula findet es anstrengend, so weit zu reisen. Sie versucht, einen Kompromiss zu finden.',q:'Warum möchte Paula nicht so weit reisen?',opts:['Sie hat kein Geld','Sie findet es anstrengend','Sie hat Angst','Sie hat keine Zeit'],ans:1},
+  {t:'mc',q:'„weil" und „da" sind ___ Konjunktionen.',opts:['konzessive','kausale','temporale','finale'],ans:1},
+  {t:'mc',q:'Welcher Satz ist grammatisch korrekt?',opts:['Ich bleibe zu Hause, weil ich bin müde.','Ich bleibe zu Hause, weil ich müde bin.','Weil ich bin müde, bleibe ich zu Hause.','Ich bleibe, weil müde ich bin, zu Hause.'],ans:1},
+  {t:'mc',q:'Wo steht das Verb in einem „weil"-Satz?',opts:['An zweiter Position','Am Anfang','Am Ende','Direkt nach weil'],ans:2},
+  {t:'passage',p:'Anton Richter besuchte Rothenburg. Da die kleine Stadt sehr bekannt ist, hatten sie offenbar noch viele tausend Touristen. Die Altstadt ist sehr schön. Obwohl Anton alte Städte mag, war er ein bisschen enttäuscht. Er findet Würzburg interessanter, weil es größer ist.',q:'Warum war Anton enttäuscht?',opts:['Das Wetter war schlecht','Zu viele Touristen','Das Hotel war teuer','Die Stadt war zu klein'],ans:1},
+  {t:'passage',p:'Anton Richter besuchte Rothenburg. Da die kleine Stadt sehr bekannt ist, hatten sie offenbar noch viele tausend Touristen. Die Altstadt ist sehr schön. Obwohl Anton alte Städte mag, war er ein bisschen enttäuscht. Er findet Würzburg interessanter, weil es größer ist.',q:'Warum findet Anton Würzburg interessanter?',opts:['Es ist günstiger','Es ist größer','Es hat mehr Strände','Es ist näher'],ans:1},
+  {t:'mc',q:'Was bedeutet „obwohl"?',opts:['because','although/even though','when/while','since'],ans:1},
+  {t:'mc',q:'Welcher Satz zeigt einen Widerspruch?',opts:['Er schläft, weil er müde ist.','Er schläft, obwohl er Arbeit hat.','Er schläft, da er müde ist.','Er schläft früh, denn er ist müde.'],ans:1},
+  {t:'passage',p:'Timos Blog: Ich kann es kaum glauben: Fast drei Monate vorbei! Ich habe mich zu diesem Aufenthalt entschlossen, weil Freunde von ihrer Alm erzählt haben. Obwohl ich hier wirklich viel arbeite, fühle ich mich besser erholt als nach einem normalen Urlaub.',q:'Warum hat Timo sich für die Alm entschieden?',opts:['Wegen billiger Preise','Wegen Empfehlung von Freunden','Wegen des Wetters','Wegen der Arbeit'],ans:1},
+  {t:'passage',p:'Timos Blog: Ich kann es kaum glauben: Fast drei Monate vorbei! Ich habe mich zu diesem Aufenthalt entschlossen, weil Freunde von ihrer Alm erzählt haben. Obwohl ich hier wirklich viel arbeite, fühle ich mich besser erholt als nach einem normalen Urlaub.',q:'Wie fühlt sich Timo auf der Alm, trotz viel Arbeit?',opts:['Erschöpft und unzufrieden','Gut erholt und zufrieden','Gelangweilt','Krank'],ans:1},
+  {t:'mc',q:'Was ist die richtige Wortstellung? „Obwohl es kalt ist, ___"',opts:['wir gehen schwimmen','gehen wir schwimmen','schwimmen wir gehen','wir schwimmen gehen'],ans:1},
+  {t:'mc',q:'Welches Wort drückt einen GRUND aus?',opts:['obwohl','trotzdem','weil','aber'],ans:2},
+  {t:'mc',q:'Welches Wort drückt einen KONTRAST aus?',opts:['weil','da','denn','obwohl'],ans:3},
+  {t:'passage',p:'Ranger Florian Hofmann arbeitet im Nationalpark Schwarzwald. Er muss regelmäßig, dass alle die Regeln im Park einhalten. Für Touristen muss er oft Führungen im Park machen. Manchmal kann er das Gebiet kontrollieren. Er erklärt den Besuchern, dass sie das Gebiet schützen sollen.',q:'Welche Aufgabe hat Florian NICHT?',opts:['Führungen machen','Regeln kontrollieren','Fische fangen','Besucher informieren'],ans:2},
+  {t:'mc',q:'„Es macht Spaß, ___" : welche Ergänzung ist korrekt?',opts:['zu tanzen gehen','tanzen gehen','tanzen zu gehen','zu gehen tanzen'],ans:2},
+  {t:'mc',q:'In welchem Satz steht das Verb am Ende?',opts:['Er schläft früh, denn er ist müde.','Er ist müde, also schläft er früh.','Er schläft früh, weil er müde ist.','Er ist müde. Er schläft früh.'],ans:2},
+  {t:'mc',q:'„vorhaben" → Infinitiv mit zu = ?',opts:['zu vorhaben','vorzuhaben','vorhabenzum','vorhaben zu'],ans:1},
+  {t:'mc',q:'Was ist ein Reiseziel aus dem Kapitel?',opts:['München','Rothenburg ob der Tauber','Köln','Frankfurt'],ans:1},
+  {t:'mc',q:'Wie heißt das Meer im Norden Deutschlands, das im Kapitel erwähnt wird?',opts:['Nordsee','Ostsee','Mittelmeer','Atlantik'],ans:1},
+  {t:'mc',q:'Was bedeutet „Halbpension" im Hotel?',opts:['Nur Frühstück','Frühstück + ein Abendessen','Alle Mahlzeiten','Kein Essen'],ans:1},
+  {t:'mc',q:'Was ist eine „Verspätung" am Bahnhof?',opts:['Ein Gleis','Eine Ansage','Eine Verzögerung (delay)','Ein Fahrplan'],ans:2},
+  {t:'mc',q:'Was ist ein Nationalpark?',opts:['Ein Stadtpark','Ein geschütztes Naturgebiet','Ein Vergnügungspark','Ein Botanischer Garten'],ans:1},
+  {t:'mc',q:'Wohin fährt Melina laut dem Text im Kapitel?',opts:['Rothenburg','Berlin','Heringsdorf / Usedom','Hamburg'],ans:2},
+  {t:'mc',q:'Was ist „Vollpension" im Hotel?',opts:['Nur Frühstück','Frühstück und Mittagessen','Alle Mahlzeiten inklusive','Kein Essen'],ans:2},
+  {t:'mc',q:'Was ist die Aufgabe eines Rangers im Nationalpark?',opts:['Tickets verkaufen','Natur schützen und Besucher informieren','Souvenirs verkaufen','Essen kochen'],ans:1},
+  {t:'mc',q:'Was bedeutet „Durchsage" am Bahnhof?',opts:['Ein Fahrschein','Eine Ansage / Lautsprechernachricht','Ein Schild','Ein Ticket'],ans:1},
+  {t:'mc',q:'Welches Tier ist typisch für einen Nationalpark im Schwarzwald?',opts:['Pinguin','Reh / Hirsch','Krokodil','Papagei'],ans:1},
+  {t:'mc',q:'Was bedeutet „sich entspannen"?',opts:['Arbeiten','Reisen','Sich ausruhen / relaxen','Sport machen'],ans:2},
+  {t:'mc',q:'„Obwohl die Fahrt lang ist, ___" : was ist grammatisch korrekt?',opts:['wir fahren gern.','fahren wir gern.','fahren gern wir.','wir gern fahren.'],ans:1},
+  {t:'mc',q:'Was ist ein Synonym für „da" in einem Kausalsatz?',opts:['obwohl','weil','trotzdem','aber'],ans:1},
+  {t:'mc',q:'Welche Konjunktion braucht KEINE Verbendstellung?',opts:['weil','da','obwohl','denn'],ans:3},
+  {t:'mc',q:'„anfangen" → Infinitiv mit zu = ?',opts:['anzufangen','zu anfangen','anfangen zu','fangen zu an'],ans:0},
+  {t:'mc',q:'„Ich versuche, jeden Tag Deutsch ___ lernen."',opts:['zu','an zu','zu zu','an'],ans:0},
+  {t:'mc',q:'Was bedeutet „Sehenswürdigkeit"?',opts:['Eine Art Unterkunft','Ein öffentliches Transportmittel','Eine Attraktion / ein Ort zum Besichtigen','Ein Getränk'],ans:2},
+  {t:'mc',q:'Was ist „Gepäckband" am Flughafen?',opts:['Ein Sicherheitsbereich','Das runde Band, wo Koffer ankommen','Ein Gate','Eine Rolltreppe'],ans:1},
+  {t:'mc',q:'„Da der Zug Verspätung hat, ___" : was kommt danach?',opts:['wir warten.','warten wir.','wir warten noch.','wir noch warten.'],ans:1},
+  {t:'mc',q:'Was sind „Vorlieben"?',opts:['Abneigungen','Dinge, die man mag / bevorzugt','Reisepläne','Hotels'],ans:1},
+  {t:'mc',q:'Was bedeutet „Unterkunft"?',opts:['Transport','Essen','Unterkunft = Ort zum Schlafen / Wohnen','Aktivität'],ans:2},
+  {t:'mc',q:'Wie viele Grammatikthemen hat Kapitel 1?',opts:['1','2','3','4'],ans:2},
+];
+
+const sprechenQ=[
+  {t:'order',q:'Bilde den Satz: (Infinitiv mit zu)',words:['Ich','habe','vergessen,','dich','anzurufen.'],correct:'Ich habe vergessen, dich anzurufen.'},
+  {t:'order',q:'Bilde den Satz: (Infinitiv mit zu)',words:['Es','ist','schön,','am','Strand','zu','liegen.'],correct:'Es ist schön, am Strand zu liegen.'},
+  {t:'order',q:'Bilde den Satz: (weil - Verbendstellung)',words:['Ich','bleibe','zu','Hause,','weil','ich','müde','bin.'],correct:'Ich bleibe zu Hause, weil ich müde bin.'},
+  {t:'order',q:'Bilde den Satz: (da - Satzanfang)',words:['Da','Rothenburg','sehr','bekannt','ist,','kommen','viele','Touristen.'],correct:'Da Rothenburg sehr bekannt ist, kommen viele Touristen.'},
+  {t:'order',q:'Bilde den Satz: (obwohl)',words:['Obwohl','das','Wetter','schlecht','war,','hatten','wir','Spaß.'],correct:'Obwohl das Wetter schlecht war, hatten wir Spaß.'},
+  {t:'order',q:'Bilde den Satz: (vorhaben - trennbar)',words:['Wir','haben','vor,','im','Sommer','zu','reisen.'],correct:'Wir haben vor, im Sommer zu reisen.'},
+  {t:'order',q:'Bilde den Satz:',words:['Anna','schlägt','vor,','nach','Berlin','zu','fahren.'],correct:'Anna schlägt vor, nach Berlin zu fahren.'},
+  {t:'order',q:'Bilde den Satz: (obwohl)',words:['Er','arbeitet,','obwohl','er','krank','ist.'],correct:'Er arbeitet, obwohl er krank ist.'},
+  {t:'order',q:'Bilde den Satz: (weil)',words:['Sie','nimmt','den','Zug,','weil','das','Fliegen','teuer','ist.'],correct:'Sie nimmt den Zug, weil das Fliegen teuer ist.'},
+  {t:'order',q:'Bilde den Satz: (aufhören - trennbar)',words:['Er','hört','auf,','so','viel','zu','arbeiten.'],correct:'Er hört auf, so viel zu arbeiten.'},
+  {t:'order',q:'Bilde den Satz:',words:['Es','ist','wichtig,','viel','Wasser','zu','trinken.'],correct:'Es ist wichtig, viel Wasser zu trinken.'},
+  {t:'order',q:'Bilde den Satz: (da am Anfang)',words:['Da','sie','kein','Geld','hat,','kann','sie','nicht','reisen.'],correct:'Da sie kein Geld hat, kann sie nicht reisen.'},
+  {t:'order',q:'Bilde den Satz:',words:['Ich','habe','keine','Lust,','ins','Reisebüro','zu','gehen.'],correct:'Ich habe keine Lust, ins Reisebüro zu gehen.'},
+  {t:'order',q:'Bilde den Satz: (obwohl mit Inversion)',words:['Obwohl','es','regnet,','gehen','wir','spazieren.'],correct:'Obwohl es regnet, gehen wir spazieren.'},
+  {t:'order',q:'Bilde den Satz:',words:['Paula','versucht,','einen','Kompromiss','zu','finden.'],correct:'Paula versucht, einen Kompromiss zu finden.'},
+  {t:'order',q:'Bilde den Satz: (weil)',words:['Florian','mag','seinen','Job,','weil','er','die','Natur','liebt.'],correct:'Florian mag seinen Job, weil er die Natur liebt.'},
+  {t:'order',q:'Bilde den Satz:',words:['Es','macht','Spaß,','auf','der','Alm','zu','arbeiten.'],correct:'Es macht Spaß, auf der Alm zu arbeiten.'},
+  {t:'order',q:'Bilde den Satz: (obwohl)',words:['Timo','arbeitet','weiter,','obwohl','er','krank','war.'],correct:'Timo arbeitet weiter, obwohl er krank war.'},
+  {t:'order',q:'Bilde den Satz:',words:['Ich','finde','es','anstrengend,','so','weit','zu','reisen.'],correct:'Ich finde es anstrengend, so weit zu reisen.'},
+  {t:'order',q:'Bilde den Satz: (weil - Perfekt)',words:['Timo','entschied','sich,','weil','Freunde','ihm','davon','erzählt','hatten.'],correct:'Timo entschied sich, weil Freunde ihm davon erzählt hatten.'},
+  {t:'order',q:'Bilde den Satz:',words:['Er','empfiehlt,','Rothenburg','zu','besuchen.'],correct:'Er empfiehlt, Rothenburg zu besuchen.'},
+  {t:'order',q:'Bilde den Satz:',words:['Sie','hat','Angst,','alleine','zu','fliegen.'],correct:'Sie hat Angst, alleine zu fliegen.'},
+  {t:'order',q:'Bilde den Satz: (da)',words:['Da','die','Bahn','Verspätung','hat,','warten','wir.'],correct:'Da die Bahn Verspätung hat, warten wir.'},
+  {t:'order',q:'Bilde den Satz:',words:['Es','ist','interessant,','neue','Kulturen','kennenzulernen.'],correct:'Es ist interessant, neue Kulturen kennenzulernen.'},
+  {t:'order',q:'Bilde den Satz: (obwohl)',words:['Sie','findet','den','Job','gut,','obwohl','er','anstrengend','ist.'],correct:'Sie findet den Job gut, obwohl er anstrengend ist.'},
+  {t:'order',q:'Bilde den Satz:',words:['Ich','plane,','nächste','Woche','abzureisen.'],correct:'Ich plane, nächste Woche abzureisen.'},
+  {t:'order',q:'Bilde den Satz: (weil)',words:['Er','verpasst','den','Zug,','weil','er','verschlafen','hat.'],correct:'Er verpasst den Zug, weil er verschlafen hat.'},
+  {t:'order',q:'Bilde den Satz:',words:['Wir','fangen','an,','den','Koffer','zu','packen.'],correct:'Wir fangen an, den Koffer zu packen.'},
+  {t:'order',q:'Bilde den Satz:',words:['Er','verspricht,','pünktlich','zu','sein.'],correct:'Er verspricht, pünktlich zu sein.'},
+  {t:'order',q:'Bilde den Satz: (da am Anfang)',words:['Da','er','Ranger','ist,','kennt','er','den','Schwarzwald','gut.'],correct:'Da er Ranger ist, kennt er den Schwarzwald gut.'},
+  {t:'order',q:'Bilde den Satz:',words:['Es','ist','teuer,','nach','New','York','zu','fliegen.'],correct:'Es ist teuer, nach New York zu fliegen.'},
+  {t:'order',q:'Bilde den Satz: (obwohl)',words:['Anna','will','die','Ostsee',',','obwohl','Paula','lieber','nach','Berlin','will.'],correct:'Anna will die Ostsee, obwohl Paula lieber nach Berlin will.'},
+  {t:'order',q:'Bilde den Satz:',words:['Ich','habe','keine','Zeit,','die','Stadt','zu','besichtigen.'],correct:'Ich habe keine Zeit, die Stadt zu besichtigen.'},
+  {t:'order',q:'Bilde den Satz: (weil)',words:['Er','bleibt,','weil','das','Hotel','zentral','liegt.'],correct:'Er bleibt, weil das Hotel zentral liegt.'},
+  {t:'order',q:'Bilde den Satz:',words:['Sie','entscheidet','sich,','in','Heringsdorf','zu','bleiben.'],correct:'Sie entscheidet sich, in Heringsdorf zu bleiben.'},
+  {t:'order',q:'Bilde den Satz: (obwohl + Inversion)',words:['Obwohl','es','kalt','ist,','gehen','viele','an','den','Strand.'],correct:'Obwohl es kalt ist, gehen viele an den Strand.'},
+  {t:'order',q:'Bilde den Satz:',words:['Hast','du','Lust,','heute','Abend','auszugehen?'],correct:'Hast du Lust, heute Abend auszugehen?'},
+  {t:'order',q:'Bilde den Satz: (weil)',words:['Florian','schützt','die','Natur,','weil','das','sein','Job','ist.'],correct:'Florian schützt die Natur, weil das sein Job ist.'},
+  {t:'order',q:'Bilde den Satz:',words:['Es','ist','gut,','sich','im','Urlaub','auszuruhen.'],correct:'Es ist gut, sich im Urlaub auszuruhen.'},
+  {t:'order',q:'Bilde den Satz: (da)',words:['Da','das','Hotel','günstig','ist,','buchen','wir','es.'],correct:'Da das Hotel günstig ist, buchen wir es.'},
+  {t:'order',q:'Bilde den Satz:',words:['Er','hat','Freude','daran,','Fotos','zu','machen.'],correct:'Er hat Freude daran, Fotos zu machen.'},
+];
+
+const schreibenQ=[
+  {t:'fill1',q:'Ergänze: „Ich habe ___, dich anzurufen." (vergessen)',b:['vergessen']},
+  {t:'fill1',q:'Ergänze: „Er hört ___, zu rauchen." (auf)',b:['auf']},
+  {t:'fill1',q:'Ergänze: „Es ist schön, am Strand ___ liegen."',b:['zu']},
+  {t:'fill1',q:'Ergänze: „Ich bleibe zu Hause, ___ ich müde bin."',b:['weil']},
+  {t:'fill1',q:'Ergänze: „___ Rothenburg bekannt ist, kommen viele Touristen." (da)',b:['Da']},
+  {t:'fill1',q:'Ergänze: „Melina hatte Spaß, ___ das Wetter schlecht war." (obwohl)',b:['obwohl']},
+  {t:'fill1',q:'Ergänze: „Er empfiehlt, Rügen ___ besuchen."',b:['zu']},
+  {t:'fill1',q:'Ergänze: „Sie hat Angst, alleine ___ fliegen."',b:['zu']},
+  {t:'fill1',q:'Ergänze: „___ das Wetter schlecht ist, gehen wir spazieren." (obwohl)',b:['Obwohl']},
+  {t:'fill1',q:'Ergänze: „___ die Bahn Verspätung hat, warten wir." (da)',b:['Da']},
+  {t:'fill1',q:'Ergänze: „Anna schlägt ___, nach Berlin zu fahren." (vor)',b:['vor']},
+  {t:'fill1',q:'Ergänze: „Ich habe keine ___, ins Reisebüro zu gehen." (Lust)',b:['Lust']},
+  {t:'fill1',q:'Ergänze: „___ er krank ist, arbeitet er weiter." (obwohl)',b:['Obwohl']},
+  {t:'fill1',q:'Ergänze: „anrufen" → Infinitiv mit zu = ___',b:['anzurufen']},
+  {t:'fill1',q:'Ergänze: „aufhören" → Infinitiv mit zu = ___',b:['aufzuhören']},
+  {t:'fill1',q:'Ergänze: „vorhaben" → Infinitiv mit zu = ___',b:['vorzuhaben']},
+  {t:'fill1',q:'Ergänze: „anfangen" → Infinitiv mit zu = ___',b:['anzufangen']},
+  {t:'fill1',q:'Ergänze: „Es macht Spaß, auf der Alm ___ arbeiten."',b:['zu']},
+  {t:'fill1',q:'Ergänze: „Ich plane, nächste Woche ___reisen." (ab)',b:['abzureisen']},
+  {t:'fill1',q:'Ergänze: „Er findet Würzburg interessanter, ___ es größer ist."',b:['weil']},
+  {t:'fill1',q:'Ergänze: „Florian mag seinen Job, ___ er die Natur liebt."',b:['weil']},
+  {t:'fill1',q:'Ergänze: „Sie nimmt den Zug, ___ das Fliegen teuer ist."',b:['weil']},
+  {t:'fill1',q:'Ergänze: „Ich habe keine Zeit, die ___ zu besichtigen." (Sehenswürdigkeit / Stadt)',b:['Stadt']},
+  {t:'fill1',q:'Ergänze: „___ das Hotel günstig ist, buchen wir es." (da)',b:['Da']},
+  {t:'fill1',q:'Ergänze: „Er verspricht, ___ zu sein." (pünktlich)',b:['pünktlich']},
+  {t:'fill1',q:'Ergänze: „Es ist wichtig, viel Wasser zu ___." (trinken)',b:['trinken']},
+  {t:'fill1',q:'Ergänze: „Sie entscheidet sich, ___ zu bleiben." (in Heringsdorf)',b:['in Heringsdorf']},
+  {t:'fill1',q:'Ergänze: „Timo hat weiter___earbeitet, obwohl er krank war." (ge)',b:['ge']},
+  {t:'fill1',q:'Ergänze: „Es ist interessant, neue Kulturen kennen___lernen." (zu)',b:['zu']},
+  {t:'fill1',q:'Ergänze: „Obwohl es kalt ist, ___ viele an den Strand." (gehen → Inversion)',b:['gehen']},
+  {t:'fill1',q:'Ergänze: „Ich finde es anstrengend, so weit ___ reisen."',b:['zu']},
+  {t:'fill1',q:'Ergänze: „Hast du Lust, heute Abend ___zugehen?" (aus)',b:['auszugehen']},
+  {t:'fill1',q:'Ergänze: „___ die Strände schön sind, fahren viele nach Rügen." (da)',b:['Da']},
+  {t:'fill1',q:'Ergänze: „Wir wollen versuchen, einen Kompromiss ___ finden."',b:['zu']},
+  {t:'fill1',q:'Ergänze: „obwohl" drückt einen ___ aus." (Widerspruch / Kontrast)',b:['Widerspruch']},
+];
+
+/* ─── VOCAB DATA ─── */
+const vocabData=[
+  {art:'N',w:'das Reisebüro',en:'travel agency',ex:'Wir gehen ins Reisebüro, um eine Reise zu buchen.'},
+  {art:'N',w:'das Angebot',en:'offer / deal',ex:'Das Hotel hat ein tolles Angebot für Familien.'},
+  {art:'N',w:'das Reiseziel',en:'travel destination',ex:'Unser Reiseziel ist Rügen an der Ostsee.'},
+  {art:'F',w:'die Unterkunft',en:'accommodation',ex:'Wir suchen eine günstige Unterkunft am Strand.'},
+  {art:'F',w:'die Sehenswürdigkeit',en:'tourist attraction / sight',ex:'Rothenburg hat viele historische Sehenswürdigkeiten.'},
+  {art:'N',w:'das Gepäckband',en:'baggage carousel',ex:'Am Flughafen warten wir am Gepäckband.'},
+  {art:'F',w:'die Verspätung',en:'delay',ex:'Der Zug hat 20 Minuten Verspätung.'},
+  {art:'F',w:'die Durchsage',en:'announcement (PA)',ex:'Eine Durchsage informiert die Reisenden über die Verspätung.'},
+  {art:'N',w:'das Gleis',en:'platform / track',ex:'Der Zug nach Stuttgart fährt von Gleis 5 ab.'},
+  {art:'M',w:'der Bahnhof',en:'train station',ex:'Wir treffen uns um 9 Uhr am Bahnhof.'},
+  {art:'F',w:'die Halbpension',en:'half board (breakfast + dinner)',ex:'Das Hotel bietet Halbpension für 80 Euro pro Nacht.'},
+  {art:'F',w:'die Vollpension',en:'full board (all meals)',ex:'Mit Vollpension muss man kein Restaurant suchen.'},
+  {art:'F',w:'die Übernachtung',en:'overnight stay',ex:'Eine Übernachtung im Wellness-Hotel kostet 120 Euro.'},
+  {art:'F',w:'die Ferienwohnung',en:'holiday apartment',ex:'Wir haben eine Ferienwohnung auf Rügen gemietet.'},
+  {art:'M',w:'der Urlaub',en:'vacation / holiday',ex:'Nächsten Sommer machen wir Urlaub in Österreich.'},
+  {art:'F',w:'die Alm',en:'alpine pasture / mountain meadow',ex:'Timo verbringt den Sommer auf einer Alm in den Alpen.'},
+  {art:'M',w:'der Ranger',en:'ranger',ex:'Florian Hofmann ist Ranger im Nationalpark Schwarzwald.'},
+  {art:'M',w:'der Nationalpark',en:'national park',ex:'Im Nationalpark darf man die Natur nicht zerstören.'},
+  {art:'F',w:'die Natur',en:'nature',ex:'Der Ranger schützt die Natur vor Schäden.'},
+  {art:'V',w:'schützen',en:'to protect',ex:'Die Ranger schützen seltene Pflanzen und Tiere.'},
+  {art:'V',w:'kontrollieren',en:'to check / control',ex:'Er kontrolliert, ob alle Besucher die Regeln einhalten.'},
+  {art:'V',w:'vergessen',en:'to forget',ex:'Ich habe vergessen, den Reisepass einzupacken.'},
+  {art:'V',w:'versuchen',en:'to try',ex:'Sie versucht, jeden Tag Deutsch zu lernen.'},
+  {art:'V',w:'vorhaben',en:'to plan / intend',ex:'Wir haben vor, nächsten Sommer nach Spanien zu fahren.'},
+  {art:'V',w:'vorschlagen',en:'to suggest',ex:'Er schlägt vor, das Wellnesshotel zu buchen.'},
+  {art:'V',w:'aufhören',en:'to stop (doing sth)',ex:'Er hört auf, so viel zu rauchen.'},
+  {art:'V',w:'anfangen',en:'to start / begin',ex:'Wir fangen an, den Koffer zu packen.'},
+  {art:'V',w:'sich entscheiden',en:'to decide',ex:'Sie entscheidet sich für die Ferienwohnung auf Rügen.'},
+  {art:'V',w:'empfehlen',en:'to recommend',ex:'Ich empfehle dir, Rothenburg zu besuchen.'},
+  {art:'V',w:'buchen',en:'to book',ex:'Wir buchen das Hotel direkt am Strand.'},
+  {art:'ADJ',w:'anstrengend',en:'exhausting / tiring',ex:'Die lange Wanderung war sehr anstrengend.'},
+  {art:'ADJ',w:'entspannend',en:'relaxing',ex:'Ein Urlaub am Meer ist sehr entspannend.'},
+  {art:'ADJ',w:'langweilig',en:'boring',ex:'Er findet es langweilig, den ganzen Tag zu faulenzen.'},
+  {art:'ADJ',w:'spannend',en:'exciting / thrilling',ex:'Es ist spannend, einen neuen Ort zu entdecken.'},
+  {art:'ADJ',w:'günstig',en:'cheap / affordable',ex:'Die Ferienwohnung ist günstig und liegt zentral.'},
+  {art:'ADJ',w:'zentral',en:'central / central location',ex:'Das Hotel liegt zentral, direkt am Bahnhof.'},
+  {art:'F',w:'die Vorliebe',en:'preference / fondness',ex:'Seine Vorliebe ist Abenteuerurlaub in den Bergen.'},
+  {art:'F',w:'die Abneigung',en:'dislike / aversion',ex:'Meine Abneigung gegen lange Flüge ist bekannt.'},
+  {art:'M',w:'der Kompromiss',en:'compromise',ex:'Anna und Paula finden einen Kompromiss für den Urlaub.'},
+  {art:'F',w:'die Wanderung',en:'hike / walking tour',ex:'Wir machen eine lange Wanderung durch den Schwarzwald.'},
+  {art:'F',w:'die Stimmung',en:'mood / atmosphere',ex:'Die Stimmung auf der Alm ist entspannt und fröhlich.'},
+  {art:'ADJ',w:'enttäuscht',en:'disappointed',ex:'Anton war enttäuscht, weil so viele Touristen da waren.'},
+  {art:'ADJ',w:'begeistert',en:'enthusiastic / thrilled',ex:'Timos Freunde waren begeistert von der Alm.'},
+  {art:'F',w:'die Einsamkeit',en:'loneliness / solitude',ex:'Die Einsamkeit auf der Alm war anfangs schwer für Timo.'},
+  {art:'M',w:'der Empfang',en:'reception / phone signal',ex:'Auf der Alm hat Timo fast keinen Empfang.'},
+  {art:'ADJ',w:'selten',en:'rare / rarely',ex:'Im Nationalpark gibt es viele seltene Pflanzen.'},
+  {art:'V',w:'einhalten',en:'to comply with / keep (rules)',ex:'Alle Besucher müssen die Regeln im Park einhalten.'},
+  {art:'V',w:'berichten',en:'to report / tell',ex:'Der Ranger berichtet über seltene Tiere im Park.'},
+  {art:'N',w:'das Heimweh',en:'homesickness',ex:'Timo hat kein Heimweh, aber er freut sich auf zu Hause.'},
+  {art:'F',w:'die Schifffahrt',en:'boat trip / cruise',ex:'Eine Schifffahrt durch den Spreewald ist sehr schön.'},
+  {art:'F',w:'die Reiseplanung',en:'travel planning',ex:'Die Reiseplanung beginnt mit der Wahl des Reiseziels.'},
+  {art:'ADJ',w:'bekannt',en:'well-known / famous',ex:'Rothenburg ob der Tauber ist eine bekannte Stadt.'},
+  {art:'F',w:'die Fahrt',en:'journey / ride',ex:'Die Fahrt mit dem Zug dauert etwa 3 Stunden.'},
+  {art:'M',w:'der Preis',en:'price / award',ex:'Was kostet die Reise? Der Preis ist inklusive Frühstück.'},
+  {art:'F',w:'die Lage',en:'location / position',ex:'Das Hotel hat eine gute Lage direkt am Strand.'},
+  {t:'N',w:'das Frühstück',en:'breakfast',ex:'Das Hotel bietet täglich Frühstück ab 7 Uhr an.'},
+  {art:'M',w:'der Ausflug',en:'excursion / day trip',ex:'Wir machen einen Ausflug nach Rothenburg.'},
+  {art:'F',w:'die Strandpromenade',en:'beachfront promenade',ex:'Heringsdorf hat eine renovierte Strandpromenade.'},
+  {art:'V',w:'sich ausruhen',en:'to rest / relax',ex:'Im Urlaub möchte ich mich endlich ausruhen.'},
+  {art:'V',w:'faulenzen',en:'to be lazy / laze around',ex:'Ist es dir wichtig, im Urlaub zu faulenzen?'},
+  {art:'ADJ',w:'spontan',en:'spontaneous',ex:'Typ 1 reist ganz spontan ohne Plan.'},
+];
+
+/* ─── RENDER EXERCISES ─── */
+function renderAll(){
+  renderSet(lesenQ,'lesen-set');
+  renderSet(sprechenQ,'sprechen-set');
+  renderSet(schreibenQ,'schreiben-set');
+}
+
+function renderSet(data,containerId){
+  const c=document.getElementById(containerId);
+  c.innerHTML='';
+  data.forEach((q,i)=>{
+    const id=containerId.split('-')[0]+'-'+i;
+    let inner='';
+    if(q.t==='mc'||q.t==='passage'){
+      const passHtml=q.p?`<div class="passage">${q.p}</div>`:'';
+      const optsHtml=q.opts.map((o,oi)=>`<button class="opt" id="opt-${id}-${oi}" onclick="checkMC('${id}',${oi},${q.ans})">${o}</button>`).join('');
+      inner=`${passHtml}<div class="q-text">${q.q}</div><div class="opts">${optsHtml}</div>`;
+    } else if(q.t==='order'){
+      orderState[id]=[];
+      const shuffled=[...q.words].sort(()=>Math.random()-.5);
+      const chips=shuffled.map((w,wi)=>`<button class="wchip" id="wc-${id}-${wi}" onclick="pickWord('${id}',${wi},'${w.replace(/'/g,"\'")}')">${w}</button>`).join('');
+      inner=`<div class="q-text">${q.q}</div>
+      <div class="hint-t">Tippe auf die Wörter in der richtigen Reihenfolge:</div>
+      <div class="ans-area empty-hint" id="aa-${id}">Hier erscheint dein Satz…</div>
+      <div class="word-bank" id="wb-${id}">${chips}</div>`;
+    } else if(q.t==='fill1'){
+      const inpHtml=q.b.map((_,bi)=>`<input class="inline-inp" id="ii-${id}-${bi}" placeholder="?" autocomplete="off" autocorrect="off" spellcheck="false" onkeydown="if(event.key==='Enter')checkFill('${id}',${i},'${containerId.split('-')[0]}')">`).join(' ');
+      inner=`<div class="q-text">${q.q}</div><div style="margin-top:4px">${inpHtml}</div>`;
+    }
+    const typeLabel=q.t==='mc'||q.t==='passage'?'Multiple Choice':q.t==='order'?'Wortstellung':'Lückentext';
+    const card=`<div class="qcard" id="card-${id}">
+      <div class="q-meta"><span class="q-num">#${i+1}</span><span class="q-type">${typeLabel}</span><span class="q-status" id="st-${id}"></span></div>
+      ${inner}
+      <div class="fb" id="fb-${id}"></div>
+      <div class="q-actions">
+        ${q.t==='order'?`<button class="btn-check" onclick="checkOrd('${id}',${i},'${containerId.split('-')[0]}')">Prüfen ✓</button><button class="btn-reset" onclick="resetOrd('${id}',${i},'${containerId.split('-')[0]}')">↺ Reset</button>`:''}
+        ${q.t==='fill1'?`<button class="btn-check" onclick="checkFill('${id}',${i},'${containerId.split('-')[0]}')">Prüfen ✓</button>`:''}
+      </div>
+    </div>`;
+    c.innerHTML+=card;
+  });
+}
+
+function checkMC(id,chosen,correct){
+  if(answered.has(id)) return;
+  answered.add(id);
+  const fb=document.getElementById('fb-'+id);
+  const st=document.getElementById('st-'+id);
+  document.querySelectorAll(`[id^="opt-${id}-"]`).forEach((b,i)=>{
+    b.classList.add('disabled');
+    if(i===correct) b.classList.add('correct');
+    else if(i===chosen&&chosen!==correct) b.classList.add('wrong');
+  });
+  if(chosen===correct){st.textContent='✅';fb.textContent='Richtig! +10 Punkte 🎉';fb.className='fb ok';addScore(10);}
+  else{st.textContent='❌';fb.textContent='Leider falsch. Richtige Antwort ist hervorgehoben.';fb.className='fb err';}
+}
+
+function pickWord(id,wi,word){
+  const chip=document.getElementById('wc-'+id+'-'+wi);
+  if(chip.classList.contains('used')) return;
+  chip.classList.add('used');
+  orderState[id].push({wi,word});
+  const aa=document.getElementById('aa-'+id);
+  aa.classList.remove('empty-hint');
+  aa.textContent=orderState[id].map(x=>x.word).join(' ');
+}
+
+function checkOrd(id,qi,section){
+  if(answered.has(id)) return;
+  const data=section==='lesen'?lesenQ:section==='sprechen'?sprechenQ:schreibenQ;
+  const q=data[qi];
+  const userAns=orderState[id].map(x=>x.word).join(' ').replace(/\s+/g,' ').trim();
+  const correct=q.correct.trim();
+  const fb=document.getElementById('fb-'+id);
+  const st=document.getElementById('st-'+id);
+  if(userAns===correct){
+    answered.add(id);
+    st.textContent='✅';
+    fb.textContent='Perfekt! Richtige Reihenfolge! +10 Punkte 🎉';
+    fb.className='fb ok';
+    addScore(10);
+    document.querySelectorAll(`#wb-${id} .wchip`).forEach(c=>c.disabled=true);
+  } else {
+    st.textContent='❌';
+    fb.innerHTML=`Noch nicht ganz richtig. Versuche es nochmal! <br><small>Richtig: ${correct}</small>`;
+    fb.className='fb err';
+  }
+}
+
+function resetOrd(id,qi,section){
+  if(answered.has(id)) return;
+  orderState[id]=[];
+  const aa=document.getElementById('aa-'+id);
+  aa.classList.add('empty-hint');
+  aa.textContent='Hier erscheint dein Satz…';
+  document.querySelectorAll(`#wb-${id} .wchip`).forEach(c=>c.classList.remove('used'));
+  document.getElementById('fb-'+id).textContent='';
+  document.getElementById('fb-'+id).className='fb';
+}
+
+function checkFill(id,qi,section){
+  if(answered.has(id)) return;
+  const data=section==='lesen'?lesenQ:section==='sprechen'?sprechenQ:schreibenQ;
+  const q=data[qi];
+  let allOk=true;
+  q.b.forEach((ans,bi)=>{
+    const inp=document.getElementById('ii-'+id+'-'+bi);
+    if(!inp) return;
+    const userVal=inp.value.trim().toLowerCase();
+    const correctVal=ans.toLowerCase();
+    if(userVal===correctVal){inp.classList.add('correct');}
+    else{inp.classList.add('wrong');allOk=false;}
+  });
+  const fb=document.getElementById('fb-'+id);
+  const st=document.getElementById('st-'+id);
+  if(allOk){
+    answered.add(id);
+    st.textContent='✅';
+    fb.textContent='Ausgezeichnet! +10 Punkte 🎉';
+    fb.className='fb ok';
+    addScore(10);
+  } else {
+    st.textContent='❌';
+    fb.textContent='Nicht ganz richtig. Richtige Antwort: '+q.b.join(', ');
+    fb.className='fb err';
+  }
+}
+
+/* ─── VOCAB ─── */
+function buildVocab(){
+  const c=document.getElementById('vocab-container');
+  const cats=[
+    {label:'✈️ Urlaubsarten & Reisen',words:vocabData.filter((_,i)=>i<10)},
+    {label:'🏨 Unterkunft & Hotel',words:vocabData.filter((_,i)=>i>=10&&i<15)},
+    {label:'🏔️ Alm & Natur',words:vocabData.filter((_,i)=>i>=15&&i<20)},
+    {label:'🌲 Nationalpark & Ranger',words:vocabData.filter((_,i)=>i>=20&&i<25)},
+    {label:'🔧 Wichtige Verben',words:vocabData.filter((_,i)=>i>=22&&i<32)},
+    {label:'💬 Adjektive & Gefühle',words:vocabData.filter((_,i)=>i>=32&&i<42)},
+    {label:'📍 Weitere Nomen',words:vocabData.filter((_,i)=>i>=42)},
+  ];
+  let html='';
+  cats.forEach(cat=>{
+    if(!cat.words.length) return;
+    html+=`<div class="section-h">${cat.label}</div><div class="vocab-grid">`;
+    cat.words.forEach((v,vi)=>{
+      const artClass={'M':'art-m','F':'art-f','N':'art-n','PL':'art-pl','V':'art-v','ADJ':'art-adj','t':'art-n'}[v.art||v.t]||'art-n';
+      const artLabel={'M':'der','F':'die','N':'das','PL':'die(pl)','V':'Verb','ADJ':'Adj','t':'das'}[v.art||v.t]||'';
+      html+=`<div class="vword" onclick="this.classList.toggle('open')">
+        <div class="vw-top"><span class="vw-art ${artClass}">${artLabel}</span><span class="vw-word">${v.w.replace(/^(der|die|das) /,'')}</span></div>
+        <div class="vw-details"><div class="vw-en">🇬🇧 ${v.en}</div><div class="vw-ex">${v.ex}</div></div>
+      </div>`;
+    });
+    html+='</div>';
+  });
+  c.innerHTML=html;
+}
+
+function filterVocab(){
+  const q=document.getElementById('v-search').value.toLowerCase();
+  document.querySelectorAll('.vword').forEach(v=>{
+    v.style.display=v.textContent.toLowerCase().includes(q)?'':'none';
+  });
+}
+
+/* ─── INIT ─── */
+renderAll();
+buildVocab();
+
+
+/* ═══ WÖRTERBUCH DATA ═══ */
+const wbData = [
+
+  /* ── NOMEN: Reise & Transport ── */
+  {cat:'Nomen', sub:'Reise & Transport', art:'M', w:'der Urlaub', en:'vacation / holiday', ex:'Nächsten Sommer machen wir Urlaub an der Ostsee.'},
+  {cat:'Nomen', sub:'Reise & Transport', art:'F', w:'die Reise', en:'trip / journey', ex:'Die Reise nach Wien dauert drei Stunden mit dem Zug.'},
+  {cat:'Nomen', sub:'Reise & Transport', art:'N', w:'das Reiseziel', en:'travel destination', ex:'Unser Reiseziel dieses Jahr ist Rügen.'},
+  {cat:'Nomen', sub:'Reise & Transport', art:'N', w:'das Reisebüro', en:'travel agency', ex:'Im Reisebüro kann man Pauschalreisen buchen.'},
+  {cat:'Nomen', sub:'Reise & Transport', art:'F', w:'die Reiseplanung', en:'travel planning', ex:'Die Reiseplanung beginnt oft Monate im Voraus.'},
+  {cat:'Nomen', sub:'Reise & Transport', art:'M', w:'der Flug', en:'flight', ex:'Der Flug nach Barcelona dauert zwei Stunden.'},
+  {cat:'Nomen', sub:'Reise & Transport', art:'M', w:'der Flughafen', en:'airport', ex:'Wir fahren früh zum Flughafen, weil der Flug um 6 Uhr geht.'},
+  {cat:'Nomen', sub:'Reise & Transport', art:'N', w:'das Flugticket', en:'plane ticket', ex:'Das Flugticket nach New York ist sehr teuer.'},
+  {cat:'Nomen', sub:'Reise & Transport', art:'M', w:'der Bahnhof', en:'train station', ex:'Der Hauptbahnhof liegt im Zentrum der Stadt.'},
+  {cat:'Nomen', sub:'Reise & Transport', art:'M', w:'der Zug', en:'train', ex:'Der Zug nach München fährt in zehn Minuten ab.'},
+  {cat:'Nomen', sub:'Reise & Transport', art:'N', w:'das Gleis', en:'platform / track', ex:'Der ICE nach Berlin fährt von Gleis 7 ab.'},
+  {cat:'Nomen', sub:'Reise & Transport', art:'F', w:'die Verspätung', en:'delay', ex:'Der Zug hat leider 30 Minuten Verspätung.'},
+  {cat:'Nomen', sub:'Reise & Transport', art:'F', w:'die Durchsage', en:'announcement (PA system)', ex:'Eine Durchsage informiert über die Verspätung des Zuges.'},
+  {cat:'Nomen', sub:'Reise & Transport', art:'N', w:'das Gepäck', en:'luggage / baggage', ex:'Bitte nehmen Sie Ihr Gepäck aus der Ablage.'},
+  {cat:'Nomen', sub:'Reise & Transport', art:'N', w:'das Gepäckband', en:'baggage carousel', ex:'Das Gepäckband am Flughafen dreht sich langsam.'},
+  {cat:'Nomen', sub:'Reise & Transport', art:'M', w:'der Koffer', en:'suitcase', ex:'Ich packe meinen Koffer am Abend vor der Reise.'},
+  {cat:'Nomen', sub:'Reise & Transport', art:'M', w:'der Rucksack', en:'backpack', ex:'Backpacker reisen meistens mit einem Rucksack.'},
+  {cat:'Nomen', sub:'Reise & Transport', art:'M', w:'der Reisepass', en:'passport', ex:'Vergiss nicht, deinen Reisepass einzupacken!'},
+  {cat:'Nomen', sub:'Reise & Transport', art:'F', w:'die Fahrkarte', en:'train/bus ticket', ex:'Die Fahrkarte nach Hamburg kostet 49 Euro.'},
+  {cat:'Nomen', sub:'Reise & Transport', art:'F', w:'die Abfahrt', en:'departure', ex:'Die Abfahrt des Zuges ist um 14:32 Uhr.'},
+  {cat:'Nomen', sub:'Reise & Transport', art:'F', w:'die Ankunft', en:'arrival', ex:'Die Ankunft in Wien ist für 17:00 Uhr geplant.'},
+  {cat:'Nomen', sub:'Reise & Transport', art:'F', w:'die Strecke', en:'route / stretch', ex:'Die Strecke von Berlin nach München ist 600 km lang.'},
+  {cat:'Nomen', sub:'Reise & Transport', art:'M', w:'der Ausflug', en:'excursion / day trip', ex:'Wir machen einen Tagesausflug nach Rothenburg.'},
+  {cat:'Nomen', sub:'Reise & Transport', art:'F', w:'die Schifffahrt', en:'boat trip / cruise', ex:'Eine Schifffahrt durch den Rhein ist sehr schön.'},
+
+  /* ── NOMEN: Unterkunft ── */
+  {cat:'Nomen', sub:'Unterkunft & Hotel', art:'F', w:'die Unterkunft', en:'accommodation', ex:'Wir suchen eine preiswerte Unterkunft in der Altstadt.'},
+  {cat:'Nomen', sub:'Unterkunft & Hotel', art:'N', w:'das Hotel', en:'hotel', ex:'Das Hotel liegt direkt am Strand.'},
+  {cat:'Nomen', sub:'Unterkunft & Hotel', art:'F', w:'die Halbpension', en:'half board (breakfast + dinner)', ex:'Mit Halbpension spart man Geld für ein Abendessen.'},
+  {cat:'Nomen', sub:'Unterkunft & Hotel', art:'F', w:'die Vollpension', en:'full board (all meals included)', ex:'Vollpension bedeutet: Frühstück, Mittagessen und Abendessen.'},
+  {cat:'Nomen', sub:'Unterkunft & Hotel', art:'F', w:'die Übernachtung', en:'overnight stay', ex:'Eine Übernachtung im Doppelzimmer kostet 90 Euro.'},
+  {cat:'Nomen', sub:'Unterkunft & Hotel', art:'F', w:'die Ferienwohnung', en:'holiday apartment', ex:'Die Ferienwohnung hat drei Zimmer und eine Küche.'},
+  {cat:'Nomen', sub:'Unterkunft & Hotel', art:'N', w:'das Zimmer', en:'room', ex:'Das Zimmer hat einen schönen Blick aufs Meer.'},
+  {cat:'Nomen', sub:'Unterkunft & Hotel', art:'N', w:'das Doppelzimmer', en:'double room', ex:'Wir haben ein Doppelzimmer für drei Nächte gebucht.'},
+  {cat:'Nomen', sub:'Unterkunft & Hotel', art:'N', w:'das Einzelzimmer', en:'single room', ex:'Ein Einzelzimmer ist günstiger als ein Doppelzimmer.'},
+  {cat:'Nomen', sub:'Unterkunft & Hotel', art:'N', w:'das Frühstück', en:'breakfast', ex:'Das Frühstücksbuffet beginnt um 7:00 Uhr.'},
+  {cat:'Nomen', sub:'Unterkunft & Hotel', art:'F', w:'die Rezeption', en:'reception desk', ex:'An der Rezeption bekommt man den Zimmerschlüssel.'},
+  {cat:'Nomen', sub:'Unterkunft & Hotel', art:'F', w:'die Lage', en:'location / position', ex:'Das Hotel hat eine zentrale Lage nahe dem Bahnhof.'},
+  {cat:'Nomen', sub:'Unterkunft & Hotel', art:'M', w:'der Preis', en:'price', ex:'Was ist der Preis pro Nacht inklusive Frühstück?'},
+  {cat:'Nomen', sub:'Unterkunft & Hotel', art:'N', w:'das Angebot', en:'offer / deal', ex:'Das Hotel hat ein tolles Sonderangebot für Familien.'},
+  {cat:'Nomen', sub:'Unterkunft & Hotel', art:'F', w:'die Buchung', en:'booking / reservation', ex:'Die Buchung kann man online oder telefonisch machen.'},
+
+  /* ── NOMEN: Natur & Orte ── */
+  {cat:'Nomen', sub:'Natur & Orte', art:'F', w:'die Natur', en:'nature', ex:'Der Ranger schützt die Natur im Nationalpark.'},
+  {cat:'Nomen', sub:'Natur & Orte', art:'M', w:'der Nationalpark', en:'national park', ex:'Im Nationalpark Schwarzwald leben viele seltene Tiere.'},
+  {cat:'Nomen', sub:'Natur & Orte', art:'F', w:'die Alm', en:'alpine pasture / mountain meadow', ex:'Auf der Alm in Österreich arbeitet Timo im Sommer.'},
+  {cat:'Nomen', sub:'Natur & Orte', art:'M', w:'der Berg', en:'mountain', ex:'Der höchste Berg Deutschlands ist die Zugspitze.'},
+  {cat:'Nomen', sub:'Natur & Orte', art:'N', w:'das Meer', en:'sea / ocean', ex:'Im Sommer fahren wir ans Meer.'},
+  {cat:'Nomen', sub:'Natur & Orte', art:'F', w:'die Ostsee', en:'Baltic Sea', ex:'Rügen und Usedom liegen in der Ostsee.'},
+  {cat:'Nomen', sub:'Natur & Orte', art:'F', w:'die Nordsee', en:'North Sea', ex:'Sylt ist eine bekannte Insel in der Nordsee.'},
+  {cat:'Nomen', sub:'Natur & Orte', art:'M', w:'der Strand', en:'beach', ex:'Der Strand von Heringsdorf ist sehr schön.'},
+  {cat:'Nomen', sub:'Natur & Orte', art:'M', w:'der Wald', en:'forest / woods', ex:'Der Schwarzwald ist der größte Wald in Deutschland.'},
+  {cat:'Nomen', sub:'Natur & Orte', art:'M', w:'der See', en:'lake', ex:'Am Bodensee kann man wunderschön Fahrrad fahren.'},
+  {cat:'Nomen', sub:'Natur & Orte', art:'F', w:'die Insel', en:'island', ex:'Rügen ist die größte Insel Deutschlands.'},
+  {cat:'Nomen', sub:'Natur & Orte', art:'F', w:'die Küste', en:'coast / coastline', ex:'Die Ostseeküste ist im Sommer sehr beliebt.'},
+  {cat:'Nomen', sub:'Natur & Orte', art:'M', w:'der Fluss', en:'river', ex:'Der Rhein ist der längste Fluss in Deutschland.'},
+  {cat:'Nomen', sub:'Natur & Orte', art:'F', w:'die Landschaft', en:'landscape / scenery', ex:'Die Landschaft im Schwarzwald ist sehr beeindruckend.'},
+  {cat:'Nomen', sub:'Natur & Orte', art:'F', w:'die Wanderung', en:'hike / walking tour', ex:'Die Wanderung durch den Nationalpark dauert vier Stunden.'},
+  {cat:'Nomen', sub:'Natur & Orte', art:'F', w:'die Strandpromenade', en:'beach promenade', ex:'Die Strandpromenade in Heringsdorf ist 3 km lang.'},
+
+  /* ── NOMEN: Tourismus ── */
+  {cat:'Nomen', sub:'Tourismus & Sehenswürdigkeiten', art:'F', w:'die Sehenswürdigkeit', en:'tourist attraction / sight', ex:'Rothenburg hat viele mittelalterliche Sehenswürdigkeiten.'},
+  {cat:'Nomen', sub:'Tourismus & Sehenswürdigkeiten', art:'F', w:'die Altstadt', en:'old town', ex:'Die Altstadt von Rothenburg ist sehr gut erhalten.'},
+  {cat:'Nomen', sub:'Tourismus & Sehenswürdigkeiten', art:'F', w:'die Stadtmauer', en:'city wall', ex:'Man kann auf der Stadtmauer von Rothenburg entlanglaufen.'},
+  {cat:'Nomen', sub:'Tourismus & Sehenswürdigkeiten', art:'M', w:'der Tourist', en:'tourist (m)', ex:'Im Sommer kommen viele Touristen nach Rothenburg.'},
+  {cat:'Nomen', sub:'Tourismus & Sehenswürdigkeiten', art:'F', w:'die Touristin', en:'tourist (f)', ex:'Die Touristin fotografiert die Altstadt.'},
+  {cat:'Nomen', sub:'Tourismus & Sehenswürdigkeiten', art:'M', w:'der Stadtplan', en:'city map', ex:'Am Bahnhof kann man einen kostenlosen Stadtplan bekommen.'},
+  {cat:'Nomen', sub:'Tourismus & Sehenswürdigkeiten', art:'F', w:'die Führung', en:'guided tour', ex:'Der Ranger macht täglich eine Führung durch den Park.'},
+  {cat:'Nomen', sub:'Tourismus & Sehenswürdigkeiten', art:'N', w:'das Museum', en:'museum', ex:'Das Stadtmuseum ist von Dienstag bis Sonntag geöffnet.'},
+  {cat:'Nomen', sub:'Tourismus & Sehenswürdigkeiten', art:'F', w:'die Besichtigung', en:'sightseeing visit', ex:'Die Besichtigung der Burg dauert etwa zwei Stunden.'},
+  {cat:'Nomen', sub:'Tourismus & Sehenswürdigkeiten', art:'M', w:'der Eintritt', en:'admission / entry fee', ex:'Der Eintritt ins Museum kostet 8 Euro.'},
+
+  /* ── NOMEN: Ranger & Nationalpark ── */
+  {cat:'Nomen', sub:'Ranger & Nationalpark', art:'M', w:'der Ranger', en:'ranger / park warden', ex:'Florian Hofmann ist Ranger im Nationalpark Schwarzwald.'},
+  {cat:'Nomen', sub:'Ranger & Nationalpark', art:'F', w:'die Regel', en:'rule / regulation', ex:'Die Regeln im Nationalpark muss man unbedingt einhalten.'},
+  {cat:'Nomen', sub:'Ranger & Nationalpark', art:'F', w:'die Pflanze', en:'plant', ex:'Im Nationalpark gibt es viele seltene Pflanzen.'},
+  {cat:'Nomen', sub:'Ranger & Nationalpark', art:'N', w:'das Tier', en:'animal', ex:'Ranger schützen die Tiere vor menschlichen Störungen.'},
+  {cat:'Nomen', sub:'Ranger & Nationalpark', art:'N', w:'das Gebiet', en:'area / territory', ex:'Der Ranger kontrolliert regelmäßig sein Gebiet.'},
+  {cat:'Nomen', sub:'Ranger & Nationalpark', art:'M', w:'der Besucher', en:'visitor (m)', ex:'Jedes Jahr kommen viele Besucher in den Nationalpark.'},
+  {cat:'Nomen', sub:'Ranger & Nationalpark', art:'F', w:'die Besucherin', en:'visitor (f)', ex:'Die Besucherin fragt den Ranger nach dem Weg.'},
+  {cat:'Nomen', sub:'Ranger & Nationalpark', art:'M', w:'der Umweltschutz', en:'environmental protection', ex:'Umweltschutz ist das wichtigste Ziel des Nationalparks.'},
+  {cat:'Nomen', sub:'Ranger & Nationalpark', art:'F', w:'die Natur', en:'nature', ex:'Die Natur muss für zukünftige Generationen bewahrt werden.'},
+
+  /* ── NOMEN: Gefühle & Erfahrungen ── */
+  {cat:'Nomen', sub:'Gefühle & Erfahrungen', art:'F', w:'die Vorliebe', en:'preference / fondness', ex:'Meine Vorliebe ist Natururlaub in den Bergen.'},
+  {cat:'Nomen', sub:'Gefühle & Erfahrungen', art:'F', w:'die Abneigung', en:'dislike / aversion', ex:'Ihre Abneigung gegen lange Flugreisen ist bekannt.'},
+  {cat:'Nomen', sub:'Gefühle & Erfahrungen', art:'F', w:'die Stimmung', en:'mood / atmosphere', ex:'Die Stimmung auf der Alm ist ruhig und entspannt.'},
+  {cat:'Nomen', sub:'Gefühle & Erfahrungen', art:'F', w:'die Einsamkeit', en:'loneliness / solitude', ex:'Timo genoss die Einsamkeit auf der Alm.'},
+  {cat:'Nomen', sub:'Gefühle & Erfahrungen', art:'N', w:'das Heimweh', en:'homesickness', ex:'Timo hatte kaum Heimweh auf der Alm.'},
+  {cat:'Nomen', sub:'Gefühle & Erfahrungen', art:'M', w:'der Kompromiss', en:'compromise', ex:'Anna und Paula finden einen Kompromiss für ihren Urlaub.'},
+  {cat:'Nomen', sub:'Gefühle & Erfahrungen', art:'M', w:'der Empfang', en:'mobile signal / reception', ex:'Auf der Alm hat Timo fast keinen Empfang.'},
+  {cat:'Nomen', sub:'Gefühle & Erfahrungen', art:'F', w:'die Erholung', en:'relaxation / recovery', ex:'Nach einem stressigen Jahr braucht man echte Erholung.'},
+  {cat:'Nomen', sub:'Gefühle & Erfahrungen', art:'N', w:'das Erlebnis', en:'experience / adventure', ex:'Der Aufenthalt auf der Alm war ein unvergessliches Erlebnis.'},
+  {cat:'Nomen', sub:'Gefühle & Erfahrungen', art:'F', w:'die Enttäuschung', en:'disappointment', ex:'Antons Enttäuschung über die vielen Touristen war groß.'},
+
+  /* ── VERBEN: Reise-Verben ── */
+  {cat:'Verben', sub:'Reisen & Bewegen', art:'V', w:'reisen', en:'to travel', ex:'Wir reisen jedes Jahr in ein anderes Land.', extra:'reist · reiste · ist gereist'},
+  {cat:'Verben', sub:'Reisen & Bewegen', art:'V', w:'fahren', en:'to drive / travel by vehicle', ex:'Wir fahren mit dem Zug nach München.', extra:'fährt · fuhr · ist gefahren (unregelm.)'},
+  {cat:'Verben', sub:'Reisen & Bewegen', art:'V', w:'fliegen', en:'to fly', ex:'Sie fliegt einmal im Jahr nach Indien.', extra:'fliegt · flog · ist geflogen (unregelm.)'},
+  {cat:'Verben', sub:'Reisen & Bewegen', art:'V', w:'ankommen', en:'to arrive', ex:'Wir kommen um 15 Uhr in Wien an.', extra:'kommt an · kam an · ist angekommen (trennb.)'},
+  {cat:'Verben', sub:'Reisen & Bewegen', art:'V', w:'abfahren', en:'to depart (vehicle)', ex:'Der Zug fährt um 8:30 Uhr ab.', extra:'fährt ab · fuhr ab · ist abgefahren (trennb.)'},
+  {cat:'Verben', sub:'Reisen & Bewegen', art:'V', w:'abreisen', en:'to depart (person)', ex:'Wir reisen morgen früh ab.', extra:'reist ab · reiste ab · ist abgereist (trennb.)'},
+  {cat:'Verben', sub:'Reisen & Bewegen', art:'V', w:'wandern', en:'to hike', ex:'Wir wandern jeden Samstag durch den Wald.', extra:'wandert · wanderte · ist gewandert'},
+  {cat:'Verben', sub:'Reisen & Bewegen', art:'V', w:'spazieren gehen', en:'to go for a walk', ex:'Nach dem Abendessen gehen wir spazieren.', extra:'geht spazieren · ging spazieren · ist spazieren gegangen'},
+  {cat:'Verben', sub:'Reisen & Bewegen', art:'V', w:'besichtigen', en:'to visit / sightsee', ex:'Wir besichtigen heute die Altstadt von Rothenburg.', extra:'besichtigt · besichtigte · hat besichtigt'},
+  {cat:'Verben', sub:'Reisen & Bewegen', art:'V', w:'besuchen', en:'to visit (a person/place)', ex:'Wir besuchen nächste Woche unsere Freunde in Hamburg.', extra:'besucht · besuchte · hat besucht'},
+
+  /* ── VERBEN: Planung ── */
+  {cat:'Verben', sub:'Planung & Entscheidung', art:'V', w:'buchen', en:'to book / reserve', ex:'Ich buche das Hotel direkt auf der Website.', extra:'bucht · buchte · hat gebucht'},
+  {cat:'Verben', sub:'Planung & Entscheidung', art:'V', w:'planen', en:'to plan', ex:'Wir planen unseren Urlaub schon im Januar.', extra:'plant · plante · hat geplant'},
+  {cat:'Verben', sub:'Planung & Entscheidung', art:'V', w:'vorhaben', en:'to intend / plan to do', ex:'Was hast du am Wochenende vor?', extra:'hat vor · hatte vor · hat vorgehabt (trennb.)'},
+  {cat:'Verben', sub:'Planung & Entscheidung', art:'V', w:'vorschlagen', en:'to suggest / propose', ex:'Sie schlägt vor, nach Berlin zu fahren.', extra:'schlägt vor · schlug vor · hat vorgeschlagen (trennb., unregelm.)'},
+  {cat:'Verben', sub:'Planung & Entscheidung', art:'V', w:'sich entscheiden', en:'to decide', ex:'Er entscheidet sich für die Ferienwohnung.', extra:'entscheidet sich · entschied sich · hat sich entschieden (unregelm.)'},
+  {cat:'Verben', sub:'Planung & Entscheidung', art:'V', w:'empfehlen', en:'to recommend', ex:'Ich empfehle Rügen: die Strände sind wunderschön.', extra:'empfiehlt · empfahl · hat empfohlen (unregelm.)'},
+  {cat:'Verben', sub:'Planung & Entscheidung', art:'V', w:'organisieren', en:'to organise', ex:'Wer organisiert die Unterkunft für die Reise?', extra:'organisiert · organisierte · hat organisiert'},
+  {cat:'Verben', sub:'Planung & Entscheidung', art:'V', w:'vorbereiten', en:'to prepare', ex:'Wir bereiten die Reise sorgfältig vor.', extra:'bereitet vor · bereitete vor · hat vorbereitet (trennb.)'},
+  {cat:'Verben', sub:'Planung & Entscheidung', art:'V', w:'vergleichen', en:'to compare', ex:'Ich vergleiche die Preise verschiedener Hotels.', extra:'vergleicht · verglich · hat verglichen (unregelm.)'},
+
+  /* ── VERBEN: Infinitiv-mit-zu Verben ── */
+  {cat:'Verben', sub:'Infinitiv-mit-zu Verben', art:'V', w:'vergessen', en:'to forget', ex:'Ich habe vergessen, den Reisepass einzupacken.', extra:'vergisst · vergaß · hat vergessen (unregelm.)'},
+  {cat:'Verben', sub:'Infinitiv-mit-zu Verben', art:'V', w:'versuchen', en:'to try / attempt', ex:'Sie versucht, jeden Tag eine Stunde Deutsch zu lernen.', extra:'versucht · versuchte · hat versucht'},
+  {cat:'Verben', sub:'Infinitiv-mit-zu Verben', art:'V', w:'anfangen', en:'to begin / start', ex:'Wir fangen an, den Koffer zu packen.', extra:'fängt an · fing an · hat angefangen (trennb., unregelm.)'},
+  {cat:'Verben', sub:'Infinitiv-mit-zu Verben', art:'V', w:'aufhören', en:'to stop / cease', ex:'Er hört auf, so viel zu arbeiten.', extra:'hört auf · hörte auf · hat aufgehört (trennb.)'},
+  {cat:'Verben', sub:'Infinitiv-mit-zu Verben', art:'V', w:'versprechen', en:'to promise', ex:'Er verspricht, pünktlich am Bahnhof zu sein.', extra:'verspricht · versprach · hat versprochen (unregelm.)'},
+  {cat:'Verben', sub:'Infinitiv-mit-zu Verben', art:'V', w:'sich freuen auf', en:'to look forward to', ex:'Ich freue mich darauf, endlich Urlaub zu machen.', extra:'freut sich · freute sich · hat sich gefreut'},
+  {cat:'Verben', sub:'Infinitiv-mit-zu Verben', art:'V', w:'hoffen', en:'to hope', ex:'Wir hoffen, gutes Wetter zu haben.', extra:'hofft · hoffte · hat gehofft'},
+  {cat:'Verben', sub:'Infinitiv-mit-zu Verben', art:'V', w:'beginnen', en:'to begin / start', ex:'Sie beginnt, die Reise online zu buchen.', extra:'beginnt · begann · hat begonnen (unregelm.)'},
+  {cat:'Verben', sub:'Infinitiv-mit-zu Verben', art:'V', w:'ablehnen', en:'to decline / reject', ex:'Er lehnt es ab, ins Reisebüro zu gehen.', extra:'lehnt ab · lehnte ab · hat abgelehnt (trennb.)'},
+
+  /* ── VERBEN: Natur & Ranger ── */
+  {cat:'Verben', sub:'Natur & Ranger', art:'V', w:'schützen', en:'to protect', ex:'Ranger schützen seltene Pflanzen und Tiere.', extra:'schützt · schützte · hat geschützt'},
+  {cat:'Verben', sub:'Natur & Ranger', art:'V', w:'kontrollieren', en:'to check / monitor', ex:'Er kontrolliert täglich sein Gebiet im Park.', extra:'kontrolliert · kontrollierte · hat kontrolliert'},
+  {cat:'Verben', sub:'Natur & Ranger', art:'V', w:'einhalten', en:'to comply with / observe (rules)', ex:'Alle Besucher müssen die Regeln einhalten.', extra:'hält ein · hielt ein · hat eingehalten (trennb., unregelm.)'},
+  {cat:'Verben', sub:'Natur & Ranger', art:'V', w:'berichten', en:'to report / inform', ex:'Der Ranger berichtet über seltene Tiere im Nationalpark.', extra:'berichtet · berichtete · hat berichtet'},
+  {cat:'Verben', sub:'Natur & Ranger', art:'V', w:'beobachten', en:'to observe / watch', ex:'Der Ranger beobachtet die Tiere aus sicherer Entfernung.', extra:'beobachtet · beobachtete · hat beobachtet'},
+  {cat:'Verben', sub:'Natur & Ranger', art:'V', w:'erklären', en:'to explain', ex:'Der Ranger erklärt den Besuchern die Parkregeln.', extra:'erklärt · erklärte · hat erklärt'},
+
+  /* ── VERBEN: Erholung ── */
+  {cat:'Verben', sub:'Erholung & Freizeit', art:'V', w:'sich ausruhen', en:'to rest / relax', ex:'Im Urlaub ruhe ich mich endlich aus.', extra:'ruht sich aus · ruhte sich aus · hat sich ausgeruht (trennb.)'},
+  {cat:'Verben', sub:'Erholung & Freizeit', art:'V', w:'sich erholen', en:'to recover / recuperate', ex:'Timo erholt sich besser auf der Alm als im Urlaub.', extra:'erholt sich · erholte sich · hat sich erholt'},
+  {cat:'Verben', sub:'Erholung & Freizeit', art:'V', w:'genießen', en:'to enjoy', ex:'Sie genießt den Sonnenuntergang am Strand.', extra:'genießt · genoss · hat genossen (unregelm.)'},
+  {cat:'Verben', sub:'Erholung & Freizeit', art:'V', w:'faulenzen', en:'to laze around / be lazy', ex:'Im Urlaub kann man ruhig ein bisschen faulenzen.', extra:'faulenzt · faulenzte · hat gefaulenzt'},
+  {cat:'Verben', sub:'Erholung & Freizeit', art:'V', w:'schwimmen', en:'to swim', ex:'Obwohl es kalt war, sind wir schwimmen gegangen.', extra:'schwimmt · schwamm · ist geschwommen (unregelm.)'},
+  {cat:'Verben', sub:'Erholung & Freizeit', art:'V', w:'fotografieren', en:'to photograph / take photos', ex:'Sie fotografiert gern alte Gebäude und Landschaften.', extra:'fotografiert · fotografierte · hat fotografiert'},
+  {cat:'Verben', sub:'Erholung & Freizeit', art:'V', w:'schlafen', en:'to sleep', ex:'Er schläft aus, weil er im Urlaub keine Termine hat.', extra:'schläft · schlief · hat geschlafen (unregelm.)'},
+
+  /* ── ADJEKTIVE ── */
+  {cat:'Adjektive', sub:'Beschreibung', art:'ADJ', w:'anstrengend', en:'exhausting / tiring', ex:'Die lange Wanderung in den Bergen war sehr anstrengend.'},
+  {cat:'Adjektive', sub:'Beschreibung', art:'ADJ', w:'entspannend', en:'relaxing', ex:'Ein Urlaub am Meer ist wirklich sehr entspannend.'},
+  {cat:'Adjektive', sub:'Beschreibung', art:'ADJ', w:'langweilig', en:'boring', ex:'Er findet es langweilig, den ganzen Tag am Strand zu liegen.'},
+  {cat:'Adjektive', sub:'Beschreibung', art:'ADJ', w:'spannend', en:'exciting / thrilling', ex:'Die Arbeit als Ranger ist jeden Tag spannend.'},
+  {cat:'Adjektive', sub:'Beschreibung', art:'ADJ', w:'schön', en:'beautiful / nice', ex:'Die Landschaft im Schwarzwald ist wirklich schön.'},
+  {cat:'Adjektive', sub:'Beschreibung', art:'ADJ', w:'wunderbar', en:'wonderful / marvellous', ex:'Der Sonnenuntergang am Strand war wunderbar.'},
+  {cat:'Adjektive', sub:'Beschreibung', art:'ADJ', w:'interessant', en:'interesting', ex:'Es ist interessant, neue Kulturen kennenzulernen.'},
+  {cat:'Adjektive', sub:'Beschreibung', art:'ADJ', w:'wichtig', en:'important', ex:'Es ist wichtig, den Reisepass nicht zu vergessen.'},
+  {cat:'Adjektive', sub:'Beschreibung', art:'ADJ', w:'schwierig', en:'difficult / hard', ex:'Es ist schwierig, eine günstige Ferienwohnung zu finden.'},
+  {cat:'Adjektive', sub:'Beschreibung', art:'ADJ', w:'einfach', en:'easy / simple', ex:'Mit dem Zug zu reisen ist einfach und bequem.'},
+  {cat:'Adjektive', sub:'Beschreibung', art:'ADJ', w:'bekannt', en:'well-known / famous', ex:'Rothenburg ist eine bekannte Stadt in Bayern.'},
+  {cat:'Adjektive', sub:'Beschreibung', art:'ADJ', w:'beliebt', en:'popular', ex:'Rügen ist bei deutschen Urlaubern sehr beliebt.'},
+  {cat:'Adjektive', sub:'Beschreibung', art:'ADJ', w:'selten', en:'rare / rarely', ex:'Im Nationalpark gibt es viele seltene Tierarten.'},
+  {cat:'Adjektive', sub:'Beschreibung', art:'ADJ', w:'günstig', en:'affordable / cheap', ex:'Die Ferienwohnung war sehr günstig für die Lage.'},
+  {cat:'Adjektive', sub:'Beschreibung', art:'ADJ', w:'teuer', en:'expensive', ex:'Das Wellnesshotel war leider sehr teuer.'},
+  {cat:'Adjektive', sub:'Beschreibung', art:'ADJ', w:'zentral', en:'central', ex:'Das Hotel liegt zentral, direkt am Marktplatz.'},
+  {cat:'Adjektive', sub:'Beschreibung', art:'ADJ', w:'spontan', en:'spontaneous', ex:'Manche Reisenden buchen ganz spontan, ohne Plan.'},
+  {cat:'Adjektive', sub:'Beschreibung', art:'ADJ', w:'enttäuscht', en:'disappointed', ex:'Anton war enttäuscht, weil zu viele Touristen da waren.'},
+  {cat:'Adjektive', sub:'Beschreibung', art:'ADJ', w:'begeistert', en:'enthusiastic / thrilled', ex:'Timos Eltern waren begeistert von seinem Abenteuer.'},
+  {cat:'Adjektive', sub:'Beschreibung', art:'ADJ', w:'zufrieden', en:'satisfied / content', ex:'Obwohl Florian viel arbeitet, ist er sehr zufrieden.'},
+  {cat:'Adjektive', sub:'Beschreibung', art:'ADJ', w:'erschöpft', en:'exhausted', ex:'Nach der langen Wanderung war sie total erschöpft.'},
+  {cat:'Adjektive', sub:'Beschreibung', art:'ADJ', w:'historisch', en:'historical', ex:'Rothenburg ist eine historisch bedeutende Stadt.'},
+  {cat:'Adjektive', sub:'Beschreibung', art:'ADJ', w:'mittelalterlich', en:'medieval', ex:'Die mittelalterliche Stadtmauer ist sehr gut erhalten.'},
+  {cat:'Adjektive', sub:'Beschreibung', art:'ADJ', w:'natürlich', en:'natural / of course', ex:'Im Nationalpark ist die Natur natürlich geschützt.'},
+
+  /* ── AUSDRÜCKE ── */
+  {cat:'Ausdrücke', sub:'Nützliche Ausdrücke', art:'PH', w:'Lust haben zu + Inf.', en:'to feel like doing sth', ex:'Ich habe keine Lust, heute ans Meer zu fahren.'},
+  {cat:'Ausdrücke', sub:'Nützliche Ausdrücke', art:'PH', w:'Zeit haben zu + Inf.', en:'to have time to do sth', ex:'Ich habe keine Zeit, die ganze Stadt zu besichtigen.'},
+  {cat:'Ausdrücke', sub:'Nützliche Ausdrücke', art:'PH', w:'Angst haben zu + Inf.', en:'to be afraid to do sth', ex:'Er hat Angst, alleine ins Ausland zu fliegen.'},
+  {cat:'Ausdrücke', sub:'Nützliche Ausdrücke', art:'PH', w:'Spaß machen zu + Inf.', en:'to be fun to do sth', ex:'Es macht Spaß, auf der Alm zu arbeiten.'},
+  {cat:'Ausdrücke', sub:'Nützliche Ausdrücke', art:'PH', w:'Es ist schön zu + Inf.', en:'It is nice/beautiful to …', ex:'Es ist schön, am Strand spazieren zu gehen.'},
+  {cat:'Ausdrücke', sub:'Nützliche Ausdrücke', art:'PH', w:'Es ist wichtig zu + Inf.', en:'It is important to …', ex:'Es ist wichtig, genug Wasser zu trinken.'},
+  {cat:'Ausdrücke', sub:'Nützliche Ausdrücke', art:'PH', w:'Es ist möglich zu + Inf.', en:'It is possible to …', ex:'Es ist möglich, günstig nach Spanien zu fliegen.'},
+  {cat:'Ausdrücke', sub:'Nützliche Ausdrücke', art:'PH', w:'eine Reise machen', en:'to take a trip', ex:'Wir möchten im Herbst eine Reise nach Portugal machen.'},
+  {cat:'Ausdrücke', sub:'Nützliche Ausdrücke', art:'PH', w:'in Urlaub fahren', en:'to go on holiday', ex:'Jedes Jahr fahren wir im Juli in Urlaub.'},
+  {cat:'Ausdrücke', sub:'Nützliche Ausdrücke', art:'PH', w:'einen Ausflug machen', en:'to go on an excursion', ex:'Wir machen morgen einen Ausflug nach Rothenburg.'},
+  {cat:'Ausdrücke', sub:'Nützliche Ausdrücke', art:'PH', w:'Sehenswürdigkeiten besichtigen', en:'to visit sights / go sightseeing', ex:'Wir besichtigen heute die Sehenswürdigkeiten der Altstadt.'},
+  {cat:'Ausdrücke', sub:'Nützliche Ausdrücke', art:'PH', w:'ein Zimmer buchen', en:'to book a room', ex:'Hast du schon ein Zimmer für unsere Reise gebucht?'},
+  {cat:'Ausdrücke', sub:'Nützliche Ausdrücke', art:'PH', w:'sich auf den Weg machen', en:'to set off / head out', ex:'Wir machen uns früh auf den Weg, um den Zug zu erwischen.'},
+  {cat:'Ausdrücke', sub:'Nützliche Ausdrücke', art:'PH', w:'gut erholt sein', en:'to be well-rested', ex:'Nach dem Urlaub auf der Alm war Timo gut erholt.'},
+  {cat:'Ausdrücke', sub:'Nützliche Ausdrücke', art:'PH', w:'Verspätung haben', en:'to be delayed / running late', ex:'Leider hat unser Zug 40 Minuten Verspätung.'},
+  {cat:'Ausdrücke', sub:'Nützliche Ausdrücke', art:'PH', w:'Die Regeln einhalten', en:'to follow the rules', ex:'Im Nationalpark muss man unbedingt die Regeln einhalten.'},
+];
+
+/* ── WB RENDER ── */
+const artColors = {
+  'M':'art-m','F':'art-f','N':'art-n','PL':'art-pl','V':'art-v','ADJ':'art-adj','PH':'art-pl'
+};
+const artLabels = {
+  'M':'der','F':'die','N':'das','PL':'die(pl)','V':'Verb','ADJ':'Adj','PH':'Ausdruck'
+};
+
+var wbCurrentCat = 'all';
+
+function buildWB() {
+  renderWB(wbCurrentCat, document.getElementById('wb-search').value.toLowerCase());
+}
+
+function renderWB(cat, search) {
+  const c = document.getElementById('wb-container');
+  let filtered = wbData;
+  if (cat !== 'all') filtered = filtered.filter(w => w.cat === cat);
+  if (search) filtered = filtered.filter(w =>
+    w.w.toLowerCase().includes(search) ||
+    w.en.toLowerCase().includes(search) ||
+    (w.sub && w.sub.toLowerCase().includes(search))
+  );
+
+  // Group by sub-category
+  const groups = {};
+  filtered.forEach(w => {
+    const key = w.sub || w.cat;
+    if (!groups[key]) groups[key] = [];
+    groups[key].push(w);
+  });
+
+  let html = '';
+  if (filtered.length === 0) {
+    html = '<div style="text-align:center;color:var(--muted);padding:40px 0;font-size:.9rem;">Kein Wort gefunden. Versuche eine andere Suche.</div>';
+  } else {
+    html += `<div style="font-size:.78rem;color:var(--muted);margin-bottom:12px;font-weight:700;">${filtered.length} Wörter gefunden</div>`;
+    Object.entries(groups).forEach(([sub, words]) => {
+      html += `<div class="wb-cat-title">${sub} <span style="font-size:.7rem;font-weight:700;color:var(--muted);text-transform:none;letter-spacing:0;">(${words.length})</span></div>`;
+      html += '<div class="wb-grid">';
+      words.forEach((w, i) => {
+        const uid = 'wb-' + w.w.replace(/[^a-zA-Z]/g,'') + i;
+        const ac = artColors[w.art] || 'art-n';
+        const al = artLabels[w.art] || '';
+        const displayWord = w.w.replace(/^(der |die |das )/,'');
+        html += `<div class="wb-item" id="${uid}">
+          <div class="wb-head" onclick="toggleWB('${uid}')">
+            <span class="wb-art-badge ${ac}">${al}</span>
+            <span class="wb-word-text">${displayWord}</span>
+            <span class="wb-short-en">${w.en.split('/')[0].trim()}</span>
+            <span class="wb-arrow">▶</span>
+          </div>
+          <div class="wb-body">
+            <div class="wb-en-full">🇬🇧 ${w.en}</div>
+            <div class="wb-ex-sent">„${w.ex}"</div>
+            ${w.extra ? `<div class="wb-extra">📝 ${w.extra}</div>` : ''}
+          </div>
+        </div>`;
+      });
+      html += '</div>';
+    });
+  }
+  c.innerHTML = html;
+}
+
+function toggleWB(id) {
+  document.getElementById(id).classList.toggle('open');
+}
+
+function filterWBCat(cat, btn) {
+  wbCurrentCat = cat;
+  document.querySelectorAll('.wb-filter').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderWB(cat, document.getElementById('wb-search').value.toLowerCase());
+}
+
+function filterWB() {
+  renderWB(wbCurrentCat, document.getElementById('wb-search').value.toLowerCase());
+}
+
+/* SCORE CARD */
+function openSubmit(){
+  document.getElementById('sc-overlay').classList.remove('hidden');
+  document.getElementById('sc-modal').classList.remove('hidden');
+  document.getElementById('sr-card').classList.add('hidden');
+  document.getElementById('sc-name-inp').value='';
+  setTimeout(()=>document.getElementById('sc-name-inp').focus(),100);
+}
+function generateCard(){
+  const name=document.getElementById('sc-name-inp').value.trim();
+  if(!name){document.getElementById('sc-name-inp').style.borderColor='var(--red)';return;}
+  document.getElementById('sc-name-inp').style.borderColor='';
+  const pct=Math.round((score/1200)*100);
+  const ans=answered.size;
+  const now=new Date();
+  const dateStr=now.toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'});
+  document.getElementById('sr-name').textContent=name;
+  document.getElementById('sr-pts').textContent=score;
+  document.getElementById('sr-answered').textContent=ans;
+  document.getElementById('sr-pct').textContent=pct+'%';
+  document.getElementById('sr-date').textContent=dateStr;
+  document.getElementById('sc-modal').classList.add('hidden');
+  document.getElementById('sr-card').classList.remove('hidden');
+  const sid=sessionStorage.getItem('dm_student_id');
+  if(sid&&window.saveKapitelScore) window.saveKapitelScore(sid,'b1k1',score);
+}
+function closeCard(){
+  document.getElementById('sc-overlay').classList.add('hidden');
+}
+window.addEventListener('load',function(){
+  const ov=document.getElementById('sc-overlay');
+  if(ov) ov.addEventListener('click',function(e){if(e.target===this) closeCard();});
+});
+
+</script>
+
+
+<!-- ══════════════ WÖRTERBUCH ══════════════ -->
+<div class="screen" id="s-woerterbuch">
+  <div class="sec-h">📖 Vollständiges Wörterbuch</div>
+  <p style="font-size:.88rem;color:var(--muted);margin-bottom:14px;line-height:1.6;">Alle Vokabeln zu Kapitel 1 · Reisen, Urlaub, Grammatik-Verben und mehr. Tippe auf ein Wort für Details.</p>
+
+  <div class="search-wrap">
+    <span class="search-icon">🔍</span>
+    <input class="search-inp" id="wb-search" placeholder="Wort suchen…" oninput="filterWB()" autocomplete="off">
+  </div>
+
+  <!-- Filter buttons -->
+  <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px;" id="wb-filters">
+    <button class="wb-filter active" onclick="filterWBCat('all',this)">Alle</button>
+    <button class="wb-filter" onclick="filterWBCat('Nomen',this)">🏷️ Nomen</button>
+    <button class="wb-filter" onclick="filterWBCat('Verben',this)">⚡ Verben</button>
+    <button class="wb-filter" onclick="filterWBCat('Adjektive',this)">🎨 Adjektive</button>
+    <button class="wb-filter" onclick="filterWBCat('Ausdrücke',this)">💬 Ausdrücke</button>
+  </div>
+
+  <div id="wb-container"></div>
+</div>
+
+<!-- STUDENT SCORE OVERLAY -->
+<div class="sc-overlay hidden" id="sc-overlay">
+  <div class="sc-modal" id="sc-modal">
+    <h2>📋 Submit Your Score</h2>
+    <p>Enter your name to generate your personal score card. Share the screenshot with Anshuka!</p>
+    <input class="sc-inp" id="sc-name-inp" placeholder="Your name…" maxlength="40" autocomplete="off">
+    <button class="sc-btn" onclick="generateCard()">Generate My Score Card ✨</button>
+  </div>
+  <div class="sr-card hidden" id="sr-card">
+    <div class="sr-logo">
+      <div class="sr-logo-icon">🇩🇪</div>
+      <div class="sr-logo-text">
+        <div class="sr-logo-name">Deutsch Meistern</div>
+        <div class="sr-logo-by">by Anshuka</div>
+      </div>
+    </div>
+    <div class="sr-divider"></div>
+    <div class="sr-student" id="sr-name">Student</div>
+    <div class="sr-label">Score Card</div>
+    <div class="sr-score-ring">
+      <div class="sr-pts" id="sr-pts">0</div>
+      <div class="sr-pts-lbl">points</div>
+    </div>
+    <div class="sr-chapter">B1 · Kapitel 1 · Gute Reise!</div>
+    <div class="sr-stats">
+      <div class="sr-stat"><div class="sr-stat-n" id="sr-answered">0</div><div class="sr-stat-l">Answered</div></div>
+      <div class="sr-stat"><div class="sr-stat-n" id="sr-pct">0%</div><div class="sr-stat-l">Score %</div></div>
+      <div class="sr-stat"><div class="sr-stat-n">120</div><div class="sr-stat-l">Max pts</div></div>
+    </div>
+    <div class="sr-footer">Completed on <strong id="sr-date"></strong><br>Platform: <strong>Deutsch Meistern by Anshuka</strong></div>
+    <div class="sr-actions">
+      <button class="sr-close-btn" onclick="closeCard()">✕ Close</button>
+      <button class="sr-new-btn" onclick="closeCard()">Keep Learning 🚀</button>
+    </div>
+  </div>
+</div>
+
+<!-- Firebase: Real Leaderboard -->
+<script type="module">
+import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js';
+import { getFirestore, collection, doc, getDoc, updateDoc, getDocs, query, orderBy, limit }
+  from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js';
+const app = initializeApp({
+  apiKey:"AIzaSyCuMSWNpOIlnqqxFmy08CfIcbvAUpTXo1E",
+  authDomain:"deutschmeistern-abc4d.firebaseapp.com",
+  projectId:"deutschmeistern-abc4d",
+  storageBucket:"deutschmeistern-abc4d.firebasestorage.app",
+  messagingSenderId:"282075407369",
+  appId:"1:282075407369:web:4a5587b4eb391e768004d8"
+});
+const db = getFirestore(app);
+window.saveKapitelScore = async function(studentId, kapitelKey, newScore) {
+  try {
+    const ref = doc(db, 'students', studentId);
+    const snap = await getDoc(ref);
+    if (!snap.exists()) return;
+    const data = snap.data();
+    const scores = data.scores || {};
+    const existing = scores[kapitelKey] || 0;
+    if (newScore <= existing) return;
+    scores[kapitelKey] = newScore;
+    const total = Object.values(scores).reduce((a,b)=>a+b,0);
+    await updateDoc(ref, { scores, totalScore: total });
+  } catch(e) { console.log('Score save error:', e); }
+};
+window.loadLeaderboard = async function() {
+  const listEl = document.getElementById('lb-list');
+  const p1n = document.getElementById('lb-p1-name');
+  const p1p = document.getElementById('lb-p1-pts');
+  const p2n = document.getElementById('lb-p2-name');
+  const p2p = document.getElementById('lb-p2-pts');
+  const p3n = document.getElementById('lb-p3-name');
+  const p3p = document.getElementById('lb-p3-pts');
+  if (listEl) listEl.innerHTML = '<div style="text-align:center;padding:24px;color:var(--muted);font-size:.85rem;">Lade Rangliste...</div>';
+  try {
+    const myId = sessionStorage.getItem('dm_student_id');
+    const q = query(collection(db, 'students'), orderBy('totalScore', 'desc'), limit(20));
+    const snap = await getDocs(q);
+    const students = [];
+    snap.forEach(d => {
+      const data = d.data();
+      if ((data.totalScore || 0) > 0) students.push({ id:d.id, name:data.name, total:data.totalScore||0, you:d.id===myId });
+    });
+    if (myId && !students.find(s=>s.id===myId)) {
+      const mySelf = sessionStorage.getItem('dm_student_name');
+      if (mySelf) students.push({ id:myId, name:mySelf, total:0, you:true });
+    }
+    students.sort((a,b) => b.total - a.total);
+    const names = ['--','--','--'], pts = ['--','--','--'];
+    students.slice(0,3).forEach((s,i) => { names[i]=s.name; pts[i]=s.total+' Pts'; });
+    if(p1n) p1n.textContent=names[0]; if(p1p) p1p.textContent=pts[0];
+    if(p2n) p2n.textContent=names[1]; if(p2p) p2p.textContent=pts[1];
+    if(p3n) p3n.textContent=names[2]; if(p3p) p3p.textContent=pts[2];
+    if (students.length === 0) {
+      if(listEl) listEl.innerHTML = '<div style="text-align:center;padding:30px;color:var(--muted);font-size:.88rem;">Noch keine Punkte! Mach Ubungen und gib deinen Score ab.</div>';
+      return;
+    }
+    const maxPts = Math.max(...students.map(s=>s.total), 1);
+    if(listEl) listEl.innerHTML = students.map((s,i) => `<div class="lb-row${s.you?' lb-you':''}">
+      <div class="lb-rank">${i+1}</div>
+      <div style="flex:1">
+        <div class="lb-name">${s.name}${s.you?' 👈':''}</div>
+        <div class="lb-bar-wrap"><div class="lb-bar" style="width:${Math.round((s.total/maxPts)*100)}%"></div></div>
+      </div>
+      <div class="lb-pts">${s.total}</div>
+    </div>`).join('');
+  } catch(e) {
+    console.log('Leaderboard error:', e);
+    if (listEl) listEl.innerHTML = '<div style="text-align:center;padding:20px;color:var(--muted);">Konnte Rangliste nicht laden.</div>';
+  }
+};
+</script>
+</body>
+</html>

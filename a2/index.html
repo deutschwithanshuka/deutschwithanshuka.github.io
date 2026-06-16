@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Deutsch Meistern · A2</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f0f4ff;--white:#fff;--navy:#0d1b6e;
+  --blue:#2563eb;--blue2:#60a5fa;
+  --text:#1e1b4b;--muted:#64748b;--border:#c7d2fe;
+  --sh:0 2px 12px rgba(37,99,235,.10);
+  --r:16px;--r2:10px;
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:'Nunito',sans-serif;overflow-x:hidden;min-height:100vh;}
+nav{background:rgba(255,255,255,.97);backdrop-filter:blur(12px);border-bottom:2px solid var(--border);display:flex;align-items:center;padding:11px 16px;gap:10px;position:sticky;top:0;z-index:100;}
+.nav-back{font-size:1.2rem;text-decoration:none;color:var(--navy);font-weight:900;flex-shrink:0;}
+.nav-brand{flex:1;}
+.nav-title{font-size:.95rem;font-weight:900;color:var(--navy);line-height:1.1;}
+.nav-sub{font-size:.6rem;color:var(--muted);font-weight:700;letter-spacing:.5px;}
+.nav-badge{font-family:'Space Mono',monospace;font-size:.7rem;font-weight:700;background:#dbeafe;color:#1e40af;border-radius:50px;padding:3px 10px;flex-shrink:0;}
+.main{padding:18px 16px 60px;max-width:480px;margin:0 auto;}
+.hero{background:linear-gradient(135deg,#2563eb,#1d4ed8,#1e40af);border-radius:18px;padding:24px 20px;text-align:center;color:#fff;margin-bottom:18px;position:relative;overflow:hidden;}
+.hero::before{content:'📘';font-size:7rem;position:absolute;top:-10px;right:-10px;opacity:.08;}
+.hero-chip{display:inline-block;background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.3);border-radius:50px;padding:3px 12px;font-size:.65rem;font-weight:800;text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;}
+.hero-title{font-size:2.2rem;font-weight:900;line-height:1;margin-bottom:4px;}
+.hero-sub{font-size:.82rem;opacity:.88;line-height:1.5;}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:18px;}
+.stat{background:#fff;border:2px solid var(--border);border-radius:12px;padding:10px 8px;text-align:center;box-shadow:var(--sh);}
+.stat-n{font-family:'Space Mono',monospace;font-size:1.2rem;font-weight:700;color:var(--blue);}
+.stat-l{font-size:.58rem;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;font-weight:800;margin-top:1px;}
+.sec-label{font-size:.68rem;font-weight:900;color:#7c3aed;text-transform:uppercase;letter-spacing:1.2px;margin-bottom:10px;}
+.chapter-list{display:flex;flex-direction:column;gap:10px;margin-bottom:24px;}
+.ch-card{background:#fff;border:2px solid var(--border);border-radius:14px;padding:14px;display:flex;align-items:center;gap:12px;box-shadow:var(--sh);text-decoration:none;color:inherit;transition:transform .12s, border-color .12s;}
+.ch-card:active{transform:scale(.98);}
+.ch-card.locked{opacity:.55;cursor:not-allowed;}
+.ch-num{font-family:'Space Mono',monospace;font-size:.75rem;font-weight:700;background:linear-gradient(135deg,#2563eb,#1d4ed8);color:#fff;border-radius:8px;padding:6px 8px;min-width:36px;text-align:center;flex-shrink:0;}
+.ch-card.locked .ch-num{background:#e2e8f0;color:var(--muted);}
+.ch-info{flex:1;}
+.ch-title{font-size:.92rem;font-weight:900;color:var(--navy);margin-bottom:2px;}
+.ch-topics{font-size:.68rem;color:var(--muted);font-weight:600;line-height:1.4;}
+.ch-arrow{font-size:.9rem;color:var(--blue);flex-shrink:0;}
+.ch-card.locked .ch-arrow{color:var(--muted);}
+.ch-tag{font-size:.58rem;font-weight:800;border-radius:50px;padding:2px 8px;flex-shrink:0;}
+.tag-soon{background:#f1f5f9;color:var(--muted);}
+.book-card{background:#fff;border:2px solid var(--border);border-radius:14px;padding:14px 16px;box-shadow:var(--sh);display:flex;align-items:center;gap:12px;}
+.book-icon{font-size:2rem;flex-shrink:0;}
+.book-title{font-size:.88rem;font-weight:900;color:var(--navy);}
+.book-sub{font-size:.7rem;color:var(--muted);font-weight:600;margin-top:2px;line-height:1.4;}
+.coming-banner{background:linear-gradient(135deg,#dbeafe,#eff6ff);border:2px solid #93c5fd;border-radius:14px;padding:16px;text-align:center;margin-bottom:18px;}
+.coming-banner p{font-size:.85rem;font-weight:700;color:#1e40af;line-height:1.6;}
+.coming-banner .em{font-size:1.5rem;display:block;margin-bottom:6px;}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-back" href="../index.html">&#8592;</a>
+  <div class="nav-brand">
+    <div class="nav-title">A2 Elementary</div>
+    <div class="nav-sub">Deutsch Meistern · by Anshuka</div>
+  </div>
+  <span class="nav-badge">A2</span>
+</nav>
+
+<div class="main">
+
+  <div class="hero">
+    <div class="hero-chip">Netzwerk Neu A2</div>
+    <div class="hero-title">A2 Elementary</div>
+    <div class="hero-sub">12 Kapitel · Expand your German beyond the basics</div>
+  </div>
+
+  <div class="coming-banner">
+    <span class="em">🚧</span>
+    <p>A2 lessons are coming soon! Complete A1 first to be ready for A2.</p>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><div class="stat-n">12</div><div class="stat-l">Kapitel</div></div>
+    <div class="stat"><div class="stat-n">A2</div><div class="stat-l">CEFR Level</div></div>
+    <div class="stat"><div class="stat-n">Free</div><div class="stat-l">Always</div></div>
+  </div>
+
+  <div class="sec-label">📚 Choose a Kapitel</div>
+
+  <div class="chapter-list">
+
+    <div class="ch-card locked">
+      <span class="ch-num">K1</span>
+      <div class="ch-info">
+        <div class="ch-title">Herzlich willkommen!</div>
+        <div class="ch-topics">Revisiting and building on A1 · Introductions · Reflexivpronomen</div>
+      </div>
+      <span class="ch-tag tag-soon">Soon</span>
+      <span class="ch-arrow">🔒</span>
+    </div>
+
+    <div class="ch-card locked">
+      <span class="ch-num">K2</span>
+      <div class="ch-info">
+        <div class="ch-title">Menschen und Beziehungen</div>
+        <div class="ch-topics">Describing people · Relationships · Adjektivdeklination</div>
+      </div>
+      <span class="ch-tag tag-soon">Soon</span>
+      <span class="ch-arrow">🔒</span>
+    </div>
+
+    <div class="ch-card locked">
+      <span class="ch-num">K3</span>
+      <div class="ch-info">
+        <div class="ch-title">Wohnen</div>
+        <div class="ch-topics">Apartments · Furniture · Rooms · Wechselpräpositionen (Dativ/Akkusativ)</div>
+      </div>
+      <span class="ch-tag tag-soon">Soon</span>
+      <span class="ch-arrow">🔒</span>
+    </div>
+
+    <div class="ch-card locked">
+      <span class="ch-num">K4</span>
+      <div class="ch-info">
+        <div class="ch-title">Arbeit</div>
+        <div class="ch-topics">Jobs · Workplace · Applications · Modalverben im Präteritum</div>
+      </div>
+      <span class="ch-tag tag-soon">Soon</span>
+      <span class="ch-arrow">🔒</span>
+    </div>
+
+    <div class="ch-card locked">
+      <span class="ch-num">K5</span>
+      <div class="ch-info">
+        <div class="ch-title">Freizeit und Hobbys</div>
+        <div class="ch-topics">Sports · Hobbies · Making plans · Konjunktiv II (würde)</div>
+      </div>
+      <span class="ch-tag tag-soon">Soon</span>
+      <span class="ch-arrow">🔒</span>
+    </div>
+
+    <div class="ch-card locked">
+      <span class="ch-num">K6</span>
+      <div class="ch-info">
+        <div class="ch-title">Essen und Trinken</div>
+        <div class="ch-topics">Recipes · Restaurants · Quantities · Adjektive ohne Artikel</div>
+      </div>
+      <span class="ch-tag tag-soon">Soon</span>
+      <span class="ch-arrow">🔒</span>
+    </div>
+
+    <div class="ch-card locked">
+      <span class="ch-num">K7</span>
+      <div class="ch-info">
+        <div class="ch-title">Reisen</div>
+        <div class="ch-topics">Travel · Transport · Hotels · Nebensätze mit dass</div>
+      </div>
+      <span class="ch-tag tag-soon">Soon</span>
+      <span class="ch-arrow">🔒</span>
+    </div>
+
+    <div class="ch-card locked">
+      <span class="ch-num">K8</span>
+      <div class="ch-info">
+        <div class="ch-title">Gesundheit</div>
+        <div class="ch-topics">Body · Illness · Doctor · Reflexivverben · Ratschläge geben</div>
+      </div>
+      <span class="ch-tag tag-soon">Soon</span>
+      <span class="ch-arrow">🔒</span>
+    </div>
+
+    <div class="ch-card locked">
+      <span class="ch-num">K9</span>
+      <div class="ch-info">
+        <div class="ch-title">Einkaufen</div>
+        <div class="ch-topics">Shopping · Clothes · Prices · Vergleiche mit als und wie</div>
+      </div>
+      <span class="ch-tag tag-soon">Soon</span>
+      <span class="ch-arrow">🔒</span>
+    </div>
+
+    <div class="ch-card locked">
+      <span class="ch-num">K10</span>
+      <div class="ch-info">
+        <div class="ch-title">Feiern</div>
+        <div class="ch-topics">Celebrations · Events · Invitations · Nebensätze mit wenn</div>
+      </div>
+      <span class="ch-tag tag-soon">Soon</span>
+      <span class="ch-arrow">🔒</span>
+    </div>
+
+    <div class="ch-card locked">
+      <span class="ch-num">K11</span>
+      <div class="ch-info">
+        <div class="ch-title">Natur und Umwelt</div>
+        <div class="ch-topics">Nature · Weather · Environment · Passiv Präsens</div>
+      </div>
+      <span class="ch-tag tag-soon">Soon</span>
+      <span class="ch-arrow">🔒</span>
+    </div>
+
+    <div class="ch-card locked">
+      <span class="ch-num">K12</span>
+      <div class="ch-info">
+        <div class="ch-title">Zukunftspläne</div>
+        <div class="ch-topics">Future plans · Wishes · Goals · Futur I mit werden</div>
+      </div>
+      <span class="ch-tag tag-soon">Soon</span>
+      <span class="ch-arrow">🔒</span>
+    </div>
+
+  </div>
+
+  <div class="book-card">
+    <span class="book-icon">📘</span>
+    <div>
+      <div class="book-title">Netzwerk Neu A2 Kursbuch</div>
+      <div class="book-sub">All lessons on this platform follow the official Netzwerk Neu A2 curriculum by Klett Verlag.</div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

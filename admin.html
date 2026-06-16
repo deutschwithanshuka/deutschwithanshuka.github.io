@@ -279,7 +279,7 @@ window.loadStudents = async function() {
         <td>${(s.levels || (s.level ? [s.level] : ['A1'])).map(l => `<span class="badge-level">${l}</span>`).join(' ')}</td>
         <td>
           <button class="btn-view" onclick="viewActivity('${d.id}','${s.name}','${s.email || s.code || ''}')">Activity</button>
-          <button class="btn-lvl" data-lvl-id="${d.id}" onclick="changeLevel('${d.id}','${s.name}',${JSON.stringify(s.levels || (s.level ? [s.level] : ['A1']))})">Levels</button>
+          <button class="btn-lvl" data-lvl-id="${d.id}" onclick="changeLevel('${d.id}','${s.name}','${(s.levels || (s.level ? [s.level] : ['A1'])).join(',')}')">Levels</button>
           <button class="btn-del" data-del-id="${d.id}" onclick="deleteStudent('${d.id}','${s.name}')">Delete</button>
         </td>
       </tr>`;
@@ -323,7 +323,7 @@ let _lvlStudentId = null;
 
 window.changeLevel = function(id, name, currentLevels) {
   _lvlStudentId = id;
-  const selected = Array.isArray(currentLevels) ? currentLevels : (currentLevels ? [currentLevels] : ['A1']);
+  const selected = typeof currentLevels === 'string' ? currentLevels.split(',').filter(Boolean) : (Array.isArray(currentLevels) ? currentLevels : ['A1']);
   document.getElementById('lvl-modal-name').textContent = name;
   const ALL = ['A1','A2','B1','B2','C1'];
   document.getElementById('lvl-toggles').innerHTML = ALL.map(l =>

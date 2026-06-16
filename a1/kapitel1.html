@@ -321,7 +321,7 @@ nav{position:sticky;top:0;z-index:999;background:rgba(255,255,255,.98);backdrop-
   <button class="bn active" onclick="goTo('home',this)"><span class="bn-i">🏠</span>Home</button>
   <button class="bn" onclick="goTo('grammar',this)"><span class="bn-i">📚</span>Grammatik</button>
   <button class="bn" onclick="goTo('exercises',this)"><span class="bn-i">✏️</span>Übungen</button>
-  <button class="bn" onclick="goTo('vocab',this)"><span class="bn-i">🔤</span>Vokabeln</button>
+  <button class="bn" onclick="openSubmit()"><span class="bn-i">📋</span>Score</button>
   <button class="bn" onclick="openMehr()"><span class="bn-i">•••</span>Mehr</button>
 </div>
 
@@ -330,7 +330,8 @@ nav{position:sticky;top:0;z-index:999;background:rgba(255,255,255,.98);backdrop-
 <div class="mehr-sheet" id="mehr-sheet">
   <div class="mehr-handle"></div>
   <div class="mehr-title">Mehr Inhalte</div>
-  <div class="mehr-grid">
+  <div class="mehr-grid" style="grid-template-columns:repeat(3,1fr);">
+    <button class="mehr-btn" onclick="closeMehr();goTo('vocab',null)"><span class="mehr-btn-i">🔤</span><span class="mehr-btn-l">Vokabeln</span></button>
     <button class="mehr-btn" onclick="closeMehr();goTo('leaderboard',null)"><span class="mehr-btn-i">🏆</span><span class="mehr-btn-l">Rangliste</span></button>
     <button class="mehr-btn" onclick="closeMehr();goTo('woerterbuch',null)"><span class="mehr-btn-i">📖</span><span class="mehr-btn-l">Wörterbuch</span></button>
     <button class="mehr-btn" onclick="closeMehr();goTo('laender',null)"><span class="mehr-btn-i">🌍</span><span class="mehr-btn-l">Länder</span></button>
@@ -954,8 +955,6 @@ nav{position:sticky;top:0;z-index:999;background:rgba(255,255,255,.98);backdrop-
   </div>
 </div>
 
-<!-- SCORE CARD BUTTON -->
-<button onclick="openSubmit()" style="position:fixed;bottom:72px;left:14px;z-index:900;background:linear-gradient(135deg,#16a34a,#15803d);color:#fff;border:none;border-radius:50px;padding:9px 16px;font-family:'Nunito',sans-serif;font-size:.75rem;font-weight:900;cursor:pointer;box-shadow:0 4px 16px rgba(22,163,74,.4);display:flex;align-items:center;gap:6px;">📋 My Score Card</button>
 
 <script>
 /* ── MEHR DRAWER ── */

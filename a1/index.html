@@ -233,13 +233,15 @@ nav{background:rgba(255,255,255,.97);backdrop-filter:blur(12px);border-bottom:2p
 
 <script>
 (function() {
-  const level = sessionStorage.getItem('dm_student_level') || '';
-  const name  = sessionStorage.getItem('dm_student_name') || '';
+  const raw    = sessionStorage.getItem('dm_student_levels') || '[]';
+  const levels = JSON.parse(raw);
+  const name   = sessionStorage.getItem('dm_student_name') || '';
   if (!name) {
     window.location.href = '../index.html';
     return;
   }
-  if (level && level !== 'A1') {
+  if (levels.length && !levels.includes('A1')) {
+    const level = levels[0] || 'another level';
     const overlay = document.createElement('div');
     overlay.style.cssText = 'position:fixed;inset:0;z-index:9999;background:linear-gradient(135deg,#1e40af,#6d28d9,#be185d);display:flex;align-items:center;justify-content:center;padding:24px;';
     overlay.innerHTML = `

@@ -402,7 +402,10 @@ window.checkStudentLogin = async function() {
     // Store session
     sessionStorage.setItem('dm_student_id', studentDoc.id);
     sessionStorage.setItem('dm_student_name', studentData.name);
-    sessionStorage.setItem('dm_student_level', (studentData.level || 'A1').toUpperCase());
+    // Support both old single-level and new multi-level format
+    const rawLevels = studentData.levels || (studentData.level ? [studentData.level] : ['A1']);
+    const myLevels = rawLevels.map(l => l.toUpperCase());
+    sessionStorage.setItem('dm_student_levels', JSON.stringify(myLevels));
 
     // Show main content
     document.getElementById('gate2').classList.add('hidden');
@@ -427,11 +430,12 @@ function showStudentUI(name) {
 }
 
 function applyLevelAccess() {
-  const myLevel = sessionStorage.getItem('dm_student_level') || '';
-  if (!myLevel) return;
+  const raw = sessionStorage.getItem('dm_student_levels') || '[]';
+  const myLevels = JSON.parse(raw);
+  if (!myLevels.length) return;
   document.querySelectorAll('.lv-btn[data-level]').forEach(btn => {
     const btnLevel = btn.getAttribute('data-level');
-    if (btnLevel === myLevel) {
+    if (myLevels.includes(btnLevel)) {
       btn.classList.add('lv-mine');
       btn.classList.remove('locked','lv-noaccess');
       const tag = btn.querySelector('[class*="lv-tag"]');
@@ -476,6 +480,26 @@ window.comingSoon = function(e, level) {
   e.preventDefault();
   alert('🔒 ' + level + ' is coming soon!\nCheck back later. Viel Geduld! 😊');
 };
+
+// ── AUTO-RESTORE SESSION WITH FRESH LEVELS ──
+// If student already logged in this browser session, re-fetch levels from
+// Firestore so admin changes are reflected immediately (no re-login needed).
+(async () => {
+  const studentId   = sessionStorage.getItem('dm_student_id');
+  const studentName = sessionStorage.getItem('dm_student_name');
+  if (!studentId || !studentName) return;
+  try {
+    const snap = await getDoc(doc(db, 'students', studentId));
+    if (!snap.exists()) return;
+    const data = snap.data();
+    const rawLevels = data.levels || (data.level ? [data.level] : ['A1']);
+    const myLevels  = rawLevels.map(l => l.toUpperCase());
+    sessionStorage.setItem('dm_student_levels', JSON.stringify(myLevels));
+    document.getElementById('gate1').classList.add('hidden');
+    document.getElementById('gate2').classList.add('hidden');
+    showStudentUI(studentName);
+  } catch(e) { /* silent fail */ }
+})();
 </script>
 </body>
 </html>

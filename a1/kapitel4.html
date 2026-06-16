@@ -1,0 +1,1021 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Deutsch Meistern · A1 Kapitel 4</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f4f6ff;--white:#fff;--navy:#0f1f6f;--blue:#2563eb;--blue2:#60a5fa;--purple:#7c3aed;--green:#16a34a;--red:#dc2626;--yellow:#d97706;--teal:#0f766e;--text:#1a1a3e;--muted:#5a6a8a;--border:#c7d2fe;--sh:0 2px 14px rgba(37,99,235,.09);--r:18px;--r2:12px;}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+html{scroll-behavior:smooth;font-size:17px;}
+body{background:var(--bg);color:var(--text);font-family:'Nunito',sans-serif;overflow-x:hidden;line-height:1.6;}
+nav{position:sticky;top:0;z-index:999;background:rgba(255,255,255,.98);backdrop-filter:blur(12px);border-bottom:2px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:12px 16px;}
+.nav-left{display:flex;align-items:center;gap:10px;}
+.nav-icon{width:34px;height:34px;border-radius:8px;background:#1a1a1a;display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0;}
+.nav-title{font-size:1rem;font-weight:900;color:var(--navy);}
+.nav-sub{font-size:.68rem;color:var(--muted);font-weight:700;display:block;margin-top:-1px;}
+.score-pill{background:linear-gradient(135deg,#f59e0b,#ef4444);color:#fff;border-radius:50px;padding:6px 15px;font-weight:900;font-size:.82rem;white-space:nowrap;}
+.bnav{position:fixed;bottom:0;left:0;right:0;z-index:999;background:rgba(255,255,255,.98);backdrop-filter:blur(10px);border-top:2px solid var(--border);display:flex;}
+.bn{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:8px 2px 11px;border:none;background:none;font-family:'Nunito',sans-serif;cursor:pointer;color:var(--muted);font-size:.58rem;font-weight:800;letter-spacing:.3px;gap:3px;transition:color .15s;}
+.bn-i{font-size:1.2rem;}
+.bn.active{color:var(--blue);}
+.screen{display:none;padding:18px 16px 100px;min-height:100vh;}
+.screen.active{display:block;}
+.hero{background:linear-gradient(135deg,#1e40af,#6d28d9,#be185d);border-radius:var(--r);padding:26px 18px 28px;text-align:center;color:#fff;margin-bottom:16px;position:relative;overflow:hidden;}
+.hero::before{content:'🍽️';font-size:6rem;position:absolute;top:-10px;right:-10px;opacity:.1;}
+.hero-chip{display:inline-block;background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.35);border-radius:50px;padding:3px 14px;font-size:.68rem;font-weight:800;text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;}
+.hero h1{font-size:clamp(1.6rem,5vw,2.4rem);font-weight:900;line-height:1.1;margin-bottom:6px;}
+.hero p{font-size:.9rem;opacity:.9;line-height:1.65;max-width:320px;margin:0 auto;}
+.stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px;}
+.stat-card{background:#fff;border:2px solid var(--border);border-radius:var(--r2);padding:12px;text-align:center;box-shadow:var(--sh);}
+.stat-em{font-size:1.4rem;margin-bottom:2px;}
+.stat-n{font-family:'Space Mono',monospace;font-size:1.3rem;font-weight:700;color:var(--blue);}
+.stat-l{font-size:.64rem;color:var(--muted);text-transform:uppercase;letter-spacing:.7px;font-weight:800;}
+.topic-list{display:flex;flex-direction:column;gap:8px;}
+.t-row{background:#fff;border:2px solid var(--border);border-radius:var(--r2);padding:13px 14px;display:flex;align-items:center;gap:10px;box-shadow:var(--sh);cursor:pointer;transition:transform .12s;}
+.t-row:active{transform:scale(.98);}
+.t-ico{font-size:1.3rem;flex-shrink:0;}
+.t-main{flex:1;}
+.t-name{font-weight:900;color:var(--navy);font-size:.96rem;}
+.t-sub{font-size:.78rem;color:var(--muted);font-weight:600;margin-top:1px;}
+.t-badge{background:linear-gradient(135deg,var(--blue),var(--purple));color:#fff;border-radius:50px;padding:3px 10px;font-size:.62rem;font-weight:800;flex-shrink:0;}
+.sec-h{font-size:1.05rem;font-weight:900;color:var(--navy);margin-bottom:14px;display:flex;align-items:center;gap:8px;}
+.sec-h::after{content:'';flex:1;height:2px;background:linear-gradient(90deg,var(--border),transparent);}
+.g-tabs{display:flex;gap:6px;overflow-x:auto;padding-bottom:6px;margin-bottom:14px;-ms-overflow-style:none;scrollbar-width:none;}
+.g-tabs::-webkit-scrollbar{display:none;}
+.g-tab{flex-shrink:0;padding:9px 18px;border-radius:50px;border:2px solid var(--border);background:#fff;color:var(--muted);font-family:'Nunito',sans-serif;font-size:.82rem;font-weight:800;cursor:pointer;transition:all .15s;white-space:nowrap;}
+.g-tab.active{background:linear-gradient(135deg,var(--blue),var(--purple));color:#fff;border-color:transparent;}
+.g-panel{display:none;}
+.g-panel.active{display:block;}
+.gcard{background:#fff;border:2px solid var(--border);border-radius:var(--r);padding:20px 18px;box-shadow:var(--sh);margin-bottom:14px;}
+.gcard-title{font-size:1.2rem;font-weight:900;color:var(--navy);margin-bottom:6px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+.gcard-badge{font-size:.66rem;background:linear-gradient(135deg,var(--blue),var(--purple));color:#fff;border-radius:50px;padding:3px 11px;font-weight:800;}
+.gcard-desc{font-size:.88rem;color:var(--muted);font-weight:600;margin-bottom:14px;line-height:1.65;}
+.rule-box{background:#eff6ff;border-left:4px solid var(--blue);border-radius:0 var(--r2) var(--r2) 0;padding:14px 16px;margin-bottom:12px;font-size:.9rem;font-weight:700;color:var(--navy);line-height:1.65;}
+.tip-box{background:#fef9e7;border-left:4px solid var(--yellow);border-radius:0 var(--r2) var(--r2) 0;padding:14px 16px;margin-bottom:12px;font-size:.88rem;font-weight:700;color:#78350f;line-height:1.65;}
+.warn-box{background:#fff4f4;border-left:4px solid var(--red);border-radius:0 var(--r2) var(--r2) 0;padding:14px 16px;margin-bottom:12px;font-size:.88rem;font-weight:700;color:#9f1239;line-height:1.65;}
+.section-h{font-size:.78rem;font-weight:900;color:var(--purple);text-transform:uppercase;letter-spacing:1px;margin:18px 0 10px;border-bottom:2px solid #e0e7ff;padding-bottom:6px;}
+.conj-table{width:100%;border-collapse:collapse;margin-bottom:14px;font-size:.88rem;}
+.conj-table th{background:linear-gradient(135deg,var(--blue),var(--purple));color:#fff;padding:8px 10px;font-weight:900;text-align:left;font-size:.78rem;}
+.conj-table td{padding:8px 10px;border-bottom:1px solid #e0e7ff;font-weight:700;}
+.conj-table tr:last-child td{border-bottom:none;}
+.conj-table tr:nth-child(even) td{background:#f8faff;}
+.conj-highlight{color:var(--blue);font-weight:900;}
+.ex-grid{display:flex;flex-direction:column;gap:8px;margin-bottom:12px;}
+.ex-item{background:#f8faff;border:1px solid #e0e7ff;border-radius:10px;padding:12px 14px;font-size:.88rem;line-height:1.6;}
+.ex-de{font-weight:700;color:var(--navy);margin-bottom:2px;}
+.ex-en{color:var(--muted);font-size:.82rem;font-style:italic;margin-top:2px;}
+.ex-note{color:var(--teal);font-size:.78rem;font-weight:700;margin-top:3px;}
+.dialog-card{background:#fff;border:2px solid var(--border);border-radius:var(--r);padding:18px;margin-bottom:12px;box-shadow:var(--sh);}
+.dialog-title{font-size:.9rem;font-weight:900;color:var(--navy);margin-bottom:12px;}
+.d-bubble{display:flex;gap:8px;margin-bottom:8px;align-items:flex-start;}
+.d-bubble:last-child{margin-bottom:0;}
+.d-speaker{font-size:.7rem;font-weight:900;color:#fff;border-radius:50px;padding:3px 10px;white-space:nowrap;flex-shrink:0;margin-top:2px;}
+.sp-a{background:linear-gradient(135deg,var(--blue),var(--purple));}
+.sp-b{background:linear-gradient(135deg,var(--green),var(--teal));}
+.d-text{font-size:.88rem;font-weight:700;color:var(--navy);background:#f8faff;border-radius:10px;padding:8px 12px;line-height:1.5;flex:1;}
+/* FOOD GRID */
+.food-cat{background:#fff;border:2px solid var(--border);border-radius:var(--r2);padding:14px;margin-bottom:10px;box-shadow:var(--sh);}
+.food-cat-title{font-size:.82rem;font-weight:900;color:var(--navy);margin-bottom:10px;display:flex;align-items:center;gap:6px;}
+.food-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;}
+.food-item{background:#f8faff;border:1px solid #e0e7ff;border-radius:8px;padding:8px 10px;}
+.fi-art{font-size:.62rem;font-weight:900;border-radius:4px;padding:2px 5px;margin-bottom:3px;display:inline-block;}
+.art-m{background:#dbeafe;color:#1e40af;}
+.art-f{background:#fce7f3;color:#9d174d;}
+.art-n{background:#dcfce7;color:#166534;}
+.fi-word{font-weight:800;color:var(--navy);font-size:.88rem;}
+.fi-en{font-size:.75rem;color:var(--muted);}
+/* AKKUSATIV BOX */
+.akk-table{width:100%;border-collapse:collapse;margin-bottom:12px;font-size:.88rem;}
+.akk-table th{background:linear-gradient(135deg,#1e40af,#6d28d9);color:#fff;padding:8px 10px;font-weight:900;font-size:.78rem;text-align:left;}
+.akk-table td{padding:8px 10px;border-bottom:1px solid #e0e7ff;font-weight:700;}
+.akk-table tr:nth-child(even) td{background:#f8faff;}
+.nom{color:#1e40af;font-weight:900;}
+.akk{color:#dc2626;font-weight:900;}
+/* VOCAB/WB */
+.search-wrap{position:relative;margin-bottom:12px;}
+.search-inp{width:100%;padding:12px 16px 12px 42px;border-radius:50px;border:2px solid var(--border);background:#fff;font-family:'Nunito',sans-serif;font-size:.92rem;font-weight:700;color:var(--navy);outline:none;}
+.search-inp:focus{border-color:var(--blue);}
+.search-icon{position:absolute;left:14px;top:50%;transform:translateY(-50%);font-size:.95rem;color:var(--muted);}
+.wb-filter{padding:7px 14px;border-radius:50px;border:2px solid var(--border);background:#fff;color:var(--muted);font-family:'Nunito',sans-serif;font-size:.78rem;font-weight:800;cursor:pointer;transition:all .15s;white-space:nowrap;}
+.wb-filter.active{background:linear-gradient(135deg,var(--blue),var(--purple));color:#fff;border-color:transparent;}
+.wb-cat-title{font-size:.78rem;font-weight:900;color:var(--purple);text-transform:uppercase;letter-spacing:1px;margin:18px 0 10px;border-bottom:2px solid #e0e7ff;padding-bottom:6px;}
+.wb-grid{display:flex;flex-direction:column;gap:8px;margin-bottom:4px;}
+.wb-item{background:#fff;border:2px solid var(--border);border-radius:12px;overflow:hidden;box-shadow:var(--sh);cursor:pointer;}
+.wb-item.open{border-color:var(--blue);}
+.wb-head{display:flex;align-items:center;gap:10px;padding:12px 14px;}
+.wb-art-badge{font-size:.64rem;font-weight:900;border-radius:5px;padding:3px 7px;flex-shrink:0;}
+.wb-word-text{font-weight:900;color:var(--navy);font-size:.95rem;flex:1;}
+.wb-short-en{font-size:.78rem;color:var(--muted);font-weight:600;}
+.wb-arrow{font-size:.8rem;color:var(--muted);transition:transform .2s;}
+.wb-item.open .wb-arrow{transform:rotate(90deg);}
+.wb-body{display:none;padding:0 14px 14px;border-top:1px solid var(--border);}
+.wb-item.open .wb-body{display:block;}
+.wb-en-full{font-size:.88rem;font-weight:700;color:var(--green);margin-bottom:6px;padding-top:10px;}
+.wb-ex-sent{font-size:.82rem;color:var(--muted);font-style:italic;line-height:1.6;margin-bottom:4px;}
+.wb-extra{font-size:.78rem;color:var(--teal);font-weight:700;}
+/* EXERCISES */
+.ex-tabs{display:flex;gap:6px;margin-bottom:14px;}
+.ex-tab{flex:1;padding:10px 4px;border-radius:50px;border:2px solid var(--border);background:#fff;color:var(--muted);font-family:'Nunito',sans-serif;font-size:.8rem;font-weight:800;cursor:pointer;transition:all .15s;text-align:center;}
+.ex-tab.active{background:linear-gradient(135deg,var(--blue),var(--purple));color:#fff;border-color:transparent;}
+.ex-panel{display:none;}.ex-panel.active{display:block;}
+.qcard{background:#fff;border:2px solid var(--border);border-radius:var(--r);padding:18px 16px;margin-bottom:12px;box-shadow:var(--sh);}
+.q-meta{display:flex;align-items:center;gap:7px;margin-bottom:10px;flex-wrap:wrap;}
+.q-num{font-family:'Space Mono',monospace;font-size:.72rem;font-weight:700;background:#e0e7ff;color:var(--blue);border-radius:5px;padding:3px 8px;}
+.q-type{font-size:.66rem;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;}
+.q-status{margin-left:auto;font-size:1rem;}
+.q-text{font-weight:700;font-size:.95rem;color:var(--navy);margin-bottom:12px;line-height:1.6;}
+.passage{background:#f8faff;border:1px solid #e0e7ff;border-radius:10px;padding:14px 16px;font-size:.86rem;line-height:1.7;color:var(--text);margin-bottom:10px;}
+.opts{display:flex;flex-direction:column;gap:8px;}
+.opt{width:100%;padding:12px 16px;border-radius:11px;border:2px solid var(--border);background:#f8faff;font-family:'Nunito',sans-serif;font-size:.9rem;font-weight:700;color:var(--text);cursor:pointer;text-align:left;transition:all .15s;}
+.opt.correct{border-color:var(--green);background:#dcfce7;color:var(--green);}
+.opt.wrong{border-color:var(--red);background:#fff1f2;color:var(--red);}
+.opt.disabled{cursor:default;}
+.word-bank{display:flex;flex-wrap:wrap;gap:7px;margin-top:10px;}
+.wchip{padding:9px 14px;border-radius:10px;border:2px solid var(--border);background:#f8faff;font-family:'Nunito',sans-serif;font-size:.88rem;font-weight:700;cursor:pointer;transition:all .15s;color:var(--navy);}
+.wchip.used{opacity:.3;cursor:default;}
+.ans-area{min-height:46px;background:#eff6ff;border:2px dashed var(--blue2);border-radius:11px;padding:10px 14px;font-size:.9rem;font-weight:700;color:var(--navy);margin:10px 0;line-height:1.6;}
+.hint-t{font-size:.82rem;color:var(--muted);font-weight:600;margin-bottom:6px;}
+.inline-inp{border:none;border-bottom:2.5px solid var(--blue);background:transparent;font-family:'Nunito',sans-serif;font-size:.95rem;font-weight:700;color:var(--navy);padding:3px 5px;width:130px;outline:none;}
+.inline-inp.correct{border-color:var(--green);color:var(--green);}
+.inline-inp.wrong{border-color:var(--red);color:var(--red);}
+.fb{font-size:.85rem;font-weight:700;min-height:0;margin-top:8px;line-height:1.5;}
+.fb.ok{color:var(--green);}.fb.err{color:var(--red);}
+.q-actions{display:flex;gap:8px;margin-top:10px;}
+.btn-check{background:linear-gradient(135deg,var(--blue),var(--purple));color:#fff;border:none;border-radius:10px;padding:10px 20px;font-family:'Nunito',sans-serif;font-size:.86rem;font-weight:800;cursor:pointer;}
+.btn-reset{background:#f1f5f9;color:var(--muted);border:2px solid var(--border);border-radius:10px;padding:10px 14px;font-family:'Nunito',sans-serif;font-size:.86rem;font-weight:800;cursor:pointer;}
+.lb-header{background:linear-gradient(135deg,#1e40af,#6d28d9);border-radius:var(--r);padding:20px 16px;text-align:center;color:#fff;margin-bottom:14px;}
+.podium{display:flex;align-items:flex-end;justify-content:center;gap:8px;margin-bottom:16px;height:130px;}
+.pod{display:flex;flex-direction:column;align-items:center;justify-content:flex-end;border-radius:var(--r2) var(--r2) 0 0;}
+.pod-1{width:90px;height:110px;background:linear-gradient(135deg,#f59e0b,#d97706);}
+.pod-2{width:78px;height:85px;background:linear-gradient(135deg,#94a3b8,#64748b);}
+.pod-3{width:70px;height:65px;background:linear-gradient(135deg,#b45309,#92400e);}
+.pod-inner{padding:6px 4px 8px;text-align:center;color:#fff;}
+.pod-rank{font-size:1.2rem;}.pod-name{font-size:.65rem;font-weight:900;}.pod-pts{font-family:'Space Mono',monospace;font-size:.7rem;font-weight:700;}
+.lb-row{background:#fff;border:2px solid var(--border);border-radius:var(--r2);padding:10px 12px;display:flex;align-items:center;gap:10px;margin-bottom:7px;box-shadow:var(--sh);}
+.lb-rank{font-family:'Space Mono',monospace;font-size:.75rem;font-weight:700;color:var(--muted);width:22px;}
+.lb-name{flex:1;font-weight:800;color:var(--navy);font-size:.92rem;}.lb-level{font-size:.65rem;font-weight:700;color:var(--purple);}
+.lb-pts{font-family:'Space Mono',monospace;font-size:.88rem;font-weight:700;color:var(--blue);}
+.lb-bar-wrap{width:100%;background:#e0e7ff;border-radius:50px;height:5px;margin-top:3px;}
+.lb-bar{height:5px;background:linear-gradient(90deg,var(--blue),var(--purple));border-radius:50px;}
+.lb-you{border-color:var(--blue);background:#eff6ff;}
+.float-score{position:fixed;bottom:72px;right:14px;z-index:900;background:linear-gradient(135deg,#f59e0b,#ef4444);color:#fff;border-radius:50px;padding:8px 14px;font-weight:900;font-size:.8rem;box-shadow:0 4px 20px rgba(239,68,68,.4);}
+.conf-piece{position:fixed;width:8px;height:8px;border-radius:2px;z-index:9999;pointer-events:none;animation:fall 1.2s ease-in forwards;}
+@keyframes fall{0%{transform:translateY(-20px) rotate(0);opacity:1;}100%{transform:translateY(100vh) rotate(720deg);opacity:0;}}
+.sc-overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:2000;display:flex;align-items:center;justify-content:center;padding:20px;}
+.sc-overlay.hidden{display:none;}
+.sc-modal.hidden{display:none;}
+.sr-card.hidden{display:none;}
+.sc-modal{background:#fff;border-radius:20px;padding:28px 24px;max-width:360px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,.25);}
+.sc-modal h2{font-size:1.15rem;font-weight:900;color:var(--navy);margin-bottom:4px;}
+.sc-modal p{font-size:.82rem;color:var(--muted);margin-bottom:16px;line-height:1.5;}
+.sc-inp{width:100%;padding:11px 14px;border:2px solid var(--border);border-radius:10px;font-family:'Nunito',sans-serif;font-size:.95rem;font-weight:700;color:var(--navy);outline:none;margin-bottom:12px;}
+.sc-inp:focus{border-color:var(--blue);}
+.sc-btn{width:100%;padding:11px;background:linear-gradient(135deg,var(--blue),var(--purple));color:#fff;border:none;border-radius:10px;font-family:'Nunito',sans-serif;font-size:.9rem;font-weight:900;cursor:pointer;}
+.sr-card{background:#fff;border-radius:20px;padding:28px 24px;max-width:360px;width:100%;text-align:center;}
+.sr-logo{display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:18px;}
+.sr-logo-icon{width:38px;height:38px;border-radius:9px;background:#1a1a1a;display:flex;align-items:center;justify-content:center;font-size:1.3rem;}
+.sr-logo-name{font-size:.95rem;font-weight:900;color:var(--navy);}
+.sr-logo-by{font-size:.6rem;color:var(--muted);text-transform:uppercase;letter-spacing:1.5px;font-weight:700;}
+.sr-divider{height:1px;background:var(--border);margin:0 0 18px;}
+.sr-student{font-size:1.1rem;font-weight:900;color:var(--navy);margin-bottom:2px;}
+.sr-label{font-size:.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:1px;font-weight:700;margin-bottom:16px;}
+.sr-score-ring{width:110px;height:110px;border-radius:50%;background:linear-gradient(135deg,var(--blue),var(--purple));display:flex;flex-direction:column;align-items:center;justify-content:center;margin:0 auto 14px;color:#fff;}
+.sr-pts{font-family:'Space Mono',monospace;font-size:1.6rem;font-weight:700;line-height:1;}
+.sr-pts-lbl{font-size:.6rem;text-transform:uppercase;letter-spacing:1px;opacity:.85;margin-top:2px;}
+.sr-chapter{display:inline-block;background:#eff6ff;color:var(--blue);border-radius:50px;padding:4px 14px;font-size:.72rem;font-weight:800;margin-bottom:14px;}
+.sr-stats{display:flex;gap:8px;justify-content:center;margin-bottom:16px;}
+.sr-stat{background:#f8faff;border:1px solid var(--border);border-radius:10px;padding:8px 12px;text-align:center;}
+.sr-stat-n{font-family:'Space Mono',monospace;font-size:1rem;font-weight:700;color:var(--navy);}
+.sr-stat-l{font-size:.6rem;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;font-weight:700;}
+.sr-footer{font-size:.7rem;color:var(--muted);border-top:1px solid var(--border);padding-top:12px;line-height:1.6;}
+.sr-actions{display:flex;gap:8px;margin-top:12px;}
+.sr-close-btn{flex:1;padding:10px;border-radius:10px;border:2px solid var(--border);background:#f8faff;font-family:'Nunito',sans-serif;font-size:.82rem;font-weight:800;color:var(--muted);cursor:pointer;}
+.sr-new-btn{flex:1;padding:10px;border-radius:10px;border:none;background:linear-gradient(135deg,var(--blue),var(--purple));font-family:'Nunito',sans-serif;font-size:.82rem;font-weight:800;color:#fff;cursor:pointer;}
+@media(min-width:900px){.screen{padding:24px 28px 40px;max-width:820px;margin:0 auto;}}
+.mehr-overlay{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:1000;display:none;}
+.mehr-overlay.open{display:block;}
+.mehr-sheet{position:fixed;bottom:0;left:0;right:0;z-index:1001;background:#fff;border-radius:20px 20px 0 0;padding:14px 16px 30px;box-shadow:0 -4px 30px rgba(0,0,0,.15);transform:translateY(100%);transition:transform .28s cubic-bezier(.4,0,.2,1);}
+.mehr-sheet.open{transform:translateY(0);}
+.mehr-handle{width:36px;height:4px;background:var(--border);border-radius:2px;margin:0 auto 14px;}
+.mehr-title{font-size:.78rem;font-weight:900;color:var(--purple);text-transform:uppercase;letter-spacing:1.2px;margin-bottom:14px;}
+.mehr-grid{display:grid;gap:8px;margin-bottom:8px;}
+.mehr-btn{background:#f8faff;border:2px solid var(--border);border-radius:14px;padding:14px 8px;display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer;font-family:'Nunito',sans-serif;transition:border-color .15s;}
+.mehr-btn:active{border-color:var(--blue);}
+.mehr-btn-i{font-size:1.6rem;}
+.mehr-btn-l{font-size:.7rem;font-weight:800;color:var(--navy);}
+</style>
+</head>
+<body>
+<nav>
+  <div class="nav-left">
+    <div class="nav-icon">🇩🇪</div>
+    <div><div class="nav-title">Deutsch Meistern</div><span class="nav-sub">by Anshuka · A1 Kapitel 4</span></div>
+  </div>
+  <div class="score-pill" id="score-pill">⭐ 0 Pts</div>
+</nav>
+<div class="float-score" id="float-score">⭐ <span id="float-pts">0</span></div>
+<div class="bnav">
+  <button class="bn active" onclick="goTo('home',this)"><span class="bn-i">🏠</span>Home</button>
+  <button class="bn" onclick="goTo('grammar',this)"><span class="bn-i">📚</span>Grammatik</button>
+  <button class="bn" onclick="goTo('exercises',this)"><span class="bn-i">✏️</span>Übungen</button>
+  <button class="bn" onclick="openSubmit()"><span class="bn-i">📋</span>Score</button>
+  <button class="bn" onclick="openMehr()"><span class="bn-i">•••</span>Mehr</button>
+</div>
+<div class="mehr-overlay" id="mehr-overlay" onclick="closeMehr()"></div>
+<div class="mehr-sheet" id="mehr-sheet">
+  <div class="mehr-handle"></div>
+  <div class="mehr-title">Mehr Inhalte</div>
+  <div class="mehr-grid" style="grid-template-columns:repeat(4,1fr);">
+    <button class="mehr-btn" onclick="closeMehr();goTo('vocab',null)"><span class="mehr-btn-i">🔤</span><span class="mehr-btn-l">Vokabeln</span></button>
+    <button class="mehr-btn" onclick="closeMehr();goTo('leaderboard',null)"><span class="mehr-btn-i">🏆</span><span class="mehr-btn-l">Rangliste</span></button>
+    <button class="mehr-btn" onclick="closeMehr();goTo('woerterbuch',null)"><span class="mehr-btn-i">📖</span><span class="mehr-btn-l">Wörterbuch</span></button>
+    <button class="mehr-btn" onclick="closeMehr();goTo('lesen',null)"><span class="mehr-btn-i">📰</span><span class="mehr-btn-l">Lesen</span></button>
+  </div>
+</div>
+
+<!-- HOME -->
+<div class="screen active" id="s-home">
+  <div class="hero">
+    <div class="hero-chip">Deutsch Meistern · by Anshuka</div>
+    <h1>Guten Appetit! 🍽️</h1>
+    <p>A1 Kapitel 4: Lebensmittel, Einkaufen, Akkusativ, mögen und möchten!</p>
+  </div>
+  <div class="stat-grid">
+    <div class="stat-card"><div class="stat-em">📚</div><div class="stat-n">4</div><div class="stat-l">Grammatik</div></div>
+    <div class="stat-card"><div class="stat-em">✏️</div><div class="stat-n">120</div><div class="stat-l">Übungen</div></div>
+    <div class="stat-card"><div class="stat-em">🔤</div><div class="stat-n">150+</div><div class="stat-l">Vokabeln</div></div>
+    <div class="stat-card"><div class="stat-em">📰</div><div class="stat-n">3</div><div class="stat-l">Lesetexte</div></div>
+  </div>
+  <div class="sec-h">📖 Themen dieses Kapitels</div>
+  <div class="topic-list">
+    <div class="t-row" onclick="goToGram(0)"><span class="t-ico">🍞</span><div class="t-main"><div class="t-name">Lebensmittel und Mahlzeiten</div><div class="t-sub">Frühstück · Mittagessen · Abendessen · Geschäfte</div></div><span class="t-badge">Grammatik</span></div>
+    <div class="t-row" onclick="goToGram(1)"><span class="t-ico">🔄</span><div class="t-main"><div class="t-name">Akkusativ</div><div class="t-sub">den/einen/keinen · das/ein/kein · die/eine/keine</div></div><span class="t-badge">Grammatik</span></div>
+    <div class="t-row" onclick="goToGram(2)"><span class="t-ico">❤️</span><div class="t-main"><div class="t-name">mögen und möchten</div><div class="t-sub">mag/magst · möchte/möchtest · essen/isst</div></div><span class="t-badge">Grammatik</span></div>
+    <div class="t-row" onclick="goToGram(3)"><span class="t-ico">🛒</span><div class="t-main"><div class="t-name">Einkaufen und Gespräche</div><div class="t-sub">Supermarkt · Preise · Was kostet...? · Guten Appetit!</div></div><span class="t-badge">Grammatik</span></div>
+    <div class="t-row" onclick="navTo('exercises')"><span class="t-ico">✏️</span><div class="t-main"><div class="t-name">120 Übungen</div><div class="t-sub">Lesen, Sprechen und Schreiben</div></div><span class="t-badge">Üben</span></div>
+    <div class="t-row" onclick="navTo('lesen')"><span class="t-ico">📰</span><div class="t-main"><div class="t-name">Lesetexte</div><div class="t-sub">3 Texte · Akkusativ, mögen, Einkauf</div></div><span class="t-badge">Lesen</span></div>
+    <div class="t-row" onclick="navTo('vocab')"><span class="t-ico">🔤</span><div class="t-main"><div class="t-name">Vokabeln und Wörterbuch</div><div class="t-sub">150+ Wörter mit Beispielen</div></div><span class="t-badge">Vokabeln</span></div>
+  </div>
+</div>
+
+<!-- GRAMMAR -->
+<div class="screen" id="s-grammar">
+  <div class="sec-h">📚 Grammatik</div>
+  <div class="g-tabs">
+    <button class="g-tab active" onclick="switchGTab(0,this)">🍞 Lebensmittel</button>
+    <button class="g-tab" onclick="switchGTab(1,this)">🔄 Akkusativ</button>
+    <button class="g-tab" onclick="switchGTab(2,this)">❤️ mögen und möchten</button>
+    <button class="g-tab" onclick="switchGTab(3,this)">🛒 Einkaufen</button>
+  </div>
+
+  <!-- PANEL 0: LEBENSMITTEL -->
+  <div class="g-panel active" id="gp-0">
+    <div class="gcard">
+      <div class="gcard-title">Lebensmittel und Mahlzeiten <span class="gcard-badge">Essen und Trinken</span></div>
+      <div class="gcard-desc">German food vocabulary organized by meal time. Always learn each word WITH its article : it matters for the Akkusativ later!</div>
+      <div class="rule-box">📌 Wo kaufe ich was?<br>in der <strong>Bäckerei</strong>: Brot, Brötchen, Kuchen<br>auf dem <strong>Markt</strong>: Gemüse, Obst, frischer Fisch<br>in der <strong>Metzgerei</strong>: Wurst, Fleisch, Schinken<br>im <strong>Supermarkt</strong>: alles!</div>
+
+      <div class="section-h">☀️ Frühstück</div>
+      <div class="food-grid">
+        <div class="food-item"><span class="fi-art art-f">die</span><div class="fi-word">Banane</div><div class="fi-en">banana</div></div>
+        <div class="food-item"><span class="fi-art art-m">der</span><div class="fi-word">Orangensaft</div><div class="fi-en">orange juice</div></div>
+        <div class="food-item"><span class="fi-art art-n">das</span><div class="fi-word">Müsli</div><div class="fi-en">muesli / granola</div></div>
+        <div class="food-item"><span class="fi-art art-m">der</span><div class="fi-word">Joghurt</div><div class="fi-en">yoghurt</div></div>
+        <div class="food-item"><span class="fi-art art-m">der</span><div class="fi-word">Tee</div><div class="fi-en">tea</div></div>
+        <div class="food-item"><span class="fi-art art-f">die</span><div class="fi-word">Milch</div><div class="fi-en">milk</div></div>
+        <div class="food-item"><span class="fi-art art-m">der</span><div class="fi-word">Käse</div><div class="fi-en">cheese</div></div>
+        <div class="food-item"><span class="fi-art art-f">die</span><div class="fi-word">Marmelade</div><div class="fi-en">jam / marmalade</div></div>
+        <div class="food-item"><span class="fi-art art-n">das</span><div class="fi-word">Ei (pl: die Eier)</div><div class="fi-en">egg</div></div>
+        <div class="food-item"><span class="fi-art art-n">das</span><div class="fi-word">Brötchen</div><div class="fi-en">bread roll</div></div>
+      </div>
+
+      <div class="section-h">🌞 Mittagessen</div>
+      <div class="food-grid">
+        <div class="food-item"><span class="fi-art art-m">der</span><div class="fi-word">Apfelsaft</div><div class="fi-en">apple juice</div></div>
+        <div class="food-item"><span class="fi-art art-f">die</span><div class="fi-word">Kartoffeln (Pl.)</div><div class="fi-en">potatoes</div></div>
+        <div class="food-item"><span class="fi-art art-n">das</span><div class="fi-word">Salz</div><div class="fi-en">salt</div></div>
+        <div class="food-item"><span class="fi-art art-m">der</span><div class="fi-word">Pfeffer</div><div class="fi-en">pepper</div></div>
+        <div class="food-item"><span class="fi-art art-n">das</span><div class="fi-word">Gemüse</div><div class="fi-en">vegetables</div></div>
+        <div class="food-item"><span class="fi-art art-n">das</span><div class="fi-word">Wasser</div><div class="fi-en">water</div></div>
+        <div class="food-item"><span class="fi-art art-m">der</span><div class="fi-word">Essig</div><div class="fi-en">vinegar</div></div>
+        <div class="food-item"><span class="fi-art art-n">das</span><div class="fi-word">Öl</div><div class="fi-en">oil</div></div>
+        <div class="food-item"><span class="fi-art art-f">die</span><div class="fi-word">Cola</div><div class="fi-en">cola</div></div>
+        <div class="food-item"><span class="fi-art art-n">das</span><div class="fi-word">Fleisch</div><div class="fi-en">meat</div></div>
+      </div>
+
+      <div class="section-h">☕ Kaffee und Kuchen</div>
+      <div class="food-grid">
+        <div class="food-item"><span class="fi-art art-m">der</span><div class="fi-word">Kaffee</div><div class="fi-en">coffee</div></div>
+        <div class="food-item"><span class="fi-art art-m">der</span><div class="fi-word">Kuchen</div><div class="fi-en">cake</div></div>
+        <div class="food-item"><span class="fi-art art-f">die</span><div class="fi-word">Sahne</div><div class="fi-en">cream</div></div>
+        <div class="food-item"><span class="fi-art art-f">die</span><div class="fi-word">Schokolade</div><div class="fi-en">chocolate</div></div>
+        <div class="food-item"><span class="fi-art art-m">der</span><div class="fi-word">Keks</div><div class="fi-en">biscuit / cookie</div></div>
+        <div class="food-item"><span class="fi-art art-m">der</span><div class="fi-word">Zucker</div><div class="fi-en">sugar</div></div>
+      </div>
+
+      <div class="section-h">🌙 Abendessen</div>
+      <div class="food-grid">
+        <div class="food-item"><span class="fi-art art-f">die</span><div class="fi-word">Butter</div><div class="fi-en">butter</div></div>
+        <div class="food-item"><span class="fi-art art-n">das</span><div class="fi-word">Brot</div><div class="fi-en">bread</div></div>
+        <div class="food-item"><span class="fi-art art-f">die</span><div class="fi-word">Tomate</div><div class="fi-en">tomato</div></div>
+        <div class="food-item"><span class="fi-art art-f">die</span><div class="fi-word">Gurke</div><div class="fi-en">cucumber</div></div>
+        <div class="food-item"><span class="fi-art art-m">der</span><div class="fi-word">Salat</div><div class="fi-en">salad / lettuce</div></div>
+        <div class="food-item"><span class="fi-art art-f">die</span><div class="fi-word">Suppe</div><div class="fi-en">soup</div></div>
+        <div class="food-item"><span class="fi-art art-f">die</span><div class="fi-word">Wurst</div><div class="fi-en">sausage / deli meat</div></div>
+        <div class="food-item"><span class="fi-art art-m">der</span><div class="fi-word">Schinken</div><div class="fi-en">ham</div></div>
+        <div class="food-item"><span class="fi-art art-n">das</span><div class="fi-word">Mehl</div><div class="fi-en">flour</div></div>
+        <div class="food-item"><span class="fi-art art-m">der</span><div class="fi-word">Fisch</div><div class="fi-en">fish</div></div>
+      </div>
+      <div class="tip-box">💡 Zeitangaben beim Essen:<br>morgens = zum Frühstück · vormittags = mid-morning<br>mittags = at noon/lunch · nachmittags = in the afternoon<br>abends = in the evening/dinner</div>
+    </div>
+  </div>
+
+  <!-- PANEL 1: AKKUSATIV -->
+  <div class="g-panel" id="gp-1">
+    <div class="gcard">
+      <div class="gcard-title">Der Akkusativ <span class="gcard-badge">Objekt im Satz</span></div>
+      <div class="gcard-desc">The Akkusativ is the case for the direct object : the thing being acted on. In German, only the MASKULIN article changes from Nominativ to Akkusativ!</div>
+      <div class="rule-box">📌 KEY RULE: Only maskulin changes!<br>Nominativ: <strong>der</strong> → Akkusativ: <strong>den</strong><br>Nominativ: <strong>ein</strong> → Akkusativ: <strong>einen</strong><br>Nominativ: <strong>kein</strong> → Akkusativ: <strong>keinen</strong><br>Neutrum (das), Feminin (die) and Plural stay THE SAME!</div>
+
+      <div class="section-h">📊 Nominativ vs. Akkusativ: Vollständige Tabelle</div>
+      <table class="akk-table">
+        <tr><th>Gender</th><th>Nominativ</th><th>Akkusativ</th><th>Negation Akk.</th></tr>
+        <tr><td><strong>maskulin</strong></td><td><span class="nom">der</span> / ein Käse</td><td><span class="akk">den</span> / einen Käse</td><td>keinen Käse</td></tr>
+        <tr><td><strong>neutrum</strong></td><td><span class="nom">das</span> / ein Brot</td><td><span class="nom">das</span> / ein Brot</td><td>kein Brot</td></tr>
+        <tr><td><strong>feminin</strong></td><td><span class="nom">die</span> / eine Gurke</td><td><span class="nom">die</span> / eine Gurke</td><td>keine Gurke</td></tr>
+        <tr><td><strong>Plural</strong></td><td><span class="nom">die</span> Tomaten</td><td><span class="nom">die</span> Tomaten</td><td>keine Tomaten</td></tr>
+      </table>
+      <div class="warn-box">⚠️ Only maskulin changes: der → den / ein → einen / kein → keinen<br>Neutrum, Feminin and Plural look exactly the same in Nominativ and Akkusativ!</div>
+
+      <div class="section-h">✅ Verben mit Akkusativ (Verbs that take Akkusativ)</div>
+      <div class="ex-grid">
+        <div class="ex-item"><div class="ex-de">Ich kaufe <strong>den</strong> Käse. (maskulin → den)</div><div class="ex-en">I buy the cheese.</div></div>
+        <div class="ex-item"><div class="ex-de">Ich kaufe <strong>das</strong> Brot. (neutrum → das, kein Wechsel)</div><div class="ex-en">I buy the bread.</div></div>
+        <div class="ex-item"><div class="ex-de">Ich kaufe <strong>die</strong> Gurke. (feminin → die, kein Wechsel)</div><div class="ex-en">I buy the cucumber.</div></div>
+        <div class="ex-item"><div class="ex-de">Ich kaufe <strong>die</strong> Tomaten. (Plural → die, kein Wechsel)</div><div class="ex-en">I buy the tomatoes.</div></div>
+        <div class="ex-item"><div class="ex-de">Wir brauchen <strong>einen</strong> Salat. (maskulin → einen)</div><div class="ex-en">We need a salad.</div></div>
+        <div class="ex-item"><div class="ex-de">Wir haben <strong>keinen</strong> Käse mehr. (maskulin → keinen)</div><div class="ex-en">We have no more cheese.</div></div>
+        <div class="ex-item"><div class="ex-de">Wir haben auch <strong>keine</strong> Getränke. (feminin/Pl. → keine)</div><div class="ex-en">We also have no drinks.</div></div>
+        <div class="ex-item"><div class="ex-de">Ich nehme noch 150 Gramm Schinken. (<strong>den</strong> Schinken)</div><div class="ex-en">I'll take another 150 grams of ham.</div></div>
+      </div>
+
+      <div class="section-h">⚙️ Verben + Akkusativ aus dem Kapitel</div>
+      <table class="conj-table">
+        <tr><th>Verb</th><th>+ Akkusativ Beispiel</th></tr>
+        <tr><td>kaufen</td><td>Ich kaufe <strong>den</strong> Apfelsaft.</td></tr>
+        <tr><td>brauchen</td><td>Wir brauchen <strong>eine</strong> Gurke und <strong>einen</strong> Apfel.</td></tr>
+        <tr><td>haben</td><td>Wir haben <strong>keinen</strong> Käse mehr.</td></tr>
+        <tr><td>machen</td><td>Ich mache <strong>einen</strong> Salat.</td></tr>
+        <tr><td>essen</td><td>Ich esse <strong>das</strong> Fleisch gern.</td></tr>
+        <tr><td>trinken</td><td>Ich trinke <strong>den</strong> Kaffee.</td></tr>
+        <tr><td>nehmen</td><td>Ich nehme noch 150 Gramm Schinken.</td></tr>
+        <tr><td>mögen</td><td>Ich mag <strong>keinen</strong> Fisch.</td></tr>
+        <tr><td>möchten</td><td>Ich möchte <strong>ein</strong> Stück Emmentaler.</td></tr>
+        <tr><td>kochen</td><td>Wir kochen <strong>keine</strong> Suppe heute.</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- PANEL 2: MÖGEN UND MÖCHTEN -->
+  <div class="g-panel" id="gp-2">
+    <div class="gcard">
+      <div class="gcard-title">mögen und möchten <span class="gcard-badge">Unregelmäßige Verben</span></div>
+      <div class="gcard-desc">Both are modal verbs relating to preferences and wishes. "mögen" = to like (general preference). "möchten" = would like (polite request, wanting something right now).</div>
+
+      <div class="rule-box">📌 mögen = to like (in general): Ich mag Schokolade. = Ich esse gern Schokolade.<br>📌 möchten = would like (right now): Ich möchte ein Stück Kuchen, bitte.<br>📌 essen = to eat (vowel change: du isst / er isst!)</div>
+
+      <div class="section-h">⚙️ Konjugation: mögen</div>
+      <table class="conj-table">
+        <tr><th>Pronomen</th><th>mögen</th><th>Beispiel</th></tr>
+        <tr><td>ich</td><td><span class="conj-highlight">mag</span></td><td>Ich mag Fisch sehr gern.</td></tr>
+        <tr><td>du</td><td><span class="conj-highlight">magst</span></td><td>Magst du Schokolade?</td></tr>
+        <tr><td>er/es/sie</td><td><span class="conj-highlight">mag</span></td><td>Er mag keine Gurken.</td></tr>
+        <tr><td>wir</td><td><span class="conj-highlight">mögen</span></td><td>Wir mögen gern Fisch.</td></tr>
+        <tr><td>ihr</td><td><span class="conj-highlight">mögt</span></td><td>Mögt ihr Kuchen?</td></tr>
+        <tr><td>sie/Sie</td><td><span class="conj-highlight">mögen</span></td><td>Sie mögen asiatisches Essen.</td></tr>
+      </table>
+      <div class="tip-box">💡 "Ich mag Schokolade" = "Ich esse gern Schokolade" : they mean the same thing! Both express a general preference.</div>
+
+      <div class="section-h">⚙️ Konjugation: möchten</div>
+      <table class="conj-table">
+        <tr><th>Pronomen</th><th>möchten</th><th>Beispiel</th></tr>
+        <tr><td>ich</td><td><span class="conj-highlight">möchte</span></td><td>Ich möchte ein Stück Emmentaler.</td></tr>
+        <tr><td>du</td><td><span class="conj-highlight">möchtest</span></td><td>Möchtest du noch Kuchen?</td></tr>
+        <tr><td>er/es/sie</td><td><span class="conj-highlight">möchte</span></td><td>Er möchte keinen Käse.</td></tr>
+        <tr><td>wir</td><td><span class="conj-highlight">möchten</span></td><td>Wir möchten die Getränke kaufen.</td></tr>
+        <tr><td>ihr</td><td><span class="conj-highlight">möchtet</span></td><td>Möchtet ihr noch etwas?</td></tr>
+        <tr><td>sie/Sie</td><td><span class="conj-highlight">möchten</span></td><td>Was möchten Sie?</td></tr>
+      </table>
+      <div class="warn-box">⚠️ mögen vs. möchten: ich mag (like in general) · ich möchte (would like right now)<br>Ich mag Schokolade. (always) vs. Ich möchte ein Stück Schokolade. (right now, please!)</div>
+
+      <div class="section-h">⚙️ Konjugation: essen (Vokalwechsel e→i!)</div>
+      <table class="conj-table">
+        <tr><th>Pronomen</th><th>essen</th><th>Beispiel</th></tr>
+        <tr><td>ich</td><td><span class="conj-highlight">esse</span></td><td>Ich esse morgens Müsli.</td></tr>
+        <tr><td>du</td><td><span class="conj-highlight">isst</span></td><td>Isst du gern Fleisch?</td></tr>
+        <tr><td>er/es/sie</td><td><span class="conj-highlight">isst</span></td><td>Lina isst morgens Müsli.</td></tr>
+        <tr><td>wir</td><td><span class="conj-highlight">essen</span></td><td>Wir essen zusammen.</td></tr>
+        <tr><td>ihr</td><td><span class="conj-highlight">esst</span></td><td>Esst ihr gern Pizza?</td></tr>
+        <tr><td>sie/Sie</td><td><span class="conj-highlight">essen</span></td><td>Was essen Sie gern?</td></tr>
+      </table>
+
+      <div class="section-h">📍 Positionen im Satz (Word order)</div>
+      <div class="rule-box">📌 Das Verb steht auf Position 2. Das Subjekt steht vor oder nach dem Verb.<br>Lina <strong>isst</strong> morgens Müsli. (Subjekt → Verb)<br>Morgens <strong>isst</strong> Lina Müsli. (Adverb → Verb → Subjekt = Inversion!)</div>
+      <div class="ex-grid">
+        <div class="ex-item"><div class="ex-de">Lina <strong>isst</strong> morgens Müsli.</div><div class="ex-en">Lina eats muesli in the mornings.</div><div class="ex-note">Normal: Subjekt + Verb + Rest</div></div>
+        <div class="ex-item"><div class="ex-de">Morgens <strong>isst</strong> Lina Müsli.</div><div class="ex-en">In the mornings, Lina eats muesli.</div><div class="ex-note">Inversion: Adverb + Verb + Subjekt + Rest</div></div>
+        <div class="ex-item"><div class="ex-de">Zum Frühstück <strong>esse</strong> ich Brot.</div><div class="ex-en">For breakfast I eat bread.</div><div class="ex-note">Inversion: Zeit + Verb + Subjekt + Rest</div></div>
+        <div class="ex-item"><div class="ex-de">Abends <strong>mag</strong> er Fisch oder Fleisch.</div><div class="ex-en">In the evenings he likes fish or meat.</div><div class="ex-note">Inversion: Adverb + Verb + Subjekt</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PANEL 3: EINKAUFEN -->
+  <div class="g-panel" id="gp-3">
+    <div class="gcard">
+      <div class="gcard-title">Einkaufen und Gespräche <span class="gcard-badge">Im Supermarkt / Restaurant</span></div>
+      <div class="gcard-desc">Key phrases for shopping, asking prices, and eating together. These dialogues come directly from the textbook!</div>
+
+      <div class="section-h">🛒 Gespräche beim Einkauf</div>
+      <div class="dialog-card">
+        <div class="dialog-title">💬 Im Supermarkt: Kleingeld wechseln</div>
+        <div class="d-bubble"><span class="d-speaker sp-a">Kunde</span><div class="d-text">Entschuldigung, ich brauche einen Euro für den Einkaufswagen. Können Sie wechseln, bitte?</div></div>
+        <div class="d-bubble"><span class="d-speaker sp-b">Person</span><div class="d-text">Ja, Moment : hier bitte.</div></div>
+        <div class="d-bubble"><span class="d-speaker sp-a">Kunde</span><div class="d-text">Danke.</div></div>
+      </div>
+      <div class="dialog-card">
+        <div class="dialog-title">💬 Im Supermarkt: Preise fragen</div>
+        <div class="d-bubble"><span class="d-speaker sp-a">Kunde</span><div class="d-text">Entschuldigung, was kostet der Apfelsaft?</div></div>
+        <div class="d-bubble"><span class="d-speaker sp-b">Verkäufer</span><div class="d-text">99 Cent.</div></div>
+        <div class="d-bubble"><span class="d-speaker sp-a">Kunde</span><div class="d-text">Und wie viel kostet der Orangensaft?</div></div>
+        <div class="d-bubble"><span class="d-speaker sp-b">Verkäufer</span><div class="d-text">1,09 Euro.</div></div>
+      </div>
+      <div class="dialog-card">
+        <div class="dialog-title">💬 An der Fleischtheke (At the deli counter)</div>
+        <div class="d-bubble"><span class="d-speaker sp-a">Verkäufer</span><div class="d-text">Wer kommt dran?</div></div>
+        <div class="d-bubble"><span class="d-speaker sp-b">Kundin</span><div class="d-text">Ich, bitte.</div></div>
+        <div class="d-bubble"><span class="d-speaker sp-a">Verkäufer</span><div class="d-text">Was möchten Sie?</div></div>
+        <div class="d-bubble"><span class="d-speaker sp-b">Kundin</span><div class="d-text">Ich möchte ein Stück Emmentaler, bitte.</div></div>
+        <div class="d-bubble"><span class="d-speaker sp-a">Verkäufer</span><div class="d-text">Sonst noch etwas?</div></div>
+        <div class="d-bubble"><span class="d-speaker sp-b">Kundin</span><div class="d-text">Ja, ich nehme noch 150 Gramm Schinken.</div></div>
+        <div class="d-bubble"><span class="d-speaker sp-a">Verkäufer</span><div class="d-text">Ist das alles?</div></div>
+        <div class="d-bubble"><span class="d-speaker sp-b">Kundin</span><div class="d-text">Ja, danke.</div></div>
+      </div>
+      <div class="dialog-card">
+        <div class="dialog-title">💬 An der Kasse (At the checkout)</div>
+        <div class="d-bubble"><span class="d-speaker sp-a">Kassierer</span><div class="d-text">Das macht dann 18,65 Euro. Brauchen Sie den Kassenzettel?</div></div>
+        <div class="d-bubble"><span class="d-speaker sp-b">Kunde</span><div class="d-text">Ja, bitte.</div></div>
+        <div class="d-bubble"><span class="d-speaker sp-a">Kassierer</span><div class="d-text">Ich brauche noch eine Tüte, bitte.</div></div>
+        <div class="d-bubble"><span class="d-speaker sp-b">Kunde</span><div class="d-text">Hier bitte. Die kostet 35 Cent.</div></div>
+        <div class="d-bubble"><span class="d-speaker sp-a">Kassierer</span><div class="d-text">Wie bitte? 35 Cent? Das ist aber teuer! Also gut...</div></div>
+      </div>
+
+      <div class="section-h">🍽️ Gespräche beim Essen</div>
+      <div class="dialog-card">
+        <div class="dialog-title">💬 Die Grillparty</div>
+        <div class="d-bubble"><span class="d-speaker sp-a">Gastgeber</span><div class="d-text">Guten Appetit!</div></div>
+        <div class="d-bubble"><span class="d-speaker sp-b">Gäste</span><div class="d-text">Danke, gleichfalls!</div></div>
+        <div class="d-bubble"><span class="d-speaker sp-a">Gastgeber</span><div class="d-text">Schmeckt's?</div></div>
+        <div class="d-bubble"><span class="d-speaker sp-b">Gast</span><div class="d-text">Mmh, ja, das Fleisch schmeckt sehr gut!</div></div>
+        <div class="d-bubble"><span class="d-speaker sp-a">Gastgeber</span><div class="d-text">Möchtest du noch ein Würstchen?</div></div>
+        <div class="d-bubble"><span class="d-speaker sp-b">Gast</span><div class="d-text">Ja, gerne! Die Würstchen sind wirklich lecker.</div></div>
+        <div class="d-bubble"><span class="d-speaker sp-a">Gastgeber</span><div class="d-text">Und du, Lukas?</div></div>
+        <div class="d-bubble"><span class="d-speaker sp-b">Lukas</span><div class="d-text">Nein, danke, ich bin satt.</div></div>
+      </div>
+
+      <div class="section-h">💬 Preise sprechen</div>
+      <div class="ex-grid">
+        <div class="ex-item"><div class="ex-de">0,99 Euro</div><div class="ex-en">neunundneunzig Cent</div></div>
+        <div class="ex-item"><div class="ex-de">1,09 Euro</div><div class="ex-en">ein Euro neun</div></div>
+        <div class="ex-item"><div class="ex-de">2,20 Euro</div><div class="ex-en">zwei Euro zwanzig</div></div>
+        <div class="ex-item"><div class="ex-de">18,65 Euro</div><div class="ex-en">achtzehn Euro fünfundsechzig</div></div>
+      </div>
+
+      <div class="tip-box">💡 Gut gesagt beim Essen:<br>Guten Appetit! = Bon appétit! / Enjoy your meal!<br>Danke, gleichfalls! = Thank you, same to you!<br>Prost! / Zum Wohl! = Cheers!<br>Mahlzeit! = Enjoy your meal! (informal)<br>Schmeckt's? = Does it taste good?<br>Ja, sehr lecker! = Yes, very tasty!<br>Ich bin satt. = I am full.</div>
+    </div>
+  </div>
+</div>
+
+<!-- EXERCISES -->
+<div class="screen" id="s-exercises">
+  <div class="sec-h">✏️ Übungen</div>
+  <div class="ex-tabs">
+    <button class="ex-tab active" onclick="switchExTab(0,this)">📖 Lesen</button>
+    <button class="ex-tab" onclick="switchExTab(1,this)">🗣️ Sprechen</button>
+    <button class="ex-tab" onclick="switchExTab(2,this)">✍️ Schreiben</button>
+  </div>
+  <div class="ex-panel active" id="ep-0"><div id="lesen-set"></div></div>
+  <div class="ex-panel" id="ep-1"><div id="sprechen-set"></div></div>
+  <div class="ex-panel" id="ep-2"><div id="schreiben-set"></div></div>
+</div>
+
+<!-- VOCAB + WB MERGED -->
+<div class="screen" id="s-vocab">
+  <div class="sec-h">🔤 Vokabeln und Wörterbuch</div>
+  <p style="font-size:.88rem;color:var(--muted);margin-bottom:14px;line-height:1.6;">Alle Vokabeln zu A1 Kapitel 4. Tippe auf ein Wort für Details.</p>
+  <div class="search-wrap"><span class="search-icon">🔍</span><input class="search-inp" id="v-search" placeholder="Wort suchen..." oninput="filterVocabAll()" autocomplete="off"></div>
+  <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px;" id="vocab-filters">
+    <button class="wb-filter active" onclick="filterVocabCat('all',this)">Alle</button>
+    <button class="wb-filter" onclick="filterVocabCat('Lebensmittel',this)">🍞 Lebensmittel</button>
+    <button class="wb-filter" onclick="filterVocabCat('Verben',this)">⚡ Verben</button>
+    <button class="wb-filter" onclick="filterVocabCat('Geschäfte',this)">🏪 Geschäfte</button>
+    <button class="wb-filter" onclick="filterVocabCat('Ausdrücke',this)">💬 Ausdrücke</button>
+  </div>
+  <div id="vocab-container"></div>
+</div>
+
+<!-- LEADERBOARD -->
+<div class="screen" id="s-leaderboard">
+  <div class="lb-header"><h2 style="font-size:1.4rem;font-weight:900;margin-bottom:4px;">🏆 Rangliste</h2><p style="font-size:.8rem;opacity:.85;">Alle Kapitel · Gesamtpunktzahl</p></div>
+  <div class="podium">
+    <div class="pod pod-2"><div class="pod-inner"><div class="pod-rank">🥈</div><div class="pod-name" id="lb-p2-name">--</div><div class="pod-pts" id="lb-p2-pts">--</div></div></div>
+    <div class="pod pod-1"><div class="pod-inner"><div class="pod-rank">🥇</div><div class="pod-name" id="lb-p1-name">--</div><div class="pod-pts" id="lb-p1-pts">--</div></div></div>
+    <div class="pod pod-3"><div class="pod-inner"><div class="pod-rank">🥉</div><div class="pod-name" id="lb-p3-name">--</div><div class="pod-pts" id="lb-p3-pts">--</div></div></div>
+  </div>
+  <div id="lb-list"></div>
+</div>
+
+<!-- LESEN -->
+<div class="screen" id="s-lesen">
+  <div class="sec-h">📰 Lesetexte</div>
+  <p style="font-size:.88rem;color:var(--muted);margin-bottom:16px;line-height:1.6;">Drei originale Texte zum Thema Essen und Einkaufen. Übe Akkusativ, mögen/möchten und Vokabeln aus Kapitel 4!</p>
+
+  <!-- TEXT 1 -->
+  <div class="gcard" style="margin-bottom:18px;">
+    <div class="gcard-title" style="font-size:1rem;">📖 Text 1: Frühstück in Deutschland</div>
+    <div style="font-size:.75rem;font-weight:800;color:var(--purple);text-transform:uppercase;letter-spacing:1px;margin-bottom:12px;">Thema: Frühstücksgewohnheiten · Akkusativ · mögen</div>
+    <div class="passage" style="margin-bottom:14px;">
+      Das Frühstück ist für viele Deutsche sehr wichtig. Aber was essen die Deutschen morgens?<br><br>
+      Eine Umfrage zeigt: 78% der Deutschen frühstücken zu Hause. Das beliebteste Frühstück ist Brot oder ein Brötchen mit Butter und Käse. Viele mögen auch Wurst oder Schinken auf dem Brot. Zum Trinken nehmen die meisten Kaffee oder Tee. Kinder trinken oft Milch oder Orangensaft.<br><br>
+      Joghurt mit Früchten ist auch sehr beliebt. Etwa 40% der Deutschen essen morgens Joghurt. Müsli mit Milch oder Joghurt mögen vor allem junge Leute. Ein Ei zum Frühstück essen viele am Wochenende, wenn sie mehr Zeit haben.<br><br>
+      In der Bäckerei kaufen viele Deutsche frische Brötchen. Eine Bäckerei öffnet oft um 6 Uhr morgens. Die Brötchen kosten zwischen 30 und 60 Cent pro Stück. Viele kaufen auch Kuchen oder Croissants. Ein Croissant kostet circa 1,50 Euro.<br><br>
+      Interessant: In Deutschland gibt es über 11.000 Bäckereien! Das ist eine Bäckerei für circa 7.500 Einwohner. In anderen Ländern ist das anders. In Japan zum Beispiel essen viele Menschen morgens Reis, keine Brötchen.
+    </div>
+    <div class="section-h">❓ Fragen zum Text 1</div>
+    <div id="lesen1-set"></div>
+  </div>
+
+  <!-- TEXT 2 -->
+  <div class="gcard" style="margin-bottom:18px;">
+    <div class="gcard-title" style="font-size:1rem;">📖 Text 2: Ein Abend im Supermarkt</div>
+    <div style="font-size:.75rem;font-weight:800;color:var(--purple);text-transform:uppercase;letter-spacing:1px;margin-bottom:12px;">Thema: Einkaufen · Akkusativ (den/einen/keinen) · Preise</div>
+    <div class="passage" style="margin-bottom:14px;">
+      Es ist Dienstag, 18 Uhr. Karim geht in den Supermarkt. Er möchte heute Abend Pasta kochen. Er braucht Tomaten, Zwiebeln, Öl und Käse. Einen Käse hat er noch zu Hause, aber keine Tomaten und keine Zwiebeln.<br><br>
+      Im Supermarkt sucht Karim zuerst das Gemüse. Er findet die Tomaten schnell. Ein Kilogramm Tomaten kostet 1,99 Euro. Er nimmt den Tomaten. Dann sucht er die Zwiebeln. Ein Netz Zwiebeln kostet 89 Cent. Karim nimmt das Netz.<br><br>
+      Dann geht er zur Kühltheke. Er braucht keinen Käse mehr, aber er sieht frischen Mozzarella. Den Mozzarella mag er sehr gern! Er nimmt einen Mozzarella für 1,29 Euro. Dann kauft er noch eine Flasche Öl für 2,49 Euro und eine Packung Pasta für 99 Cent.<br><br>
+      An der Kasse fragt die Kassiererin: "Haben Sie eine Kundenkarte?" Karim sagt: "Nein, leider nicht." Er zahlt 7,65 Euro. Die Kassiererin fragt: "Brauchen Sie eine Tüte?" Karim sagt: "Ja, bitte. Wie viel kostet die Tüte?" Die Kassiererin antwortet: "30 Cent." Karim bezahlt und geht nach Hause. Heute Abend gibt es Pasta mit Tomatensauce und Mozzarella. Lecker!
+    </div>
+    <div class="section-h">❓ Fragen zum Text 2</div>
+    <div id="lesen2-set"></div>
+  </div>
+
+  <!-- TEXT 3 -->
+  <div class="gcard" style="margin-bottom:18px;">
+    <div class="gcard-title" style="font-size:1rem;">📖 Text 3: Das Wochenmarkt-Interview</div>
+    <div style="font-size:.75rem;font-weight:800;color:var(--purple);text-transform:uppercase;letter-spacing:1px;margin-bottom:12px;">Thema: Einkaufsgewohnheiten · mögen/möchten · Positionen im Satz</div>
+    <div class="passage" style="margin-bottom:14px;">
+      In vielen deutschen Städten gibt es einen Wochenmarkt. Dort kaufen die Leute frisches Obst, Gemüse, Käse, Fleisch und Fisch. Ein Reporter macht Interviews auf dem Wochenmarkt in München.<br><br>
+      <strong>Interview 1: Frau Bergmann, 52 Jahre</strong><br>
+      Reporter: "Was kaufen Sie heute auf dem Markt?"<br>
+      Frau Bergmann: "Ich kaufe Tomaten, Salat und eine Gurke. Und frischen Fisch möchte ich auch. Den Fisch hier mag ich sehr gern, er ist immer frisch. Einen Kuchen kaufe ich noch beim Bäcker am Markt."<br><br>
+      <strong>Interview 2: Herr Yilmaz, 34 Jahre</strong><br>
+      Reporter: "Warum kaufen Sie auf dem Markt und nicht im Supermarkt?"<br>
+      Herr Yilmaz: "Den Supermarkt mag ich nicht so gern. Das Gemüse ist oft nicht frisch. Hier auf dem Markt kaufe ich jeden Samstag ein. Morgens kaufe ich zuerst das Obst, dann das Gemüse. Käse kaufe ich auch immer hier. Einen guten Käse findet man im Supermarkt selten."<br><br>
+      <strong>Interview 3: Jana und Tom, 19 und 21 Jahre</strong><br>
+      Reporter: "Was esst ihr gern?"<br>
+      Jana: "Ich mag Salat und frisches Gemüse. Fleisch esse ich nicht, ich bin Vegetarierin."<br>
+      Tom: "Ich möchte heute einen Kuchen kaufen. Den Kuchen hier mag ich sehr, er ist nicht zu süß. Und Obst kaufe ich auch. Abends essen wir zusammen. Jana kocht, und das Essen schmeckt immer super!"
+    </div>
+    <div class="section-h">❓ Fragen zum Text 3</div>
+    <div id="lesen3-set"></div>
+  </div>
+</div>
+
+<!-- SCORE CARD -->
+<div class="sc-overlay hidden" id="sc-overlay">
+  <div class="sc-modal" id="sc-modal">
+    <h2>📋 Submit Your Score</h2>
+    <p>Enter your name to generate your score card. Share the screenshot with Anshuka!</p>
+    <input class="sc-inp" id="sc-name-inp" placeholder="Your name..." maxlength="40" autocomplete="off">
+    <button class="sc-btn" onclick="generateCard()">Generate My Score Card ✨</button>
+  </div>
+  <div class="sr-card hidden" id="sr-card">
+    <div class="sr-logo"><div class="sr-logo-icon">🇩🇪</div><div><div class="sr-logo-name">Deutsch Meistern</div><div class="sr-logo-by">by Anshuka</div></div></div>
+    <div class="sr-divider"></div>
+    <div class="sr-student" id="sr-name">Student</div>
+    <div class="sr-label">Score Card</div>
+    <div class="sr-score-ring"><div class="sr-pts" id="sr-pts">0</div><div class="sr-pts-lbl">points</div></div>
+    <div class="sr-chapter">A1 · Kapitel 4 · Guten Appetit!</div>
+    <div class="sr-stats">
+      <div class="sr-stat"><div class="sr-stat-n" id="sr-answered">0</div><div class="sr-stat-l">Answered</div></div>
+      <div class="sr-stat"><div class="sr-stat-n" id="sr-pct">0%</div><div class="sr-stat-l">Score %</div></div>
+      <div class="sr-stat"><div class="sr-stat-n">120</div><div class="sr-stat-l">Max pts</div></div>
+    </div>
+    <div class="sr-footer">Completed on <strong id="sr-date"></strong><br>Platform: <strong>Deutsch Meistern by Anshuka</strong></div>
+    <div class="sr-actions">
+      <button class="sr-close-btn" onclick="closeCard()">Close</button>
+      <button class="sr-new-btn" onclick="closeCard()">Keep Learning 🚀</button>
+    </div>
+  </div>
+</div>
+
+<script>
+let score=0,answered=new Set(),orderState={};
+function goTo(id,btn){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.querySelectorAll('.bn').forEach(b=>b.classList.remove('active'));document.getElementById('s-'+id).classList.add('active');if(btn)btn.classList.add('active');if(id==='lesen')setTimeout(renderLesenTexts,50);if(id==='leaderboard'&&window.loadLeaderboard)window.loadLeaderboard();}
+function openMehr(){document.getElementById('mehr-overlay').classList.add('open');document.getElementById('mehr-sheet').classList.add('open');}
+function closeMehr(){document.getElementById('mehr-overlay').classList.remove('open');document.getElementById('mehr-sheet').classList.remove('open');}
+function navTo(id){const btn=document.querySelector(".bn[onclick*='"+id+"']");goTo(id,btn);}
+function goToGram(idx){navTo('grammar');setTimeout(()=>switchGTab(idx,document.querySelectorAll('.g-tab')[idx]),80);}
+function switchGTab(idx,btn){document.querySelectorAll('.g-panel').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.g-tab').forEach(t=>t.classList.remove('active'));document.getElementById('gp-'+idx).classList.add('active');if(btn)btn.classList.add('active');}
+function switchExTab(idx,btn){document.querySelectorAll('.ex-panel').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.ex-tab').forEach(t=>t.classList.remove('active'));document.getElementById('ep-'+idx).classList.add('active');if(btn)btn.classList.add('active');}
+function addScore(pts){score+=pts;document.getElementById('score-pill').textContent='⭐ '+score+' Pts';document.getElementById('float-pts').textContent=score;if(score>0&&score%100===0)confetti();}
+function confetti(){const c=['#ef4444','#f59e0b','#10b981','#3b82f6','#8b5cf6','#ec4899'];for(let i=0;i<30;i++){const d=document.createElement('div');d.className='conf-piece';d.style.cssText=`left:${Math.random()*100}vw;top:0;background:${c[Math.floor(Math.random()*c.length)]};animation-delay:${Math.random()*.5}s;animation-duration:${.8+Math.random()*.6}s;`;document.body.appendChild(d);setTimeout(()=>d.remove(),1500);}}
+
+const lesenQ=[
+  {t:'mc',q:'Welche Form ist korrekt im Akkusativ? "Ich kaufe ___ Käse." (maskulin)',opts:['der Käse','den Käse','dem Käse','ein Käse'],ans:1},
+  {t:'mc',q:'Welche Form ist korrekt? "Wir brauchen ___ Gurke." (feminin)',opts:['eine Gurke','einen Gurke','ein Gurke','der Gurke'],ans:0},
+  {t:'mc',q:'Welche Form ist korrekt? "Wir haben ___ Käse mehr." (Negation, maskulin)',opts:['kein','keine','keinen','nicht'],ans:2},
+  {t:'mc',q:'Welche Form ist korrekt? "Wir haben ___ Getränke." (Negation, Plural)',opts:['keinen','kein','keine','nicht'],ans:2},
+  {t:'mc',q:'Was ändert sich im Akkusativ bei maskulinen Nomen?',opts:['Nichts','der → den · ein → einen · kein → keinen','die → den','das → dem'],ans:1},
+  {t:'mc',q:'Was ändert sich im Akkusativ bei femininen Nomen?',opts:['die → den','eine → einen','Nichts!','die → dem'],ans:2},
+  {t:'mc',q:'Wie heißt "mögen" für "ich"?',opts:['möchte','mag','magst','mögen'],ans:1},
+  {t:'mc',q:'Wie heißt "mögen" für "du"?',opts:['mag','möchtest','magst','mögt'],ans:2},
+  {t:'mc',q:'Wie heißt "essen" für "du"? (Vokalwechsel!)',opts:['esst','esse','essen','isst'],ans:3},
+  {t:'mc',q:'Wie heißt "essen" für "er/sie"? (Vokalwechsel!)',opts:['esst','esse','isst','essen'],ans:2},
+  {t:'mc',q:'Was bedeutet "möchten" im Unterschied zu "mögen"?',opts:['Sie bedeuten das Gleiche','mögen = would like now; möchten = like in general','mögen = like in general; möchten = would like now','mögen ist formeller'],ans:2},
+  {t:'mc',q:'"Ich bin satt." bedeutet:',opts:['I am hungry','I am full','I am tired','I am satisfied'],ans:1},
+  {t:'mc',q:'"Schmeckt\'s?" bedeutet:',opts:['Is it cheap?','Do you want more?','Does it taste good?','Is it ready?'],ans:2},
+  {t:'mc',q:'Wo kauft man Brot und Brötchen?',opts:['Im Supermarkt','In der Metzgerei','In der Bäckerei','Auf dem Markt'],ans:2},
+  {t:'mc',q:'Wo kauft man Wurst und Fleisch?',opts:['In der Bäckerei','In der Metzgerei','Im Supermarkt','Auf dem Markt'],ans:1},
+  {t:'passage',p:'Mario und Elena planen eine Grillparty. Wir brauchen Tomaten, Eier, Öl und eine Gurke. Wir haben keinen Käse mehr. Wir haben auch keine Getränke.',q:'Was fehlt für den Salat? (Was haben sie nicht?)',opts:['Tomaten und Eier','Käse und Getränke','Öl und Gurke','Fleisch und Würstchen'],ans:1},
+  {t:'passage',p:'Mario und Elena planen eine Grillparty. Wir brauchen Tomaten, Eier, Öl und eine Gurke. Wir haben keinen Käse mehr. Wir haben auch keine Getränke.',q:'Wer kauft den Käse?',opts:['Elena auf dem Markt','Katrin und Lukas','Mario im Supermarkt','Niemand'],ans:2},
+  {t:'mc',q:'Wie sagt man "99 Cent" auf Deutsch?',opts:['neun Cent','neunzig Cent','neunundneunzig Cent','neun Euro'],ans:2},
+  {t:'mc',q:'"Sonst noch etwas?" bedeutet:',opts:['Is that all?','Anything else?','How much is it?','Do you have a bag?'],ans:1},
+  {t:'mc',q:'"Wer kommt dran?" sagt man...',opts:['Am Telefon','An der Kasse / Theke','Im Restaurant','Auf dem Markt'],ans:1},
+  {t:'mc',q:'Welche Form ist korrekt? "Ich nehme noch 150 Gramm ___." (Schinken, maskulin Akk.)',opts:['der Schinken','dem Schinken','den Schinken','Schinken'],ans:3},
+  {t:'mc',q:'"Danke, gleichfalls!" antwortet man auf...',opts:['Wie geht\'s?','Guten Appetit!','Was kostet das?','Auf Wiedersehen!'],ans:1},
+  {t:'mc',q:'Welcher Artikel hat "Supermarkt"?',opts:['die','das','der','ein'],ans:2},
+  {t:'mc',q:'Was ist "das Mehl" auf Englisch?',opts:['oil','salt','flour','sugar'],ans:2},
+  {t:'passage',p:'Max Schmidt ist Koch im Restaurant "Esszimmer" in Konstanz. Morgens geht er auf den Markt und kauft Tomaten, Champignons, Salat, Kartoffeln und Zwiebeln. Frischen Fisch braucht er auch.',q:'Was kauft Max Schmidt auf dem Markt?',opts:['Nur Fisch','Tomaten, Champignons, Salat, Kartoffeln, Zwiebeln und Fisch','Nur Gemüse','Fleisch und Käse'],ans:1},
+  {t:'passage',p:'Max Schmidt ist Koch im Restaurant "Esszimmer" in Konstanz. Er sagt: "Kochen ist mein Beruf, aber auch mein Hobby."',q:'Was sagt Max Schmidt über seinen Beruf?',opts:['Er findet seinen Job langweilig','Kochen ist sein Beruf und sein Hobby','Er möchte einen anderen Job','Er kocht nicht gern'],ans:1},
+  {t:'mc',q:'Welche Negationsform ist korrekt? "___ Suppe." (feminin, Akkusativ)',opts:['keinen','kein','keine','nicht'],ans:2},
+  {t:'mc',q:'Welche Form ist korrekt? "Ich möchte ___ Stück Emmentaler." (neutrum)',opts:['einen','ein','eine','der'],ans:1},
+  {t:'mc',q:'"Guten Appetit!" sagt man...',opts:['Am Telefon','Beim Essen','Beim Kochen','Im Supermarkt'],ans:1},
+  {t:'mc',q:'Wie heißt "möchten" für "du"?',opts:['möchte','möchtet','möchten','möchtest'],ans:3},
+  {t:'mc',q:'Was bedeutet "lecker"?',opts:['expensive','delicious','enough','fresh'],ans:1},
+  {t:'mc',q:'Verb Position im Deutschen:',opts:['Verb immer Position 1','Verb immer am Ende','Verb auf Position 2','Verb nach dem Subjekt'],ans:1},
+  {t:'mc',q:'Welches Wort ist Plural? "die ___"',opts:['Tomaten','Käse','Brot','Schinken'],ans:0},
+  {t:'mc',q:'Was ist "die Sahne" auf Englisch?',opts:['butter','cream','milk','oil'],ans:1},
+  {t:'mc',q:'Was ist "der Pfeffer" auf Englisch?',opts:['salt','sugar','pepper','vinegar'],ans:2},
+  {t:'mc',q:'"Zum Frühstück esse ich Brot." Verb ist auf Position...',opts:['1','2','3','4'],ans:1},
+  {t:'mc',q:'Was ist "die Metzgerei"?',opts:['bakery','butcher shop','supermarket','market'],ans:1},
+  {t:'mc',q:'Wie sagt man "I am full" auf Deutsch?',opts:['Ich bin voll.','Ich bin satt.','Ich mag nicht mehr.','Ich esse nicht mehr.'],ans:1},
+  {t:'mc',q:'"Prost!" sagt man...',opts:['Beim Essen','Beim Trinken / Anstoßen','In der Bäckerei','Im Supermarkt'],ans:1},
+  {t:'mc',q:'Was ist "das Ei" auf Englisch?',opts:['oil','vinegar','egg','rice'],ans:2},
+  {t:'mc',q:'"Wie viel kostet...?" fragt nach...',opts:['dem Namen','dem Preis','der Menge','der Qualität'],ans:1},
+  {t:'mc',q:'Was ist die Akkusativform von "der Salat"?',opts:['der Salat','des Salat','dem Salat','den Salat'],ans:3},
+  {t:'mc',q:'Was ist korrekt? Lina isst morgens Müsli. = ___ isst Lina Müsli.',opts:['Mittags','Abends','Morgens','Nachmittags'],ans:2},
+  {t:'mc',q:'Welcher Artikel hat "Gurke"?',opts:['der','das','die','ein'],ans:2},
+  {t:'mc',q:'"Ich nehme noch eine Tüte." Was ist eine Tüte?',opts:['A trolley','A bag','A receipt','A basket'],ans:1},
+];
+
+const sprechenQ=[
+  {t:'order',q:'Bilde den Satz (Akkusativ):',words:['Ich','kaufe','den','Käse.'],correct:'Ich kaufe den Käse.'},
+  {t:'order',q:'Bilde den Satz (Akkusativ):',words:['Ich','kaufe','das','Brot.'],correct:'Ich kaufe das Brot.'},
+  {t:'order',q:'Bilde den Satz (Akkusativ):',words:['Ich','kaufe','die','Gurke.'],correct:'Ich kaufe die Gurke.'},
+  {t:'order',q:'Bilde den Satz (Akkusativ):',words:['Wir','brauchen','einen','Salat.'],correct:'Wir brauchen einen Salat.'},
+  {t:'order',q:'Bilde den Satz (Negation Akkusativ):',words:['Wir','haben','keinen','Käse','mehr.'],correct:'Wir haben keinen Käse mehr.'},
+  {t:'order',q:'Bilde den Satz (Negation Akkusativ):',words:['Wir','haben','auch','keine','Getränke.'],correct:'Wir haben auch keine Getränke.'},
+  {t:'order',q:'Bilde den Satz (möchten):',words:['Ich','möchte','ein','Stück','Emmentaler,','bitte.'],correct:'Ich möchte ein Stück Emmentaler, bitte.'},
+  {t:'order',q:'Bilde den Satz (möchten):',words:['Was','möchten','Sie?'],correct:'Was möchten Sie?'},
+  {t:'order',q:'Bilde den Satz (mögen):',words:['Ich','mag','Schokolade','sehr','gern.'],correct:'Ich mag Schokolade sehr gern.'},
+  {t:'order',q:'Bilde den Satz (mögen Negation):',words:['Ich','mag','keine','Gurken.'],correct:'Ich mag keine Gurken.'},
+  {t:'order',q:'Bilde den Satz (essen Vokalwechsel):',words:['Lina','isst','morgens','Müsli.'],correct:'Lina isst morgens Müsli.'},
+  {t:'order',q:'Bilde den Satz (Inversion):',words:['Morgens','isst','Lina','Müsli.'],correct:'Morgens isst Lina Müsli.'},
+  {t:'order',q:'Bilde den Satz:',words:['Guten','Appetit!'],correct:'Guten Appetit!'},
+  {t:'order',q:'Bilde den Satz:',words:['Danke,','gleichfalls!'],correct:'Danke, gleichfalls!'},
+  {t:'order',q:'Bilde den Satz:',words:['Nein,','danke,','ich','bin','satt.'],correct:'Nein, danke, ich bin satt.'},
+  {t:'order',q:'Bilde den Satz (Preis fragen):',words:['Was','kostet','der','Apfelsaft?'],correct:'Was kostet der Apfelsaft?'},
+  {t:'order',q:'Bilde den Satz:',words:['99','Cent.'],correct:'99 Cent.'},
+  {t:'order',q:'Bilde den Satz:',words:['Sonst','noch','etwas?'],correct:'Sonst noch etwas?'},
+  {t:'order',q:'Bilde den Satz:',words:['Ja,','ich','nehme','noch','150','Gramm','Schinken.'],correct:'Ja, ich nehme noch 150 Gramm Schinken.'},
+  {t:'order',q:'Bilde den Satz:',words:['Das','macht','dann','18,65','Euro.'],correct:'Das macht dann 18,65 Euro.'},
+  {t:'order',q:'Bilde den Satz (Akkusativ):',words:['Ich','esse','das','Fleisch','gern.'],correct:'Ich esse das Fleisch gern.'},
+  {t:'order',q:'Bilde den Satz (Akkusativ):',words:['Ich','trinke','den','Kaffee.'],correct:'Ich trinke den Kaffee.'},
+  {t:'order',q:'Bilde den Satz:',words:['Zum','Frühstück','esse','ich','Brot','mit','Käse.'],correct:'Zum Frühstück esse ich Brot mit Käse.'},
+  {t:'order',q:'Bilde den Satz:',words:['Abends','mögen','wir','gern','Fisch','oder','Fleisch.'],correct:'Abends mögen wir gern Fisch oder Fleisch.'},
+  {t:'order',q:'Bilde den Satz:',words:['Ich','gehe','in','die','Bäckerei','und','kaufe','Brot.'],correct:'Ich gehe in die Bäckerei und kaufe Brot.'},
+  {t:'order',q:'Bilde den Satz:',words:['Wo','finde','ich','Reis?','Dort','rechts.'],correct:'Wo finde ich Reis? Dort rechts.'},
+  {t:'order',q:'Bilde den Satz:',words:['Können','Sie','wechseln,','bitte?'],correct:'Können Sie wechseln, bitte?'},
+  {t:'order',q:'Bilde den Satz (möchten):',words:['Möchtest','du','noch','ein','Würstchen?'],correct:'Möchtest du noch ein Würstchen?'},
+  {t:'order',q:'Bilde den Satz:',words:['Ja,','gerne!','Die','Würstchen','sind','wirklich','lecker.'],correct:'Ja, gerne! Die Würstchen sind wirklich lecker.'},
+  {t:'order',q:'Bilde den Satz:',words:['Ich','koche','keine','Suppe','heute.'],correct:'Ich koche keine Suppe heute.'},
+  {t:'order',q:'Bilde den Satz:',words:['Ich','brauche','noch','eine','Tüte,','bitte.'],correct:'Ich brauche noch eine Tüte, bitte.'},
+  {t:'order',q:'Bilde den Satz:',words:['Mittags','mag','ich','einen','Döner','oder','eine','Pizza.'],correct:'Mittags mag ich einen Döner oder eine Pizza.'},
+  {t:'order',q:'Bilde den Satz:',words:['Wir','machen','den','Salat','und','kaufen','die','Getränke.'],correct:'Wir machen den Salat und kaufen die Getränke.'},
+  {t:'order',q:'Bilde den Satz:',words:['Kochen','ist','mein','Beruf,','aber','auch','mein','Hobby.'],correct:'Kochen ist mein Beruf, aber auch mein Hobby.'},
+  {t:'order',q:'Bilde den Satz:',words:['Wir','essen','zusammen','und','trinken','Saft.'],correct:'Wir essen zusammen und trinken Saft.'},
+  {t:'order',q:'Bilde den Satz:',words:['Er','kauft','einen','Zander','auf','dem','Markt.'],correct:'Er kauft einen Zander auf dem Markt.'},
+  {t:'order',q:'Bilde den Satz:',words:['Ich','esse','gern','asiatisches','Essen.'],correct:'Ich esse gern asiatisches Essen.'},
+  {t:'order',q:'Bilde den Satz (Preis):',words:['0,99','Euro','=','neunundneunzig','Cent.'],correct:'0,99 Euro = neunundneunzig Cent.'},
+  {t:'order',q:'Bilde den Satz:',words:['Ist','das','alles?','Ja,','danke.'],correct:'Ist das alles? Ja, danke.'},
+  {t:'order',q:'Bilde den Satz:',words:['Wir','haben','keinen','Käse','und','keine','Getränke.'],correct:'Wir haben keinen Käse und keine Getränke.'},
+];
+
+const schreibenQ=[
+  {t:'fill1',q:'Akkusativ (maskulin): "der Käse" → Ich kaufe ___ Käse.',b:['den']},
+  {t:'fill1',q:'Akkusativ (maskulin, indefinit): "ein Salat" → Wir brauchen ___ Salat.',b:['einen']},
+  {t:'fill1',q:'Akkusativ (maskulin, Negation): "kein Käse" → Wir haben ___ Käse.',b:['keinen']},
+  {t:'fill1',q:'Akkusativ (neutrum): "das Brot" → Ich kaufe ___ Brot. (kein Wechsel!)',b:['das']},
+  {t:'fill1',q:'Akkusativ (feminin): "die Gurke" → Ich kaufe ___ Gurke. (kein Wechsel!)',b:['die']},
+  {t:'fill1',q:'Akkusativ (feminin, Negation): "keine Suppe" → Ich mache ___ Suppe.',b:['keine']},
+  {t:'fill1',q:'Akkusativ (Plural, Negation): "keine Tomaten" → Wir haben ___ Tomaten.',b:['keine']},
+  {t:'fill1',q:'Ergänze: "Ich ___ Schokolade sehr gern." (mögen, ich)',b:['mag']},
+  {t:'fill1',q:'Ergänze: "Du ___ Fisch?" (mögen, du)',b:['magst']},
+  {t:'fill1',q:'Ergänze: "Er ___ keine Gurken." (mögen, er)',b:['mag']},
+  {t:'fill1',q:'Ergänze: "Ich ___ ein Stück Emmentaler, bitte." (möchten, ich)',b:['möchte']},
+  {t:'fill1',q:'Ergänze: "___ du noch Kuchen?" (möchten, du)',b:['Möchtest']},
+  {t:'fill1',q:'Ergänze: "Lina ___ morgens Müsli." (essen, Vokalwechsel!)',b:['isst']},
+  {t:'fill1',q:'Ergänze: "Du ___ gern Pizza?" (essen, Vokalwechsel!)',b:['isst']},
+  {t:'fill1',q:'Welcher Artikel hat "Käse"? (maskulin/feminin/neutrum)',b:['der']},
+  {t:'fill1',q:'Welcher Artikel hat "Gurke"? (maskulin/feminin/neutrum)',b:['die']},
+  {t:'fill1',q:'Welcher Artikel hat "Brot"? (maskulin/feminin/neutrum)',b:['das']},
+  {t:'fill1',q:'Welcher Artikel hat "Fleisch"? (maskulin/feminin/neutrum)',b:['das']},
+  {t:'fill1',q:'Welcher Artikel hat "Wurst"? (maskulin/feminin/neutrum)',b:['die']},
+  {t:'fill1',q:'Welcher Artikel hat "Salat"? (maskulin/feminin/neutrum)',b:['der']},
+  {t:'fill1',q:'"___, ich bin satt." (No thanks, I am full)',b:['Nein']},
+  {t:'fill1',q:'"Guten Appetit!" Antwort: "Danke, ___!"',b:['gleichfalls']},
+  {t:'fill1',q:'Wo kauft man Brot? In der ___.',b:['Bäckerei']},
+  {t:'fill1',q:'Wo kauft man Wurst? In der ___.',b:['Metzgerei']},
+  {t:'fill1',q:'"Was ___ der Apfelsaft?" (kosten, er)',b:['kostet']},
+  {t:'fill1',q:'Inversion: "Morgens ___ Lina Müsli." (essen)',b:['isst']},
+  {t:'fill1',q:'"Zum Frühstück ___ ich Brot." (essen, ich)',b:['esse']},
+  {t:'fill1',q:'"Schmeckt\'s?" Antwort: "Ja, sehr ___!"',b:['lecker']},
+  {t:'fill1',q:'Das Verb steht auf Position ___ im deutschen Satz.',b:['2']},
+  {t:'fill1',q:'"Wir haben ___ Käse mehr." (Negation Akk. maskulin)',b:['keinen']},
+  {t:'fill1',q:'Akkusativ: "Ich möchte ___ Stück Kuchen." (neutrum)',b:['ein']},
+  {t:'fill1',q:'"Sonst noch ___?" sagt der Verkäufer.',b:['etwas']},
+  {t:'fill1',q:'"Ist das ___?" sagt der Verkäufer am Ende.',b:['alles']},
+  {t:'fill1',q:'"___ Appetit!" sagt man vor dem Essen.',b:['Guten']},
+  {t:'fill1',q:'Preis: "0,99 Euro" = neunundneunzig ___.',b:['Cent']},
+];
+
+/* LESEN Q&A */
+const lesen1Q=[
+  {t:'mc',q:'Was essen die meisten Deutschen morgens?',opts:['Reis und Suppe','Brot oder Brötchen mit Butter und Käse','Müsli und Joghurt','Eier und Wurst'],ans:1},
+  {t:'mc',q:'Was trinken die meisten Deutschen zum Frühstück?',opts:['Orangensaft','Milch','Kaffee oder Tee','Cola'],ans:2},
+  {t:'mc',q:'Wie viel Prozent der Deutschen essen morgens Joghurt?',opts:['20%','40%','60%','78%'],ans:1},
+  {t:'mc',q:'Wann öffnet eine deutsche Bäckerei oft?',opts:['Um 7 Uhr','Um 8 Uhr','Um 6 Uhr','Um 9 Uhr'],ans:2},
+  {t:'mc',q:'Wie viel kostet ein Brötchen circa?',opts:['5 bis 10 Cent','30 bis 60 Cent','1 bis 2 Euro','10 bis 20 Cent'],ans:1},
+  {t:'mc',q:'Wie viele Bäckereien gibt es in Deutschland?',opts:['Über 1.000','Über 5.000','Über 11.000','Über 50.000'],ans:2},
+  {t:'mc',q:'Was essen viele Deutsche am Wochenende zum Frühstück?',opts:['Müsli','Joghurt','Ein Ei','Croissant'],ans:2},
+  {t:'mc',q:'Was essen Kinder in Japan morgens, laut dem Text?',opts:['Brötchen','Joghurt','Müsli','Reis'],ans:3},
+];
+const lesen2Q=[
+  {t:'mc',q:'Was möchte Karim heute Abend kochen?',opts:['Suppe','Salat','Pasta','Fleisch'],ans:2},
+  {t:'mc',q:'Was hat Karim noch zu Hause?',opts:['Tomaten und Zwiebeln','Einen Käse','Öl und Pasta','Mozzarella'],ans:1},
+  {t:'mc',q:'Wie viel kostet ein Kilogramm Tomaten?',opts:['89 Cent','1,29 Euro','1,99 Euro','2,49 Euro'],ans:2},
+  {t:'mc',q:'Warum kauft Karim den Mozzarella?',opts:['Weil er keinen Käse hat','Weil er ihn sehr gern mag','Weil er billig ist','Weil die Kassiererin ihn empfiehlt'],ans:1},
+  {t:'mc',q:'Wie viel zahlt Karim insgesamt?',opts:['5,65 Euro','6,75 Euro','7,65 Euro','8,50 Euro'],ans:2},
+  {t:'mc',q:'Wie viel kostet die Tüte?',opts:['10 Cent','20 Cent','30 Cent','50 Cent'],ans:2},
+  {t:'mc',q:'Was ist die Akkusativform von "der Mozzarella"?',opts:['der Mozzarella','dem Mozzarella','den Mozzarella','ein Mozzarella'],ans:2},
+  {t:'mc',q:'Was kocht Karim heute Abend?',opts:['Suppe mit Gemüse','Pasta mit Tomatensauce und Mozzarella','Salat','Fleisch mit Kartoffeln'],ans:1},
+];
+const lesen3Q=[
+  {t:'mc',q:'Was kauft Frau Bergmann auf dem Markt?',opts:['Nur Fisch','Tomaten, Salat, Gurke, Fisch und Kuchen','Käse und Fleisch','Brot und Brötchen'],ans:1},
+  {t:'mc',q:'Warum mag Herr Yilmaz den Supermarkt nicht?',opts:['Er ist zu teuer','Das Gemüse ist oft nicht frisch','Es ist zu weit','Er hat keine Zeit'],ans:1},
+  {t:'mc',q:'Wann kauft Herr Yilmaz auf dem Markt ein?',opts:['Jeden Montag','Jeden Mittwoch','Jeden Samstag','Jeden Sonntag'],ans:2},
+  {t:'mc',q:'Was isst Jana nicht?',opts:['Gemüse','Salat','Obst','Fleisch'],ans:3},
+  {t:'mc',q:'Was möchte Tom heute kaufen?',opts:['Käse','Fisch','Einen Kuchen','Gemüse'],ans:2},
+  {t:'mc',q:'Wer kocht abends, laut dem Text?',opts:['Tom','Jana','Beide zusammen','Herr Yilmaz'],ans:1},
+  {t:'mc',q:'Was bedeutet "Vegetarierin"?',opts:['Someone who only eats fish','Someone who does not eat meat','Someone who only eats vegetables','Someone who loves cooking'],ans:1},
+  {t:'mc',q:'"Den Kuchen hier mag ich sehr." Was ist "den Kuchen" grammatisch?',opts:['Nominativ maskulin','Akkusativ maskulin','Nominativ neutrum','Akkusativ feminin'],ans:1},
+];
+
+function renderLesenTexts(){
+  renderLesenSet(lesen1Q,'lesen1-set');
+  renderLesenSet(lesen2Q,'lesen2-set');
+  renderLesenSet(lesen3Q,'lesen3-set');
+}
+function renderLesenSet(data,cid){
+  const c=document.getElementById(cid);if(!c)return;c.innerHTML='';
+  data.forEach((q,i)=>{
+    const id=cid+'-'+i;
+    const oh=q.opts.map((o,oi)=>`<button class="opt" id="opt-${id}-${oi}" onclick="checkMC('${id}',${oi},${q.ans})">${o}</button>`).join('');
+    c.innerHTML+=`<div class="qcard" id="card-${id}"><div class="q-meta"><span class="q-num">#${i+1}</span><span class="q-type">Multiple Choice</span><span class="q-status" id="st-${id}"></span></div><div class="q-text">${q.q}</div><div class="opts">${oh}</div><div class="fb" id="fb-${id}"></div></div>`;
+  });
+}
+
+function renderAll(){renderSet(lesenQ,'lesen-set');renderSet(sprechenQ,'sprechen-set');renderSet(schreibenQ,'schreiben-set');}
+function renderSet(data,cid){
+  const c=document.getElementById(cid);c.innerHTML='';
+  data.forEach((q,i)=>{
+    const id=cid.split('-')[0]+'-'+i;let inner='';
+    if(q.t==='mc'||q.t==='passage'){
+      const ph=q.p?`<div class="passage">${q.p}</div>`:'';
+      const oh=q.opts.map((o,oi)=>`<button class="opt" id="opt-${id}-${oi}" onclick="checkMC('${id}',${oi},${q.ans})">${o}</button>`).join('');
+      inner=`${ph}<div class="q-text">${q.q}</div><div class="opts">${oh}</div>`;
+    }else if(q.t==='order'){
+      orderState[id]=[];
+      const sh=[...q.words].sort(()=>Math.random()-.5);
+      const ch=sh.map((w,wi)=>`<button class="wchip" id="wc-${id}-${wi}" onclick="pickWord('${id}',${wi},'${w.replace(/'/g,"\\'")}')">${w}</button>`).join('');
+      inner=`<div class="q-text">${q.q}</div><div class="hint-t">Tippe auf die Wörter in der richtigen Reihenfolge:</div><div class="ans-area" id="aa-${id}" style="color:var(--muted);font-style:italic;font-weight:600;">Hier erscheint dein Satz...</div><div class="word-bank" id="wb2-${id}">${ch}</div>`;
+    }else if(q.t==='fill1'){
+      const ih=q.b.map((_,bi)=>`<input class="inline-inp" id="ii-${id}-${bi}" placeholder="?" autocomplete="off" autocorrect="off" spellcheck="false" onkeydown="if(event.key==='Enter')checkFill('${id}',${i},'${cid.split('-')[0]}')">`).join(' ');
+      inner=`<div class="q-text">${q.q}</div><div style="margin-top:6px">${ih}</div>`;
+    }
+    const tl=q.t==='mc'||q.t==='passage'?'Multiple Choice':q.t==='order'?'Wortstellung':'Lückentext';
+    c.innerHTML+=`<div class="qcard" id="card-${id}"><div class="q-meta"><span class="q-num">#${i+1}</span><span class="q-type">${tl}</span><span class="q-status" id="st-${id}"></span></div>${inner}<div class="fb" id="fb-${id}"></div><div class="q-actions">${q.t==='order'?`<button class="btn-check" onclick="checkOrd('${id}',${i},'${cid.split('-')[0]}')">Prüfen ✓</button><button class="btn-reset" onclick="resetOrd('${id}')">↺ Reset</button>`:''} ${q.t==='fill1'?`<button class="btn-check" onclick="checkFill('${id}',${i},'${cid.split('-')[0]}')">Prüfen ✓</button>`:''}</div></div>`;
+  });
+}
+function checkMC(id,chosen,correct){if(answered.has(id))return;answered.add(id);document.querySelectorAll(`[id^="opt-${id}-"]`).forEach((b,i)=>{b.classList.add('disabled');if(i===correct)b.classList.add('correct');else if(i===chosen&&chosen!==correct)b.classList.add('wrong');});const fb=document.getElementById('fb-'+id),st=document.getElementById('st-'+id);if(chosen===correct){st.textContent='✅';fb.textContent='Richtig! +10 Punkte 🎉';fb.className='fb ok';addScore(10);}else{st.textContent='❌';fb.textContent='Leider falsch. Die richtige Antwort ist markiert.';fb.className='fb err';}}
+function pickWord(id,wi,word){const chip=document.getElementById('wc-'+id+'-'+wi);if(chip.classList.contains('used'))return;chip.classList.add('used');orderState[id].push({wi,word});const aa=document.getElementById('aa-'+id);aa.style.color='var(--navy)';aa.style.fontStyle='normal';aa.style.fontWeight='700';aa.textContent=orderState[id].map(x=>x.word).join(' ');}
+function checkOrd(id,qi,section){if(answered.has(id))return;const data=section==='lesen'?lesenQ:section==='sprechen'?sprechenQ:schreibenQ;const userAns=orderState[id].map(x=>x.word).join(' ').trim();const correct=data[qi].correct.trim();const fb=document.getElementById('fb-'+id),st=document.getElementById('st-'+id);if(userAns===correct){answered.add(id);st.textContent='✅';fb.textContent='Perfekt! +10 Punkte 🎉';fb.className='fb ok';addScore(10);document.querySelectorAll(`#wb2-${id} .wchip`).forEach(c=>c.disabled=true);}else{st.textContent='❌';fb.innerHTML=`Noch nicht ganz. Richtig: <em>${correct}</em>`;fb.className='fb err';}}
+function resetOrd(id){if(answered.has(id))return;orderState[id]=[];const aa=document.getElementById('aa-'+id);aa.style.color='var(--muted)';aa.style.fontStyle='italic';aa.style.fontWeight='600';aa.textContent='Hier erscheint dein Satz...';document.querySelectorAll(`#wb2-${id} .wchip`).forEach(c=>c.classList.remove('used'));document.getElementById('fb-'+id).textContent='';}
+function checkFill(id,qi,section){if(answered.has(id))return;const data=section==='lesen'?lesenQ:section==='sprechen'?sprechenQ:schreibenQ;const q=data[qi];let allOk=true;q.b.forEach((ans,bi)=>{const inp=document.getElementById('ii-'+id+'-'+bi);if(!inp)return;const uv=inp.value.trim().toLowerCase();const cv=ans.toLowerCase();if(uv===cv)inp.classList.add('correct');else{inp.classList.add('wrong');allOk=false;}});const fb=document.getElementById('fb-'+id),st=document.getElementById('st-'+id);if(allOk){answered.add(id);st.textContent='✅';fb.textContent='Ausgezeichnet! +10 Punkte 🎉';fb.className='fb ok';addScore(10);}else{st.textContent='❌';fb.textContent='Nicht ganz. Richtig: '+q.b.join(', ');fb.className='fb err';}}
+
+/* VOCAB */
+const allVocab=[
+  {cat:'Lebensmittel',sub:'Frühstück',art:'F',w:'die Banane',en:'banana',ex:'Zum Frühstück esse ich eine Banane.'},
+  {cat:'Lebensmittel',sub:'Frühstück',art:'M',w:'der Orangensaft',en:'orange juice',ex:'Ich trinke gern Orangensaft zum Frühstück.'},
+  {cat:'Lebensmittel',sub:'Frühstück',art:'N',w:'das Müsli',en:'muesli',ex:'Lina isst morgens Müsli mit Milch.'},
+  {cat:'Lebensmittel',sub:'Frühstück',art:'M',w:'der Joghurt',en:'yoghurt',ex:'Ich esse gern Joghurt mit Früchten.'},
+  {cat:'Lebensmittel',sub:'Frühstück',art:'M',w:'der Tee',en:'tea',ex:'Zum Frühstück trinke ich Tee.'},
+  {cat:'Lebensmittel',sub:'Frühstück',art:'F',w:'die Milch',en:'milk',ex:'Kaffee mit Milch bitte!'},
+  {cat:'Lebensmittel',sub:'Frühstück',art:'M',w:'der Käse',en:'cheese',ex:'Ich kaufe den Käse im Supermarkt.'},
+  {cat:'Lebensmittel',sub:'Frühstück',art:'F',w:'die Marmelade',en:'jam',ex:'Brötchen mit Marmelade mag Lars sehr gern.'},
+  {cat:'Lebensmittel',sub:'Frühstück',art:'N',w:'das Ei (pl: die Eier)',en:'egg',ex:'Wir brauchen Eier für den Salat.'},
+  {cat:'Lebensmittel',sub:'Frühstück',art:'N',w:'das Brötchen',en:'bread roll',ex:'Ich kaufe Brötchen in der Bäckerei.'},
+  {cat:'Lebensmittel',sub:'Mittagessen',art:'M',w:'der Apfelsaft',en:'apple juice',ex:'Was kostet der Apfelsaft? 99 Cent.'},
+  {cat:'Lebensmittel',sub:'Mittagessen',art:'F',w:'die Kartoffeln (Pl.)',en:'potatoes',ex:'Wir essen abends Fleisch mit Kartoffeln.'},
+  {cat:'Lebensmittel',sub:'Mittagessen',art:'N',w:'das Salz',en:'salt',ex:'Das Essen braucht mehr Salz!'},
+  {cat:'Lebensmittel',sub:'Mittagessen',art:'M',w:'der Pfeffer',en:'pepper',ex:'Salz und Pfeffer stehen auf dem Tisch.'},
+  {cat:'Lebensmittel',sub:'Mittagessen',art:'N',w:'das Gemüse',en:'vegetables',ex:'Wir wäscht das Gemüse und schneidet es.'},
+  {cat:'Lebensmittel',sub:'Mittagessen',art:'N',w:'das Wasser',en:'water',ex:'Ein Glas Wasser, bitte.'},
+  {cat:'Lebensmittel',sub:'Mittagessen',art:'M',w:'der Essig',en:'vinegar',ex:'Essig und Öl für den Salat.'},
+  {cat:'Lebensmittel',sub:'Mittagessen',art:'N',w:'das Öl',en:'oil',ex:'Wir brauchen Öl für den Salat.'},
+  {cat:'Lebensmittel',sub:'Mittagessen',art:'F',w:'die Cola',en:'cola',ex:'Ich trinke nicht gern Cola.'},
+  {cat:'Lebensmittel',sub:'Mittagessen',art:'N',w:'das Fleisch',en:'meat',ex:'Wir kaufen das Fleisch in der Metzgerei.'},
+  {cat:'Lebensmittel',sub:'Kaffee und Kuchen',art:'M',w:'der Kaffee',en:'coffee',ex:'Ich trinke jeden Morgen Kaffee.'},
+  {cat:'Lebensmittel',sub:'Kaffee und Kuchen',art:'M',w:'der Kuchen',en:'cake',ex:'Am Nachmittag essen wir gern Kuchen.'},
+  {cat:'Lebensmittel',sub:'Kaffee und Kuchen',art:'F',w:'die Sahne',en:'cream',ex:'Kaffee mit Sahne, bitte!'},
+  {cat:'Lebensmittel',sub:'Kaffee und Kuchen',art:'F',w:'die Schokolade',en:'chocolate',ex:'Nachmittags esse ich manchmal Schokolade.'},
+  {cat:'Lebensmittel',sub:'Kaffee und Kuchen',art:'M',w:'der Keks',en:'biscuit / cookie',ex:'Zum Kaffee esse ich gern Kekse.'},
+  {cat:'Lebensmittel',sub:'Kaffee und Kuchen',art:'M',w:'der Zucker',en:'sugar',ex:'Kaffee mit Zucker, bitte.'},
+  {cat:'Lebensmittel',sub:'Abendessen',art:'F',w:'die Butter',en:'butter',ex:'Brot mit Butter ist lecker.'},
+  {cat:'Lebensmittel',sub:'Abendessen',art:'N',w:'das Brot',en:'bread',ex:'Ich kaufe Brot in der Bäckerei.'},
+  {cat:'Lebensmittel',sub:'Abendessen',art:'F',w:'die Tomate',en:'tomato',ex:'Wir brauchen Tomaten für den Salat.'},
+  {cat:'Lebensmittel',sub:'Abendessen',art:'F',w:'die Gurke',en:'cucumber',ex:'Wir brauchen eine Gurke für den Salat.'},
+  {cat:'Lebensmittel',sub:'Abendessen',art:'M',w:'der Salat',en:'salad / lettuce',ex:'Ich mache einen Salat.'},
+  {cat:'Lebensmittel',sub:'Abendessen',art:'F',w:'die Suppe',en:'soup',ex:'Abends esse ich oft eine Suppe.'},
+  {cat:'Lebensmittel',sub:'Abendessen',art:'F',w:'die Wurst',en:'sausage / deli meat',ex:'Die Wurst kaufe ich in der Metzgerei.'},
+  {cat:'Lebensmittel',sub:'Abendessen',art:'M',w:'der Schinken',en:'ham',ex:'Ich nehme noch 150 Gramm Schinken.'},
+  {cat:'Lebensmittel',sub:'Abendessen',art:'N',w:'das Mehl',en:'flour',ex:'Für den Kuchen brauchen wir Mehl.'},
+  {cat:'Lebensmittel',sub:'Abendessen',art:'M',w:'der Fisch',en:'fish',ex:'Abends mögen wir Fisch sehr gern.'},
+  {cat:'Geschäfte',sub:'Geschäfte und Einkauf',art:'F',w:'die Bäckerei',en:'bakery',ex:'Ich kaufe Brot und Brötchen in der Bäckerei.'},
+  {cat:'Geschäfte',sub:'Geschäfte und Einkauf',art:'M',w:'der Markt',en:'market',ex:'Auf dem Markt gibt es frisches Gemüse.'},
+  {cat:'Geschäfte',sub:'Geschäfte und Einkauf',art:'F',w:'die Metzgerei',en:'butcher shop',ex:'In der Metzgerei kaufe ich Wurst und Fleisch.'},
+  {cat:'Geschäfte',sub:'Geschäfte und Einkauf',art:'M',w:'der Supermarkt',en:'supermarket',ex:'Im Supermarkt kaufe ich alles.'},
+  {cat:'Geschäfte',sub:'Geschäfte und Einkauf',art:'N',w:'das Geld',en:'money',ex:'Der Kuchen kostet 4,50 Euro.'},
+  {cat:'Geschäfte',sub:'Geschäfte und Einkauf',art:'M',w:'der Kassenzettel',en:'receipt',ex:'Brauchen Sie den Kassenzettel?'},
+  {cat:'Geschäfte',sub:'Geschäfte und Einkauf',art:'F',w:'die Tüte',en:'bag',ex:'Ich brauche noch eine Tüte, bitte.'},
+  {cat:'Geschäfte',sub:'Geschäfte und Einkauf',art:'M',w:'der Einkaufswagen',en:'shopping trolley',ex:'Ich brauche einen Euro für den Einkaufswagen.'},
+  {cat:'Verben',sub:'Essen und Einkaufen',art:'V',w:'essen',en:'to eat (VOWEL CHANGE)',ex:'Ich esse, du isst, er isst, wir essen.',extra:'esse · ISST · ISST · essen (e→i for du/er/sie!)'},
+  {cat:'Verben',sub:'Essen und Einkaufen',art:'V',w:'trinken',en:'to drink',ex:'Ich trinke gern Wasser.',extra:'trinke · trinkst · trinkt · trinken'},
+  {cat:'Verben',sub:'Essen und Einkaufen',art:'V',w:'kaufen',en:'to buy',ex:'Ich kaufe den Käse im Supermarkt.',extra:'kaufe · kaufst · kauft · kaufen + AKKUSATIV'},
+  {cat:'Verben',sub:'Essen und Einkaufen',art:'V',w:'kochen',en:'to cook',ex:'Abends koche ich oft Fisch.',extra:'koche · kochst · kocht · kochen'},
+  {cat:'Verben',sub:'Essen und Einkaufen',art:'V',w:'brauchen',en:'to need',ex:'Wir brauchen eine Gurke und Tomaten.',extra:'brauche · brauchst · braucht · brauchen + AKKUSATIV'},
+  {cat:'Verben',sub:'Essen und Einkaufen',art:'V',w:'nehmen',en:'to take',ex:'Ich nehme noch 150 Gramm Schinken.',extra:'nehme · nimmst · nimmt · nehmen (e→i!) + AKKUSATIV'},
+  {cat:'Verben',sub:'Essen und Einkaufen',art:'V',w:'mögen',en:'to like (general preference)',ex:'Ich mag Schokolade = Ich esse gern Schokolade.',extra:'mag · MAGST · MAG · mögen · mögt · mögen (IRREGULAR!)'},
+  {cat:'Verben',sub:'Essen und Einkaufen',art:'V',w:'möchten',en:'to would like (right now)',ex:'Ich möchte ein Stück Kuchen, bitte.',extra:'möchte · MÖCHTEST · möchte · möchten · möchtet · möchten'},
+  {cat:'Verben',sub:'Essen und Einkaufen',art:'V',w:'schmecken',en:'to taste (good)',ex:'Das Fleisch schmeckt sehr gut!',extra:'schmeckt · schmeckte · hat geschmeckt'},
+  {cat:'Verben',sub:'Essen und Einkaufen',art:'V',w:'kosten',en:'to cost',ex:'Was kostet der Apfelsaft? 99 Cent.',extra:'kostet · kostete · hat gekostet'},
+  {cat:'Ausdrücke',sub:'Beim Essen',art:'PH',w:'Guten Appetit!',en:'Enjoy your meal! / Bon appétit!',ex:'Guten Appetit! · Danke, gleichfalls!'},
+  {cat:'Ausdrücke',sub:'Beim Essen',art:'PH',w:'Danke, gleichfalls!',en:'Thank you, same to you!',ex:'Guten Appetit! Danke, gleichfalls!'},
+  {cat:'Ausdrücke',sub:'Beim Essen',art:'PH',w:'Prost! / Zum Wohl!',en:'Cheers!',ex:'Prost! Zum Wohl!'},
+  {cat:'Ausdrücke',sub:'Beim Essen',art:'PH',w:'Mahlzeit!',en:'Enjoy your meal! (informal)',ex:'Mahlzeit! Das sagt man beim Essen.'},
+  {cat:'Ausdrücke',sub:'Beim Essen',art:'PH',w:'Schmeckt\'s?',en:'Does it taste good?',ex:'Schmeckt\'s? Ja, sehr lecker!'},
+  {cat:'Ausdrücke',sub:'Beim Essen',art:'PH',w:'Ja, sehr lecker!',en:'Yes, very tasty / delicious!',ex:'Schmeckt\'s? Ja, sehr lecker!'},
+  {cat:'Ausdrücke',sub:'Beim Essen',art:'PH',w:'Ich bin satt.',en:'I am full.',ex:'Nein, danke. Ich bin satt.'},
+  {cat:'Ausdrücke',sub:'Beim Einkauf',art:'PH',w:'Was kostet...? / Wie viel kostet...?',en:'How much does ... cost?',ex:'Was kostet der Apfelsaft? 99 Cent.'},
+  {cat:'Ausdrücke',sub:'Beim Einkauf',art:'PH',w:'Sonst noch etwas?',en:'Anything else?',ex:'Sonst noch etwas? Ja, ich nehme noch Schinken.'},
+  {cat:'Ausdrücke',sub:'Beim Einkauf',art:'PH',w:'Ist das alles?',en:'Is that everything?',ex:'Ist das alles? Ja, danke.'},
+  {cat:'Ausdrücke',sub:'Beim Einkauf',art:'PH',w:'Wer kommt dran?',en:'Who is next?',ex:'Wer kommt dran? Ich, bitte.'},
+  {cat:'Ausdrücke',sub:'Beim Einkauf',art:'PH',w:'Können Sie wechseln?',en:'Can you change (give change)?',ex:'Ich brauche einen Euro. Können Sie wechseln?'},
+  {cat:'Ausdrücke',sub:'Mahlzeiten',art:'PH',w:'zum Frühstück',en:'for breakfast',ex:'Zum Frühstück esse ich Brot.'},
+  {cat:'Ausdrücke',sub:'Mahlzeiten',art:'PH',w:'mittags / zu Mittag',en:'at noon / for lunch',ex:'Mittags esse ich in der Kantine.'},
+  {cat:'Ausdrücke',sub:'Mahlzeiten',art:'PH',w:'abends / zu Abend',en:'in the evening / for dinner',ex:'Abends essen wir alle zusammen.'},
+  {cat:'Ausdrücke',sub:'Mahlzeiten',art:'PH',w:'morgens / zum Frühstück',en:'in the morning / for breakfast',ex:'Morgens esse ich Müsli.'},
+];
+
+var vocabCurrentCat='all';
+function buildVocab(){renderVocabAll('all','');}
+function renderVocabAll(cat,search){
+  const c=document.getElementById('vocab-container');if(!c)return;
+  let filtered=allVocab;
+  if(cat!=='all')filtered=allVocab.filter(w=>w.cat===cat);
+  if(search)filtered=filtered.filter(w=>(w.w||'').toLowerCase().includes(search)||(w.en||'').toLowerCase().includes(search)||(w.sub||'').toLowerCase().includes(search));
+  const groups={};filtered.forEach(w=>{const k=w.sub||w.cat;if(!groups[k])groups[k]=[];groups[k].push(w);});
+  const ac={M:'art-m',F:'art-f',N:'art-n',V:'art-v',ADJ:'art-adj',PH:'art-ph'};
+  const al={M:'der',F:'die',N:'das',V:'Verb',ADJ:'Adj',PH:'Ausdruck'};
+  let html=`<div style="font-size:.78rem;color:var(--muted);margin-bottom:12px;font-weight:700;">${filtered.length} Wörter gefunden</div>`;
+  if(!filtered.length){c.innerHTML='<div style="text-align:center;color:var(--muted);padding:40px;font-size:.9rem;">Kein Wort gefunden.</div>';return;}
+  Object.entries(groups).forEach(([sub,words])=>{
+    html+=`<div class="wb-cat-title">${sub} <span style="font-size:.7rem;font-weight:700;color:var(--muted);text-transform:none;letter-spacing:0;">(${words.length})</span></div><div class="wb-grid">`;
+    words.forEach((w,i)=>{const uid='vc-'+(w.w||'').replace(/[^a-zA-Z]/g,'')+i;const dw=(w.w||'').replace(/^(der |die |das )/,'');html+=`<div class="wb-item" id="${uid}"><div class="wb-head" onclick="toggleWB('${uid}')"><span class="wb-art-badge ${ac[w.art]||'art-n'}">${al[w.art]||''}</span><span class="wb-word-text">${dw}</span><span class="wb-short-en">${(w.en||'').split('/')[0].split('(')[0].trim()}</span><span class="wb-arrow">▶</span></div><div class="wb-body"><div class="wb-en-full">🇬🇧 ${w.en||''}</div><div class="wb-ex-sent">„${w.ex||''}"</div>${w.extra?`<div class="wb-extra">📝 ${w.extra}</div>`:''}</div></div>`;});
+    html+='</div>';
+  });
+  c.innerHTML=html;
+}
+function toggleWB(id){document.getElementById(id).classList.toggle('open');}
+function filterVocabAll(){const s=document.getElementById('v-search').value.toLowerCase();renderVocabAll(vocabCurrentCat,s);}
+function filterVocabCat(cat,btn){vocabCurrentCat=cat;document.querySelectorAll('#vocab-filters .wb-filter').forEach(b=>b.classList.remove('active'));btn.classList.add('active');renderVocabAll(cat,document.getElementById('v-search').value.toLowerCase());}
+
+
+function openSubmit(){document.getElementById('sc-overlay').classList.remove('hidden');document.getElementById('sc-modal').classList.remove('hidden');document.getElementById('sr-card').classList.add('hidden');document.getElementById('sc-name-inp').value='';setTimeout(()=>document.getElementById('sc-name-inp').focus(),100);}
+function generateCard(){const name=document.getElementById('sc-name-inp').value.trim();if(!name){document.getElementById('sc-name-inp').style.borderColor='var(--red)';return;}const pct=Math.round((score/1200)*100);const now=new Date();document.getElementById('sr-name').textContent=name;document.getElementById('sr-pts').textContent=score;document.getElementById('sr-answered').textContent=answered.size;document.getElementById('sr-pct').textContent=pct+'%';document.getElementById('sr-date').textContent=now.toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'});document.getElementById('sc-modal').classList.add('hidden');document.getElementById('sr-card').classList.remove('hidden');const studentId=sessionStorage.getItem('dm_student_id');if(studentId&&window.saveKapitelScore)window.saveKapitelScore(studentId,'a1k4',score);}
+function closeCard(){document.getElementById('sc-overlay').classList.add('hidden');}
+
+renderAll();buildVocab();
+window.addEventListener('load',function(){const ov=document.getElementById('sc-overlay');if(ov)ov.addEventListener('click',function(e){if(e.target===this)closeCard();});});
+</script>
+
+<!-- Firebase: Real Leaderboard -->
+<script type="module">
+import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js';
+import { getFirestore, collection, doc, getDoc, updateDoc, getDocs, query, orderBy, limit }
+  from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js';
+const app = initializeApp({
+  apiKey:"AIzaSyCuMSWNpOIlnqqxFmy08CfIcbvAUpTXo1E",
+  authDomain:"deutschmeistern-abc4d.firebaseapp.com",
+  projectId:"deutschmeistern-abc4d",
+  storageBucket:"deutschmeistern-abc4d.firebasestorage.app",
+  messagingSenderId:"282075407369",
+  appId:"1:282075407369:web:4a5587b4eb391e768004d8"
+});
+const db = getFirestore(app);
+window.saveKapitelScore = async function(studentId, kapitelKey, newScore) {
+  try {
+    const ref = doc(db, 'students', studentId);
+    const snap = await getDoc(ref);
+    if (!snap.exists()) return;
+    const data = snap.data();
+    const scores = data.scores || {};
+    const existing = scores[kapitelKey] || 0;
+    if (newScore <= existing) return;
+    scores[kapitelKey] = newScore;
+    const total = Object.values(scores).reduce((a,b)=>a+b,0);
+    await updateDoc(ref, { scores, totalScore: total });
+  } catch(e) { console.log('Score save error:', e); }
+};
+window.loadLeaderboard = async function() {
+  const listEl = document.getElementById('lb-list');
+  const p1n = document.getElementById('lb-p1-name');
+  const p1p = document.getElementById('lb-p1-pts');
+  const p2n = document.getElementById('lb-p2-name');
+  const p2p = document.getElementById('lb-p2-pts');
+  const p3n = document.getElementById('lb-p3-name');
+  const p3p = document.getElementById('lb-p3-pts');
+  if (listEl) listEl.innerHTML = '<div style="text-align:center;padding:24px;color:var(--muted);font-size:.85rem;">Lade Rangliste...</div>';
+  try {
+    const myId = sessionStorage.getItem('dm_student_id');
+    const q = query(collection(db, 'students'), orderBy('totalScore', 'desc'), limit(20));
+    const snap = await getDocs(q);
+    const students = [];
+    snap.forEach(d => {
+      const data = d.data();
+      if ((data.totalScore || 0) > 0) students.push({ id:d.id, name:data.name, total:data.totalScore||0, you:d.id===myId });
+    });
+    if (myId && !students.find(s=>s.id===myId)) {
+      const mySelf = sessionStorage.getItem('dm_student_name');
+      if (mySelf) students.push({ id:myId, name:mySelf, total:0, you:true });
+    }
+    students.sort((a,b) => b.total - a.total);
+    const names = ['--','--','--'], pts = ['--','--','--'];
+    students.slice(0,3).forEach((s,i) => { names[i]=s.name; pts[i]=s.total+' Pts'; });
+    if(p1n) p1n.textContent=names[0]; if(p1p) p1p.textContent=pts[0];
+    if(p2n) p2n.textContent=names[1]; if(p2p) p2p.textContent=pts[1];
+    if(p3n) p3n.textContent=names[2]; if(p3p) p3p.textContent=pts[2];
+    if (students.length === 0) {
+      listEl.innerHTML = '<div style="text-align:center;padding:30px;color:var(--muted);font-size:.88rem;">Noch keine Punkte! Mach Ubungen und gib deinen Score ab.</div>';
+      return;
+    }
+    const maxPts = Math.max(...students.map(s=>s.total), 1);
+    listEl.innerHTML = students.map((s,i) => `<div class="lb-row${s.you?' lb-you':''}">
+      <div class="lb-rank">${i+1}</div>
+      <div style="flex:1">
+        <div class="lb-name">${s.name}${s.you?' 👈':''}</div>
+        <div class="lb-bar-wrap"><div class="lb-bar" style="width:${Math.round((s.total/maxPts)*100)}%"></div></div>
+      </div>
+      <div class="lb-pts">${s.total}</div>
+    </div>`).join('');
+  } catch(e) {
+    console.log('Leaderboard error:', e);
+    if (listEl) listEl.innerHTML = '<div style="text-align:center;padding:20px;color:var(--muted);">Konnte Rangliste nicht laden.</div>';
+  }
+};
+</script>
+</body>
+</html>

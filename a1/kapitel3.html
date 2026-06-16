@@ -1,0 +1,1131 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Deutsch Meistern · A1 Kapitel 3</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f4f6ff;--white:#fff;--navy:#0f1f6f;--blue:#2563eb;--blue2:#60a5fa;--purple:#7c3aed;--green:#16a34a;--red:#dc2626;--yellow:#d97706;--teal:#0f766e;--text:#1a1a3e;--muted:#5a6a8a;--border:#c7d2fe;--sh:0 2px 14px rgba(37,99,235,.09);--r:18px;--r2:12px;}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+html{scroll-behavior:smooth;font-size:17px;}
+body{background:var(--bg);color:var(--text);font-family:'Nunito',sans-serif;overflow-x:hidden;line-height:1.6;}
+nav{position:sticky;top:0;z-index:999;background:rgba(255,255,255,.98);backdrop-filter:blur(12px);border-bottom:2px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:12px 16px;}
+.nav-left{display:flex;align-items:center;gap:10px;}
+.nav-icon{width:34px;height:34px;border-radius:8px;background:#1a1a1a;display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0;}
+.nav-title{font-size:1rem;font-weight:900;color:var(--navy);}
+.nav-sub{font-size:.68rem;color:var(--muted);font-weight:700;display:block;margin-top:-1px;}
+.score-pill{background:linear-gradient(135deg,#f59e0b,#ef4444);color:#fff;border-radius:50px;padding:6px 15px;font-weight:900;font-size:.82rem;white-space:nowrap;}
+.bnav{position:fixed;bottom:0;left:0;right:0;z-index:999;background:rgba(255,255,255,.98);backdrop-filter:blur(10px);border-top:2px solid var(--border);display:flex;}
+.bn{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:8px 2px 11px;border:none;background:none;font-family:'Nunito',sans-serif;cursor:pointer;color:var(--muted);font-size:.58rem;font-weight:800;letter-spacing:.3px;gap:3px;transition:color .15s;}
+.bn-i{font-size:1.2rem;}
+.bn.active{color:var(--blue);}
+.screen{display:none;padding:18px 16px 100px;min-height:100vh;}
+.screen.active{display:block;}
+.hero{background:linear-gradient(135deg,#1e40af,#6d28d9,#be185d);border-radius:var(--r);padding:26px 18px 28px;text-align:center;color:#fff;margin-bottom:16px;position:relative;overflow:hidden;}
+.hero::before{content:'🏙️';font-size:6rem;position:absolute;top:-10px;right:-10px;opacity:.1;}
+.hero-chip{display:inline-block;background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.35);border-radius:50px;padding:3px 14px;font-size:.68rem;font-weight:800;text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;}
+.hero h1{font-size:clamp(1.6rem,5vw,2.4rem);font-weight:900;line-height:1.1;margin-bottom:6px;}
+.hero p{font-size:.9rem;opacity:.9;line-height:1.65;max-width:320px;margin:0 auto;}
+.stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px;}
+.stat-card{background:#fff;border:2px solid var(--border);border-radius:var(--r2);padding:12px;text-align:center;box-shadow:var(--sh);}
+.stat-em{font-size:1.4rem;margin-bottom:2px;}
+.stat-n{font-family:'Space Mono',monospace;font-size:1.3rem;font-weight:700;color:var(--blue);}
+.stat-l{font-size:.64rem;color:var(--muted);text-transform:uppercase;letter-spacing:.7px;font-weight:800;}
+.topic-list{display:flex;flex-direction:column;gap:8px;}
+.t-row{background:#fff;border:2px solid var(--border);border-radius:var(--r2);padding:13px 14px;display:flex;align-items:center;gap:10px;box-shadow:var(--sh);cursor:pointer;transition:transform .12s;}
+.t-row:active{transform:scale(.98);}
+.t-ico{font-size:1.3rem;flex-shrink:0;}
+.t-main{flex:1;}
+.t-name{font-weight:900;color:var(--navy);font-size:.96rem;}
+.t-sub{font-size:.78rem;color:var(--muted);font-weight:600;margin-top:1px;}
+.t-badge{background:linear-gradient(135deg,var(--blue),var(--purple));color:#fff;border-radius:50px;padding:3px 10px;font-size:.62rem;font-weight:800;flex-shrink:0;}
+.sec-h{font-size:1.05rem;font-weight:900;color:var(--navy);margin-bottom:14px;display:flex;align-items:center;gap:8px;}
+.sec-h::after{content:'';flex:1;height:2px;background:linear-gradient(90deg,var(--border),transparent);}
+.g-tabs{display:flex;gap:6px;overflow-x:auto;padding-bottom:6px;margin-bottom:14px;-ms-overflow-style:none;scrollbar-width:none;}
+.g-tabs::-webkit-scrollbar{display:none;}
+.g-tab{flex-shrink:0;padding:9px 18px;border-radius:50px;border:2px solid var(--border);background:#fff;color:var(--muted);font-family:'Nunito',sans-serif;font-size:.82rem;font-weight:800;cursor:pointer;transition:all .15s;white-space:nowrap;}
+.g-tab.active{background:linear-gradient(135deg,var(--blue),var(--purple));color:#fff;border-color:transparent;}
+.g-panel{display:none;}
+.g-panel.active{display:block;}
+.gcard{background:#fff;border:2px solid var(--border);border-radius:var(--r);padding:20px 18px;box-shadow:var(--sh);margin-bottom:14px;}
+.gcard-title{font-size:1.2rem;font-weight:900;color:var(--navy);margin-bottom:6px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+.gcard-badge{font-size:.66rem;background:linear-gradient(135deg,var(--blue),var(--purple));color:#fff;border-radius:50px;padding:3px 11px;font-weight:800;}
+.gcard-desc{font-size:.88rem;color:var(--muted);font-weight:600;margin-bottom:14px;line-height:1.65;}
+.rule-box{background:#eff6ff;border-left:4px solid var(--blue);border-radius:0 var(--r2) var(--r2) 0;padding:14px 16px;margin-bottom:12px;font-size:.9rem;font-weight:700;color:var(--navy);line-height:1.65;}
+.tip-box{background:#fef9e7;border-left:4px solid var(--yellow);border-radius:0 var(--r2) var(--r2) 0;padding:14px 16px;margin-bottom:12px;font-size:.88rem;font-weight:700;color:#78350f;line-height:1.65;}
+.warn-box{background:#fff4f4;border-left:4px solid var(--red);border-radius:0 var(--r2) var(--r2) 0;padding:14px 16px;margin-bottom:12px;font-size:.88rem;font-weight:700;color:#9f1239;line-height:1.65;}
+.section-h{font-size:.78rem;font-weight:900;color:var(--purple);text-transform:uppercase;letter-spacing:1px;margin:18px 0 10px;border-bottom:2px solid #e0e7ff;padding-bottom:6px;}
+.conj-table{width:100%;border-collapse:collapse;margin-bottom:14px;font-size:.88rem;}
+.conj-table th{background:linear-gradient(135deg,var(--blue),var(--purple));color:#fff;padding:8px 10px;font-weight:900;text-align:left;font-size:.78rem;}
+.conj-table td{padding:8px 10px;border-bottom:1px solid #e0e7ff;font-weight:700;}
+.conj-table tr:last-child td{border-bottom:none;}
+.conj-table tr:nth-child(even) td{background:#f8faff;}
+.conj-highlight{color:var(--blue);font-weight:900;}
+.ex-grid{display:flex;flex-direction:column;gap:8px;margin-bottom:12px;}
+.ex-item{background:#f8faff;border:1px solid #e0e7ff;border-radius:10px;padding:12px 14px;font-size:.88rem;line-height:1.6;}
+.ex-de{font-weight:700;color:var(--navy);margin-bottom:2px;}
+.ex-en{color:var(--muted);font-size:.82rem;font-style:italic;margin-top:2px;}
+.ex-note{color:var(--teal);font-size:.78rem;font-weight:700;margin-top:3px;}
+.dialog-card{background:#fff;border:2px solid var(--border);border-radius:var(--r);padding:18px;margin-bottom:12px;box-shadow:var(--sh);}
+.dialog-title{font-size:.9rem;font-weight:900;color:var(--navy);margin-bottom:12px;}
+.d-bubble{display:flex;gap:8px;margin-bottom:8px;align-items:flex-start;}
+.d-bubble:last-child{margin-bottom:0;}
+.d-speaker{font-size:.7rem;font-weight:900;color:#fff;border-radius:50px;padding:3px 10px;white-space:nowrap;flex-shrink:0;margin-top:2px;}
+.sp-a{background:linear-gradient(135deg,var(--blue),var(--purple));}
+.sp-b{background:linear-gradient(135deg,var(--green),var(--teal));}
+.d-text{font-size:.88rem;font-weight:700;color:var(--navy);background:#f8faff;border-radius:10px;padding:8px 12px;line-height:1.5;flex:1;}
+/* DIRECTIONS */
+.dir-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px;}
+.dir-card{background:#fff;border:2px solid var(--border);border-radius:12px;padding:14px 12px;text-align:center;box-shadow:var(--sh);}
+.dir-arrow{font-size:2rem;margin-bottom:6px;}
+.dir-de{font-weight:900;color:var(--navy);font-size:.96rem;}
+.dir-en{font-size:.78rem;color:var(--muted);font-weight:700;margin-top:2px;}
+/* MONTHS */
+.month-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-bottom:14px;}
+.month-card{background:#fff;border:2px solid var(--border);border-radius:10px;padding:10px 8px;text-align:center;box-shadow:var(--sh);}
+.month-n{font-family:'Space Mono',monospace;font-size:.78rem;font-weight:700;color:var(--muted);}
+.month-de{font-weight:900;color:var(--navy);font-size:.88rem;}
+.month-en{font-size:.7rem;color:var(--muted);font-weight:700;margin-top:1px;}
+/* SEASONS */
+.season-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px;}
+.season-card{background:#fff;border:2px solid var(--border);border-radius:12px;padding:14px;box-shadow:var(--sh);}
+.season-ico{font-size:1.8rem;margin-bottom:6px;}
+.season-de{font-weight:900;color:var(--navy);font-size:1rem;}
+.season-en{font-size:.78rem;color:var(--muted);font-weight:700;}
+.season-months{font-size:.75rem;color:var(--teal);font-weight:700;margin-top:4px;}
+/* ARTIKEL TABLE COLORS */
+.art-m-cell{color:#1e40af;font-weight:900;}
+.art-n-cell{color:#166534;font-weight:900;}
+.art-f-cell{color:#9d174d;font-weight:900;}
+/* VOCAB */
+.search-wrap{position:relative;margin-bottom:12px;}
+.search-inp{width:100%;padding:12px 16px 12px 42px;border-radius:50px;border:2px solid var(--border);background:#fff;font-family:'Nunito',sans-serif;font-size:.92rem;font-weight:700;color:var(--navy);outline:none;}
+.search-inp:focus{border-color:var(--blue);}
+.search-icon{position:absolute;left:14px;top:50%;transform:translateY(-50%);font-size:.95rem;color:var(--muted);}
+.vocab-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-bottom:10px;}
+@media(min-width:500px){.vocab-grid{grid-template-columns:repeat(3,1fr);}}
+.vword{background:#f8faff;border:1px solid #e0e7ff;border-radius:10px;padding:11px 12px;cursor:pointer;transition:border-color .15s;}
+.vword.open{border-color:var(--blue);background:#eff6ff;}
+.vw-top{display:flex;align-items:center;gap:7px;}
+.vw-art{font-size:.64rem;font-weight:900;border-radius:4px;padding:2px 6px;}
+.art-m{background:#dbeafe;color:#1e40af;}.art-f{background:#fce7f3;color:#9d174d;}.art-n{background:#dcfce7;color:#166534;}.art-v{background:#f3e8ff;color:#6b21a8;}.art-adj{background:#ffedd5;color:#9a3412;}.art-ph{background:#fef3c7;color:#92400e;}
+.vw-word{font-weight:900;color:var(--navy);font-size:.9rem;}
+.vw-details{display:none;margin-top:8px;border-top:1px solid #e0e7ff;padding-top:8px;}
+.vword.open .vw-details{display:block;}
+.vw-en{font-weight:700;color:var(--green);font-size:.86rem;}
+.vw-ex{font-size:.8rem;color:var(--muted);font-style:italic;margin-top:4px;line-height:1.5;}
+/* EXERCISES */
+.ex-tabs{display:flex;gap:6px;margin-bottom:14px;}
+.ex-tab{flex:1;padding:10px 4px;border-radius:50px;border:2px solid var(--border);background:#fff;color:var(--muted);font-family:'Nunito',sans-serif;font-size:.8rem;font-weight:800;cursor:pointer;transition:all .15s;text-align:center;}
+.ex-tab.active{background:linear-gradient(135deg,var(--blue),var(--purple));color:#fff;border-color:transparent;}
+.ex-panel{display:none;}.ex-panel.active{display:block;}
+.qcard{background:#fff;border:2px solid var(--border);border-radius:var(--r);padding:18px 16px;margin-bottom:12px;box-shadow:var(--sh);}
+.q-meta{display:flex;align-items:center;gap:7px;margin-bottom:10px;flex-wrap:wrap;}
+.q-num{font-family:'Space Mono',monospace;font-size:.72rem;font-weight:700;background:#e0e7ff;color:var(--blue);border-radius:5px;padding:3px 8px;}
+.q-type{font-size:.66rem;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;}
+.q-status{margin-left:auto;font-size:1rem;}
+.q-text{font-weight:700;font-size:.95rem;color:var(--navy);margin-bottom:12px;line-height:1.6;}
+.passage{background:#f8faff;border:1px solid #e0e7ff;border-radius:10px;padding:14px 16px;font-size:.86rem;line-height:1.7;color:var(--text);margin-bottom:10px;}
+.opts{display:flex;flex-direction:column;gap:8px;}
+.opt{width:100%;padding:12px 16px;border-radius:11px;border:2px solid var(--border);background:#f8faff;font-family:'Nunito',sans-serif;font-size:.9rem;font-weight:700;color:var(--text);cursor:pointer;text-align:left;transition:all .15s;}
+.opt.correct{border-color:var(--green);background:#dcfce7;color:var(--green);}
+.opt.wrong{border-color:var(--red);background:#fff1f2;color:var(--red);}
+.opt.disabled{cursor:default;}
+.word-bank{display:flex;flex-wrap:wrap;gap:7px;margin-top:10px;}
+.wchip{padding:9px 14px;border-radius:10px;border:2px solid var(--border);background:#f8faff;font-family:'Nunito',sans-serif;font-size:.88rem;font-weight:700;cursor:pointer;transition:all .15s;color:var(--navy);}
+.wchip.used{opacity:.3;cursor:default;}
+.ans-area{min-height:46px;background:#eff6ff;border:2px dashed var(--blue2);border-radius:11px;padding:10px 14px;font-size:.9rem;font-weight:700;color:var(--navy);margin:10px 0;line-height:1.6;}
+.hint-t{font-size:.82rem;color:var(--muted);font-weight:600;margin-bottom:6px;}
+.inline-inp{border:none;border-bottom:2.5px solid var(--blue);background:transparent;font-family:'Nunito',sans-serif;font-size:.95rem;font-weight:700;color:var(--navy);padding:3px 5px;width:130px;outline:none;}
+.inline-inp.correct{border-color:var(--green);color:var(--green);}
+.inline-inp.wrong{border-color:var(--red);color:var(--red);}
+.fb{font-size:.85rem;font-weight:700;min-height:0;margin-top:8px;line-height:1.5;}
+.fb.ok{color:var(--green);}.fb.err{color:var(--red);}
+.q-actions{display:flex;gap:8px;margin-top:10px;}
+.btn-check{background:linear-gradient(135deg,var(--blue),var(--purple));color:#fff;border:none;border-radius:10px;padding:10px 20px;font-family:'Nunito',sans-serif;font-size:.86rem;font-weight:800;cursor:pointer;}
+.btn-reset{background:#f1f5f9;color:var(--muted);border:2px solid var(--border);border-radius:10px;padding:10px 14px;font-family:'Nunito',sans-serif;font-size:.86rem;font-weight:800;cursor:pointer;}
+/* LB */
+.lb-header{background:linear-gradient(135deg,#1e40af,#6d28d9);border-radius:var(--r);padding:20px 16px;text-align:center;color:#fff;margin-bottom:14px;}
+.podium{display:flex;align-items:flex-end;justify-content:center;gap:8px;margin-bottom:16px;height:130px;}
+.pod{display:flex;flex-direction:column;align-items:center;justify-content:flex-end;border-radius:var(--r2) var(--r2) 0 0;}
+.pod-1{width:90px;height:110px;background:linear-gradient(135deg,#f59e0b,#d97706);}
+.pod-2{width:78px;height:85px;background:linear-gradient(135deg,#94a3b8,#64748b);}
+.pod-3{width:70px;height:65px;background:linear-gradient(135deg,#b45309,#92400e);}
+.pod-inner{padding:6px 4px 8px;text-align:center;color:#fff;}
+.pod-rank{font-size:1.2rem;}.pod-name{font-size:.65rem;font-weight:900;}.pod-pts{font-family:'Space Mono',monospace;font-size:.7rem;font-weight:700;}
+.lb-row{background:#fff;border:2px solid var(--border);border-radius:var(--r2);padding:10px 12px;display:flex;align-items:center;gap:10px;margin-bottom:7px;box-shadow:var(--sh);}
+.lb-rank{font-family:'Space Mono',monospace;font-size:.75rem;font-weight:700;color:var(--muted);width:22px;}
+.lb-name{flex:1;font-weight:800;color:var(--navy);font-size:.92rem;}.lb-level{font-size:.65rem;font-weight:700;color:var(--purple);}
+.lb-pts{font-family:'Space Mono',monospace;font-size:.88rem;font-weight:700;color:var(--blue);}
+.lb-bar-wrap{width:100%;background:#e0e7ff;border-radius:50px;height:5px;margin-top:3px;}
+.lb-bar{height:5px;background:linear-gradient(90deg,var(--blue),var(--purple));border-radius:50px;}
+.lb-you{border-color:var(--blue);background:#eff6ff;}
+/* WB */
+.wb-filter{padding:7px 14px;border-radius:50px;border:2px solid var(--border);background:#fff;color:var(--muted);font-family:'Nunito',sans-serif;font-size:.78rem;font-weight:800;cursor:pointer;transition:all .15s;white-space:nowrap;}
+.wb-filter.active{background:linear-gradient(135deg,var(--blue),var(--purple));color:#fff;border-color:transparent;}
+.wb-cat-title{font-size:.78rem;font-weight:900;color:var(--purple);text-transform:uppercase;letter-spacing:1px;margin:18px 0 10px;border-bottom:2px solid #e0e7ff;padding-bottom:6px;}
+.wb-grid{display:flex;flex-direction:column;gap:8px;margin-bottom:4px;}
+.wb-item{background:#fff;border:2px solid var(--border);border-radius:12px;overflow:hidden;box-shadow:var(--sh);cursor:pointer;}
+.wb-item.open{border-color:var(--blue);}
+.wb-head{display:flex;align-items:center;gap:10px;padding:12px 14px;}
+.wb-art-badge{font-size:.64rem;font-weight:900;border-radius:5px;padding:3px 7px;flex-shrink:0;}
+.wb-word-text{font-weight:900;color:var(--navy);font-size:.95rem;flex:1;}
+.wb-short-en{font-size:.78rem;color:var(--muted);font-weight:600;}
+.wb-arrow{font-size:.8rem;color:var(--muted);transition:transform .2s;}
+.wb-item.open .wb-arrow{transform:rotate(90deg);}
+.wb-body{display:none;padding:0 14px 14px;border-top:1px solid var(--border);}
+.wb-item.open .wb-body{display:block;}
+.wb-en-full{font-size:.88rem;font-weight:700;color:var(--green);margin-bottom:6px;padding-top:10px;}
+.wb-ex-sent{font-size:.82rem;color:var(--muted);font-style:italic;line-height:1.6;margin-bottom:4px;}
+.wb-extra{font-size:.78rem;color:var(--teal);font-weight:700;}
+.float-score{position:fixed;bottom:72px;right:14px;z-index:900;background:linear-gradient(135deg,#f59e0b,#ef4444);color:#fff;border-radius:50px;padding:8px 14px;font-weight:900;font-size:.8rem;box-shadow:0 4px 20px rgba(239,68,68,.4);}
+.conf-piece{position:fixed;width:8px;height:8px;border-radius:2px;z-index:9999;pointer-events:none;animation:fall 1.2s ease-in forwards;}
+@keyframes fall{0%{transform:translateY(-20px) rotate(0);opacity:1;}100%{transform:translateY(100vh) rotate(720deg);opacity:0;}}
+.sc-overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:2000;display:flex;align-items:center;justify-content:center;padding:20px;}
+.sc-overlay.hidden{display:none;}
+.sc-modal.hidden{display:none;}
+.sr-card.hidden{display:none;}
+.sc-modal{background:#fff;border-radius:20px;padding:28px 24px;max-width:360px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,.25);}
+.sc-modal h2{font-size:1.15rem;font-weight:900;color:var(--navy);margin-bottom:4px;}
+.sc-modal p{font-size:.82rem;color:var(--muted);margin-bottom:16px;line-height:1.5;}
+.sc-inp{width:100%;padding:11px 14px;border:2px solid var(--border);border-radius:10px;font-family:'Nunito',sans-serif;font-size:.95rem;font-weight:700;color:var(--navy);outline:none;margin-bottom:12px;}
+.sc-inp:focus{border-color:var(--blue);}
+.sc-btn{width:100%;padding:11px;background:linear-gradient(135deg,var(--blue),var(--purple));color:#fff;border:none;border-radius:10px;font-family:'Nunito',sans-serif;font-size:.9rem;font-weight:900;cursor:pointer;}
+.sr-card{background:#fff;border-radius:20px;padding:28px 24px;max-width:360px;width:100%;text-align:center;}
+.sr-logo{display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:18px;}
+.sr-logo-icon{width:38px;height:38px;border-radius:9px;background:#1a1a1a;display:flex;align-items:center;justify-content:center;font-size:1.3rem;}
+.sr-logo-name{font-size:.95rem;font-weight:900;color:var(--navy);}
+.sr-logo-by{font-size:.6rem;color:var(--muted);text-transform:uppercase;letter-spacing:1.5px;font-weight:700;}
+.sr-divider{height:1px;background:var(--border);margin:0 0 18px;}
+.sr-student{font-size:1.1rem;font-weight:900;color:var(--navy);margin-bottom:2px;}
+.sr-label{font-size:.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:1px;font-weight:700;margin-bottom:16px;}
+.sr-score-ring{width:110px;height:110px;border-radius:50%;background:linear-gradient(135deg,var(--blue),var(--purple));display:flex;flex-direction:column;align-items:center;justify-content:center;margin:0 auto 14px;color:#fff;}
+.sr-pts{font-family:'Space Mono',monospace;font-size:1.6rem;font-weight:700;line-height:1;}
+.sr-pts-lbl{font-size:.6rem;text-transform:uppercase;letter-spacing:1px;opacity:.85;margin-top:2px;}
+.sr-chapter{display:inline-block;background:#eff6ff;color:var(--blue);border-radius:50px;padding:4px 14px;font-size:.72rem;font-weight:800;margin-bottom:14px;}
+.sr-stats{display:flex;gap:8px;justify-content:center;margin-bottom:16px;}
+.sr-stat{background:#f8faff;border:1px solid var(--border);border-radius:10px;padding:8px 12px;text-align:center;}
+.sr-stat-n{font-family:'Space Mono',monospace;font-size:1rem;font-weight:700;color:var(--navy);}
+.sr-stat-l{font-size:.6rem;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;font-weight:700;}
+.sr-footer{font-size:.7rem;color:var(--muted);border-top:1px solid var(--border);padding-top:12px;line-height:1.6;}
+.sr-actions{display:flex;gap:8px;margin-top:12px;}
+.sr-close-btn{flex:1;padding:10px;border-radius:10px;border:2px solid var(--border);background:#f8faff;font-family:'Nunito',sans-serif;font-size:.82rem;font-weight:800;color:var(--muted);cursor:pointer;}
+.sr-new-btn{flex:1;padding:10px;border-radius:10px;border:none;background:linear-gradient(135deg,var(--blue),var(--purple));font-family:'Nunito',sans-serif;font-size:.82rem;font-weight:800;color:#fff;cursor:pointer;}
+@media(min-width:900px){.screen{padding:24px 28px 40px;max-width:820px;margin:0 auto;}}
+/* MEHR DRAWER */
+.mehr-overlay{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:1000;display:none;}
+.mehr-overlay.open{display:block;}
+.mehr-sheet{position:fixed;bottom:0;left:0;right:0;z-index:1001;background:#fff;border-radius:20px 20px 0 0;padding:14px 16px 30px;box-shadow:0 -4px 30px rgba(0,0,0,.15);transform:translateY(100%);transition:transform .28s cubic-bezier(.4,0,.2,1);}
+.mehr-sheet.open{transform:translateY(0);}
+.mehr-handle{width:36px;height:4px;background:var(--border);border-radius:2px;margin:0 auto 14px;}
+.mehr-title{font-size:.78rem;font-weight:900;color:var(--purple);text-transform:uppercase;letter-spacing:1.2px;margin-bottom:14px;}
+.mehr-grid{display:grid;gap:8px;margin-bottom:8px;}
+.mehr-btn{background:#f8faff;border:2px solid var(--border);border-radius:14px;padding:14px 8px;display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer;font-family:'Nunito',sans-serif;transition:border-color .15s;}
+.mehr-btn:active{border-color:var(--blue);}
+.mehr-btn-i{font-size:1.6rem;}
+.mehr-btn-l{font-size:.7rem;font-weight:800;color:var(--navy);}
+</style>
+</head>
+<body>
+<nav>
+  <div class="nav-left">
+    <div class="nav-icon">🇩🇪</div>
+    <div><div class="nav-title">Deutsch Meistern</div><span class="nav-sub">by Anshuka · A1 Kapitel 3</span></div>
+  </div>
+  <div class="score-pill" id="score-pill">⭐ 0 Pts</div>
+</nav>
+<div class="float-score" id="float-score">⭐ <span id="float-pts">0</span></div>
+<div class="bnav">
+  <button class="bn active" onclick="goTo('home',this)"><span class="bn-i">🏠</span>Home</button>
+  <button class="bn" onclick="goTo('grammar',this)"><span class="bn-i">📚</span>Grammatik</button>
+  <button class="bn" onclick="goTo('exercises',this)"><span class="bn-i">✏️</span>Übungen</button>
+  <button class="bn" onclick="openSubmit()"><span class="bn-i">📋</span>Score</button>
+  <button class="bn" onclick="openMehr()"><span class="bn-i">•••</span>Mehr</button>
+</div>
+
+<!-- MEHR DRAWER -->
+<div class="mehr-overlay" id="mehr-overlay" onclick="closeMehr()"></div>
+<div class="mehr-sheet" id="mehr-sheet">
+  <div class="mehr-handle"></div>
+  <div class="mehr-title">Mehr Inhalte</div>
+  <div class="mehr-grid" style="grid-template-columns:repeat(4,1fr);">
+    <button class="mehr-btn" onclick="closeMehr();goTo('vocab',null)"><span class="mehr-btn-i">🔤</span><span class="mehr-btn-l">Vokabeln</span></button>
+    <button class="mehr-btn" onclick="closeMehr();goTo('leaderboard',null)"><span class="mehr-btn-i">🏆</span><span class="mehr-btn-l">Rangliste</span></button>
+    <button class="mehr-btn" onclick="closeMehr();goTo('woerterbuch',null)"><span class="mehr-btn-i">📖</span><span class="mehr-btn-l">Wörterbuch</span></button>
+    <button class="mehr-btn" onclick="closeMehr();goTo('lesen',null)"><span class="mehr-btn-i">📰</span><span class="mehr-btn-l">Lesen</span></button>
+  </div>
+</div>
+
+<!-- HOME -->
+<div class="screen active" id="s-home">
+  <div class="hero">
+    <div class="hero-chip">Deutsch Meistern · by Anshuka</div>
+    <h1>In Hamburg 🏙️</h1>
+    <p>A1 Kapitel 3: Orte, Wegbeschreibung, Verkehrsmittel, Monate und Jahreszeiten!</p>
+  </div>
+  <div class="stat-grid">
+    <div class="stat-card"><div class="stat-em">📚</div><div class="stat-n">5</div><div class="stat-l">Grammatik</div></div>
+    <div class="stat-card"><div class="stat-em">✏️</div><div class="stat-n">120</div><div class="stat-l">Übungen</div></div>
+    <div class="stat-card"><div class="stat-em">🔤</div><div class="stat-n">60</div><div class="stat-l">Vokabeln</div></div>
+    <div class="stat-card"><div class="stat-em">📖</div><div class="stat-n">150+</div><div class="stat-l">Wörterbuch</div></div>
+  </div>
+  <div class="sec-h">📖 Themen dieses Kapitels</div>
+  <div class="topic-list">
+    <div class="t-row" onclick="goToGram(0)"><span class="t-ico">🏛️</span><div class="t-main"><div class="t-name">Plätze und Gebäude</div><div class="t-sub">Bahnhof, Kirche, Rathaus, Museum, Hafen...</div></div><span class="t-badge">Grammatik</span></div>
+    <div class="t-row" onclick="goToGram(1)"><span class="t-ico">🏷️</span><div class="t-main"><div class="t-name">Artikel: ein, der, kein</div><div class="t-sub">unbestimmt · bestimmt · Negationsartikel</div></div><span class="t-badge">Grammatik</span></div>
+    <div class="t-row" onclick="goToGram(2)"><span class="t-ico">🗺️</span><div class="t-main"><div class="t-name">Wegbeschreibung</div><div class="t-sub">links · rechts · geradeaus · Imperativ mit Sie</div></div><span class="t-badge">Grammatik</span></div>
+    <div class="t-row" onclick="goToGram(3)"><span class="t-ico">🚌</span><div class="t-main"><div class="t-name">Verkehrsmittel</div><div class="t-sub">Bus · Fahrrad · U-Bahn · zu Fuß · kein / keine</div></div><span class="t-badge">Grammatik</span></div>
+    <div class="t-row" onclick="goToGram(4)"><span class="t-ico">🌸</span><div class="t-main"><div class="t-name">Monate und Jahreszeiten</div><div class="t-sub">Januar bis Dezember · Frühling/Sommer/Herbst/Winter</div></div><span class="t-badge">Grammatik</span></div>
+    <div class="t-row" onclick="navTo('exercises')"><span class="t-ico">✏️</span><div class="t-main"><div class="t-name">120 Übungen</div><div class="t-sub">Lesen, Sprechen und Schreiben</div></div><span class="t-badge">Üben</span></div>
+    <div class="t-row" onclick="navTo('lesen')"><span class="t-ico">📰</span><div class="t-main"><div class="t-name">Lesetexte</div><div class="t-sub">3 Texte · Artikel, Imperativ, Monate</div></div><span class="t-badge">Lesen</span></div>
+  </div>
+</div>
+
+<!-- GRAMMAR -->
+<div class="screen" id="s-grammar">
+  <div class="sec-h">📚 Grammatik</div>
+  <div class="g-tabs">
+    <button class="g-tab active" onclick="switchGTab(0,this)">📍 Nomen und Orte</button>
+    <button class="g-tab" onclick="switchGTab(1,this)">🏷️ Artikel: ein · der · kein</button>
+    <button class="g-tab" onclick="switchGTab(2,this)">↗️ Imperativ mit Sie</button>
+    <button class="g-tab" onclick="switchGTab(3,this)">❌ Negationsartikel: kein</button>
+    <button class="g-tab" onclick="switchGTab(4,this)">📅 Monate und Jahreszeiten</button>
+  </div>
+
+  <!-- PANEL 0: ORTE -->
+  <div class="g-panel active" id="gp-0">
+    <div class="gcard">
+      <div class="gcard-title">Plätze und Gebäude <span class="gcard-badge">Orte benennen</span></div>
+      <div class="gcard-desc">Learn the German names for places in a city. These are key vocabulary for navigating, describing locations, and asking for directions.</div>
+      <div class="rule-box">📌 Was ist das? Das ist <strong>der</strong> Bahnhof. / Das ist <strong>die</strong> Kirche. / Das ist <strong>das</strong> Rathaus.<br>📌 Adjektiv mit sein: Der Turm ist 132 Meter <strong>hoch</strong>. Der Hafen ist <strong>groß</strong>.</div>
+
+      <div class="section-h">🏙️ Orte in Hamburg und Deutschland</div>
+      <div class="ex-grid">
+        <div class="ex-item"><div class="ex-de"><span class="art-m-cell">der</span> Bahnhof</div><div class="ex-en">train station</div><div class="ex-note">720 Züge fahren täglich. · Das ist der Hamburger Hauptbahnhof.</div></div>
+        <div class="ex-item"><div class="ex-de"><span class="art-m-cell">der</span> Hafen</div><div class="ex-en">port / harbour</div><div class="ex-note">12.000 Schiffe pro Jahr! Die Schiffe fahren in 175 Länder.</div></div>
+        <div class="ex-item"><div class="ex-de"><span class="art-n-cell">das</span> Rathaus</div><div class="ex-en">town hall / city hall</div><div class="ex-note">Das Rathaus ist über 120 Jahre alt und 111 Meter breit.</div></div>
+        <div class="ex-item"><div class="ex-de"><span class="art-f-cell">die</span> Kirche</div><div class="ex-en">church</div><div class="ex-note">Der Michel ist die Kirche und das Symbol von Hamburg.</div></div>
+        <div class="ex-item"><div class="ex-de"><span class="art-n-cell">das</span> Konzerthaus / die Elbphilharmonie</div><div class="ex-en">concert hall</div><div class="ex-note">Kosten: 866 Millionen Euro. Im ersten Jahr: 600 Konzerte.</div></div>
+        <div class="ex-item"><div class="ex-de"><span class="art-f-cell">die</span> Kunsthalle</div><div class="ex-en">art gallery / art hall</div><div class="ex-note">Die Kunsthalle ist rechts vom Bahnhof.</div></div>
+        <div class="ex-item"><div class="ex-de"><span class="art-n-cell">das</span> Museum</div><div class="ex-en">museum</div><div class="ex-note">Das Museum "Haus der Kunst" ist in München.</div></div>
+        <div class="ex-item"><div class="ex-de"><span class="art-m-cell">der</span> Fluss</div><div class="ex-en">river</div><div class="ex-note">Der Fluss heißt Alster (kein See!). Die Elbe fließt zum Hafen.</div></div>
+        <div class="ex-item"><div class="ex-de"><span class="art-m-cell">der</span> Turm</div><div class="ex-en">tower</div><div class="ex-note">Der Turm des Michels ist 132 m hoch. Der Turm im Rathaus ist 112 m hoch.</div></div>
+        <div class="ex-item"><div class="ex-de"><span class="art-f-cell">die</span> Brücke</div><div class="ex-en">bridge</div><div class="ex-note">Die Köhlbrandbrücke ist eine bekannte Brücke in Hamburg.</div></div>
+        <div class="ex-item"><div class="ex-de"><span class="art-n-cell">das</span> Hotel</div><div class="ex-en">hotel</div><div class="ex-note">Zum Hotel "Michel", bitte! · Das Hotel heißt "Alster".</div></div>
+        <div class="ex-item"><div class="ex-de"><span class="art-m-cell">der</span> Park</div><div class="ex-en">park</div><div class="ex-note">Der Englische Garten in München ist sehr groß.</div></div>
+        <div class="ex-item"><div class="ex-de"><span class="art-m-cell">der</span> Markt</div><div class="ex-en">market</div><div class="ex-note">Der Viktualienmarkt in München ist sehr berühmt.</div></div>
+        <div class="ex-item"><div class="ex-de"><span class="art-f-cell">die</span> Straße</div><div class="ex-en">street</div><div class="ex-note">Die Straße heißt Müllerstraße. Gehen Sie die Straße entlang.</div></div>
+      </div>
+
+      <div class="section-h">💬 Fragen zu Orten</div>
+      <div class="ex-grid">
+        <div class="ex-item"><div class="ex-de">Was ist das?</div><div class="ex-en">What is that?</div><div class="ex-note">Das ist der Hafen / eine Kirche / das Rathaus.</div></div>
+        <div class="ex-item"><div class="ex-de">Ist das eine Kirche?</div><div class="ex-en">Is that a church?</div><div class="ex-note">Ja, das ist die Michaeliskirche. / Nein, das ist das Rathaus.</div></div>
+        <div class="ex-item"><div class="ex-de">Wie heißt der See?</div><div class="ex-en">What is the lake called?</div><div class="ex-note">Das ist kein See, das ist ein Fluss. Der Fluss heißt Alster.</div></div>
+        <div class="ex-item"><div class="ex-de">Der Turm ist 132 Meter hoch.</div><div class="ex-en">The tower is 132 metres tall.</div><div class="ex-note">Adjektiv mit sein: ist + hoch / groß / alt / lang</div></div>
+      </div>
+
+      <div class="tip-box">💡 Gut gesagt: Grüßen in D-A-CH (Germany, Austria, Switzerland):<br>Deutschland: <strong>Guten Tag</strong> / <strong>Hallo</strong><br>Nord-Deutschland (Hamburg): <strong>Moin!</strong><br>Österreich: <strong>Grüß Gott!</strong><br>Schweiz: <strong>Grüezi!</strong></div>
+    </div>
+  </div>
+
+  <!-- PANEL 1: ARTIKEL -->
+  <div class="g-panel" id="gp-1">
+    <div class="gcard">
+      <div class="gcard-title">Artikel: ein, der, kein <span class="gcard-badge">unbestimmt / bestimmt / Negation</span></div>
+      <div class="gcard-desc">German has three types of articles: indefinite (ein/eine), definite (der/das/die), and negation (kein/keine). This is one of the most important grammar topics!</div>
+      <div class="rule-box">📌 Unbestimmt (new/unknown): Das ist <strong>ein</strong> Hafen. · Das ist <strong>eine</strong> Kirche.<br>📌 Bestimmt (known): Das ist <strong>der</strong> Hafen von Hamburg. · <strong>Die</strong> Kirche heißt Michel.<br>📌 Negation (it is NOT): Das ist <strong>kein</strong> Bus. · Das ist <strong>keine</strong> U-Bahn.</div>
+
+      <div class="section-h">📊 Alle drei Artikel im Vergleich</div>
+      <table class="conj-table">
+        <tr><th>Gender</th><th>unbestimmt (ein)</th><th>bestimmt (der)</th><th>Negation (kein)</th></tr>
+        <tr><td><strong>maskulin</strong></td><td>Das ist <strong>ein</strong> Hafen.</td><td>Das ist <strong>der</strong> Hafen.</td><td>Das ist <strong>kein</strong> Bus.</td></tr>
+        <tr><td><strong>neutrum</strong></td><td>Das ist <strong>ein</strong> Hotel.</td><td><strong>Das</strong> Hotel heißt "Linde".</td><td>Das ist <strong>kein</strong> Rathaus.</td></tr>
+        <tr><td><strong>feminin</strong></td><td>Das ist <strong>eine</strong> Brücke.</td><td><strong>Die</strong> Brücke heißt "Alsterbrücke".</td><td>Das ist <strong>keine</strong> Straße.</td></tr>
+        <tr><td><strong>Plural</strong></td><td>Das sind Schiffe. (kein ein!)</td><td><strong>Die</strong> Schiffe sind im Hafen.</td><td>Das sind <strong>keine</strong> Autos.</td></tr>
+      </table>
+      <div class="warn-box">⚠️ KEY RULE: Use unbestimmt (ein/eine) when first introducing something NEW or UNKNOWN. Switch to bestimmt (der/das/die) once it's known to both speaker and listener!<br>Das ist <strong>ein</strong> Hafen. (you're telling them for the first time)<br>Der <strong>Hafen</strong> ist sehr groß. (now both know which harbour)</div>
+
+      <div class="section-h">❌ Negationsartikel: kein / keine</div>
+      <div class="ex-grid">
+        <div class="ex-item"><div class="ex-de">Das ist <strong>kein</strong> Bus. → Das ist eine U-Bahn!</div><div class="ex-en">maskulin (der Bus) → kein Bus</div></div>
+        <div class="ex-item"><div class="ex-de">Das ist <strong>kein</strong> Fahrrad. → Das ist ein Motorrad!</div><div class="ex-en">neutrum (das Fahrrad) → kein Fahrrad</div></div>
+        <div class="ex-item"><div class="ex-de">Das ist <strong>keine</strong> U-Bahn. → Das ist ein Bus!</div><div class="ex-en">feminin (die U-Bahn) → keine U-Bahn</div></div>
+        <div class="ex-item"><div class="ex-de">Das sind <strong>keine</strong> Autos. → Das sind Busse!</div><div class="ex-en">Plural → keine Autos</div></div>
+        <div class="ex-item"><div class="ex-de">Das ist <strong>kein</strong> Bahnhof. → Das ist ein Museum!</div><div class="ex-en">maskulin → kein Bahnhof</div></div>
+        <div class="ex-item"><div class="ex-de">Das ist <strong>keine</strong> Fahrkarte! Oh nein!</div><div class="ex-en">feminin (die Fahrkarte) → keine Fahrkarte</div></div>
+      </div>
+      <div class="tip-box">💡 kein/keine follows the SAME pattern as ein/eine!<br>ein Bus → kein Bus · eine Straße → keine Straße · ein Hotel → kein Hotel<br>Plural: keine Autos / keine Busse / keine Kirchen</div>
+
+      <div class="section-h">🎨 Adjektiv mit sein</div>
+      <div class="rule-box">📌 Pattern: Der/Das/Die + Nomen + ist/sind + Adjektiv<br>Der Turm <strong>ist</strong> 132 Meter <strong>hoch</strong>. · Der Hafen <strong>ist</strong> sehr <strong>groß</strong>.<br>Das Rathaus <strong>ist</strong> 120 Jahre <strong>alt</strong>.</div>
+      <div class="ex-grid">
+        <div class="ex-item"><div class="ex-de">Der Turm ist 132 Meter <strong>hoch</strong>.</div><div class="ex-en">The tower is 132 metres tall.</div></div>
+        <div class="ex-item"><div class="ex-de">Der Hafen ist sehr <strong>groß</strong>.</div><div class="ex-en">The harbour is very large.</div></div>
+        <div class="ex-item"><div class="ex-de">Das Rathaus ist über 120 Jahre <strong>alt</strong>.</div><div class="ex-en">The town hall is over 120 years old.</div></div>
+        <div class="ex-item"><div class="ex-de">Die Brücke ist 111 Meter <strong>breit</strong>.</div><div class="ex-en">The bridge is 111 metres wide.</div></div>
+        <div class="ex-item"><div class="ex-de">Der Englische Garten ist sehr <strong>riesig</strong>.</div><div class="ex-en">The English Garden is enormous.</div></div>
+        <div class="ex-item"><div class="ex-de">Das ist ganz <strong>einfach</strong>!</div><div class="ex-en">That is very simple / easy!</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PANEL 2: WEGBESCHREIBUNG -->
+  <div class="g-panel" id="gp-2">
+    <div class="gcard">
+      <div class="gcard-title">Wegbeschreibung <span class="gcard-badge">Imperativ mit Sie</span></div>
+      <div class="gcard-desc">Asking for and giving directions is a key real-life skill. In formal German you use the Imperativ mit Sie. The verb comes FIRST in an imperative sentence!</div>
+      <div class="rule-box">📌 Imperativ mit Sie: Verb steht auf Position 1!<br>gehen → <strong>Gehen</strong> Sie links! · fahren → <strong>Fahren</strong> Sie geradeaus!<br>📌 Entschuldigung, wo ist bitte ...? Das ist ganz einfach. Gehen Sie rechts/links/geradeaus und dann ... Da ist ...</div>
+
+      <div class="section-h">🧭 Richtungen (Directions)</div>
+      <div class="dir-grid">
+        <div class="dir-card"><div class="dir-arrow">←</div><div class="dir-de">links</div><div class="dir-en">left</div></div>
+        <div class="dir-card"><div class="dir-arrow">→</div><div class="dir-de">rechts</div><div class="dir-en">right</div></div>
+        <div class="dir-card"><div class="dir-arrow">↑</div><div class="dir-de">geradeaus</div><div class="dir-en">straight ahead</div></div>
+        <div class="dir-card"><div class="dir-arrow">↩️</div><div class="dir-de">dann</div><div class="dir-en">then</div></div>
+        <div class="dir-card"><div class="dir-arrow">📍</div><div class="dir-de">Da ist ...</div><div class="dir-en">There it is ...</div></div>
+        <div class="dir-card"><div class="dir-arrow">🔄</div><div class="dir-de">hier rechts / links</div><div class="dir-en">right/left here</div></div>
+      </div>
+
+      <div class="section-h">⚙️ Imperativ mit Sie</div>
+      <table class="conj-table">
+        <tr><th>Infinitiv</th><th>Imperativ (Sie)</th><th>Beispiel</th></tr>
+        <tr><td>gehen</td><td><span class="conj-highlight">Gehen Sie</span></td><td>Gehen Sie links!</td></tr>
+        <tr><td>fahren</td><td><span class="conj-highlight">Fahren Sie</span></td><td>Fahren Sie geradeaus!</td></tr>
+        <tr><td>nehmen</td><td><span class="conj-highlight">Nehmen Sie</span></td><td>Nehmen Sie die U-Bahn!</td></tr>
+        <tr><td>gehen durch</td><td><span class="conj-highlight">Gehen Sie durch</span></td><td>Gehen Sie durch das Isartor!</td></tr>
+      </table>
+      <div class="tip-box">💡 Imperativ mit Sie is formed from the infinitive + Sie:<br>gehen → Gehen Sie! · fahren → Fahren Sie! · nehmen → Nehmen Sie!<br>The verb ALWAYS comes first : no subject pronoun before it!</div>
+
+      <div class="section-h">💬 Wegbeschreibung Dialoge</div>
+      <div class="dialog-card">
+        <div class="dialog-title">💬 Im Taxi: Zum Hotel "Michel"</div>
+        <div class="d-bubble"><span class="d-speaker sp-a">Gast</span><div class="d-text">Guten Tag. Zum Hotel "Michel", bitte.</div></div>
+        <div class="d-bubble"><span class="d-speaker sp-b">Fahrer</span><div class="d-text">Moin! Hotel "Michel", okay. Kennen Sie Hamburg?</div></div>
+        <div class="d-bubble"><span class="d-speaker sp-a">Gast</span><div class="d-text">Nein.</div></div>
+        <div class="d-bubble"><span class="d-speaker sp-b">Fahrer</span><div class="d-text">Na, das ist der Bahnhof. Und das hier rechts ist die Kunsthalle. Das ist ein Museum.</div></div>
+        <div class="d-bubble"><span class="d-speaker sp-a">Gast</span><div class="d-text">Interessant. Und wie heißt der See?</div></div>
+        <div class="d-bubble"><span class="d-speaker sp-b">Fahrer</span><div class="d-text">See? Das ist kein See, das ist ein Fluss. Der Fluss heißt Alster!</div></div>
+        <div class="d-bubble"><span class="d-speaker sp-a">Gast</span><div class="d-text">Ach so. Und was ist das? Ist das eine Kirche?</div></div>
+        <div class="d-bubble"><span class="d-speaker sp-b">Fahrer</span><div class="d-text">Nein, das ist das Rathaus. Ah ja, hier ist eine Kirche. Wir sagen "der Michel". Und da ist auch schon das Hotel.</div></div>
+      </div>
+      <div class="dialog-card">
+        <div class="dialog-title">💬 Nach dem Weg fragen</div>
+        <div class="d-bubble"><span class="d-speaker sp-a">Gast</span><div class="d-text">Entschuldigung, wo ist bitte der Park?</div></div>
+        <div class="d-bubble"><span class="d-speaker sp-b">Einheimischer</span><div class="d-text">Das ist ganz einfach. Gehen Sie rechts und dann geradeaus. Da ist der Park.</div></div>
+        <div class="d-bubble"><span class="d-speaker sp-a">Gast</span><div class="d-text">Vielen Dank!</div></div>
+        <div class="d-bubble"><span class="d-speaker sp-b">Einheimischer</span><div class="d-text">Bitte, gern.</div></div>
+      </div>
+      <div class="dialog-card">
+        <div class="dialog-title">💬 Zum Viktualienmarkt in München</div>
+        <div class="d-bubble"><span class="d-speaker sp-a">Anna</span><div class="d-text">Entschuldigung, wo ist der Viktualienmarkt?</div></div>
+        <div class="d-bubble"><span class="d-speaker sp-b">Einheimischer</span><div class="d-text">Gehen Sie vor dem Marienplatz nach links, dann durch das Isartor, immer geradeaus, die Straße bis zum Isartor. Dann sehen Sie den Viktualienmarkt.</div></div>
+        <div class="d-bubble"><span class="d-speaker sp-a">Anna</span><div class="d-text">Ja, genau. Vielen Dank!</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PANEL 3: VERKEHRSMITTEL -->
+  <div class="g-panel" id="gp-3">
+    <div class="gcard">
+      <div class="gcard-title">Verkehrsmittel <span class="gcard-badge">Transport und kein/keine</span></div>
+      <div class="gcard-desc">Learn German words for transport, and practise the Negationsartikel kein/keine with them. Also: how to ask about transport!</div>
+
+      <div class="section-h">🚌 Verkehrsmittel (Means of transport)</div>
+      <div class="ex-grid">
+        <div class="ex-item"><div class="ex-de"><span class="art-m-cell">der</span> Bus</div><div class="ex-en">bus</div><div class="ex-note">Ach nee, kein Bus. Also schnell! Wo ist die U-Bahn?</div></div>
+        <div class="ex-item"><div class="ex-de"><span class="art-n-cell">das</span> Fahrrad</div><div class="ex-en">bicycle</div><div class="ex-note">Oje, kein Fahrrad! Schnell, da ist ein Bus!</div></div>
+        <div class="ex-item"><div class="ex-de"><span class="art-f-cell">die</span> U-Bahn</div><div class="ex-en">underground / metro</div><div class="ex-note">Die U-Bahn ist schnell und bequem.</div></div>
+        <div class="ex-item"><div class="ex-de"><span class="art-m-cell">der</span> Zug</div><div class="ex-en">train</div><div class="ex-note">In 2 Stunden nach Berlin mit dem Zug.</div></div>
+        <div class="ex-item"><div class="ex-de"><span class="art-n-cell">das</span> Auto</div><div class="ex-en">car</div><div class="ex-note">Das ist kein Auto! Das ist ein Bus!</div></div>
+        <div class="ex-item"><div class="ex-de"><span class="art-n-cell">das</span> Taxi</div><div class="ex-en">taxi</div><div class="ex-note">Nehmen Sie ein Taxi zum Hotel Michel!</div></div>
+        <div class="ex-item"><div class="ex-de"><span class="art-f-cell">die</span> Fahrkarte</div><div class="ex-en">ticket</div><div class="ex-note">Oh nein! Keine Fahrkarte?! Jetzt aber schnell!</div></div>
+        <div class="ex-item"><div class="ex-de">zu Fuß gehen</div><div class="ex-en">to go on foot / walk</div><div class="ex-note">Ich gehe zu Fuß. Jetzt aber schnell!</div></div>
+      </div>
+
+      <div class="section-h">❌ kein/keine mit Verkehrsmitteln</div>
+      <div class="ex-grid">
+        <div class="ex-item"><div class="ex-de">Kein Bus! → das ist <strong>kein</strong> Bus. (maskulin: der Bus → kein Bus)</div><div class="ex-en">Ach nee, kein Bus. Also schnell! Wo ist die U-Bahn?</div></div>
+        <div class="ex-item"><div class="ex-de">Kein Fahrrad! → das ist <strong>kein</strong> Fahrrad. (neutrum: das Fahrrad → kein Fahrrad)</div><div class="ex-en">Oje, kein Fahrrad! Schnell, da ist ein Bus!</div></div>
+        <div class="ex-item"><div class="ex-de">Keine Fahrkarte! → das ist <strong>keine</strong> Fahrkarte. (feminin: die Fahrkarte → keine Fahrkarte)</div><div class="ex-en">Oh nein! Keine Fahrkarte?! So ein Pech!</div></div>
+        <div class="ex-item"><div class="ex-de">Keine Autos! → das sind <strong>keine</strong> Autos. (Plural)</div><div class="ex-en">Das sind keine Autos, das sind Busse!</div></div>
+      </div>
+
+      <div class="tip-box">💡 "Kein Glück!" = No luck! (from the story "Kein Glück?!")<br>kein Glück (neutrum: das Glück) · kein Bus · kein Fahrrad · keine U-Bahn · keine Fahrkarte<br>Today kein Test! So ein Glück! = Today no test! What luck!</div>
+
+      <div class="section-h">💬 Ist das...? Nein, das ist kein/keine...</div>
+      <div class="ex-grid">
+        <div class="ex-item"><div class="ex-de">Ist das ein Bus? Nein, das ist <strong>kein</strong> Bus, das ist eine U-Bahn.</div><div class="ex-en">Is that a bus? No, that's not a bus, that's a metro.</div></div>
+        <div class="ex-item"><div class="ex-de">Ist das ein Auto? Nein, das ist <strong>kein</strong> Auto, das ist ein Fahrrad.</div><div class="ex-en">Is that a car? No, that's not a car, that's a bicycle.</div></div>
+        <div class="ex-item"><div class="ex-de">Ist das eine Kirche? Nein, das ist <strong>keine</strong> Kirche, das ist ein Rathaus.</div><div class="ex-en">Is that a church? No, that's not a church, that's a town hall.</div></div>
+        <div class="ex-item"><div class="ex-de">Sind das Busse? Nein, das sind <strong>keine</strong> Busse, das sind Züge.</div><div class="ex-en">Are those buses? No, those aren't buses, those are trains.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PANEL 4: MONATE -->
+  <div class="g-panel" id="gp-4">
+    <div class="gcard">
+      <div class="gcard-title">Monate und Jahreszeiten <span class="gcard-badge">im + Monat / in der + Jahreszeit</span></div>
+      <div class="gcard-desc">Learn all 12 months and the 4 seasons. Key preposition: "im" before months and most seasons. Months are all maskulin (der)!</div>
+      <div class="rule-box">📌 Alle Monate sind maskulin: <strong>der</strong> Januar, der Februar, der März...<br>📌 Wann? Im + Monat: <strong>Im Januar</strong>, im Februar, im März...<br>📌 Jahreszeit: <strong>im</strong> Frühling / Sommer / Herbst / Winter</div>
+
+      <div class="section-h">📅 Die 12 Monate</div>
+      <div class="month-grid">
+        <div class="month-card"><div class="month-n">01</div><div class="month-de">Januar</div><div class="month-en">January</div></div>
+        <div class="month-card"><div class="month-n">02</div><div class="month-de">Februar</div><div class="month-en">February</div></div>
+        <div class="month-card"><div class="month-n">03</div><div class="month-de">März</div><div class="month-en">March</div></div>
+        <div class="month-card"><div class="month-n">04</div><div class="month-de">April</div><div class="month-en">April</div></div>
+        <div class="month-card"><div class="month-n">05</div><div class="month-de">Mai</div><div class="month-en">May</div></div>
+        <div class="month-card"><div class="month-n">06</div><div class="month-de">Juni</div><div class="month-en">June</div></div>
+        <div class="month-card"><div class="month-n">07</div><div class="month-de">Juli</div><div class="month-en">July</div></div>
+        <div class="month-card"><div class="month-n">08</div><div class="month-de">August</div><div class="month-en">August</div></div>
+        <div class="month-card"><div class="month-n">09</div><div class="month-de">September</div><div class="month-en">September</div></div>
+        <div class="month-card"><div class="month-n">10</div><div class="month-de">Oktober</div><div class="month-en">October</div></div>
+        <div class="month-card"><div class="month-n">11</div><div class="month-de">November</div><div class="month-en">November</div></div>
+        <div class="month-card"><div class="month-n">12</div><div class="month-de">Dezember</div><div class="month-en">December</div></div>
+      </div>
+
+      <div class="section-h">🌸 Die vier Jahreszeiten</div>
+      <div class="season-grid">
+        <div class="season-card"><div class="season-ico">🌸</div><div class="season-de">der Frühling</div><div class="season-en">spring</div><div class="season-months">März · April · Mai</div></div>
+        <div class="season-card"><div class="season-ico">☀️</div><div class="season-de">der Sommer</div><div class="season-en">summer</div><div class="season-months">Juni · Juli · August</div></div>
+        <div class="season-card"><div class="season-ico">🍂</div><div class="season-de">der Herbst</div><div class="season-en">autumn / fall</div><div class="season-months">September · Oktober · November</div></div>
+        <div class="season-card"><div class="season-ico">❄️</div><div class="season-de">der Winter</div><div class="season-en">winter</div><div class="season-months">Dezember · Januar · Februar</div></div>
+      </div>
+      <div class="tip-box">💡 Alle Jahreszeiten sind maskulin: <strong>der</strong> Frühling, der Sommer, der Herbst, der Winter<br>Mit "im": im Frühling, im Sommer, im Herbst, im Winter<br>Auch mit Monaten: im Januar, im Februar, im März...</div>
+
+      <div class="section-h">💬 Wann machst du das? Im...</div>
+      <div class="ex-grid">
+        <div class="ex-item"><div class="ex-de">Ich gehe <strong>im Sommer</strong> schwimmen.</div><div class="ex-en">I go swimming in summer.</div></div>
+        <div class="ex-item"><div class="ex-de">Ich fahre Fahrrad <strong>im Frühling</strong>.</div><div class="ex-en">I cycle in spring.</div></div>
+        <div class="ex-item"><div class="ex-de">Ich gehe <strong>im Herbst</strong> ins Museum.</div><div class="ex-en">I go to the museum in autumn.</div></div>
+        <div class="ex-item"><div class="ex-de">Ich reise <strong>im Winter</strong> nicht gern.</div><div class="ex-en">I don't like travelling in winter.</div></div>
+        <div class="ex-item"><div class="ex-de">Das Hamburgfest ist <strong>im Juli</strong>.</div><div class="ex-en">The Hamburg festival is in July.</div></div>
+        <div class="ex-item"><div class="ex-de">Das Theaterfestival ist vom 12. bis 18. <strong>Oktober</strong>.</div><div class="ex-en">The theatre festival is from October 12th to 18th.</div></div>
+      </div>
+
+      <div class="section-h">🎭 Events in Hamburg</div>
+      <div class="ex-grid">
+        <div class="ex-item"><div class="ex-de">Hamburger Theater-Festival · 12. bis 18. Oktober</div><div class="ex-en">Theatre from Germany, Austria and Switzerland. Tickets ab 12,50 Euro.</div></div>
+        <div class="ex-item"><div class="ex-de">Orchester aus aller Welt · 25. Oktober · Elbphilharmonie</div><div class="ex-en">Das Orchester des Champs-Elysees. Konzert ab 29 Euro.</div></div>
+        <div class="ex-item"><div class="ex-de">Kino für alle · 27. September bis 6. Oktober · Filmfestival</div><div class="ex-en">40.000 Filmfans, 100 Filme, deutsche und internationale Produktionen.</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- EXERCISES -->
+<div class="screen" id="s-exercises">
+  <div class="sec-h">✏️ Übungen</div>
+  <div class="ex-tabs">
+    <button class="ex-tab active" onclick="switchExTab(0,this)">📖 Lesen</button>
+    <button class="ex-tab" onclick="switchExTab(1,this)">🗣️ Sprechen</button>
+    <button class="ex-tab" onclick="switchExTab(2,this)">✍️ Schreiben</button>
+  </div>
+  <div class="ex-panel active" id="ep-0"><div id="lesen-set"></div></div>
+  <div class="ex-panel" id="ep-1"><div id="sprechen-set"></div></div>
+  <div class="ex-panel" id="ep-2"><div id="schreiben-set"></div></div>
+</div>
+
+<!-- VOCAB + WÖRTERBUCH MERGED -->
+<div class="screen" id="s-vocab">
+  <div class="sec-h">🔤 Vokabeln und Wörterbuch</div>
+  <p style="font-size:.88rem;color:var(--muted);margin-bottom:14px;line-height:1.6;">Alle Vokabeln zu A1 Kapitel 3. Tippe auf ein Wort für Details.</p>
+  <div class="search-wrap"><span class="search-icon">🔍</span><input class="search-inp" id="v-search" placeholder="Wort suchen..." oninput="filterVocabAll()" autocomplete="off"></div>
+  <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px;" id="vocab-filters">
+    <button class="wb-filter active" onclick="filterVocabCat('all',this)">Alle</button>
+    <button class="wb-filter" onclick="filterVocabCat('Nomen',this)">🏷️ Nomen</button>
+    <button class="wb-filter" onclick="filterVocabCat('Verben',this)">⚡ Verben</button>
+    <button class="wb-filter" onclick="filterVocabCat('Adjektive',this)">🎨 Adjektive</button>
+    <button class="wb-filter" onclick="filterVocabCat('Ausdrücke',this)">💬 Ausdrücke</button>
+  </div>
+  <div id="vocab-container"></div>
+</div>
+
+<!-- LEADERBOARD -->
+<div class="screen" id="s-leaderboard">
+  <div class="lb-header"><h2 style="font-size:1.4rem;font-weight:900;margin-bottom:4px;">🏆 Rangliste</h2><p style="font-size:.8rem;opacity:.85;">Alle Kapitel · Gesamtpunktzahl</p></div>
+  <div class="podium">
+    <div class="pod pod-2"><div class="pod-inner"><div class="pod-rank">🥈</div><div class="pod-name" id="lb-p2-name">--</div><div class="pod-pts" id="lb-p2-pts">--</div></div></div>
+    <div class="pod pod-1"><div class="pod-inner"><div class="pod-rank">🥇</div><div class="pod-name" id="lb-p1-name">--</div><div class="pod-pts" id="lb-p1-pts">--</div></div></div>
+    <div class="pod pod-3"><div class="pod-inner"><div class="pod-rank">🥉</div><div class="pod-name" id="lb-p3-name">--</div><div class="pod-pts" id="lb-p3-pts">--</div></div></div>
+  </div>
+  <div id="lb-list"></div>
+</div>
+
+
+<!-- LESEN SCREEN -->
+<div class="screen" id="s-lesen">
+  <div class="sec-h">📰 Lesetexte</div>
+  <p style="font-size:.88rem;color:var(--muted);margin-bottom:16px;line-height:1.6;">Drei längere Texte mit allen Grammatikthemen aus Kapitel 3. Lies die Texte und beantworte die Fragen!</p>
+
+  <!-- TEXT 1 -->
+  <div class="gcard" style="margin-bottom:18px;">
+    <div class="gcard-title" style="font-size:1rem;">📖 Text 1: Eine Stadtführung in Hamburg</div>
+    <div style="font-size:.75rem;font-weight:800;color:var(--purple);text-transform:uppercase;letter-spacing:1px;margin-bottom:12px;">Grammatik: Bestimmter und unbestimmter Artikel · Adjektiv mit sein · Nomen und Orte</div>
+
+    <div class="passage" style="margin-bottom:14px;">
+      Hamburg ist eine große und bekannte Stadt in Deutschland. Der Hafen ist das Herz von Hamburg. Er ist sehr groß : über 12.000 Schiffe fahren pro Jahr in den Hafen. Die Schiffe fahren in 175 Länder. Bis zum Meer sind es von Hamburg circa 100 km. Die Schiffe fahren auf dem Fluss Elbe.<br><br>
+      Ein Tourist fragt: "Was ist das?" Der Taxifahrer antwortet: "Das ist der Bahnhof von Hamburg. Er ist sehr alt." Der Tourist sagt: "Interessant! Und das dort : ist das eine Kirche?" Der Fahrer lacht: "Nein, das ist kein Museum und keine Kirche. Das ist die Kunsthalle : eine Kunsthalle ist ein Gebäude für Kunst."<br><br>
+      Dann sagt der Fahrer: "Das ist der Michel. Der Michel ist die Hauptkirche von Hamburg und das Symbol der Stadt. Der Turm ist 132 Meter hoch. Da sieht man den Hafen." Der Tourist sagt: "Ah, und das dort : ist das ein See?" Der Fahrer antwortet: "Das ist kein See! Das ist ein Fluss. Der Fluss heißt Alster."<br><br>
+      Das Rathaus ist auch sehr bekannt. Es ist über 120 Jahre alt und 111 Meter breit. Der Turm in der Mitte ist 112 Meter hoch. Die Elbphilharmonie ist das neue Konzerthaus. Die Bauzeit war 9 Jahre. Im ersten Jahr gab es 4,5 Millionen Besucher und 600 Konzerte.
+    </div>
+
+    <div class="section-h">❓ Fragen zum Text 1</div>
+    <div id="lesen1-set"></div>
+  </div>
+
+  <!-- TEXT 2 -->
+  <div class="gcard" style="margin-bottom:18px;">
+    <div class="gcard-title" style="font-size:1rem;">📖 Text 2: Kein Glück heute!</div>
+    <div style="font-size:.75rem;font-weight:800;color:var(--purple);text-transform:uppercase;letter-spacing:1px;margin-bottom:12px;">Grammatik: Negationsartikel kein/keine · Verkehrsmittel · Imperativ mit Sie</div>
+
+    <div class="passage" style="margin-bottom:14px;">
+      Es ist Montag, 8 Uhr. Anna möchte zur Universität fahren. Sie geht aus dem Haus. Oh nein! Da ist kein Fahrrad! Jemand hat das Fahrrad weggenommen. "Kein Fahrrad! Das ist kein Glück!", sagt Anna.<br><br>
+      Anna geht zur Bushaltestelle. Sie wartet fünf Minuten. Dann kommt der Bus. Aber der Fahrer sagt: "Haben Sie eine Fahrkarte?" Anna sucht in ihrer Tasche. Keine Fahrkarte! "Oje, das ist keine Fahrkarte, das ist ein Kassenbon!", sagt der Fahrer. Anna muss aussteigen.<br><br>
+      Ein Mann auf der Straße sagt: "Entschuldigung, wie komme ich zur U-Bahn?" Anna antwortet: "Das ist ganz einfach! Gehen Sie geradeaus, dann links, und dann sehen Sie die U-Bahn-Station." Der Mann sagt: "Vielen Dank!" Anna denkt: "Eine U-Bahn! Super! Ich nehme auch die U-Bahn."<br><br>
+      Anna geht zur U-Bahn-Station. Da ist kein Automat! "Keine U-Bahn-Karte, kein Bus, kein Fahrrad : heute ist wirklich kein Glück!", sagt sie. Am Ende geht Anna zu Fuß zur Universität. Das sind 3 Kilometer : aber heute kein Problem! Sie kommt pünktlich an.
+    </div>
+
+    <div class="section-h">❓ Fragen zum Text 2</div>
+    <div id="lesen2-set"></div>
+  </div>
+
+  <!-- TEXT 3 -->
+  <div class="gcard" style="margin-bottom:18px;">
+    <div class="gcard-title" style="font-size:1rem;">📖 Text 3: Das Jahr in Hamburg</div>
+    <div style="font-size:.75rem;font-weight:800;color:var(--purple);text-transform:uppercase;letter-spacing:1px;margin-bottom:12px;">Grammatik: Monate und Jahreszeiten · im + Monat · Aktivitäten</div>
+
+    <div class="passage" style="margin-bottom:14px;">
+      Hamburg ist eine wunderbare Stadt : zu jeder Jahreszeit!<br><br>
+      Im <strong>Winter</strong> : im Dezember, Januar und Februar : ist Hamburg kalt, aber sehr gemütlich. Im Dezember gibt es den Weihnachtsmarkt am Rathaus. Er ist wunderschön! Im Januar und Februar reisen viele Hamburger in den Süden, denn es ist grau und regnerisch.<br><br>
+      Im <strong>Frühling</strong> : im März, April und Mai : wird Hamburg grün und bunt. Die Parks sind schön. Im April fahren viele Leute Fahrrad am Hafen. Im Mai ist das Hafenfest: viele Schiffe, viele Menschen, viel Musik!<br><br>
+      Im <strong>Sommer</strong> : im Juni, Juli und August : ist Hamburg warm. Viele Touristen kommen im Juli und August. Im Juli gibt es das Filmfestival "Kino für alle" (27. September bis 6. Oktober). 40.000 Filmfans sehen über 100 Filme. Im August schwimmen viele Menschen im Stadtpark.<br><br>
+      Im <strong>Herbst</strong> : im September, Oktober und November : gibt es viele Festivals in Hamburg. Das Hamburger Theater-Festival ist vom 12. bis 18. Oktober. Deutschsprachige Theater aus Deutschland, Österreich und der Schweiz kommen nach Hamburg. Tickets gibt es ab 12,50 Euro. Im November ist das Wetter wieder grau : aber Hamburg ist immer schön!
+    </div>
+
+    <div class="section-h">❓ Fragen zum Text 3</div>
+    <div id="lesen3-set"></div>
+  </div>
+</div>
+
+<!-- SCORE CARD -->
+<div class="sc-overlay hidden" id="sc-overlay">
+  <div class="sc-modal" id="sc-modal">
+    <h2>📋 Submit Your Score</h2>
+    <p>Enter your name to generate your score card. Share the screenshot with Anshuka!</p>
+    <input class="sc-inp" id="sc-name-inp" placeholder="Your name..." maxlength="40" autocomplete="off">
+    <button class="sc-btn" onclick="generateCard()">Generate My Score Card ✨</button>
+  </div>
+  <div class="sr-card hidden" id="sr-card">
+    <div class="sr-logo"><div class="sr-logo-icon">🇩🇪</div><div><div class="sr-logo-name">Deutsch Meistern</div><div class="sr-logo-by">by Anshuka</div></div></div>
+    <div class="sr-divider"></div>
+    <div class="sr-student" id="sr-name">Student</div>
+    <div class="sr-label">Score Card</div>
+    <div class="sr-score-ring"><div class="sr-pts" id="sr-pts">0</div><div class="sr-pts-lbl">points</div></div>
+    <div class="sr-chapter">A1 · Kapitel 3 · In Hamburg</div>
+    <div class="sr-stats">
+      <div class="sr-stat"><div class="sr-stat-n" id="sr-answered">0</div><div class="sr-stat-l">Answered</div></div>
+      <div class="sr-stat"><div class="sr-stat-n" id="sr-pct">0%</div><div class="sr-stat-l">Score %</div></div>
+      <div class="sr-stat"><div class="sr-stat-n">120</div><div class="sr-stat-l">Max pts</div></div>
+    </div>
+    <div class="sr-footer">Completed on <strong id="sr-date"></strong><br>Platform: <strong>Deutsch Meistern by Anshuka</strong></div>
+    <div class="sr-actions">
+      <button class="sr-close-btn" onclick="closeCard()">Close</button>
+      <button class="sr-new-btn" onclick="closeCard()">Keep Learning 🚀</button>
+    </div>
+  </div>
+</div>
+
+<script>
+let score=0,answered=new Set(),orderState={};
+function goTo(id,btn){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.querySelectorAll('.bn').forEach(b=>b.classList.remove('active'));document.getElementById('s-'+id).classList.add('active');if(btn)btn.classList.add('active');if(id==='lesen')setTimeout(renderLesenTexts,50);if(id==='leaderboard'&&window.loadLeaderboard)window.loadLeaderboard();}
+function openMehr(){document.getElementById('mehr-overlay').classList.add('open');document.getElementById('mehr-sheet').classList.add('open');}
+function closeMehr(){document.getElementById('mehr-overlay').classList.remove('open');document.getElementById('mehr-sheet').classList.remove('open');}
+function navTo(id){const btn=document.querySelector(".bn[onclick*='"+id+"']");goTo(id,btn);}
+function goToGram(idx){navTo('grammar');setTimeout(()=>switchGTab(idx,document.querySelectorAll('.g-tab')[idx]),80);}
+function switchGTab(idx,btn){document.querySelectorAll('.g-panel').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.g-tab').forEach(t=>t.classList.remove('active'));document.getElementById('gp-'+idx).classList.add('active');if(btn)btn.classList.add('active');}
+function switchExTab(idx,btn){document.querySelectorAll('.ex-panel').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.ex-tab').forEach(t=>t.classList.remove('active'));document.getElementById('ep-'+idx).classList.add('active');if(btn)btn.classList.add('active');}
+function addScore(pts){score+=pts;document.getElementById('score-pill').textContent='⭐ '+score+' Pts';document.getElementById('float-pts').textContent=score;if(score>0&&score%100===0)confetti();}
+function confetti(){const c=['#ef4444','#f59e0b','#10b981','#3b82f6','#8b5cf6','#ec4899'];for(let i=0;i<30;i++){const d=document.createElement('div');d.className='conf-piece';d.style.cssText=`left:${Math.random()*100}vw;top:0;background:${c[Math.floor(Math.random()*c.length)]};animation-delay:${Math.random()*.5}s;animation-duration:${.8+Math.random()*.6}s;`;document.body.appendChild(d);setTimeout(()=>d.remove(),1500);}}
+
+const lesenQ=[
+  {t:'mc',q:'Was ist "der Hafen" auf Englisch?',opts:['the hotel','the harbour / port','the park','the railway'],ans:1},
+  {t:'mc',q:'Welcher Artikel hat "Rathaus"?',opts:['der','das','die','ein'],ans:1},
+  {t:'mc',q:'Welcher Artikel hat "Kirche"?',opts:['der','das','die','ein'],ans:2},
+  {t:'mc',q:'Welcher Artikel hat "Bahnhof"?',opts:['der','das','die','ein'],ans:0},
+  {t:'mc',q:'Wie sagt man "straight ahead" auf Deutsch?',opts:['links','rechts','geradeaus','dann'],ans:2},
+  {t:'mc',q:'Was bedeutet "links"?',opts:['right','straight','left','back'],ans:2},
+  {t:'mc',q:'Das ist kein Bus. Das ist ___.',opts:['eine U-Bahn','ein U-Bahn','keine U-Bahn','der Bus'],ans:0},
+  {t:'mc',q:'Das ist keine Straße. Das ist ___.',opts:['eine Brücke','ein Brücke','keine Brücke','der Brücke'],ans:0},
+  {t:'mc',q:'Was ist die Negationsform von "ein Bus"?',opts:['nicht Bus','kein Bus','keine Bus','nein Bus'],ans:1},
+  {t:'mc',q:'Was ist die Negationsform von "eine Kirche"?',opts:['kein Kirche','keine Kirche','nicht Kirche','kein eine Kirche'],ans:1},
+  {t:'mc',q:'Wie heißt der 3. Monat auf Deutsch?',opts:['Mai','Februar','März','April'],ans:2},
+  {t:'mc',q:'In welcher Jahreszeit sind März, April und Mai?',opts:['Sommer','Herbst','Winter','Frühling'],ans:3},
+  {t:'mc',q:'In welcher Jahreszeit sind Juni, Juli und August?',opts:['Frühling','Sommer','Herbst','Winter'],ans:1},
+  {t:'mc',q:'Wie sagt man "im Oktober" auf Englisch?',opts:['on October','at October','in October','by October'],ans:2},
+  {t:'mc',q:'Welche Jahreszeit kommt nach dem Sommer?',opts:['Frühling','Winter','Herbst','März'],ans:2},
+  {t:'passage',p:'Guten Tag. Zum Hotel "Michel", bitte. Moin! Hotel "Michel", okay. Kennen Sie Hamburg? Nein. Na, das ist der Bahnhof. Und das hier rechts ist die Kunsthalle. Das ist ein Museum.',q:'Was ist die Kunsthalle?',opts:['Ein Hotel','Ein Bahnhof','Ein Museum','Eine Kirche'],ans:2},
+  {t:'passage',p:'Guten Tag. Zum Hotel "Michel", bitte. Moin! Hotel "Michel", okay. Kennen Sie Hamburg? Nein. Na, das ist der Bahnhof. Und das hier rechts ist die Kunsthalle. Das ist ein Museum.',q:'Wo ist die Kunsthalle?',opts:['Links','Rechts','Geradeaus','Am Bahnhof'],ans:1},
+  {t:'mc',q:'Was ist der Imperativ von "gehen" mit Sie?',opts:['Sie gehen!','Gehen Sie!','Gehen sie!','Sie gehen links!'],ans:1},
+  {t:'mc',q:'Was ist der Imperativ von "fahren" mit Sie?',opts:['Fahrt Sie!','Sie fahren!','Fahren Sie!','Fahren sie!'],ans:2},
+  {t:'mc',q:'In welchem Satz steht das Verb im Imperativ auf Position 1?',opts:['Sie gehen links.','Bitte gehen Sie links!','Links gehen Sie!','Sie bitte links gehen!'],ans:1},
+  {t:'mc',q:'Was bedeutet "Moin!"?',opts:['Good evening (North Germany)','Hello (North Germany)','Goodbye (South Germany)','Good morning (formal)'],ans:1},
+  {t:'mc',q:'Wie sagt man Hallo in Österreich?',opts:['Moin!','Grüezi!','Grüß Gott!','Hoi!'],ans:2},
+  {t:'mc',q:'Das Rathaus ist ___ 120 Jahre alt.',opts:['über','unter','genau','nur'],ans:0},
+  {t:'mc',q:'Der Turm ist 132 Meter ___.',opts:['breit','lang','hoch','alt'],ans:2},
+  {t:'mc',q:'Was bedeutet "zu Fuß gehen"?',opts:['to drive','to cycle','to take the bus','to walk'],ans:3},
+  {t:'passage',p:'Das Hamburger Theater-Festival findet vom 12. bis 18. Oktober statt. Zum Festival kommen deutschsprachige Theater aus Deutschland, Österreich und der Schweiz. Tickets gibt es ab 12,50 Euro.',q:'Wann ist das Theaterfestival?',opts:['Im Juli','Im Oktober','Im Dezember','Im April'],ans:1},
+  {t:'passage',p:'Das Hamburger Theater-Festival findet vom 12. bis 18. Oktober statt. Zum Festival kommen deutschsprachige Theater aus Deutschland, Österreich und der Schweiz. Tickets gibt es ab 12,50 Euro.',q:'Woher kommen die Theater?',opts:['Nur aus Deutschland','Aus D, A und der Schweiz','Aus aller Welt','Aus Hamburg'],ans:1},
+  {t:'mc',q:'Was ist "das Fahrrad" auf Englisch?',opts:['motorbike','car','bicycle','bus'],ans:2},
+  {t:'mc',q:'Welcher Monat kommt nach September?',opts:['August','November','Oktober','Dezember'],ans:2},
+  {t:'mc',q:'Wie sagt man "in December" auf Deutsch?',opts:['am Dezember','zu Dezember','im Dezember','in Dezember'],ans:2},
+  {t:'mc',q:'Was bedeutet "Entschuldigung, wo ist bitte..."?',opts:['Thank you very much!','Excuse me, where is ... please?','Goodbye!','How are you?'],ans:1},
+  {t:'mc',q:'Was antwortet man auf "Vielen Dank"?',opts:['Kein Problem!','Bitte, gern!','Ja genau!','Ja super!'],ans:1},
+  {t:'mc',q:'Das ist ___ See, das ist ein Fluss.',opts:['ein','eine','kein','keine'],ans:2},
+  {t:'mc',q:'Das sind ___ Autos. (Negation)',opts:['kein','keine','nicht','nein'],ans:1},
+  {t:'mc',q:'Welche Jahreszeit ist Dezember, Januar, Februar?',opts:['Frühling','Sommer','Herbst','Winter'],ans:3},
+  {t:'mc',q:'Wie heißt das Symbol von Hamburg?',opts:['Der Hafen','Der Michel','Das Rathaus','Die Alster'],ans:1},
+  {t:'mc',q:'Wie viele Schiffe fahren pro Jahr in den Hamburger Hafen?',opts:['1.200','12.000','120.000','1.200.000'],ans:1},
+  {t:'mc',q:'Was ist "die Kunsthalle"?',opts:['A concert hall','An art gallery','A sports hall','A shopping centre'],ans:1},
+  {t:'mc',q:'Was bedeutet "bekannt"?',opts:['expensive','modern','well-known','boring'],ans:2},
+  {t:'mc',q:'Was ist "die Elbphilharmonie"?',opts:['Eine Brücke','Ein Museum','Ein Konzerthaus','Ein Bahnhof'],ans:2},
+  {t:'mc',q:'Das ist ganz ___! (very easy)',opts:['schwierig','einfach','teuer','weit'],ans:1},
+  {t:'mc',q:'"Also hier rechts/links/geradeaus und dann..." ist eine ___.',opts:['Frage','Wegbeschreibung','Begrüssung','Verabschiedung'],ans:1},
+  {t:'mc',q:'Welcher Monat ist Nummer 8?',opts:['Juni','Juli','August','September'],ans:2},
+  {t:'mc',q:'Was bedeutet "riesig"?',opts:['small','normal','enormous/huge','pretty'],ans:2},
+  {t:'mc',q:'Welcher Artikel hat "Fluss"?',opts:['das','die','der','ein'],ans:2},
+];
+
+const sprechenQ=[
+  {t:'order',q:'Bilde den Satz:',words:['Das','ist','der','Bahnhof.'],correct:'Das ist der Bahnhof.'},
+  {t:'order',q:'Bilde den Satz:',words:['Das','ist','eine','Kirche.'],correct:'Das ist eine Kirche.'},
+  {t:'order',q:'Bilde den Satz:',words:['Das','ist','kein','Bus.'],correct:'Das ist kein Bus.'},
+  {t:'order',q:'Bilde den Satz:',words:['Das','ist','keine','Straße.'],correct:'Das ist keine Straße.'},
+  {t:'order',q:'Bilde den Satz:',words:['Das','sind','keine','Autos.'],correct:'Das sind keine Autos.'},
+  {t:'order',q:'Bilde den Satz:',words:['Gehen','Sie','links!'],correct:'Gehen Sie links!'},
+  {t:'order',q:'Bilde den Satz:',words:['Fahren','Sie','geradeaus!'],correct:'Fahren Sie geradeaus!'},
+  {t:'order',q:'Bilde den Satz:',words:['Entschuldigung,','wo','ist','bitte','das','Rathaus?'],correct:'Entschuldigung, wo ist bitte das Rathaus?'},
+  {t:'order',q:'Bilde den Satz:',words:['Das','ist','ganz','einfach.'],correct:'Das ist ganz einfach.'},
+  {t:'order',q:'Bilde den Satz:',words:['Gehen','Sie','rechts','und','dann','geradeaus.'],correct:'Gehen Sie rechts und dann geradeaus.'},
+  {t:'order',q:'Bilde den Satz:',words:['Da','ist','das','Hotel.'],correct:'Da ist das Hotel.'},
+  {t:'order',q:'Bilde den Satz:',words:['Vielen','Dank!'],correct:'Vielen Dank!'},
+  {t:'order',q:'Bilde den Satz:',words:['Bitte,','gern.'],correct:'Bitte, gern.'},
+  {t:'order',q:'Bilde den Satz:',words:['Ich','gehe','im','Sommer','schwimmen.'],correct:'Ich gehe im Sommer schwimmen.'},
+  {t:'order',q:'Bilde den Satz:',words:['Im','Frühling','fahre','ich','Fahrrad.'],correct:'Im Frühling fahre ich Fahrrad.'},
+  {t:'order',q:'Bilde den Satz:',words:['Ich','reise','nicht','gern','im','Winter.'],correct:'Ich reise nicht gern im Winter.'},
+  {t:'order',q:'Bilde den Satz:',words:['Der','Turm','ist','132','Meter','hoch.'],correct:'Der Turm ist 132 Meter hoch.'},
+  {t:'order',q:'Bilde den Satz:',words:['Der','Hafen','ist','sehr','groß.'],correct:'Der Hafen ist sehr groß.'},
+  {t:'order',q:'Bilde den Satz:',words:['Das','Rathaus','ist','über','120','Jahre','alt.'],correct:'Das Rathaus ist über 120 Jahre alt.'},
+  {t:'order',q:'Bilde den Satz:',words:['Ist','das','ein','Hotel?'],correct:'Ist das ein Hotel?'},
+  {t:'order',q:'Bilde den Satz:',words:['Nein,','das','ist','kein','Hotel,','das','ist','eine','Kirche.'],correct:'Nein, das ist kein Hotel, das ist eine Kirche.'},
+  {t:'order',q:'Bilde den Satz:',words:['Ja,','das','ist','die','Michaeliskirche.'],correct:'Ja, das ist die Michaeliskirche.'},
+  {t:'order',q:'Bilde den Satz:',words:['Gehen','Sie','bitte','zum','Hotel','Michel.'],correct:'Gehen Sie bitte zum Hotel Michel.'},
+  {t:'order',q:'Bilde den Satz:',words:['Nehmen','Sie','die','U-Bahn!'],correct:'Nehmen Sie die U-Bahn!'},
+  {t:'order',q:'Bilde den Satz:',words:['Ich','gehe','zu','Fuß.'],correct:'Ich gehe zu Fuß.'},
+  {t:'order',q:'Bilde den Satz:',words:['Oh','nein!','Keine','Fahrkarte!'],correct:'Oh nein! Keine Fahrkarte!'},
+  {t:'order',q:'Bilde den Satz:',words:['Das','ist','kein','See,','das','ist','ein','Fluss.'],correct:'Das ist kein See, das ist ein Fluss.'},
+  {t:'order',q:'Bilde den Satz:',words:['Der','Fluss','heißt','Alster.'],correct:'Der Fluss heißt Alster.'},
+  {t:'order',q:'Bilde den Satz:',words:['Im','Oktober','ist','das','Theaterfestival','in','Hamburg.'],correct:'Im Oktober ist das Theaterfestival in Hamburg.'},
+  {t:'order',q:'Bilde den Satz:',words:['Wir','sagen','"der','Michel".'],correct:'Wir sagen "der Michel".'},
+  {t:'order',q:'Bilde den Satz:',words:['Hier','ist','eine','Kirche.'],correct:'Hier ist eine Kirche.'},
+  {t:'order',q:'Bilde den Satz:',words:['Das','Konzerthaus','ist','der','Star','in','Hamburg.'],correct:'Das Konzerthaus ist der Star in Hamburg.'},
+  {t:'order',q:'Bilde den Satz:',words:['12.000','Schiffe','fahren','pro','Jahr','in','den','Hafen.'],correct:'12.000 Schiffe fahren pro Jahr in den Hafen.'},
+  {t:'order',q:'Bilde den Satz:',words:['Gehen','Sie','durch','das','Isartor.'],correct:'Gehen Sie durch das Isartor.'},
+  {t:'order',q:'Bilde den Satz:',words:['Im','Herbst','gehe','ich','ins','Museum.'],correct:'Im Herbst gehe ich ins Museum.'},
+  {t:'order',q:'Bilde den Satz:',words:['Also','hier','links','und','dann','geradeaus.'],correct:'Also hier links und dann geradeaus.'},
+  {t:'order',q:'Bilde den Satz:',words:['Das','ist','die','Elbphilharmonie.','Sie','ist','neu.'],correct:'Das ist die Elbphilharmonie. Sie ist neu.'},
+  {t:'order',q:'Bilde den Satz:',words:['Im','Winter','ist','es','kalt','in','Hamburg.'],correct:'Im Winter ist es kalt in Hamburg.'},
+  {t:'order',q:'Bilde den Satz:',words:['Ja,','genau.','Vielen','Dank!'],correct:'Ja, genau. Vielen Dank!'},
+  {t:'order',q:'Bilde den Satz:',words:['Sind','das','Busse?','Nein,','das','sind','Züge.'],correct:'Sind das Busse? Nein, das sind Züge.'},
+];
+
+const schreibenQ=[
+  {t:'fill1',q:'Welcher Artikel hat "Bahnhof"? (der/das/die)',b:['der']},
+  {t:'fill1',q:'Welcher Artikel hat "Rathaus"? (der/das/die)',b:['das']},
+  {t:'fill1',q:'Welcher Artikel hat "Kirche"? (der/das/die)',b:['die']},
+  {t:'fill1',q:'Welcher Artikel hat "Hafen"? (der/das/die)',b:['der']},
+  {t:'fill1',q:'Welcher Artikel hat "Brücke"? (der/das/die)',b:['die']},
+  {t:'fill1',q:'Negation von "ein Bus" = ___',b:['kein Bus']},
+  {t:'fill1',q:'Negation von "eine Kirche" = ___',b:['keine Kirche']},
+  {t:'fill1',q:'Negation von "ein Hotel" = ___',b:['kein Hotel']},
+  {t:'fill1',q:'Negation von "die Autos" (Plural) = ___',b:['keine Autos']},
+  {t:'fill1',q:'Imperativ von "gehen" mit Sie = "___ Sie links!"',b:['Gehen']},
+  {t:'fill1',q:'Imperativ von "fahren" mit Sie = "___ Sie geradeaus!"',b:['Fahren']},
+  {t:'fill1',q:'Imperativ von "nehmen" mit Sie = "___ Sie die U-Bahn!"',b:['Nehmen']},
+  {t:'fill1',q:'Wie heißt der 1. Monat?',b:['Januar']},
+  {t:'fill1',q:'Wie heißt der 6. Monat?',b:['Juni']},
+  {t:'fill1',q:'Wie heißt der 12. Monat?',b:['Dezember']},
+  {t:'fill1',q:'Welche Jahreszeit? März, April, Mai = ___',b:['Frühling']},
+  {t:'fill1',q:'Welche Jahreszeit? Juni, Juli, August = ___',b:['Sommer']},
+  {t:'fill1',q:'Welche Jahreszeit? September, Oktober, November = ___',b:['Herbst']},
+  {t:'fill1',q:'Welche Jahreszeit? Dezember, Januar, Februar = ___',b:['Winter']},
+  {t:'fill1',q:'Wie sagt man "in July" auf Deutsch?',b:['im Juli']},
+  {t:'fill1',q:'Wie sagt man "in autumn" auf Deutsch?',b:['im Herbst']},
+  {t:'fill1',q:'Der Turm ist 132 Meter ___. (tall = hoch)',b:['hoch']},
+  {t:'fill1',q:'Das Rathaus ist über 120 Jahre ___. (alt)',b:['alt']},
+  {t:'fill1',q:'Wie heißt "Hallo" in Hamburg?',b:['Moin']},
+  {t:'fill1',q:'Wie heißt "Hallo" in Österreich?',b:['Grüß Gott']},
+  {t:'fill1',q:'Das ist kein ___, das ist ein Fluss. (See)',b:['See']},
+  {t:'fill1',q:'Welcher Artikel hat "Museum"? (der/das/die)',b:['das']},
+  {t:'fill1',q:'Welcher Artikel hat "Fluss"? (der/das/die)',b:['der']},
+  {t:'fill1',q:'Welcher Artikel hat "Kunsthalle"? (der/das/die)',b:['die']},
+  {t:'fill1',q:'Welcher Monat kommt nach Oktober?',b:['November']},
+  {t:'fill1',q:'"Vielen Dank!" Antwort: "Bitte, ___!"',b:['gern']},
+  {t:'fill1',q:'"Entschuldigung, wo ist bitte ___?" (Bahnhof)',b:['der Bahnhof']},
+  {t:'fill1',q:'Wie sagt man "in winter" auf Deutsch?',b:['im Winter']},
+  {t:'fill1',q:'Wie sagt man "to walk" auf Deutsch?',b:['zu Fuß gehen']},
+  {t:'fill1',q:'Welcher Artikel hat "Zug"? (der/das/die)',b:['der']},
+];
+
+const vocabData=[
+  {art:'M',w:'der Bahnhof',en:'train station',ex:'Der Hamburger Hauptbahnhof: 720 Züge pro Tag!'},
+  {art:'M',w:'der Hafen',en:'harbour / port',ex:'12.000 Schiffe pro Jahr fahren in den Hafen.'},
+  {art:'N',w:'das Rathaus',en:'town hall / city hall',ex:'Das Rathaus ist über 120 Jahre alt.'},
+  {art:'F',w:'die Kirche',en:'church',ex:'Der Michel ist die Kirche und das Symbol von Hamburg.'},
+  {art:'N',w:'das Konzerthaus',en:'concert hall',ex:'Die Elbphilharmonie ist ein weltberühmtes Konzerthaus.'},
+  {art:'F',w:'die Kunsthalle',en:'art gallery',ex:'Die Kunsthalle ist rechts vom Bahnhof.'},
+  {art:'N',w:'das Museum',en:'museum',ex:'Das Haus der Kunst ist ein Museum in München.'},
+  {art:'M',w:'der Fluss',en:'river',ex:'Der Fluss heißt Alster. Das ist kein See!'},
+  {art:'M',w:'der Turm',en:'tower',ex:'Der Turm ist 132 Meter hoch.'},
+  {art:'F',w:'die Brücke',en:'bridge',ex:'Die Köhlbrandbrücke ist eine bekannte Brücke in Hamburg.'},
+  {art:'N',w:'das Hotel',en:'hotel',ex:'Guten Tag. Zum Hotel "Michel", bitte!'},
+  {art:'M',w:'der Park',en:'park',ex:'Der Englische Garten in München ist sehr groß.'},
+  {art:'M',w:'der Markt',en:'market',ex:'Der Viktualienmarkt ist sehr berühmt in München.'},
+  {art:'F',w:'die Straße',en:'street',ex:'Gehen Sie die Straße entlang bis zum Isartor.'},
+  {art:'M',w:'der Bus',en:'bus',ex:'Ach nee, kein Bus! Wo ist die U-Bahn?'},
+  {art:'N',w:'das Fahrrad',en:'bicycle',ex:'Oje, kein Fahrrad! Schnell, da ist ein Bus!'},
+  {art:'F',w:'die U-Bahn',en:'underground / metro',ex:'Nehmen Sie die U-Bahn! Sie ist schnell.'},
+  {art:'M',w:'der Zug',en:'train',ex:'In 2 Stunden nach Berlin mit dem Zug.'},
+  {art:'N',w:'das Taxi',en:'taxi',ex:'Nehmen Sie ein Taxi zum Hotel Michel!'},
+  {art:'F',w:'die Fahrkarte',en:'ticket',ex:'Oh nein! Keine Fahrkarte?! So ein Pech!'},
+  {art:'M',w:'der Januar',en:'January',ex:'Im Januar ist es kalt in Deutschland.'},
+  {art:'M',w:'der Februar',en:'February',ex:'Im Februar gibt es oft Schnee.'},
+  {art:'M',w:'der März',en:'March',ex:'Im März beginnt der Frühling.'},
+  {art:'M',w:'der April',en:'April',ex:'April, April! Das Wetter ist verrückt.'},
+  {art:'M',w:'der Mai',en:'May',ex:'Im Mai blühen viele Blumen.'},
+  {art:'M',w:'der Juni',en:'June',ex:'Im Juni beginnt der Sommer offiziell.'},
+  {art:'M',w:'der Juli',en:'July',ex:'Im Juli ist es am wärmsten.'},
+  {art:'M',w:'der August',en:'August',ex:'Im August fahren viele Deutsche in Urlaub.'},
+  {art:'M',w:'der September',en:'September',ex:'Im September beginnt das Schuljahr.'},
+  {art:'M',w:'der Oktober',en:'October',ex:'Das Theaterfestival ist im Oktober.'},
+  {art:'M',w:'der November',en:'November',ex:'Im November ist es oft grau und regnerisch.'},
+  {art:'M',w:'der Dezember',en:'December',ex:'Im Dezember ist Weihnachten.'},
+  {art:'M',w:'der Frühling',en:'spring',ex:'Im Frühling fahre ich gern Fahrrad.'},
+  {art:'M',w:'der Sommer',en:'summer',ex:'Im Sommer gehe ich schwimmen.'},
+  {art:'M',w:'der Herbst',en:'autumn / fall',ex:'Im Herbst gehe ich ins Museum.'},
+  {art:'M',w:'der Winter',en:'winter',ex:'Im Winter reise ich nicht so gern.'},
+  {art:'ADJ',w:'links',en:'left',ex:'Gehen Sie links! Da ist das Hotel.'},
+  {art:'ADJ',w:'rechts',en:'right',ex:'Die Kunsthalle ist rechts vom Bahnhof.'},
+  {art:'ADJ',w:'geradeaus',en:'straight ahead',ex:'Fahren Sie geradeaus und dann links.'},
+  {art:'ADJ',w:'hoch',en:'tall / high',ex:'Der Turm ist 132 Meter hoch.'},
+  {art:'ADJ',w:'groß',en:'big / large',ex:'Der Hafen ist sehr groß.'},
+  {art:'ADJ',w:'alt',en:'old',ex:'Das Rathaus ist über 120 Jahre alt.'},
+  {art:'ADJ',w:'breit',en:'wide / broad',ex:'Das Rathaus ist 111 Meter breit.'},
+  {art:'ADJ',w:'lang',en:'long',ex:'Die Strecke ist sehr lang.'},
+  {art:'ADJ',w:'bekannt',en:'well-known / famous',ex:'Hamburg ist eine bekannte Stadt.'},
+  {art:'PH',w:'Entschuldigung, wo ist bitte...?',en:'Excuse me, where is ... please?',ex:'Entschuldigung, wo ist bitte der Bahnhof?'},
+  {art:'PH',w:'Das ist ganz einfach.',en:'That is very simple.',ex:'Das ist ganz einfach. Gehen Sie rechts.'},
+  {art:'PH',w:'Gehen Sie links / rechts / geradeaus!',en:'Go left / right / straight ahead!',ex:'Gehen Sie geradeaus und dann links. Da ist das Hotel.'},
+  {art:'PH',w:'Da ist ...',en:'There is / there it is ...',ex:'Da ist das Hotel! Da ist der Bahnhof!'},
+  {art:'PH',w:'Vielen Dank!',en:'Many thanks! / Thank you very much!',ex:'Vielen Dank! Bitte, gern.'},
+  {art:'PH',w:'Bitte, gern.',en:'You are welcome / my pleasure.',ex:'Vielen Dank! Bitte, gern.'},
+  {art:'PH',w:'zu Fuß gehen',en:'to go on foot / to walk',ex:'Ich gehe zu Fuß. Jetzt aber schnell!'},
+  {art:'PH',w:'Moin!',en:'Hello! (North Germany / Hamburg)',ex:'Moin! Das ist typisch für Hamburg.'},
+  {art:'PH',w:'Grüß Gott!',en:'Hello! (Austria / South Germany)',ex:'Grüß Gott! Das sagt man in Österreich.'},
+  {art:'PH',w:'Grüezi!',en:'Hello! (Switzerland)',ex:'Grüezi! Das sagt man in der Schweiz.'},
+  {art:'PH',w:'im + Monat / Jahreszeit',en:'in + month / season',ex:'Im Sommer · Im Juli · Im Frühling · Im Winter'},
+  {art:'PH',w:'Das ist kein/keine ...',en:'That is not a ...',ex:'Das ist kein Bus! Das ist keine Kirche!'},
+  {art:'PH',w:'Ja, genau.',en:'Yes, exactly.',ex:'Ist das der Viktualienmarkt? Ja, genau!'},
+  {art:'V',w:'fahren',en:'to drive / travel',ex:'Die Schiffe fahren in 175 Länder.'},
+  {art:'V',w:'heißen',en:'to be called',ex:'Der Fluss heißt Alster.'},
+  {art:'V',w:'kennen',en:'to know (a place/person)',ex:'Kennen Sie Hamburg? Nein, leider nicht.'},
+];
+
+const wbData=[
+  {cat:'Nomen',sub:'Gebäude und Orte',art:'M',w:'der Bahnhof',en:'train station',ex:'720 Züge fahren täglich hier.'},
+  {cat:'Nomen',sub:'Gebäude und Orte',art:'M',w:'der Hafen',en:'harbour / port',ex:'12.000 Schiffe pro Jahr. Die Schiffe fahren in 175 Länder.'},
+  {cat:'Nomen',sub:'Gebäude und Orte',art:'N',w:'das Rathaus',en:'town hall',ex:'Das Rathaus ist über 120 Jahre alt und 111 Meter breit.'},
+  {cat:'Nomen',sub:'Gebäude und Orte',art:'F',w:'die Kirche',en:'church',ex:'Der Michel ist die Kirche und das Symbol von Hamburg. Platz für 2.500 Menschen.'},
+  {cat:'Nomen',sub:'Gebäude und Orte',art:'N',w:'das Museum',en:'museum',ex:'Das Haus der Kunst ist ein bekanntes Museum in München.'},
+  {cat:'Nomen',sub:'Gebäude und Orte',art:'F',w:'die Kunsthalle',en:'art gallery / art hall',ex:'Die Kunsthalle in Hamburg ist rechts vom Bahnhof.'},
+  {cat:'Nomen',sub:'Gebäude und Orte',art:'N',w:'das Konzerthaus',en:'concert hall',ex:'Die Elbphilharmonie ist das neue Konzerthaus in Hamburg. Kosten: 866 Millionen Euro.'},
+  {cat:'Nomen',sub:'Gebäude und Orte',art:'M',w:'der Fluss',en:'river',ex:'Der Fluss heißt Alster. Das ist kein See, das ist ein Fluss!'},
+  {cat:'Nomen',sub:'Gebäude und Orte',art:'M',w:'der Turm',en:'tower',ex:'Der Turm ist 132 Meter hoch. Da sieht man den Hafen.'},
+  {cat:'Nomen',sub:'Gebäude und Orte',art:'F',w:'die Brücke',en:'bridge',ex:'Die Köhlbrandbrücke ist eine bekannte Brücke in Hamburg.'},
+  {cat:'Nomen',sub:'Gebäude und Orte',art:'N',w:'das Hotel',en:'hotel',ex:'Das Hotel heißt "Alster". / Zum Hotel "Michel", bitte!'},
+  {cat:'Nomen',sub:'Gebäude und Orte',art:'M',w:'der Park',en:'park',ex:'Der Englische Garten in München ist sehr groß: 375 Hektar!'},
+  {cat:'Nomen',sub:'Gebäude und Orte',art:'M',w:'der Markt',en:'market',ex:'Der Viktualienmarkt ist sehr berühmt in München.'},
+  {cat:'Nomen',sub:'Gebäude und Orte',art:'F',w:'die Straße',en:'street',ex:'Die Straße heißt Müllerstraße. Gehen Sie die Straße entlang.'},
+  {cat:'Nomen',sub:'Gebäude und Orte',art:'N',w:'das Theater',en:'theatre',ex:'Das Thalia Theater ist in Hamburg. Das Theater (= das).'},
+  {cat:'Nomen',sub:'Gebäude und Orte',art:'M',w:'der See',en:'lake',ex:'Das ist kein See, das ist ein Fluss! Der See ist maskulin: der See.'},
+  {cat:'Nomen',sub:'Verkehrsmittel',art:'M',w:'der Bus',en:'bus',ex:'Ach nee, kein Bus! Wo ist die U-Bahn?',extra:'kein Bus (maskulin)'},
+  {cat:'Nomen',sub:'Verkehrsmittel',art:'N',w:'das Fahrrad',en:'bicycle',ex:'Oje, kein Fahrrad! Schnell, da ist ein Bus!',extra:'kein Fahrrad (neutrum)'},
+  {cat:'Nomen',sub:'Verkehrsmittel',art:'F',w:'die U-Bahn',en:'underground / metro',ex:'Nehmen Sie die U-Bahn! Sie ist schnell und bequem.',extra:'keine U-Bahn (feminin)'},
+  {cat:'Nomen',sub:'Verkehrsmittel',art:'M',w:'der Zug',en:'train',ex:'In 2 Stunden nach Berlin mit dem Zug.',extra:'kein Zug (maskulin)'},
+  {cat:'Nomen',sub:'Verkehrsmittel',art:'N',w:'das Taxi',en:'taxi',ex:'Nehmen Sie ein Taxi!',extra:'kein Taxi (neutrum)'},
+  {cat:'Nomen',sub:'Verkehrsmittel',art:'N',w:'das Auto',en:'car',ex:'Das ist kein Auto! Das ist ein Bus!',extra:'kein Auto (neutrum)'},
+  {cat:'Nomen',sub:'Verkehrsmittel',art:'F',w:'die Fahrkarte',en:'ticket (transport)',ex:'Oh nein! Keine Fahrkarte?! So ein Pech!',extra:'keine Fahrkarte (feminin)'},
+  {cat:'Nomen',sub:'Monate',art:'M',w:'der Januar',en:'January',ex:'Im Januar ist es kalt in Deutschland.'},
+  {cat:'Nomen',sub:'Monate',art:'M',w:'der Februar',en:'February',ex:'Im Februar gibt es oft Schnee.'},
+  {cat:'Nomen',sub:'Monate',art:'M',w:'der März',en:'March',ex:'Im März beginnt der Frühling.'},
+  {cat:'Nomen',sub:'Monate',art:'M',w:'der April',en:'April',ex:'April, April! Das Wetter ist sehr verrückt.'},
+  {cat:'Nomen',sub:'Monate',art:'M',w:'der Mai',en:'May',ex:'Im Mai fahre ich gern Fahrrad.'},
+  {cat:'Nomen',sub:'Monate',art:'M',w:'der Juni',en:'June',ex:'Im Juni beginnt der Sommer.'},
+  {cat:'Nomen',sub:'Monate',art:'M',w:'der Juli',en:'July',ex:'Im Juli ist das Filmfest Hamburg.'},
+  {cat:'Nomen',sub:'Monate',art:'M',w:'der August',en:'August',ex:'Im August fahren viele in Urlaub.'},
+  {cat:'Nomen',sub:'Monate',art:'M',w:'der September',en:'September',ex:'Das Filmfestival Hamburg: 27. September bis 6. Oktober.'},
+  {cat:'Nomen',sub:'Monate',art:'M',w:'der Oktober',en:'October',ex:'Das Theaterfestival Hamburg: 12. bis 18. Oktober.'},
+  {cat:'Nomen',sub:'Monate',art:'M',w:'der November',en:'November',ex:'Im November ist es oft grau und regnerisch.'},
+  {cat:'Nomen',sub:'Monate',art:'M',w:'der Dezember',en:'December',ex:'Im Dezember gibt es Weihnachtsmärkte.'},
+  {cat:'Nomen',sub:'Jahreszeiten',art:'M',w:'der Frühling',en:'spring',ex:'Im Frühling ist es warm und die Blumen blühen.',extra:'März, April, Mai'},
+  {cat:'Nomen',sub:'Jahreszeiten',art:'M',w:'der Sommer',en:'summer',ex:'Im Sommer gehe ich schwimmen.',extra:'Juni, Juli, August'},
+  {cat:'Nomen',sub:'Jahreszeiten',art:'M',w:'der Herbst',en:'autumn / fall',ex:'Im Herbst sind die Blätter bunt.',extra:'September, Oktober, November'},
+  {cat:'Nomen',sub:'Jahreszeiten',art:'M',w:'der Winter',en:'winter',ex:'Im Winter ist es kalt und manchmal schneit es.',extra:'Dezember, Januar, Februar'},
+  {cat:'Verben',sub:'Ortsbeschreibung und Bewegung',art:'V',w:'gehen',en:'to go / walk',ex:'Gehen Sie links! Ich gehe zu Fuß.',extra:'gehe · gehst · geht · gehen'},
+  {cat:'Verben',sub:'Ortsbeschreibung und Bewegung',art:'V',w:'fahren',en:'to drive / travel',ex:'Die Schiffe fahren in 175 Länder.',extra:'fahre · fährst · fährt · fahren (Vokalwechsel a→ä!)'},
+  {cat:'Verben',sub:'Ortsbeschreibung und Bewegung',art:'V',w:'nehmen',en:'to take',ex:'Nehmen Sie die U-Bahn! Sie ist schnell.',extra:'nehme · nimmst · nimmt · nehmen (Vokalwechsel e→i!)'},
+  {cat:'Verben',sub:'Ortsbeschreibung und Bewegung',art:'V',w:'kennen',en:'to know (a place/person)',ex:'Kennen Sie Hamburg? Nein, leider nicht.',extra:'kenne · kennst · kennt · kennen'},
+  {cat:'Verben',sub:'Ortsbeschreibung und Bewegung',art:'V',w:'heißen',en:'to be called',ex:'Der Fluss heißt Alster. Wie heißt die Brücke?',extra:'heiße · heißt · heißt · heißen'},
+  {cat:'Adjektive',sub:'Beschreibung von Orten',art:'ADJ',w:'hoch',en:'tall / high',ex:'Der Turm ist 132 Meter hoch.'},
+  {cat:'Adjektive',sub:'Beschreibung von Orten',art:'ADJ',w:'groß',en:'big / large',ex:'Der Hafen ist sehr groß.'},
+  {cat:'Adjektive',sub:'Beschreibung von Orten',art:'ADJ',w:'alt',en:'old',ex:'Das Rathaus ist über 120 Jahre alt.'},
+  {cat:'Adjektive',sub:'Beschreibung von Orten',art:'ADJ',w:'breit',en:'wide',ex:'Das Rathaus ist 111 Meter breit.'},
+  {cat:'Adjektive',sub:'Beschreibung von Orten',art:'ADJ',w:'lang',en:'long',ex:'Die Brücke ist 17 km lang.'},
+  {cat:'Adjektive',sub:'Beschreibung von Orten',art:'ADJ',w:'bekannt',en:'well-known / famous',ex:'Hamburg ist eine bekannte Hafenstadt.'},
+  {cat:'Adjektive',sub:'Beschreibung von Orten',art:'ADJ',w:'riesig',en:'enormous / huge',ex:'Der Englische Garten in München ist riesig!'},
+  {cat:'Adjektive',sub:'Beschreibung von Orten',art:'ADJ',w:'einfach',en:'easy / simple',ex:'Das ist ganz einfach. Gehen Sie rechts.'},
+  {cat:'Ausdrücke',sub:'Wegbeschreibung',art:'PH',w:'links',en:'left',ex:'Gehen Sie links! Da ist das Hotel.'},
+  {cat:'Ausdrücke',sub:'Wegbeschreibung',art:'PH',w:'rechts',en:'right',ex:'Die Kunsthalle ist rechts vom Bahnhof.'},
+  {cat:'Ausdrücke',sub:'Wegbeschreibung',art:'PH',w:'geradeaus',en:'straight ahead',ex:'Fahren Sie geradeaus und dann links.'},
+  {cat:'Ausdrücke',sub:'Wegbeschreibung',art:'PH',w:'Entschuldigung, wo ist bitte...?',en:'Excuse me, where is ... please?',ex:'Entschuldigung, wo ist bitte der Bahnhof?'},
+  {cat:'Ausdrücke',sub:'Wegbeschreibung',art:'PH',w:'Das ist ganz einfach.',en:'That is very simple.',ex:'Das ist ganz einfach. Gehen Sie rechts und dann geradeaus.'},
+  {cat:'Ausdrücke',sub:'Wegbeschreibung',art:'PH',w:'Da ist ...',en:'There it is ...',ex:'Da ist das Hotel! Da ist die Kunsthalle!'},
+  {cat:'Ausdrücke',sub:'Wegbeschreibung',art:'PH',w:'Vielen Dank! / Bitte, gern.',en:'Many thanks! / You are welcome.',ex:'Vielen Dank! Bitte, gern.'},
+  {cat:'Ausdrücke',sub:'Begrüßung in D-A-CH',art:'PH',w:'Moin!',en:'Hello! (Hamburg / North Germany)',ex:'Moin! Das ist typisch hamburgisch.'},
+  {cat:'Ausdrücke',sub:'Begrüßung in D-A-CH',art:'PH',w:'Grüß Gott!',en:'Hello! (Austria / Bavaria)',ex:'Grüß Gott! Das sagt man in Österreich und Bayern.'},
+  {cat:'Ausdrücke',sub:'Begrüßung in D-A-CH',art:'PH',w:'Grüezi!',en:'Hello! (Switzerland)',ex:'Grüezi! Das sagt man in der Deutschschweiz.'},
+  {cat:'Ausdrücke',sub:'Artikel und Negation',art:'PH',w:'Das ist kein... / Das ist keine...',en:'That is not a ...',ex:'Das ist kein Bus. Das ist keine Kirche.'},
+  {cat:'Ausdrücke',sub:'Artikel und Negation',art:'PH',w:'im + Monat / Jahreszeit',en:'in + month or season',ex:'Im Sommer · Im Juli · Im Frühling · Im Winter'},
+];
+
+function renderAll(){renderSet(lesenQ,'lesen-set');renderSet(sprechenQ,'sprechen-set');renderSet(schreibenQ,'schreiben-set');}
+function renderSet(data,cid){
+  const c=document.getElementById(cid);c.innerHTML='';
+  data.forEach((q,i)=>{
+    const id=cid.split('-')[0]+'-'+i;let inner='';
+    if(q.t==='mc'||q.t==='passage'){
+      const ph=q.p?`<div class="passage">${q.p}</div>`:'';
+      const oh=q.opts.map((o,oi)=>`<button class="opt" id="opt-${id}-${oi}" onclick="checkMC('${id}',${oi},${q.ans})">${o}</button>`).join('');
+      inner=`${ph}<div class="q-text">${q.q}</div><div class="opts">${oh}</div>`;
+    }else if(q.t==='order'){
+      orderState[id]=[];
+      const sh=[...q.words].sort(()=>Math.random()-.5);
+      const ch=sh.map((w,wi)=>`<button class="wchip" id="wc-${id}-${wi}" onclick="pickWord('${id}',${wi},'${w.replace(/'/g,"\\'")}')">${w}</button>`).join('');
+      inner=`<div class="q-text">${q.q}</div><div class="hint-t">Tippe auf die Wörter in der richtigen Reihenfolge:</div><div class="ans-area" id="aa-${id}" style="color:var(--muted);font-style:italic;font-weight:600;">Hier erscheint dein Satz...</div><div class="word-bank" id="wb2-${id}">${ch}</div>`;
+    }else if(q.t==='fill1'){
+      const ih=q.b.map((_,bi)=>`<input class="inline-inp" id="ii-${id}-${bi}" placeholder="?" autocomplete="off" autocorrect="off" spellcheck="false" onkeydown="if(event.key==='Enter')checkFill('${id}',${i},'${cid.split('-')[0]}')">`).join(' ');
+      inner=`<div class="q-text">${q.q}</div><div style="margin-top:6px">${ih}</div>`;
+    }
+    const tl=q.t==='mc'||q.t==='passage'?'Multiple Choice':q.t==='order'?'Wortstellung':'Lückentext';
+    c.innerHTML+=`<div class="qcard" id="card-${id}"><div class="q-meta"><span class="q-num">#${i+1}</span><span class="q-type">${tl}</span><span class="q-status" id="st-${id}"></span></div>${inner}<div class="fb" id="fb-${id}"></div><div class="q-actions">${q.t==='order'?`<button class="btn-check" onclick="checkOrd('${id}',${i},'${cid.split('-')[0]}')">Prüfen ✓</button><button class="btn-reset" onclick="resetOrd('${id}')">↺ Reset</button>`:''} ${q.t==='fill1'?`<button class="btn-check" onclick="checkFill('${id}',${i},'${cid.split('-')[0]}')">Prüfen ✓</button>`:''}</div></div>`;
+  });
+}
+function checkMC(id,chosen,correct){if(answered.has(id))return;answered.add(id);document.querySelectorAll(`[id^="opt-${id}-"]`).forEach((b,i)=>{b.classList.add('disabled');if(i===correct)b.classList.add('correct');else if(i===chosen&&chosen!==correct)b.classList.add('wrong');});const fb=document.getElementById('fb-'+id),st=document.getElementById('st-'+id);if(chosen===correct){st.textContent='✅';fb.textContent='Richtig! +10 Punkte 🎉';fb.className='fb ok';addScore(10);}else{st.textContent='❌';fb.textContent='Leider falsch. Die richtige Antwort ist markiert.';fb.className='fb err';}}
+function pickWord(id,wi,word){const chip=document.getElementById('wc-'+id+'-'+wi);if(chip.classList.contains('used'))return;chip.classList.add('used');orderState[id].push({wi,word});const aa=document.getElementById('aa-'+id);aa.style.color='var(--navy)';aa.style.fontStyle='normal';aa.style.fontWeight='700';aa.textContent=orderState[id].map(x=>x.word).join(' ');}
+function checkOrd(id,qi,section){if(answered.has(id))return;const data=section==='lesen'?lesenQ:section==='sprechen'?sprechenQ:schreibenQ;const userAns=orderState[id].map(x=>x.word).join(' ').trim();const correct=data[qi].correct.trim();const fb=document.getElementById('fb-'+id),st=document.getElementById('st-'+id);if(userAns===correct){answered.add(id);st.textContent='✅';fb.textContent='Perfekt! +10 Punkte 🎉';fb.className='fb ok';addScore(10);document.querySelectorAll(`#wb2-${id} .wchip`).forEach(c=>c.disabled=true);}else{st.textContent='❌';fb.innerHTML=`Noch nicht ganz. Richtig: <em>${correct}</em>`;fb.className='fb err';}}
+function resetOrd(id){if(answered.has(id))return;orderState[id]=[];const aa=document.getElementById('aa-'+id);aa.style.color='var(--muted)';aa.style.fontStyle='italic';aa.style.fontWeight='600';aa.textContent='Hier erscheint dein Satz...';document.querySelectorAll(`#wb2-${id} .wchip`).forEach(c=>c.classList.remove('used'));document.getElementById('fb-'+id).textContent='';}
+function checkFill(id,qi,section){if(answered.has(id))return;const data=section==='lesen'?lesenQ:section==='sprechen'?sprechenQ:schreibenQ;const q=data[qi];let allOk=true;q.b.forEach((ans,bi)=>{const inp=document.getElementById('ii-'+id+'-'+bi);if(!inp)return;const uv=inp.value.trim().toLowerCase();const cv=ans.toLowerCase();if(uv===cv)inp.classList.add('correct');else{inp.classList.add('wrong');allOk=false;}});const fb=document.getElementById('fb-'+id),st=document.getElementById('st-'+id);if(allOk){answered.add(id);st.textContent='✅';fb.textContent='Ausgezeichnet! +10 Punkte 🎉';fb.className='fb ok';addScore(10);}else{st.textContent='❌';fb.textContent='Nicht ganz. Richtig: '+q.b.join(', ');fb.className='fb err';}}
+
+/* ── LESEN TEXTS Q&A ── */
+const lesen1Q=[
+  {t:'mc',q:'Wie viele Schiffe fahren pro Jahr in den Hamburger Hafen?',opts:['1.200','12.000','120.000','1.200.000'],ans:1},
+  {t:'mc',q:'Was ist der Michel?',opts:['Ein Museum','Ein Rathaus','Die Hauptkirche von Hamburg','Ein Konzerthaus'],ans:2},
+  {t:'mc',q:'Wie hoch ist der Turm des Michels?',opts:['112 Meter','120 Meter','132 Meter','175 Meter'],ans:2},
+  {t:'mc',q:'Der Tourist fragt: "Ist das eine Kirche?" Die richtige Antwort ist:',opts:['Ja, das ist eine Kirche.','Nein, das ist ein Museum.','Nein, das ist die Kunsthalle.','Ja, das ist der Michel.'],ans:2},
+  {t:'mc',q:'Was ist die Alster?',opts:['Ein See','Ein Hafen','Ein Fluss','Ein Park'],ans:2},
+  {t:'mc',q:'Wie alt ist das Rathaus?',opts:['Über 50 Jahre','Über 100 Jahre','Über 120 Jahre','Über 200 Jahre'],ans:2},
+  {t:'mc',q:'Was war die Bauzeit der Elbphilharmonie?',opts:['3 Jahre','6 Jahre','9 Jahre','12 Jahre'],ans:2},
+  {t:'mc',q:'Was bedeutet "eine Kunsthalle"?',opts:['Eine Kirche','Ein Konzerthaus','Ein Gebäude für Kunst','Ein Bahnhof'],ans:2},
+];
+const lesen2Q=[
+  {t:'mc',q:'Warum hat Anna kein Fahrrad?',opts:['Es ist kaputt','Jemand hat es weggenommen','Sie hat es vergessen','Sie hat kein Fahrrad'],ans:1},
+  {t:'mc',q:'Was findet Anna in der Tasche : aber keine Fahrkarte?',opts:['Ein Buch','Einen Kassenbon','Eine U-Bahn-Karte','Geld'],ans:1},
+  {t:'mc',q:'Wie beschreibt Anna den Weg zur U-Bahn?',opts:['Links und dann rechts','Geradeaus, dann links','Rechts und dann geradeaus','Durch den Park'],ans:1},
+  {t:'mc',q:'Warum kann Anna auch die U-Bahn nicht nehmen?',opts:['Die U-Bahn fährt nicht','Da ist kein Automat','Es ist zu teuer','Sie findet die Station nicht'],ans:1},
+  {t:'mc',q:'Wie kommt Anna am Ende zur Universität?',opts:['Mit dem Bus','Mit der U-Bahn','Mit dem Fahrrad','Zu Fuß'],ans:3},
+  {t:'mc',q:'Wie weit ist die Universität?',opts:['1 Kilometer','2 Kilometer','3 Kilometer','5 Kilometer'],ans:2},
+  {t:'mc',q:'Was sagt Anna über den Tag?',opts:['"Super, heute ist ein guter Tag!"','"Heute ist wirklich kein Glück!"','"Das ist ganz einfach!"','"Vielen Dank!"'],ans:1},
+  {t:'mc',q:'Was ist "kein Glück" auf Englisch?',opts:['No bus','No luck','No ticket','No bicycle'],ans:1},
+];
+const lesen3Q=[
+  {t:'mc',q:'In welchem Monat gibt es den Weihnachtsmarkt am Hamburger Rathaus?',opts:['November','Dezember','Januar','Februar'],ans:1},
+  {t:'mc',q:'Wann ist das Hafenfest in Hamburg?',opts:['Im März','Im April','Im Mai','Im Juni'],ans:2},
+  {t:'mc',q:'Wie viele Filmfans kommen zum Festival "Kino für alle"?',opts:['4.000','10.000','40.000','400.000'],ans:2},
+  {t:'mc',q:'Wann ist das Hamburger Theater-Festival?',opts:['12.-18. September','12.-18. Oktober','12.-18. November','27. September - 6. Oktober'],ans:1},
+  {t:'mc',q:'Woher kommen die Theater zum Festival?',opts:['Nur aus Hamburg','Nur aus Deutschland','Aus D, Österreich und der Schweiz','Aus aller Welt'],ans:2},
+  {t:'mc',q:'Was machen viele Hamburger im Januar und Februar?',opts:['Sie schwimmen','Sie reisen in den Süden','Sie gehen ins Theater','Sie fahren Fahrrad'],ans:1},
+  {t:'mc',q:'Welche Jahreszeit ist Dezember, Januar, Februar in Hamburg?',opts:['Frühling','Sommer','Herbst','Winter'],ans:3},
+  {t:'mc',q:'Im April fahren viele Leute ___.',opts:['schwimmen','Ski','Fahrrad','ins Kino'],ans:2},
+];
+
+function renderLesenTexts(){
+  renderLesenSet(lesen1Q,'lesen1-set');
+  renderLesenSet(lesen2Q,'lesen2-set');
+  renderLesenSet(lesen3Q,'lesen3-set');
+}
+function renderLesenSet(data,cid){
+  const c=document.getElementById(cid);if(!c)return;c.innerHTML='';
+  data.forEach((q,i)=>{
+    const id=cid+'-'+i;
+    const oh=q.opts.map((o,oi)=>`<button class="opt" id="opt-${id}-${oi}" onclick="checkMC('${id}',${oi},${q.ans})">${o}</button>`).join('');
+    c.innerHTML+=`<div class="qcard" id="card-${id}"><div class="q-meta"><span class="q-num">#${i+1}</span><span class="q-type">Multiple Choice</span><span class="q-status" id="st-${id}"></span></div><div class="q-text">${q.q}</div><div class="opts">${oh}</div><div class="fb" id="fb-${id}"></div></div>`;
+  });
+}
+
+/* ── MERGED VOCAB + WÖRTERBUCH ── */
+var vocabCurrentCat='all';
+function buildVocab(){
+  renderVocabAll('all','');
+}
+function renderVocabAll(cat,search){
+  const c=document.getElementById('vocab-container');if(!c)return;
+  // Combine vocabData + wbData deduplicated
+  const allWords=[...wbData];
+  vocabData.forEach(v=>{if(!allWords.find(w=>w.w===v.w))allWords.push({cat:v.art==='V'?'Verben':v.art==='ADJ'?'Adjektive':v.art==='PH'?'Ausdrücke':'Nomen',sub:v.art==='V'?'Verben':v.art==='ADJ'?'Adjektive':v.art==='PH'?'Ausdrücke':'Nomen und Orte',...v});});
+  let filtered=allWords;
+  if(cat!=='all'){const catMap={Nomen:'Nomen',Verben:'Verben',Adjektive:'Adjektive',Ausdrücke:'Ausdrücke'};filtered=allWords.filter(w=>w.cat===catMap[cat]||w.art===cat.slice(0,1));}
+  if(search)filtered=filtered.filter(w=>(w.w||'').toLowerCase().includes(search)||(w.en||'').toLowerCase().includes(search));
+  const ac={M:'art-m',F:'art-f',N:'art-n',V:'art-v',ADJ:'art-adj',PH:'art-ph'};
+  const al={M:'der',F:'die',N:'das',V:'Verb',ADJ:'Adj',PH:'Ausdruck'};
+  // Group by sub
+  const groups={};filtered.forEach(w=>{const k=w.sub||w.cat||'Andere';if(!groups[k])groups[k]=[];groups[k].push(w);});
+  let html=`<div style="font-size:.78rem;color:var(--muted);margin-bottom:12px;font-weight:700;">${filtered.length} Wörter gefunden</div>`;
+  if(!filtered.length){c.innerHTML='<div style="text-align:center;color:var(--muted);padding:40px;font-size:.9rem;">Kein Wort gefunden.</div>';return;}
+  Object.entries(groups).forEach(([sub,words])=>{
+    html+=`<div class="wb-cat-title">${sub} <span style="font-size:.7rem;font-weight:700;color:var(--muted);text-transform:none;letter-spacing:0;">(${words.length})</span></div><div class="wb-grid">`;
+    words.forEach((w,i)=>{
+      const uid='vc-'+((w.w||'').replace(/[^a-zA-Z]/g,''))+i;
+      const dw=(w.w||'').replace(/^(der |die |das )/,'');
+      html+=`<div class="wb-item" id="${uid}"><div class="wb-head" onclick="toggleWB('${uid}')"><span class="wb-art-badge ${ac[w.art]||'art-n'}">${al[w.art]||''}</span><span class="wb-word-text">${dw}</span><span class="wb-short-en">${(w.en||'').split('/')[0].split('(')[0].trim()}</span><span class="wb-arrow">▶</span></div><div class="wb-body"><div class="wb-en-full">🇬🇧 ${w.en||''}</div><div class="wb-ex-sent">„${w.ex||''}"</div>${w.extra?`<div class="wb-extra">📝 ${w.extra}</div>`:''}</div></div>`;
+    });
+    html+='</div>';
+  });
+  c.innerHTML=html;
+}
+function filterVocabAll(){const s=document.getElementById('v-search').value.toLowerCase();renderVocabAll(vocabCurrentCat,s);}
+function filterVocabCat(cat,btn){vocabCurrentCat=cat;document.querySelectorAll('#vocab-filters .wb-filter').forEach(b=>b.classList.remove('active'));btn.classList.add('active');renderVocabAll(cat,document.getElementById('v-search').value.toLowerCase());}
+function filterVocab(){filterVocabAll();}
+
+
+/* WB functions aliased to vocab */
+function buildWB(){buildVocab();}
+function renderWB(cat,search){'dummy';}//merged
+function _old_renderWB(cat,search){
+  const c=document.getElementById('wb-container');
+  let filtered=wbData;
+  if(cat!=='all')filtered=filtered.filter(w=>w.cat===cat);
+  if(search)filtered=filtered.filter(w=>w.w.toLowerCase().includes(search)||w.en.toLowerCase().includes(search)||(w.sub&&w.sub.toLowerCase().includes(search)));
+  const groups={};filtered.forEach(w=>{const k=w.sub||w.cat;if(!groups[k])groups[k]=[];groups[k].push(w);});
+  const ac={M:'art-m',F:'art-f',N:'art-n',V:'art-v',ADJ:'art-adj',PH:'art-ph'};
+  const al={M:'der',F:'die',N:'das',V:'Verb',ADJ:'Adj',PH:'Ausdruck'};
+  let html=`<div style="font-size:.78rem;color:var(--muted);margin-bottom:12px;font-weight:700;">${filtered.length} Wörter gefunden</div>`;
+  if(!filtered.length){c.innerHTML='<div style="text-align:center;color:var(--muted);padding:40px;font-size:.9rem;">Kein Wort gefunden.</div>';return;}
+  Object.entries(groups).forEach(([sub,words])=>{
+    html+=`<div class="wb-cat-title">${sub} <span style="font-size:.7rem;font-weight:700;color:var(--muted);text-transform:none;letter-spacing:0;">(${words.length})</span></div><div class="wb-grid">`;
+    words.forEach((w,i)=>{const uid='wb-'+w.w.replace(/[^a-zA-Z]/g,'')+i;const dw=w.w.replace(/^(der |die |das )/,'');html+=`<div class="wb-item" id="${uid}"><div class="wb-head" onclick="toggleWB('${uid}')"><span class="wb-art-badge ${ac[w.art]||'art-n'}">${al[w.art]||''}</span><span class="wb-word-text">${dw}</span><span class="wb-short-en">${w.en.split('/')[0].split('(')[0].trim()}</span><span class="wb-arrow">▶</span></div><div class="wb-body"><div class="wb-en-full">🇬🇧 ${w.en}</div><div class="wb-ex-sent">„${w.ex}"</div>${w.extra?`<div class="wb-extra">📝 ${w.extra}</div>`:''}</div></div>`;});
+    html+='</div>';
+  });
+  c.innerHTML=html;
+}
+function toggleWB(id){document.getElementById(id).classList.toggle('open');}
+function filterWBCat(cat,btn){filterVocabCat(cat,btn);}
+function filterWB(){filterVocabAll();}
+
+function openSubmit(){document.getElementById('sc-overlay').classList.remove('hidden');document.getElementById('sc-modal').classList.remove('hidden');document.getElementById('sr-card').classList.add('hidden');document.getElementById('sc-name-inp').value='';setTimeout(()=>document.getElementById('sc-name-inp').focus(),100);}
+function generateCard(){const name=document.getElementById('sc-name-inp').value.trim();if(!name){document.getElementById('sc-name-inp').style.borderColor='var(--red)';return;}const pct=Math.round((score/1200)*100);const now=new Date();document.getElementById('sr-name').textContent=name;document.getElementById('sr-pts').textContent=score;document.getElementById('sr-answered').textContent=answered.size;document.getElementById('sr-pct').textContent=pct+'%';document.getElementById('sr-date').textContent=now.toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'});document.getElementById('sc-modal').classList.add('hidden');document.getElementById('sr-card').classList.remove('hidden');const studentId=sessionStorage.getItem('dm_student_id');if(studentId&&window.saveKapitelScore)window.saveKapitelScore(studentId,'a1k3',score);}
+function closeCard(){document.getElementById('sc-overlay').classList.add('hidden');}
+
+renderAll();buildVocab();
+window.addEventListener('load',function(){const ov=document.getElementById('sc-overlay');if(ov)ov.addEventListener('click',function(e){if(e.target===this)closeCard();});});
+</script>
+
+<!-- Firebase: Real Leaderboard -->
+<script type="module">
+import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js';
+import { getFirestore, collection, doc, getDoc, updateDoc, getDocs, query, orderBy, limit }
+  from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js';
+const app = initializeApp({
+  apiKey:"AIzaSyCuMSWNpOIlnqqxFmy08CfIcbvAUpTXo1E",
+  authDomain:"deutschmeistern-abc4d.firebaseapp.com",
+  projectId:"deutschmeistern-abc4d",
+  storageBucket:"deutschmeistern-abc4d.firebasestorage.app",
+  messagingSenderId:"282075407369",
+  appId:"1:282075407369:web:4a5587b4eb391e768004d8"
+});
+const db = getFirestore(app);
+window.saveKapitelScore = async function(studentId, kapitelKey, newScore) {
+  try {
+    const ref = doc(db, 'students', studentId);
+    const snap = await getDoc(ref);
+    if (!snap.exists()) return;
+    const data = snap.data();
+    const scores = data.scores || {};
+    const existing = scores[kapitelKey] || 0;
+    if (newScore <= existing) return;
+    scores[kapitelKey] = newScore;
+    const total = Object.values(scores).reduce((a,b)=>a+b,0);
+    await updateDoc(ref, { scores, totalScore: total });
+  } catch(e) { console.log('Score save error:', e); }
+};
+window.loadLeaderboard = async function() {
+  const listEl = document.getElementById('lb-list');
+  const p1n = document.getElementById('lb-p1-name');
+  const p1p = document.getElementById('lb-p1-pts');
+  const p2n = document.getElementById('lb-p2-name');
+  const p2p = document.getElementById('lb-p2-pts');
+  const p3n = document.getElementById('lb-p3-name');
+  const p3p = document.getElementById('lb-p3-pts');
+  if (listEl) listEl.innerHTML = '<div style="text-align:center;padding:24px;color:var(--muted);font-size:.85rem;">Lade Rangliste...</div>';
+  try {
+    const myId = sessionStorage.getItem('dm_student_id');
+    const q = query(collection(db, 'students'), orderBy('totalScore', 'desc'), limit(20));
+    const snap = await getDocs(q);
+    const students = [];
+    snap.forEach(d => {
+      const data = d.data();
+      if ((data.totalScore || 0) > 0) students.push({ id:d.id, name:data.name, total:data.totalScore||0, you:d.id===myId });
+    });
+    if (myId && !students.find(s=>s.id===myId)) {
+      const mySelf = sessionStorage.getItem('dm_student_name');
+      if (mySelf) students.push({ id:myId, name:mySelf, total:0, you:true });
+    }
+    students.sort((a,b) => b.total - a.total);
+    const names = ['--','--','--'], pts = ['--','--','--'];
+    students.slice(0,3).forEach((s,i) => { names[i]=s.name; pts[i]=s.total+' Pts'; });
+    if(p1n) p1n.textContent=names[0]; if(p1p) p1p.textContent=pts[0];
+    if(p2n) p2n.textContent=names[1]; if(p2p) p2p.textContent=pts[1];
+    if(p3n) p3n.textContent=names[2]; if(p3p) p3p.textContent=pts[2];
+    if (students.length === 0) {
+      listEl.innerHTML = '<div style="text-align:center;padding:30px;color:var(--muted);font-size:.88rem;">Noch keine Punkte! Mach Ubungen und gib deinen Score ab.</div>';
+      return;
+    }
+    const maxPts = Math.max(...students.map(s=>s.total), 1);
+    listEl.innerHTML = students.map((s,i) => `<div class="lb-row${s.you?' lb-you':''}">
+      <div class="lb-rank">${i+1}</div>
+      <div style="flex:1">
+        <div class="lb-name">${s.name}${s.you?' 👈':''}</div>
+        <div class="lb-bar-wrap"><div class="lb-bar" style="width:${Math.round((s.total/maxPts)*100)}%"></div></div>
+      </div>
+      <div class="lb-pts">${s.total}</div>
+    </div>`).join('');
+  } catch(e) {
+    console.log('Leaderboard error:', e);
+    if (listEl) listEl.innerHTML = '<div style="text-align:center;padding:20px;color:var(--muted);">Konnte Rangliste nicht laden.</div>';
+  }
+};
+</script>
+</body>
+</html>

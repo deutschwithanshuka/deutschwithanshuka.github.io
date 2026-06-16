@@ -60,6 +60,7 @@ input.inp:focus{border-color:var(--blue);}
 .badge-level{background:#f5f3ff;color:var(--purple);padding:2px 7px;border-radius:6px;font-size:.7rem;font-weight:800;}
 .activity-list{font-size:.7rem;color:var(--muted);line-height:1.7;}
 .btn-view{font-size:.7rem;background:#eff6ff;color:var(--blue);border:1.5px solid var(--border);border-radius:7px;padding:3px 9px;cursor:pointer;font-family:'Nunito',sans-serif;font-weight:800;}
+.btn-lvl{font-size:.7rem;background:#f5f3ff;color:#7c3aed;border:1.5px solid #ddd6fe;border-radius:7px;padding:3px 9px;cursor:pointer;font-family:'Nunito',sans-serif;font-weight:800;margin-left:4px;}
 .btn-del{font-size:.7rem;background:#fff1f1;color:var(--red);border:1.5px solid #fecaca;border-radius:7px;padding:3px 9px;cursor:pointer;font-family:'Nunito',sans-serif;font-weight:800;margin-left:4px;}
 .empty{text-align:center;padding:30px;color:var(--muted);font-size:.85rem;font-weight:700;}
 .loading{text-align:center;padding:20px;color:var(--blue);font-weight:800;font-size:.85rem;}
@@ -154,7 +155,7 @@ input.inp:focus{border-color:var(--blue);}
 
 <script type="module">
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js';
-import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, serverTimestamp, orderBy, query, limit, getDoc }
+import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, updateDoc, serverTimestamp, orderBy, query, limit, getDoc }
   from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js';
 
 const firebaseConfig = {
@@ -252,6 +253,7 @@ window.loadStudents = async function() {
         <td><span class="badge-level">${s.level || 'A1'}</span></td>
         <td>
           <button class="btn-view" onclick="viewActivity('${d.id}','${s.name}','${s.code}')">View Activity</button>
+          <button class="btn-lvl" data-lvl-id="${d.id}" onclick="changeLevel('${d.id}','${s.name}','${s.level || 'A1'}')">Change Level</button>
           <button class="btn-del" data-del-id="${d.id}" onclick="deleteStudent('${d.id}','${s.name}')">Delete</button>
         </td>
       </tr>`;
@@ -288,6 +290,30 @@ window.deleteStudent = async function(id, name) {
     errDiv.style.cssText = 'color:red;padding:8px;font-size:.8rem;font-weight:700;';
     errDiv.textContent = 'Delete error: ' + e.message;
     el.prepend(errDiv);
+  }
+};
+
+window.changeLevel = async function(id, name, currentLevel) {
+  const LEVELS = ['A1','A2','B1','B2','C1'];
+  const newLevel = prompt(`Change level for ${name}\n\nCurrent level: ${currentLevel}\n\nEnter new level (A1, A2, B1, B2, C1):`);
+  if (!newLevel) return;
+  const clean = newLevel.trim().toUpperCase();
+  if (!LEVELS.includes(clean)) {
+    alert('Invalid level. Please enter one of: A1, A2, B1, B2, C1');
+    return;
+  }
+  if (clean === currentLevel) {
+    alert(`${name} is already on ${clean}.`);
+    return;
+  }
+  const btn = document.querySelector(`[data-lvl-id="${id}"]`);
+  try {
+    if (btn) { btn.disabled = true; btn.textContent = '...'; }
+    await updateDoc(doc(db, 'students', id), { level: clean });
+    loadStudents();
+  } catch(e) {
+    if (btn) { btn.disabled = false; btn.textContent = 'Change Level'; }
+    alert('Error updating level: ' + e.message);
   }
 };
 

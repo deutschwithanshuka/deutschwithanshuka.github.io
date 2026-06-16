@@ -154,7 +154,7 @@ input.inp:focus{border-color:var(--blue);}
 
 <script type="module">
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js';
-import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, serverTimestamp, orderBy, query, limit }
+import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, serverTimestamp, orderBy, query, limit, getDoc }
   from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js';
 
 const firebaseConfig = {
@@ -169,11 +169,25 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-const ADMIN_PASS = 'AnshukaDM2024';
+// ── SHA-256 HASH ──
+async function sha256(msg) {
+  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(msg));
+  return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2,'0')).join('');
+}
 
-window.checkAdmin = function() {
+// ── ADMIN PASSWORD (loaded from Firestore, never in source code) ──
+let ADMIN_PASS_HASH = '';
+(async () => {
+  try {
+    const cfg = await getDoc(doc(db, 'config', 'site'));
+    if (cfg.exists()) ADMIN_PASS_HASH = cfg.data().adminPass;
+  } catch(e) {}
+})();
+
+window.checkAdmin = async function() {
   const v = document.getElementById('admin-inp').value.trim();
-  if (v === ADMIN_PASS) {
+  const hash = await sha256(v);
+  if (hash === ADMIN_PASS_HASH) {
     document.getElementById('gate').classList.add('hidden');
     loadStudents();
   } else {
@@ -200,8 +214,9 @@ window.addStudent = async function() {
   msg.textContent = '⏳ Adding...';
 
   try {
+    const passHash = await sha256(pass);
     await addDoc(collection(db, 'students'), {
-      name, code, password: pass, level,
+      name, code, password: passHash, level,
       createdAt: serverTimestamp()
     });
     msg.className = 'msg ok';
@@ -233,7 +248,7 @@ window.loadStudents = async function() {
       html += `<tr>
         <td><strong>${s.name}</strong></td>
         <td><span class="badge-code">${s.code}</span></td>
-        <td style="font-family:monospace;font-size:.78rem;">${s.password}</td>
+        <td style="font-family:monospace;font-size:.78rem;color:#94a3b8;">••••••••</td>
         <td><span class="badge-level">${s.level || 'A1'}</span></td>
         <td>
           <button class="btn-view" onclick="viewActivity('${d.id}','${s.name}','${s.code}')">View Activity</button>

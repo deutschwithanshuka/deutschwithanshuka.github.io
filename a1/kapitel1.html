@@ -1,0 +1,1474 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Deutsch Meistern · A1 Kapitel 1</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f4f6ff;--white:#fff;--navy:#0f1f6f;
+  --blue:#2563eb;--blue2:#60a5fa;--purple:#7c3aed;
+  --green:#16a34a;--red:#dc2626;--yellow:#d97706;--teal:#0f766e;
+  --orange:#ea580c;
+  --text:#1a1a3e;--muted:#5a6a8a;--border:#c7d2fe;
+  --sh:0 2px 14px rgba(37,99,235,.09);
+  --r:18px;--r2:12px;
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+html{scroll-behavior:smooth;font-size:17px;}
+body{background:var(--bg);color:var(--text);font-family:'Nunito',sans-serif;overflow-x:hidden;line-height:1.6;}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:999;background:rgba(255,255,255,.98);backdrop-filter:blur(12px);border-bottom:2px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:12px 16px;}
+.nav-left{display:flex;align-items:center;gap:10px;}
+.nav-icon{width:34px;height:34px;border-radius:8px;background:#1a1a1a;display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0;}
+.nav-title{font-size:1rem;font-weight:900;color:var(--navy);}
+.nav-sub{font-size:.68rem;color:var(--muted);font-weight:700;display:block;margin-top:-1px;}
+.score-pill{background:linear-gradient(135deg,#f59e0b,#ef4444);color:#fff;border-radius:50px;padding:6px 15px;font-weight:900;font-size:.82rem;white-space:nowrap;}
+
+/* BOTTOM NAV */
+.bnav{position:fixed;bottom:0;left:0;right:0;z-index:999;background:rgba(255,255,255,.98);backdrop-filter:blur(10px);border-top:2px solid var(--border);display:flex;}
+.bn{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:8px 2px 11px;border:none;background:none;font-family:'Nunito',sans-serif;cursor:pointer;color:var(--muted);font-size:.6rem;font-weight:800;letter-spacing:.3px;gap:3px;transition:color .15s;}
+.bn-i{font-size:1.25rem;}
+.bn.active{color:var(--blue);}
+
+/* SCREENS */
+.screen{display:none;padding:18px 16px 100px;min-height:100vh;}
+.screen.active{display:block;}
+
+/* HERO */
+.hero{background:linear-gradient(135deg,#1e40af,#6d28d9,#be185d);border-radius:var(--r);padding:26px 18px 28px;text-align:center;color:#fff;margin-bottom:16px;position:relative;overflow:hidden;}
+.hero::before{content:'🇩🇪';font-size:6rem;position:absolute;top:-10px;right:-10px;opacity:.1;}
+.hero-chip{display:inline-block;background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.35);border-radius:50px;padding:3px 14px;font-size:.68rem;font-weight:800;text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;}
+.hero h1{font-size:clamp(1.8rem,6vw,2.6rem);font-weight:900;line-height:1.05;margin-bottom:6px;}
+.hero p{font-size:.9rem;opacity:.9;line-height:1.65;max-width:300px;margin:0 auto;}
+
+/* STAT GRID */
+.stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px;}
+.stat-card{background:#fff;border:2px solid var(--border);border-radius:var(--r2);padding:12px;text-align:center;box-shadow:var(--sh);}
+.stat-em{font-size:1.4rem;margin-bottom:2px;}
+.stat-n{font-family:'Space Mono',monospace;font-size:1.3rem;font-weight:700;color:var(--blue);}
+.stat-l{font-size:.64rem;color:var(--muted);text-transform:uppercase;letter-spacing:.7px;font-weight:800;}
+
+/* TOPIC LIST */
+.topic-list{display:flex;flex-direction:column;gap:8px;}
+.t-row{background:#fff;border:2px solid var(--border);border-radius:var(--r2);padding:13px 14px;display:flex;align-items:center;gap:10px;box-shadow:var(--sh);cursor:pointer;transition:transform .12s;}
+.t-row:active{transform:scale(.98);}
+.t-ico{font-size:1.3rem;flex-shrink:0;}
+.t-name{font-weight:900;color:var(--navy);font-size:.96rem;}
+.t-sub{font-size:.78rem;color:var(--muted);font-weight:600;margin-top:1px;}
+.t-badge{background:linear-gradient(135deg,var(--blue),var(--purple));color:#fff;border-radius:50px;padding:3px 10px;font-size:.62rem;font-weight:800;flex-shrink:0;}
+
+/* SEC HEADER */
+.sec-h{font-size:1.05rem;font-weight:900;color:var(--navy);margin-bottom:14px;display:flex;align-items:center;gap:8px;}
+.sec-h::after{content:'';flex:1;height:2px;background:linear-gradient(90deg,var(--border),transparent);}
+
+/* GRAMMAR TABS */
+.g-tabs{display:flex;gap:6px;overflow-x:auto;padding-bottom:6px;margin-bottom:14px;-ms-overflow-style:none;scrollbar-width:none;}
+.g-tabs::-webkit-scrollbar{display:none;}
+.g-tab{flex-shrink:0;padding:9px 18px;border-radius:50px;border:2px solid var(--border);background:#fff;color:var(--muted);font-family:'Nunito',sans-serif;font-size:.82rem;font-weight:800;cursor:pointer;transition:all .15s;white-space:nowrap;}
+.g-tab.active{background:linear-gradient(135deg,var(--blue),var(--purple));color:#fff;border-color:transparent;}
+.g-panel{display:none;}
+.g-panel.active{display:block;}
+
+/* GRAMMAR CARD */
+.gcard{background:#fff;border:2px solid var(--border);border-radius:var(--r);padding:20px 18px;box-shadow:var(--sh);margin-bottom:14px;}
+.gcard-title{font-size:1.2rem;font-weight:900;color:var(--navy);margin-bottom:6px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+.gcard-badge{font-size:.66rem;background:linear-gradient(135deg,var(--blue),var(--purple));color:#fff;border-radius:50px;padding:3px 11px;font-weight:800;}
+.gcard-desc{font-size:.88rem;color:var(--muted);font-weight:600;margin-bottom:14px;line-height:1.65;}
+.rule-box{background:#eff6ff;border-left:4px solid var(--blue);border-radius:0 var(--r2) var(--r2) 0;padding:14px 16px;margin-bottom:12px;font-size:.9rem;font-weight:700;color:var(--navy);line-height:1.65;}
+.tip-box{background:#fef9e7;border-left:4px solid var(--yellow);border-radius:0 var(--r2) var(--r2) 0;padding:14px 16px;margin-bottom:12px;font-size:.88rem;font-weight:700;color:#78350f;line-height:1.65;}
+.warn-box{background:#fff4f4;border-left:4px solid var(--red);border-radius:0 var(--r2) var(--r2) 0;padding:14px 16px;margin-bottom:12px;font-size:.88rem;font-weight:700;color:#9f1239;line-height:1.65;}
+.section-h{font-size:.78rem;font-weight:900;color:var(--purple);text-transform:uppercase;letter-spacing:1px;margin:18px 0 10px;border-bottom:2px solid #e0e7ff;padding-bottom:6px;}
+
+/* CONJUGATION TABLE */
+.conj-table{width:100%;border-collapse:collapse;margin-bottom:14px;font-size:.88rem;}
+.conj-table th{background:linear-gradient(135deg,var(--blue),var(--purple));color:#fff;padding:8px 10px;font-weight:900;text-align:left;font-size:.78rem;}
+.conj-table td{padding:8px 10px;border-bottom:1px solid #e0e7ff;font-weight:700;}
+.conj-table tr:last-child td{border-bottom:none;}
+.conj-table tr:nth-child(even) td{background:#f8faff;}
+.conj-highlight{color:var(--blue);font-weight:900;}
+
+/* STRUCTURE BOX */
+.struct{background:#f8faff;border:2px solid #e0e7ff;border-radius:var(--r2);padding:14px;margin-bottom:12px;}
+.struct-row{display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin-bottom:8px;}
+.struct-row:last-child{margin-bottom:0;}
+.sb{border-radius:8px;padding:7px 11px;font-size:.82rem;font-weight:800;text-align:center;}
+.sb.s1{background:#dbeafe;color:#1e40af;}
+.sb.s2{background:#fce7f3;color:#9d174d;}
+.sb.s3{background:#dcfce7;color:#166534;}
+.sb.s4{background:#fef3c7;color:#92400e;}
+.sb.s5{background:#f3e8ff;color:#6b21a8;}
+.sb.slbl{background:none;color:var(--muted);font-size:.65rem;letter-spacing:.8px;text-transform:uppercase;padding-left:0;}
+
+/* EXAMPLE GRID */
+.ex-grid{display:flex;flex-direction:column;gap:8px;margin-bottom:12px;}
+.ex-item{background:#f8faff;border:1px solid #e0e7ff;border-radius:10px;padding:12px 14px;font-size:.88rem;line-height:1.6;}
+.ex-de{font-weight:700;color:var(--navy);margin-bottom:2px;}
+.ex-en{color:var(--muted);font-size:.82rem;font-style:italic;margin-top:2px;}
+.ex-note{color:var(--teal);font-size:.78rem;font-weight:700;margin-top:3px;}
+
+/* DIALOGUE CARD */
+.dialog-card{background:#fff;border:2px solid var(--border);border-radius:var(--r);padding:18px;margin-bottom:12px;box-shadow:var(--sh);}
+.dialog-title{font-size:.9rem;font-weight:900;color:var(--navy);margin-bottom:12px;display:flex;align-items:center;gap:8px;}
+.d-bubble{display:flex;gap:8px;margin-bottom:8px;align-items:flex-start;}
+.d-bubble:last-child{margin-bottom:0;}
+.d-speaker{font-size:.7rem;font-weight:900;color:#fff;border-radius:50px;padding:3px 10px;white-space:nowrap;flex-shrink:0;margin-top:2px;}
+.sp-a{background:linear-gradient(135deg,var(--blue),var(--purple));}
+.sp-b{background:linear-gradient(135deg,var(--green),var(--teal));}
+.d-text{font-size:.88rem;font-weight:700;color:var(--navy);background:#f8faff;border-radius:10px;padding:8px 12px;line-height:1.5;flex:1;}
+
+/* NUMBERS GRID */
+.num-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-bottom:14px;}
+.num-card{background:#fff;border:2px solid var(--border);border-radius:10px;padding:10px 6px;text-align:center;box-shadow:var(--sh);}
+.num-n{font-family:'Space Mono',monospace;font-size:1.1rem;font-weight:700;color:var(--blue);}
+.num-w{font-size:.68rem;font-weight:800;color:var(--muted);}
+
+/* ALPHABET */
+.alpha-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:5px;margin-bottom:14px;}
+.alpha-card{background:#fff;border:2px solid var(--border);border-radius:8px;padding:8px 4px;text-align:center;}
+.alpha-big{font-size:1rem;font-weight:900;color:var(--navy);}
+.alpha-sm{font-size:.65rem;color:var(--muted);font-weight:700;}
+
+/* LOANWORD GRID */
+.loan-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px;}
+.loan-card{background:#fff;border:2px solid var(--border);border-radius:10px;padding:12px;box-shadow:var(--sh);text-align:center;}
+.loan-de{font-size:1rem;font-weight:900;color:var(--navy);}
+.loan-lang{font-size:.7rem;color:var(--muted);font-weight:700;margin:2px 0;}
+.loan-ico{font-size:1.4rem;margin-bottom:4px;}
+
+/* PERSON CARD */
+.person-grid{display:flex;flex-direction:column;gap:8px;margin-bottom:14px;}
+.person-card{background:#fff;border:2px solid var(--border);border-radius:var(--r2);padding:14px;box-shadow:var(--sh);display:flex;gap:12px;align-items:flex-start;}
+.person-emoji{font-size:2rem;flex-shrink:0;}
+.person-name{font-size:.96rem;font-weight:900;color:var(--navy);margin-bottom:4px;}
+.person-detail{font-size:.82rem;color:var(--muted);font-weight:600;line-height:1.6;}
+.person-detail strong{color:var(--navy);font-weight:800;}
+
+/* EXERCISE TABS */
+.ex-tabs{display:flex;gap:6px;margin-bottom:14px;}
+.ex-tab{flex:1;padding:10px 4px;border-radius:50px;border:2px solid var(--border);background:#fff;color:var(--muted);font-family:'Nunito',sans-serif;font-size:.8rem;font-weight:800;cursor:pointer;transition:all .15s;text-align:center;}
+.ex-tab.active{background:linear-gradient(135deg,var(--blue),var(--purple));color:#fff;border-color:transparent;}
+.ex-panel{display:none;}
+.ex-panel.active{display:block;}
+
+/* Q CARD */
+.qcard{background:#fff;border:2px solid var(--border);border-radius:var(--r);padding:18px 16px;margin-bottom:12px;box-shadow:var(--sh);}
+.q-meta{display:flex;align-items:center;gap:7px;margin-bottom:10px;flex-wrap:wrap;}
+.q-num{font-family:'Space Mono',monospace;font-size:.72rem;font-weight:700;background:#e0e7ff;color:var(--blue);border-radius:5px;padding:3px 8px;}
+.q-type{font-size:.66rem;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;}
+.q-status{margin-left:auto;font-size:1rem;}
+.q-text{font-weight:700;font-size:.95rem;color:var(--navy);margin-bottom:12px;line-height:1.6;}
+.passage{background:#f8faff;border:1px solid #e0e7ff;border-radius:10px;padding:14px 16px;font-size:.86rem;line-height:1.7;color:var(--text);margin-bottom:10px;}
+.opts{display:flex;flex-direction:column;gap:8px;}
+.opt{width:100%;padding:12px 16px;border-radius:11px;border:2px solid var(--border);background:#f8faff;font-family:'Nunito',sans-serif;font-size:.9rem;font-weight:700;color:var(--text);cursor:pointer;text-align:left;transition:all .15s;}
+.opt.correct{border-color:var(--green);background:#dcfce7;color:var(--green);}
+.opt.wrong{border-color:var(--red);background:#fff1f2;color:var(--red);}
+.opt.disabled{cursor:default;}
+.word-bank{display:flex;flex-wrap:wrap;gap:7px;margin-top:10px;}
+.wchip{padding:9px 14px;border-radius:10px;border:2px solid var(--border);background:#f8faff;font-family:'Nunito',sans-serif;font-size:.88rem;font-weight:700;cursor:pointer;transition:all .15s;color:var(--navy);}
+.wchip.used{opacity:.3;cursor:default;}
+.ans-area{min-height:46px;background:#eff6ff;border:2px dashed var(--blue2);border-radius:11px;padding:10px 14px;font-size:.9rem;font-weight:700;color:var(--navy);margin:10px 0;line-height:1.6;}
+.hint-t{font-size:.82rem;color:var(--muted);font-weight:600;margin-bottom:6px;}
+.inline-inp{border:none;border-bottom:2.5px solid var(--blue);background:transparent;font-family:'Nunito',sans-serif;font-size:.95rem;font-weight:700;color:var(--navy);padding:3px 5px;width:120px;outline:none;}
+.inline-inp.correct{border-color:var(--green);color:var(--green);}
+.inline-inp.wrong{border-color:var(--red);color:var(--red);}
+.fb{font-size:.85rem;font-weight:700;min-height:0;margin-top:8px;line-height:1.5;}
+.fb.ok{color:var(--green);}
+.fb.err{color:var(--red);}
+.q-actions{display:flex;gap:8px;margin-top:10px;}
+.btn-check{background:linear-gradient(135deg,var(--blue),var(--purple));color:#fff;border:none;border-radius:10px;padding:10px 20px;font-family:'Nunito',sans-serif;font-size:.86rem;font-weight:800;cursor:pointer;}
+.btn-reset{background:#f1f5f9;color:var(--muted);border:2px solid var(--border);border-radius:10px;padding:10px 14px;font-family:'Nunito',sans-serif;font-size:.86rem;font-weight:800;cursor:pointer;}
+
+/* VOCAB */
+.search-wrap{position:relative;margin-bottom:12px;}
+.search-inp{width:100%;padding:12px 16px 12px 42px;border-radius:50px;border:2px solid var(--border);background:#fff;font-family:'Nunito',sans-serif;font-size:.92rem;font-weight:700;color:var(--navy);outline:none;}
+.search-inp:focus{border-color:var(--blue);}
+.search-icon{position:absolute;left:14px;top:50%;transform:translateY(-50%);font-size:.95rem;color:var(--muted);}
+.vocab-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-bottom:10px;}
+@media(min-width:500px){.vocab-grid{grid-template-columns:repeat(3,1fr);}}
+.vword{background:#f8faff;border:1px solid #e0e7ff;border-radius:10px;padding:11px 12px;cursor:pointer;transition:border-color .15s;}
+.vword.open{border-color:var(--blue);background:#eff6ff;}
+.vw-top{display:flex;align-items:center;gap:7px;}
+.vw-art{font-size:.64rem;font-weight:900;border-radius:4px;padding:2px 6px;}
+.art-m{background:#dbeafe;color:#1e40af;}
+.art-f{background:#fce7f3;color:#9d174d;}
+.art-n{background:#dcfce7;color:#166534;}
+.art-v{background:#f3e8ff;color:#6b21a8;}
+.art-adj{background:#ffedd5;color:#9a3412;}
+.art-ph{background:#fef3c7;color:#92400e;}
+.vw-word{font-weight:900;color:var(--navy);font-size:.9rem;}
+.vw-details{display:none;margin-top:8px;border-top:1px solid #e0e7ff;padding-top:8px;}
+.vword.open .vw-details{display:block;}
+.vw-en{font-weight:700;color:var(--green);font-size:.86rem;}
+.vw-ex{font-size:.8rem;color:var(--muted);font-style:italic;margin-top:4px;line-height:1.5;}
+
+/* LEADERBOARD */
+.lb-header{background:linear-gradient(135deg,#1e40af,#6d28d9);border-radius:var(--r);padding:20px 16px;text-align:center;color:#fff;margin-bottom:14px;}
+.podium{display:flex;align-items:flex-end;justify-content:center;gap:8px;margin-bottom:16px;height:130px;}
+.pod{display:flex;flex-direction:column;align-items:center;justify-content:flex-end;border-radius:var(--r2) var(--r2) 0 0;}
+.pod-1{width:90px;height:110px;background:linear-gradient(135deg,#f59e0b,#d97706);}
+.pod-2{width:78px;height:85px;background:linear-gradient(135deg,#94a3b8,#64748b);}
+.pod-3{width:70px;height:65px;background:linear-gradient(135deg,#b45309,#92400e);}
+.pod-inner{padding:6px 4px 8px;text-align:center;color:#fff;}
+.pod-rank{font-size:1.2rem;}
+.pod-name{font-size:.65rem;font-weight:900;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:80px;}
+.pod-pts{font-family:'Space Mono',monospace;font-size:.7rem;font-weight:700;}
+.lb-row{background:#fff;border:2px solid var(--border);border-radius:var(--r2);padding:10px 12px;display:flex;align-items:center;gap:10px;margin-bottom:7px;box-shadow:var(--sh);}
+.lb-rank{font-family:'Space Mono',monospace;font-size:.75rem;font-weight:700;color:var(--muted);width:22px;}
+.lb-name{flex:1;font-weight:800;color:var(--navy);font-size:.92rem;}
+.lb-level{font-size:.65rem;font-weight:700;color:var(--purple);}
+.lb-pts{font-family:'Space Mono',monospace;font-size:.88rem;font-weight:700;color:var(--blue);}
+.lb-bar-wrap{width:100%;background:#e0e7ff;border-radius:50px;height:5px;margin-top:3px;}
+.lb-bar{height:5px;background:linear-gradient(90deg,var(--blue),var(--purple));border-radius:50px;}
+.lb-you{border-color:var(--blue);background:#eff6ff;}
+
+/* WÖRTERBUCH */
+.wb-filter{padding:7px 14px;border-radius:50px;border:2px solid var(--border);background:#fff;color:var(--muted);font-family:'Nunito',sans-serif;font-size:.78rem;font-weight:800;cursor:pointer;transition:all .15s;white-space:nowrap;}
+.wb-filter.active{background:linear-gradient(135deg,var(--blue),var(--purple));color:#fff;border-color:transparent;}
+.wb-cat-title{font-size:.78rem;font-weight:900;color:var(--purple);text-transform:uppercase;letter-spacing:1px;margin:18px 0 10px;border-bottom:2px solid #e0e7ff;padding-bottom:6px;display:flex;align-items:center;gap:6px;}
+.wb-grid{display:flex;flex-direction:column;gap:8px;margin-bottom:4px;}
+.wb-item{background:#fff;border:2px solid var(--border);border-radius:12px;overflow:hidden;box-shadow:var(--sh);cursor:pointer;}
+.wb-item.open{border-color:var(--blue);}
+.wb-head{display:flex;align-items:center;gap:10px;padding:12px 14px;}
+.wb-art-badge{font-size:.64rem;font-weight:900;border-radius:5px;padding:3px 7px;flex-shrink:0;}
+.wb-word-text{font-weight:900;color:var(--navy);font-size:.95rem;flex:1;}
+.wb-short-en{font-size:.78rem;color:var(--muted);font-weight:600;}
+.wb-arrow{font-size:.8rem;color:var(--muted);transition:transform .2s;}
+.wb-item.open .wb-arrow{transform:rotate(90deg);}
+.wb-body{display:none;padding:0 14px 14px;border-top:1px solid var(--border);}
+.wb-item.open .wb-body{display:block;}
+.wb-en-full{font-size:.88rem;font-weight:700;color:var(--green);margin-bottom:6px;padding-top:10px;}
+.wb-ex-sent{font-size:.82rem;color:var(--muted);font-style:italic;line-height:1.6;margin-bottom:4px;}
+.wb-extra{font-size:.78rem;color:var(--teal);font-weight:700;}
+
+/* FLOAT SCORE */
+.float-score{position:fixed;bottom:72px;right:14px;z-index:900;background:linear-gradient(135deg,#f59e0b,#ef4444);color:#fff;border-radius:50px;padding:8px 14px;font-weight:900;font-size:.8rem;box-shadow:0 4px 20px rgba(239,68,68,.4);}
+
+/* CONFETTI */
+.conf-piece{position:fixed;width:8px;height:8px;border-radius:2px;z-index:9999;pointer-events:none;animation:fall 1.2s ease-in forwards;}
+@keyframes fall{0%{transform:translateY(-20px) rotate(0);opacity:1;}100%{transform:translateY(100vh) rotate(720deg);opacity:0;}}
+
+/* SCORE CARD */
+.sc-overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:2000;display:flex;align-items:center;justify-content:center;padding:20px;}
+.sc-overlay.hidden{display:none;}
+.sc-modal{background:#fff;border-radius:20px;padding:28px 24px;max-width:360px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,.25);}
+.sc-modal h2{font-size:1.15rem;font-weight:900;color:var(--navy);margin-bottom:4px;}
+.sc-modal p{font-size:.82rem;color:var(--muted);margin-bottom:16px;line-height:1.5;}
+.sc-inp{width:100%;padding:11px 14px;border:2px solid var(--border);border-radius:10px;font-family:'Nunito',sans-serif;font-size:.95rem;font-weight:700;color:var(--navy);outline:none;margin-bottom:12px;}
+.sc-inp:focus{border-color:var(--blue);}
+.sc-btn{width:100%;padding:11px;background:linear-gradient(135deg,var(--blue),var(--purple));color:#fff;border:none;border-radius:10px;font-family:'Nunito',sans-serif;font-size:.9rem;font-weight:900;cursor:pointer;}
+.sr-card{background:#fff;border-radius:20px;padding:28px 24px;max-width:360px;width:100%;text-align:center;}
+.sr-logo{display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:18px;}
+.sr-logo-icon{width:38px;height:38px;border-radius:9px;background:#1a1a1a;display:flex;align-items:center;justify-content:center;font-size:1.3rem;}
+.sr-logo-name{font-size:.95rem;font-weight:900;color:var(--navy);}
+.sr-logo-by{font-size:.6rem;color:var(--muted);text-transform:uppercase;letter-spacing:1.5px;font-weight:700;}
+.sr-divider{height:1px;background:var(--border);margin:0 0 18px;}
+.sr-student{font-size:1.1rem;font-weight:900;color:var(--navy);margin-bottom:2px;}
+.sr-label{font-size:.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:1px;font-weight:700;margin-bottom:16px;}
+.sr-score-ring{width:110px;height:110px;border-radius:50%;background:linear-gradient(135deg,var(--blue),var(--purple));display:flex;flex-direction:column;align-items:center;justify-content:center;margin:0 auto 14px;color:#fff;}
+.sr-pts{font-family:'Space Mono',monospace;font-size:1.6rem;font-weight:700;line-height:1;}
+.sr-pts-lbl{font-size:.6rem;text-transform:uppercase;letter-spacing:1px;opacity:.85;margin-top:2px;}
+.sr-chapter{display:inline-block;background:#eff6ff;color:var(--blue);border-radius:50px;padding:4px 14px;font-size:.72rem;font-weight:800;margin-bottom:14px;}
+.sr-stats{display:flex;gap:8px;justify-content:center;margin-bottom:16px;}
+.sr-stat{background:#f8faff;border:1px solid var(--border);border-radius:10px;padding:8px 12px;text-align:center;}
+.sr-stat-n{font-family:'Space Mono',monospace;font-size:1rem;font-weight:700;color:var(--navy);}
+.sr-stat-l{font-size:.6rem;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;font-weight:700;}
+.sr-footer{font-size:.7rem;color:var(--muted);border-top:1px solid var(--border);padding-top:12px;line-height:1.6;}
+.sr-actions{display:flex;gap:8px;margin-top:12px;}
+.sr-close-btn{flex:1;padding:10px;border-radius:10px;border:2px solid var(--border);background:#f8faff;font-family:'Nunito',sans-serif;font-size:.82rem;font-weight:800;color:var(--muted);cursor:pointer;}
+.sr-new-btn{flex:1;padding:10px;border-radius:10px;border:none;background:linear-gradient(135deg,var(--blue),var(--purple));font-family:'Nunito',sans-serif;font-size:.82rem;font-weight:800;color:#fff;cursor:pointer;}
+
+@media(min-width:900px){
+  .bnav{display:flex;max-width:820px;left:50%;transform:translateX(-50%);border-radius:16px 16px 0 0;border-left:2px solid var(--border);border-right:2px solid var(--border);}
+  .screen{padding:24px 28px 100px;max-width:820px;margin:0 auto;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-left">
+    <div class="nav-icon">🇩🇪</div>
+    <div>
+      <div class="nav-title">Deutsch Meistern</div>
+      <span class="nav-sub">by Anshuka · A1 Kapitel 1</span>
+    </div>
+  </div>
+  <div class="score-pill" id="score-pill">⭐ 0 Pts</div>
+</nav>
+
+<!-- FLOAT SCORE -->
+<div class="float-score" id="float-score">⭐ <span id="float-pts">0</span></div>
+
+<!-- BOTTOM NAV -->
+<div class="bnav">
+  <button class="bn active" onclick="goTo('home',this)"><span class="bn-i">🏠</span>Home</button>
+  <button class="bn" onclick="goTo('grammar',this)"><span class="bn-i">📚</span>Grammatik</button>
+  <button class="bn" onclick="goTo('exercises',this)"><span class="bn-i">✏️</span>Übungen</button>
+  <button class="bn" onclick="goTo('vocab',this)"><span class="bn-i">🔤</span>Vokabeln</button>
+  <button class="bn" onclick="goTo('leaderboard',this)"><span class="bn-i">🏆</span>Rangliste</button>
+  <button class="bn" onclick="goTo('woerterbuch',this)"><span class="bn-i">📖</span>Wörterbuch</button>
+  <button class="bn" onclick="goTo('laender',this)"><span class="bn-i">🌍</span>Länder</button>
+  <button class="bn" onclick="goTo('netzwerk',this)"><span class="bn-i">🏠</span>WG</button>
+  <button class="bn" onclick="goTo('international',this)"><span class="bn-i">🌐</span>Deutsch+</button>
+</div>
+
+<!-- ══ HOME ══ -->
+<div class="screen active" id="s-home">
+  <div class="hero">
+    <div class="hero-chip">Deutsch Meistern · by Anshuka</div>
+    <h1>Guten Tag! 👋</h1>
+    <p>A1 Kapitel 1: Sich vorstellen, grüßen, Zahlen und mehr!</p>
+  </div>
+  <div class="stat-grid">
+    <div class="stat-card"><div class="stat-em">📚</div><div class="stat-n">4</div><div class="stat-l">Grammatik</div></div>
+    <div class="stat-card"><div class="stat-em">✏️</div><div class="stat-n">120</div><div class="stat-l">Übungen</div></div>
+    <div class="stat-card"><div class="stat-em">🔤</div><div class="stat-n">60</div><div class="stat-l">Vokabeln</div></div>
+    <div class="stat-card"><div class="stat-em">📖</div><div class="stat-n">150+</div><div class="stat-l">Wörterbuch</div></div>
+  </div>
+  <div class="sec-h">📖 Themen dieses Kapitels</div>
+  <div class="topic-list">
+    <div class="t-row" onclick="goToGram(0)"><span class="t-ico">👋</span><div class="t-main"><div class="t-name">Grüßen und Verabschieden</div><div class="t-sub">Hallo! Tschüs! Guten Tag! Auf Wiedersehen!</div></div><span class="t-badge">Grammatik</span></div>
+    <div class="t-row" onclick="goToGram(1)"><span class="t-ico">🙋</span><div class="t-main"><div class="t-name">Sich vorstellen</div><div class="t-sub">W-Fragen, Aussagesatz, du vs. Sie</div></div><span class="t-badge">Grammatik</span></div>
+    <div class="t-row" onclick="goToGram(2)"><span class="t-ico">⚙️</span><div class="t-main"><div class="t-name">Verben und Pronomen</div><div class="t-sub">sein · heißen · kommen · wohnen · sprechen</div></div><span class="t-badge">Grammatik</span></div>
+    <div class="t-row" onclick="goToGram(3)"><span class="t-ico">🔢</span><div class="t-main"><div class="t-name">Zahlen 0–20 und Alphabet</div><div class="t-sub">Telefonnummern, E-Mail-Adressen, buchstabieren</div></div><span class="t-badge">Grammatik</span></div>
+    <div class="t-row" onclick="navTo('laender')"><span class="t-ico">🌍</span><div class="t-main"><div class="t-name">Länder und Sprachen</div><div class="t-sub">Olivia, Gabriel, Alessia, Boris, Saki, Kateb</div></div><span class="t-badge">Lesen</span></div>
+    <div class="t-row" onclick="navTo('netzwerk')"><span class="t-ico">🏠</span><div class="t-main"><div class="t-name">Die Netzwerk-WG</div><div class="t-sub">Anna, Luca, Bea und Max</div></div><span class="t-badge">Hören</span></div>
+    <div class="t-row" onclick="navTo('international')"><span class="t-ico">🌐</span><div class="t-main"><div class="t-name">Deutsch international</div><div class="t-sub">Deutsche Wörter in anderen Sprachen</div></div><span class="t-badge">Landeskunde</span></div>
+  </div>
+</div>
+
+<!-- ══ GRAMMAR ══ -->
+<div class="screen" id="s-grammar">
+  <div class="sec-h">📚 Grammatik</div>
+  <div class="g-tabs">
+    <button class="g-tab active" onclick="switchGTab(0,this)">👋 Grüßen</button>
+    <button class="g-tab" onclick="switchGTab(1,this)">🙋 Vorstellen</button>
+    <button class="g-tab" onclick="switchGTab(2,this)">⚙️ Verben</button>
+    <button class="g-tab" onclick="switchGTab(3,this)">🔢 Zahlen & ABC</button>
+  </div>
+
+  <!-- PANEL 0: Grüßen -->
+  <div class="g-panel active" id="gp-0">
+    <div class="gcard">
+      <div class="gcard-title">Grüßen und Verabschieden <span class="gcard-badge">Kommunikation</span></div>
+      <div class="gcard-desc">In German, how you greet someone depends on the time of day and whether you know them well. There are two registers: informal (du) and formal (Sie).</div>
+      <div class="rule-box">📌 Informell (friends, young people): Hallo! · Tschüs! · Ciao!<br>📌 Formell (strangers, work, older people): Guten Tag! · Auf Wiedersehen!</div>
+
+      <div class="section-h">🌅 Tageszeiten-Grüße (Time-based greetings)</div>
+      <div class="ex-grid">
+        <div class="ex-item"><div class="ex-de">☀️ <strong>Guten Morgen!</strong></div><div class="ex-en">Good morning! (early morning)</div></div>
+        <div class="ex-item"><div class="ex-de">🌤️ <strong>Guten Tag!</strong></div><div class="ex-en">Good day! / Hello! (daytime, formal)</div></div>
+        <div class="ex-item"><div class="ex-de">🌆 <strong>Guten Abend!</strong></div><div class="ex-en">Good evening!</div></div>
+        <div class="ex-item"><div class="ex-de">🌙 <strong>Gute Nacht!</strong></div><div class="ex-en">Good night! (when going to sleep)</div></div>
+      </div>
+
+      <div class="section-h">💬 Wie geht's? (How are you?)</div>
+      <div class="ex-grid">
+        <div class="ex-item"><div class="ex-de">Wie geht es Ihnen?</div><div class="ex-en">How are you? (formal)</div></div>
+        <div class="ex-item"><div class="ex-de">Wie geht's dir? / Wie geht's?</div><div class="ex-en">How are you? (informal)</div></div>
+        <div class="ex-item"><div class="ex-de">Danke, sehr gut! ☺☺</div><div class="ex-en">Thank you, very well!</div></div>
+        <div class="ex-item"><div class="ex-de">Danke, gut. ☺</div><div class="ex-en">Thanks, good.</div></div>
+        <div class="ex-item"><div class="ex-de">Ganz gut. ☺</div><div class="ex-en">Pretty good.</div></div>
+        <div class="ex-item"><div class="ex-de">Auch gut, danke. Und dir?</div><div class="ex-en">Also good, thanks. And you? (informal)</div></div>
+        <div class="ex-item"><div class="ex-de">Danke, gut. Und Ihnen?</div><div class="ex-en">Thanks, good. And you? (formal)</div></div>
+      </div>
+
+      <div class="section-h">👋 Verabschiedung (Saying goodbye)</div>
+      <div class="ex-grid">
+        <div class="ex-item"><div class="ex-de"><strong>Tschüs! / Tschüss!</strong></div><div class="ex-en">Bye! (informal)</div></div>
+        <div class="ex-item"><div class="ex-de"><strong>Ciao!</strong></div><div class="ex-en">Bye! (very informal, Italian loanword)</div></div>
+        <div class="ex-item"><div class="ex-de"><strong>Bis bald!</strong></div><div class="ex-en">See you soon!</div></div>
+        <div class="ex-item"><div class="ex-de"><strong>Auf Wiedersehen!</strong></div><div class="ex-en">Goodbye! (formal, "until we see again")</div></div>
+        <div class="ex-item"><div class="ex-de"><strong>Gute Nacht!</strong></div><div class="ex-en">Good night! (also a farewell at night)</div></div>
+      </div>
+
+      <div class="section-h">🎭 Beispieldialoge (Example dialogues)</div>
+      <div class="dialog-card">
+        <div class="dialog-title">💬 Informell: Julia und Niklas</div>
+        <div class="d-bubble"><span class="d-speaker sp-a">Julia</span><div class="d-text">Hallo Niklas!</div></div>
+        <div class="d-bubble"><span class="d-speaker sp-b">Niklas</span><div class="d-text">Hallo Julia! Wie geht's dir?</div></div>
+        <div class="d-bubble"><span class="d-speaker sp-a">Julia</span><div class="d-text">Danke, sehr gut! Und dir?</div></div>
+        <div class="d-bubble"><span class="d-speaker sp-b">Niklas</span><div class="d-text">Auch gut, danke.</div></div>
+      </div>
+      <div class="dialog-card">
+        <div class="dialog-title">💬 Formell: Frau Weber und Herr Hansen</div>
+        <div class="d-bubble"><span class="d-speaker sp-a">Fr. Weber</span><div class="d-text">Guten Morgen, Herr Hansen.</div></div>
+        <div class="d-bubble"><span class="d-speaker sp-b">Hr. Hansen</span><div class="d-text">Guten Morgen, Frau Weber. Wie geht es Ihnen?</div></div>
+        <div class="d-bubble"><span class="d-speaker sp-a">Fr. Weber</span><div class="d-text">Danke, gut. Und Ihnen?</div></div>
+        <div class="d-bubble"><span class="d-speaker sp-b">Hr. Hansen</span><div class="d-text">Auch gut, danke.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PANEL 1: Vorstellen / W-Fragen -->
+  <div class="g-panel" id="gp-1">
+    <div class="gcard">
+      <div class="gcard-title">Sich vorstellen <span class="gcard-badge">W-Fragen und Aussagesatz</span></div>
+      <div class="gcard-desc">To introduce yourself in German, you need W-question words and the basic sentence (Aussagesatz). The verb always comes second in a statement.</div>
+
+      <div class="rule-box">📌 Verb-second rule (V2): In German statements, the verb is ALWAYS in position 2.<br>Ich <strong>heiße</strong> Anna. · Ich <strong>wohne</strong> in Frankfurt. · Ich <strong>komme</strong> aus Spanien.</div>
+
+      <div class="section-h">❓ W-Fragen (Question words)</div>
+      <table class="conj-table">
+        <tr><th>W-Wort</th><th>Verb</th><th>Beispiel</th><th>English</th></tr>
+        <tr><td><strong>Wie</strong></td><td>heißt / bist</td><td>Wie heißt du?</td><td>What is your name?</td></tr>
+        <tr><td><strong>Wie</strong></td><td>heißen</td><td>Wie heißen Sie?</td><td>What is your name? (formal)</td></tr>
+        <tr><td><strong>Woher</strong></td><td>kommst / kommen</td><td>Woher kommst du?</td><td>Where are you from?</td></tr>
+        <tr><td><strong>Wo</strong></td><td>wohnst / wohnen</td><td>Wo wohnst du?</td><td>Where do you live?</td></tr>
+        <tr><td><strong>Welche</strong></td><td>sprichst / sprechen</td><td>Welche Sprachen sprichst du?</td><td>Which languages do you speak?</td></tr>
+        <tr><td><strong>Wer</strong></td><td>bist / sind</td><td>Wer bist du?</td><td>Who are you?</td></tr>
+        <tr><td><strong>Wie</strong></td><td>ist</td><td>Wie ist deine Nummer?</td><td>What is your number?</td></tr>
+      </table>
+
+      <div class="section-h">✅ Aussagesätze (Statements / Answers)</div>
+      <div class="struct">
+        <div class="struct-row"><span class="sb slbl">Subjekt</span><span class="sb slbl">Verb (Pos.2)</span><span class="sb slbl">Rest</span></div>
+        <div class="struct-row"><span class="sb s1">Ich</span><span class="sb s2">heiße</span><span class="sb s3">Julia.</span></div>
+        <div class="struct-row"><span class="sb s1">Ich</span><span class="sb s2">bin</span><span class="sb s3">Niklas.</span></div>
+        <div class="struct-row"><span class="sb s1">Ich</span><span class="sb s2">komme</span><span class="sb s3">aus Spanien. / Aus Spanien.</span></div>
+        <div class="struct-row"><span class="sb s1">Ich</span><span class="sb s2">wohne</span><span class="sb s3">in Frankfurt. / In Frankfurt.</span></div>
+        <div class="struct-row"><span class="sb s1">Ich</span><span class="sb s2">spreche</span><span class="sb s3">Deutsch und Russisch.</span></div>
+      </div>
+
+      <div class="tip-box">💡 du vs. Sie:<br><strong>du</strong> (informal) = friends, young people, family · Wer bist du? Wie heißt du?<br><strong>Sie</strong> (formal) = strangers, colleagues, older people · Wie heißen Sie? Wie ist Ihr Name?<br>Sie is ALWAYS capitalized when used as formal "you"!</div>
+
+      <div class="section-h">🌍 Woher + aus / Wo + in</div>
+      <div class="ex-grid">
+        <div class="ex-item"><div class="ex-de">Ich komme <strong>aus</strong> Deutschland. / <strong>aus</strong> Spanien. / <strong>aus</strong> Japan.</div><div class="ex-en">"aus" = from a country</div></div>
+        <div class="ex-item"><div class="ex-de">Ich komme <strong>aus der</strong> Schweiz. / <strong>aus der</strong> Türkei. / <strong>aus der</strong> Ukraine.</div><div class="ex-en">feminine countries need "aus der"!</div></div>
+        <div class="ex-item"><div class="ex-de">Ich komme <strong>aus den</strong> USA. / <strong>aus den</strong> Niederlanden.</div><div class="ex-en">plural countries: "aus den"</div></div>
+        <div class="ex-item"><div class="ex-de">Ich wohne <strong>in</strong> Frankfurt. / <strong>in</strong> Berlin. / <strong>in</strong> Köln.</div><div class="ex-en">"in" = in a city or country</div></div>
+      </div>
+
+      <div class="section-h">📧 Kontaktdaten (Contact details)</div>
+      <div class="ex-grid">
+        <div class="ex-item"><div class="ex-de">Wie ist Ihre/deine <strong>Telefonnummer</strong>?</div><div class="ex-en">What is your phone number?</div><div class="ex-note">0650 – 32 ... / Null sechs fünf null ...</div></div>
+        <div class="ex-item"><div class="ex-de">Wie ist Ihre/deine <strong>Handynummer</strong>?</div><div class="ex-en">What is your mobile number?</div><div class="ex-note">Null acht ...</div></div>
+        <div class="ex-item"><div class="ex-de">Wie ist Ihre/deine <strong>E-Mail-Adresse</strong>?</div><div class="ex-en">What is your email address?</div><div class="ex-note">alexis_barbos@quinnet.com = "alexis Unterstrich barbos at quinnet Punkt com"</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PANEL 2: Verben -->
+  <div class="g-panel" id="gp-2">
+    <div class="gcard">
+      <div class="gcard-title">Verben und Personalpronomem <span class="gcard-badge">Konjugation</span></div>
+      <div class="gcard-desc">The 5 key verbs for A1 Kapitel 1. These are the building blocks of every introduction. Learn each form; they are used constantly!</div>
+      <div class="rule-box">📌 German verbs change their ending based on the subject (ich/du/er/Sie). The stem stays the same, but the ending changes: ich -e · du -st · er/sie -t · Sie -en</div>
+
+      <div class="section-h">🔵 sein (to be) · IRREGULAR</div>
+      <table class="conj-table">
+        <tr><th>Pronomen</th><th>sein</th><th>Beispiel</th></tr>
+        <tr><td>ich</td><td><span class="conj-highlight">bin</span></td><td>Ich bin Julia.</td></tr>
+        <tr><td>du</td><td><span class="conj-highlight">bist</span></td><td>Du bist Niklas.</td></tr>
+        <tr><td>er / sie</td><td><span class="conj-highlight">ist</span></td><td>Er ist Jan. / Sie ist Anna.</td></tr>
+        <tr><td>Sie (formal)</td><td><span class="conj-highlight">sind</span></td><td>Sie sind Frau Weber.</td></tr>
+      </table>
+      <div class="warn-box">⚠️ "sein" is completely irregular: memorise these 4 forms! No pattern from the infinitive.</div>
+
+      <div class="section-h">🔴 heißen (to be called)</div>
+      <table class="conj-table">
+        <tr><th>Pronomen</th><th>heißen</th><th>Beispiel</th></tr>
+        <tr><td>ich</td><td><span class="conj-highlight">heiße</span></td><td>Ich heiße Nina.</td></tr>
+        <tr><td>du</td><td><span class="conj-highlight">heißt</span></td><td>Wie heißt du?</td></tr>
+        <tr><td>er / sie</td><td><span class="conj-highlight">heißt</span></td><td>Er heißt Jan.</td></tr>
+        <tr><td>Sie (formal)</td><td><span class="conj-highlight">heißen</span></td><td>Wie heißen Sie?</td></tr>
+      </table>
+
+      <div class="section-h">🟢 kommen (to come from)</div>
+      <table class="conj-table">
+        <tr><th>Pronomen</th><th>kommen</th><th>Beispiel</th></tr>
+        <tr><td>ich</td><td><span class="conj-highlight">komme</span></td><td>Ich komme aus Spanien.</td></tr>
+        <tr><td>du</td><td><span class="conj-highlight">kommst</span></td><td>Woher kommst du?</td></tr>
+        <tr><td>er / sie</td><td><span class="conj-highlight">kommt</span></td><td>Sie kommt aus Japan.</td></tr>
+        <tr><td>Sie (formal)</td><td><span class="conj-highlight">kommen</span></td><td>Woher kommen Sie?</td></tr>
+      </table>
+
+      <div class="section-h">🟠 wohnen (to live)</div>
+      <table class="conj-table">
+        <tr><th>Pronomen</th><th>wohnen</th><th>Beispiel</th></tr>
+        <tr><td>ich</td><td><span class="conj-highlight">wohne</span></td><td>Ich wohne in Zürich.</td></tr>
+        <tr><td>du</td><td><span class="conj-highlight">wohnst</span></td><td>Wo wohnst du?</td></tr>
+        <tr><td>er / sie</td><td><span class="conj-highlight">wohnt</span></td><td>Er wohnt in Salzburg.</td></tr>
+        <tr><td>Sie (formal)</td><td><span class="conj-highlight">wohnen</span></td><td>Wo wohnen Sie?</td></tr>
+      </table>
+
+      <div class="section-h">🟣 sprechen (to speak) · VOWEL CHANGE</div>
+      <table class="conj-table">
+        <tr><th>Pronomen</th><th>sprechen</th><th>Beispiel</th></tr>
+        <tr><td>ich</td><td><span class="conj-highlight">spreche</span></td><td>Ich spreche Deutsch.</td></tr>
+        <tr><td>du</td><td><span class="conj-highlight">sprichst</span></td><td>Welche Sprachen sprichst du?</td></tr>
+        <tr><td>er / sie</td><td><span class="conj-highlight">spricht</span></td><td>Sie spricht Japanisch.</td></tr>
+        <tr><td>Sie (formal)</td><td><span class="conj-highlight">sprechen</span></td><td>Welche Sprachen sprechen Sie?</td></tr>
+      </table>
+      <div class="tip-box">💡 Vowel change: sprechen → du sprichst / er spricht (e → i). This is common in strong verbs!</div>
+
+      <div class="section-h">👤 Personalpronomem in Texten</div>
+      <div class="ex-grid">
+        <div class="ex-item"><div class="ex-de">Das ist <strong>Frau Lang</strong>. <strong>Sie</strong> kommt aus Deutschland. <strong>Sie</strong> wohnt in Frankfurt.</div><div class="ex-en">She = she (female person: "sie" in lowercase</div></div>
+        <div class="ex-item"><div class="ex-de">Das ist <strong>Jan</strong>. <strong>Er</strong> kommt aus Frankfurt. <strong>Er</strong> wohnt in Zürich.</div><div class="ex-en">Er = he (male person)</div></div>
+        <div class="ex-item"><div class="ex-de">Guten Tag, <strong>Sie</strong> sind Frau Kowalski?</div><div class="ex-en">Sie (capital S) = formal "you"</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PANEL 3: Zahlen & Alphabet -->
+  <div class="g-panel" id="gp-3">
+    <div class="gcard">
+      <div class="gcard-title">Zahlen 0–20 <span class="gcard-badge">Ziffern und Wörter</span></div>
+      <div class="gcard-desc">Zahlen auf Deutsch lernen. Wichtig für Telefonnummern, Adressen und Preise!</div>
+      <div class="num-grid">
+        <div class="num-card"><div class="num-n">0</div><div class="num-w">null</div></div>
+        <div class="num-card"><div class="num-n">1</div><div class="num-w">eins</div></div>
+        <div class="num-card"><div class="num-n">2</div><div class="num-w">zwei</div></div>
+        <div class="num-card"><div class="num-n">3</div><div class="num-w">drei</div></div>
+        <div class="num-card"><div class="num-n">4</div><div class="num-w">vier</div></div>
+        <div class="num-card"><div class="num-n">5</div><div class="num-w">fünf</div></div>
+        <div class="num-card"><div class="num-n">6</div><div class="num-w">sechs</div></div>
+        <div class="num-card"><div class="num-n">7</div><div class="num-w">sieben</div></div>
+        <div class="num-card"><div class="num-n">8</div><div class="num-w">acht</div></div>
+        <div class="num-card"><div class="num-n">9</div><div class="num-w">neun</div></div>
+        <div class="num-card"><div class="num-n">10</div><div class="num-w">zehn</div></div>
+        <div class="num-card"><div class="num-n">11</div><div class="num-w">elf</div></div>
+        <div class="num-card"><div class="num-n">12</div><div class="num-w">zwölf</div></div>
+        <div class="num-card"><div class="num-n">13</div><div class="num-w">dreizehn</div></div>
+        <div class="num-card"><div class="num-n">14</div><div class="num-w">vierzehn</div></div>
+        <div class="num-card"><div class="num-n">15</div><div class="num-w">fünfzehn</div></div>
+        <div class="num-card"><div class="num-n">16</div><div class="num-w">sechzehn</div></div>
+        <div class="num-card"><div class="num-n">17</div><div class="num-w">siebzehn</div></div>
+        <div class="num-card"><div class="num-n">18</div><div class="num-w">achtzehn</div></div>
+        <div class="num-card"><div class="num-n">19</div><div class="num-w">neunzehn</div></div>
+        <div class="num-card"><div class="num-n">20</div><div class="num-w">zwanzig</div></div>
+      </div>
+      <div class="tip-box">💡 Telefonnummern: Man liest Ziffern einzeln: 0650 = null · sechs · fünf · null<br>Pause zwischen Blöcken: 0154-76895321 = null-eins-fünf-vier, dann sieben-sechs-acht-...</div>
+
+      <div class="section-h">🔤 Das Alphabet</div>
+      <div class="gcard-desc">Das deutsche Alphabet hat 26 Buchstaben + 4 Sonderzeichen: Ä, Ö, Ü, ß</div>
+      <div class="alpha-grid">
+        <div class="alpha-card"><div class="alpha-big">Aa</div><div class="alpha-sm">a</div></div>
+        <div class="alpha-card"><div class="alpha-big">Bb</div><div class="alpha-sm">be</div></div>
+        <div class="alpha-card"><div class="alpha-big">Cc</div><div class="alpha-sm">tse</div></div>
+        <div class="alpha-card"><div class="alpha-big">Dd</div><div class="alpha-sm">de</div></div>
+        <div class="alpha-card"><div class="alpha-big">Ee</div><div class="alpha-sm">e</div></div>
+        <div class="alpha-card"><div class="alpha-big">Ff</div><div class="alpha-sm">ef</div></div>
+        <div class="alpha-card"><div class="alpha-big">Gg</div><div class="alpha-sm">ge</div></div>
+        <div class="alpha-card"><div class="alpha-big">Hh</div><div class="alpha-sm">ha</div></div>
+        <div class="alpha-card"><div class="alpha-big">Ii</div><div class="alpha-sm">i</div></div>
+        <div class="alpha-card"><div class="alpha-big">Jj</div><div class="alpha-sm">jot</div></div>
+        <div class="alpha-card"><div class="alpha-big">Kk</div><div class="alpha-sm">ka</div></div>
+        <div class="alpha-card"><div class="alpha-big">Ll</div><div class="alpha-sm">el</div></div>
+        <div class="alpha-card"><div class="alpha-big">Mm</div><div class="alpha-sm">em</div></div>
+        <div class="alpha-card"><div class="alpha-big">Nn</div><div class="alpha-sm">en</div></div>
+        <div class="alpha-card"><div class="alpha-big">Oo</div><div class="alpha-sm">o</div></div>
+        <div class="alpha-card"><div class="alpha-big">Pp</div><div class="alpha-sm">pe</div></div>
+        <div class="alpha-card"><div class="alpha-big">Qq</div><div class="alpha-sm">ku</div></div>
+        <div class="alpha-card"><div class="alpha-big">Rr</div><div class="alpha-sm">er</div></div>
+        <div class="alpha-card"><div class="alpha-big">Ss</div><div class="alpha-sm">es</div></div>
+        <div class="alpha-card"><div class="alpha-big">Tt</div><div class="alpha-sm">te</div></div>
+        <div class="alpha-card"><div class="alpha-big">Uu</div><div class="alpha-sm">u</div></div>
+        <div class="alpha-card"><div class="alpha-big">Vv</div><div class="alpha-sm">fau</div></div>
+        <div class="alpha-card"><div class="alpha-big">Ww</div><div class="alpha-sm">we</div></div>
+        <div class="alpha-card"><div class="alpha-big">Xx</div><div class="alpha-sm">iks</div></div>
+        <div class="alpha-card"><div class="alpha-big">Yy</div><div class="alpha-sm">ypsilon</div></div>
+        <div class="alpha-card"><div class="alpha-big">Zz</div><div class="alpha-sm">tset</div></div>
+        <div class="alpha-card"><div class="alpha-big">Ää</div><div class="alpha-sm">ä</div></div>
+        <div class="alpha-card"><div class="alpha-big">Öö</div><div class="alpha-sm">ö</div></div>
+        <div class="alpha-card"><div class="alpha-big">Üü</div><div class="alpha-sm">ü</div></div>
+        <div class="alpha-card"><div class="alpha-big">ß</div><div class="alpha-sm">estset</div></div>
+      </div>
+
+      <div class="section-h">📧 E-Mail-Adressen lesen</div>
+      <div class="rule-box">@ = at · . = Punkt · _ = Unterstrich · - = Minus / Bindestrich<br>Beispiel: alexis_barbos@quinnet.com<br>= "alexis Unterstrich barbos at quinnet Punkt com"</div>
+      <div class="ex-grid">
+        <div class="ex-item"><div class="ex-de">ruben-gonzalez@...</div><div class="ex-en">ruben Minus gonzalez at ...</div></div>
+        <div class="ex-item"><div class="ex-de">alexis_barbos@quinnet.com</div><div class="ex-en">alexis Unterstrich barbos at quinnet Punkt com</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ EXERCISES ══ -->
+<div class="screen" id="s-exercises">
+  <div class="sec-h">✏️ Übungen</div>
+  <div class="ex-tabs">
+    <button class="ex-tab active" onclick="switchExTab(0,this)">📖 Lesen</button>
+    <button class="ex-tab" onclick="switchExTab(1,this)">🗣️ Sprechen</button>
+    <button class="ex-tab" onclick="switchExTab(2,this)">✍️ Schreiben</button>
+  </div>
+  <div class="ex-panel active" id="ep-0"><div id="lesen-set"></div></div>
+  <div class="ex-panel" id="ep-1"><div id="sprechen-set"></div></div>
+  <div class="ex-panel" id="ep-2"><div id="schreiben-set"></div></div>
+</div>
+
+<!-- ══ VOCAB ══ -->
+<div class="screen" id="s-vocab">
+  <div class="sec-h">🔤 Vokabeln</div>
+  <div class="search-wrap"><span class="search-icon">🔍</span><input class="search-inp" id="v-search" placeholder="Wort suchen…" oninput="filterVocab()" autocomplete="off"></div>
+  <div id="vocab-container"></div>
+</div>
+
+<!-- ══ LEADERBOARD ══ -->
+<div class="screen" id="s-leaderboard">
+  <div class="lb-header"><h2 style="font-size:1.4rem;font-weight:900;margin-bottom:4px;">🏆 Rangliste</h2><p style="font-size:.8rem;opacity:.85;">Top Lernende · A1 Kapitel 1</p></div>
+  <div class="podium">
+    <div class="pod pod-2"><div class="pod-inner"><div class="pod-rank">🥈</div><div class="pod-name">Lukas</div><div class="pod-pts">980</div></div></div>
+    <div class="pod pod-1"><div class="pod-inner"><div class="pod-rank">🥇</div><div class="pod-name">Sophie</div><div class="pod-pts">1150</div></div></div>
+    <div class="pod pod-3"><div class="pod-inner"><div class="pod-rank">🥉</div><div class="pod-name">Mei</div><div class="pod-pts">870</div></div></div>
+  </div>
+  <div id="lb-list"></div>
+</div>
+
+<!-- ══ WÖRTERBUCH ══ -->
+<div class="screen" id="s-woerterbuch">
+  <div class="sec-h">📖 Vollständiges Wörterbuch</div>
+  <p style="font-size:.88rem;color:var(--muted);margin-bottom:14px;line-height:1.6;">Alle Vokabeln zu A1 Kapitel 1. Tippe auf ein Wort für Details.</p>
+  <div class="search-wrap"><span class="search-icon">🔍</span><input class="search-inp" id="wb-search" placeholder="Wort suchen…" oninput="filterWB()" autocomplete="off"></div>
+  <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px;" id="wb-filters">
+    <button class="wb-filter active" onclick="filterWBCat('all',this)">Alle</button>
+    <button class="wb-filter" onclick="filterWBCat('Nomen',this)">🏷️ Nomen</button>
+    <button class="wb-filter" onclick="filterWBCat('Verben',this)">⚡ Verben</button>
+    <button class="wb-filter" onclick="filterWBCat('Adjektive',this)">🎨 Adjektive</button>
+    <button class="wb-filter" onclick="filterWBCat('Ausdrücke',this)">💬 Ausdrücke</button>
+  </div>
+  <div id="wb-container"></div>
+</div>
+
+
+<!-- ══ LÄNDER UND SPRACHEN ══ -->
+<div class="screen" id="s-laender">
+  <div class="sec-h">🌍 Länder und Sprachen</div>
+  <p style="font-size:.88rem;color:var(--muted);margin-bottom:16px;line-height:1.6;">Hier lernst du, woher verschiedene Personen kommen, wo sie wohnen und welche Sprachen sie sprechen.</p>
+
+  <div class="rule-box">📌 Woher kommst du? · Aus <strong>Deutschland</strong>. · Aus <strong>der Schweiz</strong>. · Aus <strong>den USA</strong>.<br>📌 Wo wohnst du? · In <strong>Frankfurt</strong>. · In <strong>Köln</strong>. · In <strong>Berlin</strong>.</div>
+
+  <div class="sec-h" style="font-size:.9rem;">👥 Die Personen</div>
+
+  <div class="person-grid">
+    <div class="person-card">
+      <div class="person-emoji">👩🏿</div>
+      <div>
+        <div class="person-name">Olivia Miller</div>
+        <div class="person-detail">
+          🌍 Kommt aus: <strong>den USA</strong> (San Francisco)<br>
+          🏙️ Wohnt in: <strong>San Francisco</strong><br>
+          🗣️ Spricht: <strong>Englisch</strong> und <strong>Deutsch</strong><br>
+          📚 Lernt: <strong>Spanisch</strong>
+        </div>
+      </div>
+    </div>
+    <div class="person-card">
+      <div class="person-emoji">👨🏽</div>
+      <div>
+        <div class="person-name">Gabriel Santos</div>
+        <div class="person-detail">
+          🌍 Kommt aus: <strong>Brasilien</strong><br>
+          🏙️ Wohnt in: <strong>Köln</strong>, Deutschland<br>
+          🗣️ Spricht: <strong>Portugiesisch</strong>, <strong>Deutsch</strong> und <strong>Englisch</strong>
+        </div>
+      </div>
+    </div>
+    <div class="person-card">
+      <div class="person-emoji">👩🏻‍🦰</div>
+      <div>
+        <div class="person-name">Alessia Conti</div>
+        <div class="person-detail">
+          🌍 Kommt aus: <strong>der Schweiz</strong><br>
+          🏙️ Wohnt in: <strong>Lugano</strong><br>
+          🗣️ Spricht: <strong>Italienisch</strong>, <strong>Französisch</strong> und <strong>Deutsch</strong>
+        </div>
+      </div>
+    </div>
+    <div class="person-card">
+      <div class="person-emoji">👨🏼</div>
+      <div>
+        <div class="person-name">Boris Walder</div>
+        <div class="person-detail">
+          🌍 Kommt aus: <strong>Österreich</strong><br>
+          🏙️ Wohnt in: <strong>Salzburg</strong><br>
+          🗣️ Spricht: <strong>Deutsch</strong> und <strong>Englisch</strong><br>
+          📚 Lernt: <strong>Arabisch</strong>
+        </div>
+      </div>
+    </div>
+    <div class="person-card">
+      <div class="person-emoji">👩🏻</div>
+      <div>
+        <div class="person-name">Saki Tanaka</div>
+        <div class="person-detail">
+          🌍 Kommt aus: <strong>Japan</strong> (Tokio)<br>
+          🏙️ Wohnt in: <strong>Berlin</strong><br>
+          🗣️ Spricht: <strong>Japanisch</strong> und <strong>Deutsch</strong><br>
+          📚 Lernt: <strong>Englisch</strong>
+        </div>
+      </div>
+    </div>
+    <div class="person-card">
+      <div class="person-emoji">👨🏽‍🦱</div>
+      <div>
+        <div class="person-name">Kateb Brahim</div>
+        <div class="person-detail">
+          🌍 Kommt aus: <strong>Algerien</strong><br>
+          🏙️ Wohnt in: <strong>Paris</strong><br>
+          🗣️ Spricht: <strong>Arabisch</strong> und <strong>Französisch</strong><br>
+          📚 Lernt: <strong>Deutsch</strong>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec-h" style="font-size:.9rem;">🗺️ Länder und Sprachen: Übersicht</div>
+  <div class="gcard">
+    <div class="gcard-desc">Wichtig: Manche Länder brauchen einen Artikel! Lerne diese auswendig.</div>
+    <table class="conj-table">
+      <tr><th>Land</th><th>Artikel</th><th>Sprache</th><th>Aus... (Herkunft)</th></tr>
+      <tr><td>Deutschland</td><td>kein Art.</td><td>Deutsch</td><td>aus Deutschland</td></tr>
+      <tr><td>Österreich</td><td>kein Art.</td><td>Deutsch</td><td>aus Österreich</td></tr>
+      <tr><td>die Schweiz</td><td><strong>die</strong></td><td>Deutsch / Französisch / Italienisch</td><td>aus <strong>der</strong> Schweiz</td></tr>
+      <tr><td>die Türkei</td><td><strong>die</strong></td><td>Türkisch</td><td>aus <strong>der</strong> Türkei</td></tr>
+      <tr><td>die Ukraine</td><td><strong>die</strong></td><td>Ukrainisch</td><td>aus <strong>der</strong> Ukraine</td></tr>
+      <tr><td>die USA</td><td><strong>die (Pl.)</strong></td><td>Englisch</td><td>aus <strong>den</strong> USA</td></tr>
+      <tr><td>Spanien</td><td>kein Art.</td><td>Spanisch</td><td>aus Spanien</td></tr>
+      <tr><td>Frankreich</td><td>kein Art.</td><td>Französisch</td><td>aus Frankreich</td></tr>
+      <tr><td>Italien</td><td>kein Art.</td><td>Italienisch</td><td>aus Italien</td></tr>
+      <tr><td>Brasilien</td><td>kein Art.</td><td>Portugiesisch</td><td>aus Brasilien</td></tr>
+      <tr><td>Japan</td><td>kein Art.</td><td>Japanisch</td><td>aus Japan</td></tr>
+      <tr><td>Algerien</td><td>kein Art.</td><td>Arabisch</td><td>aus Algerien</td></tr>
+      <tr><td>Russland</td><td>kein Art.</td><td>Russisch</td><td>aus Russland</td></tr>
+      <tr><td>Polen</td><td>kein Art.</td><td>Polnisch</td><td>aus Polen</td></tr>
+    </table>
+    <div class="tip-box">💡 Regel: Länder mit Artikel (die Schweiz, die Türkei, die USA) brauchen "aus der" oder "aus den" · nicht einfach "aus"!<br>Alle anderen Länder: einfach "aus" + Ländername.</div>
+  </div>
+
+  <div class="sec-h" style="font-size:.9rem;">💬 Musterdialog: Sich vorstellen</div>
+  <div class="dialog-card">
+    <div class="dialog-title">💬 Selina Lang: Reiseführerin</div>
+    <div class="d-bubble"><span class="d-speaker sp-a">Frage</span><div class="d-text">Woher kommen Sie, Frau Lang?</div></div>
+    <div class="d-bubble"><span class="d-speaker sp-b">Selina</span><div class="d-text">Ich komme aus Deutschland.</div></div>
+    <div class="d-bubble"><span class="d-speaker sp-a">Frage</span><div class="d-text">Welche Sprachen sprechen Sie?</div></div>
+    <div class="d-bubble"><span class="d-speaker sp-b">Selina</span><div class="d-text">Ich spreche Spanisch, Englisch und Deutsch.</div></div>
+    <div class="d-bubble"><span class="d-speaker sp-a">Frage</span><div class="d-text">Wo wohnen Sie?</div></div>
+    <div class="d-bubble"><span class="d-speaker sp-b">Selina</span><div class="d-text">Ich wohne in Frankfurt.</div></div>
+  </div>
+</div>
+
+<!-- ══ DIE NETZWERK-WG ══ -->
+<div class="screen" id="s-netzwerk">
+  <div class="sec-h">🏠 Die Netzwerk-WG</div>
+  <p style="font-size:.88rem;color:var(--muted);margin-bottom:16px;line-height:1.6;">Die Netzwerk-WG (Wohngemeinschaft = shared flat) ist eine Film-Geschichte. Lerne die Personen kennen!</p>
+
+  <div class="rule-box">📌 WG = <strong>W</strong>ohn<strong>g</strong>emeinschaft = shared flat / apartment<br>Die Personen: <strong>Anna, Luca, Bea</strong> und <strong>Max</strong> wohnen zusammen in München.</div>
+
+  <div class="sec-h" style="font-size:.9rem;">👥 Die Bewohner der WG</div>
+  <div class="person-grid">
+    <div class="person-card">
+      <div class="person-emoji">👩🏻</div>
+      <div>
+        <div class="person-name">Anna</div>
+        <div class="person-detail">
+          Anna ist <strong>neu</strong> in der WG.<br>
+          Sie kommt aus <strong>Berlin</strong>.<br>
+          🗣️ Sagt: <em>"Bea, das ist Anna."</em><br>
+          📱 Ihre Nummer: noch unbekannt
+        </div>
+      </div>
+    </div>
+    <div class="person-card">
+      <div class="person-emoji">👨🏼</div>
+      <div>
+        <div class="person-name">Luca</div>
+        <div class="person-detail">
+          Luca wohnt schon in der WG.<br>
+          Er kommt aus <strong>München</strong>.<br>
+          🗣️ Sagt: <em>"Ah, du bist neu hier. Ich bin Luca."</em><br>
+          🗣️ Fragt: <em>"Woher kommst du denn?"</em>
+        </div>
+      </div>
+    </div>
+    <div class="person-card">
+      <div class="person-emoji">👩🏽</div>
+      <div>
+        <div class="person-name">Bea</div>
+        <div class="person-detail">
+          Bea ist Studentin.<br>
+          Sie kommt aus <strong>Hannover</strong>.<br>
+          Nachname: <strong>Bea R.</strong><br>
+          📱 Handynummer: <strong>0154-76895321</strong>
+        </div>
+      </div>
+    </div>
+    <div class="person-card">
+      <div class="person-emoji">👨🏻‍🦱</div>
+      <div>
+        <div class="person-name">Max</div>
+        <div class="person-detail">
+          Max ist nicht da (not home).<br>
+          Er kommt aus <strong>München</strong>.<br>
+          📱 Handynummer: <strong>01</strong> (unvollständig)<br>
+          🗣️ Frau Müller sagt: <em>"Nein, do sind Sie hier falsch."</em>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec-h" style="font-size:.9rem;">🎬 Szenen aus dem Film</div>
+  <div class="dialog-card">
+    <div class="dialog-title">🎬 Szene 1: Bea stellt Anna vor</div>
+    <div class="d-bubble"><span class="d-speaker sp-a">Bea</span><div class="d-text">Bea, das ist Anna.</div></div>
+    <div class="d-bubble"><span class="d-speaker sp-b">Anna</span><div class="d-text">Hallo!</div></div>
+  </div>
+  <div class="dialog-card">
+    <div class="dialog-title">🎬 Szene 2: Luca trifft Anna</div>
+    <div class="d-bubble"><span class="d-speaker sp-a">Luca</span><div class="d-text">Ah, du bist neu hier. Ich bin Luca.</div></div>
+    <div class="d-bubble"><span class="d-speaker sp-b">Anna</span><div class="d-text">Hallo Luca! Ich bin Anna.</div></div>
+    <div class="d-bubble"><span class="d-speaker sp-a">Luca</span><div class="d-text">Woher kommst du denn?</div></div>
+    <div class="d-bubble"><span class="d-speaker sp-b">Anna</span><div class="d-text">Aus Berlin.</div></div>
+  </div>
+  <div class="dialog-card">
+    <div class="dialog-title">🎬 Szene 3: Telefonnummern</div>
+    <div class="d-bubble"><span class="d-speaker sp-a">Luca</span><div class="d-text">Und wie ist deine Nummer?</div></div>
+    <div class="d-bubble"><span class="d-speaker sp-b">Anna</span><div class="d-text">Null acht...</div></div>
+    <div class="d-bubble"><span class="d-speaker sp-a">Info</span><div class="d-text">Bea R. · 0154-76895321<br>= null-eins-fünf-vier, sieben-sechs-acht-neun-fünf-drei-zwei-eins</div></div>
+  </div>
+  <div class="dialog-card">
+    <div class="dialog-title">🎬 Szene 4: Frau Müller an der Tür</div>
+    <div class="d-bubble"><span class="d-speaker sp-a">Jemand</span><div class="d-text">Ist Max da?</div></div>
+    <div class="d-bubble"><span class="d-speaker sp-b">Fr. Müller</span><div class="d-text">Nein, do sind Sie hier falsch.</div></div>
+  </div>
+
+  <div class="gcard" style="margin-top:12px;">
+    <div class="gcard-title">📝 Nützliche Ausdrücke aus der WG</div>
+    <div class="ex-grid">
+      <div class="ex-item"><div class="ex-de">Ich bin neu hier.</div><div class="ex-en">I am new here.</div></div>
+      <div class="ex-item"><div class="ex-de">Woher kommst du denn?</div><div class="ex-en">So where are you from? ("denn" softens the question)</div></div>
+      <div class="ex-item"><div class="ex-de">Das ist Anna. / Das ist Luca.</div><div class="ex-en">This is Anna. / This is Luca.</div></div>
+      <div class="ex-item"><div class="ex-de">Und wie ist deine Nummer?</div><div class="ex-en">And what is your number?</div></div>
+      <div class="ex-item"><div class="ex-de">Max ist nicht da.</div><div class="ex-en">Max is not here / not home.</div></div>
+      <div class="ex-item"><div class="ex-de">Nein, hier sind Sie falsch.</div><div class="ex-en">No, you have the wrong place.</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ DEUTSCH INTERNATIONAL ══ -->
+<div class="screen" id="s-international">
+  <div class="sec-h">🌐 Deutsch international</div>
+  <p style="font-size:.88rem;color:var(--muted);margin-bottom:16px;line-height:1.6;">Viele deutsche Wörter sind weltweit bekannt! Sie wurden von anderen Sprachen übernommen, ohne Übersetzung.</p>
+
+  <div class="rule-box">💡 Über 150 deutsche Wörter werden weltweit in anderen Sprachen benutzt: von Kindergarten bis bis Autobahn. Das zeigt: Deutsch ist eine Weltsprache!</div>
+
+  <div class="sec-h" style="font-size:.9rem;">🗂️ Deutsche Wörter in anderen Sprachen</div>
+  <div class="loan-grid">
+    <div class="loan-card"><div class="loan-ico">🍞</div><div class="loan-de">Butterbrot</div><div class="loan-lang">🇷🇺 Russisch</div><div style="font-size:.75rem;color:var(--muted);">бутерброд (buterBROD)</div></div>
+    <div class="loan-card"><div class="loan-ico">🏥</div><div class="loan-de">Kranke</div><div class="loan-lang">🇯🇵 Japanisch</div><div style="font-size:.75rem;color:var(--muted);">クランケ (kuranke)</div></div>
+    <div class="loan-card"><div class="loan-ico">🛣️</div><div class="loan-de">Autobahn</div><div class="loan-lang">🇹🇷 Türkisch</div><div style="font-size:.75rem;color:var(--muted);">otoban</div></div>
+    <div class="loan-card"><div class="loan-ico">🧻</div><div class="loan-de">Handtuch</div><div class="loan-lang">🇮🇩 Indonesisch</div><div style="font-size:.75rem;color:var(--muted);">handuk</div></div>
+    <div class="loan-card"><div class="loan-ico">🌭</div><div class="loan-de">Würstchen</div><div class="loan-lang">🇮🇹 Italienisch</div><div style="font-size:.75rem;color:var(--muted);">wurstel</div></div>
+    <div class="loan-card"><div class="loan-ico">🍝</div><div class="loan-de">Nudeln</div><div class="loan-lang">🇭🇺 Ungarisch</div><div style="font-size:.75rem;color:var(--muted);">nudli</div></div>
+    <div class="loan-card"><div class="loan-ico">🏫</div><div class="loan-de">Kindergarten</div><div class="loan-lang">🇬🇧 Englisch</div><div style="font-size:.75rem;color:var(--muted);">kindergarten</div></div>
+    <div class="loan-card"><div class="loan-ico">🧳</div><div class="loan-de">Koffer</div><div class="loan-lang">🇧🇬 Bulgarisch</div><div style="font-size:.75rem;color:var(--muted);">куфар (kufar)</div></div>
+    <div class="loan-card"><div class="loan-ico">🍾</div><div class="loan-de">Flasche</div><div class="loan-lang">🇷🇸 Serbisch</div><div style="font-size:.75rem;color:var(--muted);">flaša</div></div>
+  </div>
+
+  <div class="tip-box">💡 "Kindergarten" ist auf Englisch, Japanisch, Arabisch und vielen anderen Sprachen bekannt. Das Wort kommt direkt aus dem Deutschen!</div>
+
+  <div class="sec-h" style="font-size:.9rem;">📦 Weitere bekannte deutsche Wörter</div>
+  <div class="gcard">
+    <table class="conj-table">
+      <tr><th>Deutsches Wort</th><th>Bedeutung</th><th>Bekannt in</th></tr>
+      <tr><td><strong>Kindergarten</strong></td><td>children's garden (preschool)</td><td>Englisch, Japanisch, Arabisch...</td></tr>
+      <tr><td><strong>Autobahn</strong></td><td>motorway / highway</td><td>Türkisch, Englisch, Polnisch...</td></tr>
+      <tr><td><strong>Rucksack</strong></td><td>backpack</td><td>Englisch, Französisch, Spanisch...</td></tr>
+      <tr><td><strong>Doppelgänger</strong></td><td>look-alike / double</td><td>Englisch, Französisch...</td></tr>
+      <tr><td><strong>Wanderlust</strong></td><td>desire to travel</td><td>Englisch, Spanisch...</td></tr>
+      <tr><td><strong>Zeitgeist</strong></td><td>spirit of the times</td><td>Englisch, Französisch...</td></tr>
+      <tr><td><strong>Angst</strong></td><td>fear / anxiety</td><td>Englisch, Dänisch, Schwedisch...</td></tr>
+      <tr><td><strong>Schadenfreude</strong></td><td>joy at others' misfortune</td><td>Englisch, Japanisch...</td></tr>
+      <tr><td><strong>Kitsch</strong></td><td>tacky / low-quality art</td><td>Englisch, Französisch...</td></tr>
+      <tr><td><strong>Blitzkrieg</strong></td><td>lightning war</td><td>Englisch, Russisch...</td></tr>
+      <tr><td><strong>Hamburger</strong></td><td>from Hamburg, worldwide food!</td><td>Weltweit!</td></tr>
+      <tr><td><strong>Pumpernickel</strong></td><td>dark rye bread</td><td>Englisch, Französisch...</td></tr>
+    </table>
+  </div>
+
+  <div class="sec-h" style="font-size:.9rem;">🔄 Übungsaufgabe: Ordnen Sie zu!</div>
+  <div class="gcard">
+    <div class="gcard-desc">Weißt du, welches deutsche Wort zu welchem Bild passt?</div>
+    <div id="match-container"></div>
+  </div>
+</div>
+
+<!-- SCORE CARD OVERLAY -->
+<div class="sc-overlay hidden" id="sc-overlay">
+  <div class="sc-modal" id="sc-modal">
+    <h2>📋 Submit Your Score</h2>
+    <p>Enter your name to generate your score card. Share the screenshot with Anshuka!</p>
+    <input class="sc-inp" id="sc-name-inp" placeholder="Your name…" maxlength="40" autocomplete="off">
+    <button class="sc-btn" onclick="generateCard()">Generate My Score Card ✨</button>
+  </div>
+  <div class="sr-card hidden" id="sr-card">
+    <div class="sr-logo">
+      <div class="sr-logo-icon">🇩🇪</div>
+      <div><div class="sr-logo-name">Deutsch Meistern</div><div class="sr-logo-by">by Anshuka</div></div>
+    </div>
+    <div class="sr-divider"></div>
+    <div class="sr-student" id="sr-name">Student</div>
+    <div class="sr-label">Score Card</div>
+    <div class="sr-score-ring"><div class="sr-pts" id="sr-pts">0</div><div class="sr-pts-lbl">points</div></div>
+    <div class="sr-chapter">A1 · Kapitel 1 · Guten Tag!</div>
+    <div class="sr-stats">
+      <div class="sr-stat"><div class="sr-stat-n" id="sr-answered">0</div><div class="sr-stat-l">Answered</div></div>
+      <div class="sr-stat"><div class="sr-stat-n" id="sr-pct">0%</div><div class="sr-stat-l">Score %</div></div>
+      <div class="sr-stat"><div class="sr-stat-n">120</div><div class="sr-stat-l">Max pts</div></div>
+    </div>
+    <div class="sr-footer">Completed on <strong id="sr-date"></strong><br>Platform: <strong>Deutsch Meistern by Anshuka</strong></div>
+    <div class="sr-actions">
+      <button class="sr-close-btn" onclick="closeCard()">✕ Close</button>
+      <button class="sr-new-btn" onclick="closeCard()">Keep Learning 🚀</button>
+    </div>
+  </div>
+</div>
+
+<!-- SCORE CARD BUTTON -->
+<button onclick="openSubmit()" style="position:fixed;bottom:72px;left:14px;z-index:900;background:linear-gradient(135deg,#16a34a,#15803d);color:#fff;border:none;border-radius:50px;padding:9px 16px;font-family:'Nunito',sans-serif;font-size:.75rem;font-weight:900;cursor:pointer;box-shadow:0 4px 16px rgba(22,163,74,.4);display:flex;align-items:center;gap:6px;">📋 My Score Card</button>
+
+<script>
+/* ── STATE ── */
+let score=0, answered=new Set(), orderState={};
+
+/* ── NAVIGATION ── */
+function goTo(id,btn){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.bn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('s-'+id).classList.add('active');
+  if(btn) btn.classList.add('active');
+  if(id==='woerterbuch') setTimeout(buildWB,50);
+}
+function navTo(id){
+  const btn=document.querySelector(`.bn[onclick*="'${id}'"]`);
+  goTo(id,btn);
+}
+function goToGram(idx){
+  goTo('grammar',document.querySelectorAll('.bn')[1]);
+  setTimeout(()=>switchGTab(idx,document.querySelectorAll('.g-tab')[idx]),50);
+}
+function switchGTab(idx,btn){
+  document.querySelectorAll('.g-panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.g-tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('gp-'+idx).classList.add('active');
+  if(btn) btn.classList.add('active');
+}
+function switchExTab(idx,btn){
+  document.querySelectorAll('.ex-panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.ex-tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('ep-'+idx).classList.add('active');
+  if(btn) btn.classList.add('active');
+}
+
+/* ── SCORE ── */
+function addScore(pts){
+  score+=pts;
+  document.getElementById('score-pill').textContent='⭐ '+score+' Pts';
+  document.getElementById('float-pts').textContent=score;
+  if(score>0&&score%100===0) confetti();
+}
+function confetti(){
+  const colors=['#ef4444','#f59e0b','#10b981','#3b82f6','#8b5cf6','#ec4899'];
+  for(let i=0;i<30;i++){
+    const d=document.createElement('div');d.className='conf-piece';
+    d.style.cssText=`left:${Math.random()*100}vw;top:0;background:${colors[Math.floor(Math.random()*colors.length)]};animation-delay:${Math.random()*.5}s;animation-duration:${.8+Math.random()*.6}s;`;
+    document.body.appendChild(d);setTimeout(()=>d.remove(),1500);
+  }
+}
+
+/* ── EXERCISE DATA ── */
+const lesenQ=[
+  {t:'mc',q:'Wie sagt man "Hallo" formell auf Deutsch?',opts:['Tschüs!','Guten Tag!','Ciao!','Bis bald!'],ans:1},
+  {t:'mc',q:'Wie sagt man "Goodbye" formell?',opts:['Tschüs!','Bis bald!','Auf Wiedersehen!','Ciao!'],ans:2},
+  {t:'mc',q:'Wie fragt man nach dem Namen informell?',opts:['Wie heißen Sie?','Wie ist Ihr Name?','Wie heißt du?','Wer sind Sie?'],ans:2},
+  {t:'mc',q:'Was sagt man am Abend?',opts:['Guten Morgen!','Guten Tag!','Guten Abend!','Gute Nacht!'],ans:2},
+  {t:'mc',q:'"Wie geht es Ihnen?" ist...',opts:['informell','formell','ein Abschied','ein Gruß'],ans:1},
+  {t:'passage',p:'Hallo! Ich bin Julia. Ich komme aus Deutschland. Ich wohne in Frankfurt. Ich spreche Deutsch, Englisch und ein bisschen Spanisch.',q:'Woher kommt Julia?',opts:['Aus Frankfurt','Aus Spanien','Aus Deutschland','Aus England'],ans:2},
+  {t:'passage',p:'Hallo! Ich bin Julia. Ich komme aus Deutschland. Ich wohne in Frankfurt. Ich spreche Deutsch, Englisch und ein bisschen Spanisch.',q:'Wo wohnt Julia?',opts:['In Deutschland','In Berlin','In Frankfurt','In Spanien'],ans:2},
+  {t:'passage',p:'Hallo! Ich bin Julia. Ich komme aus Deutschland. Ich wohne in Frankfurt. Ich spreche Deutsch, Englisch und ein bisschen Spanisch.',q:'Wie viele Sprachen spricht Julia?',opts:['Eine','Zwei','Drei','Vier'],ans:2},
+  {t:'mc',q:'Welches Pronomen benutzt man formell für "you"?',opts:['du','er','sie','Sie'],ans:3},
+  {t:'mc',q:'Was bedeutet "Woher kommst du?"',opts:['Where do you live?','Where are you going?','Where are you from?','Who are you?'],ans:2},
+  {t:'passage',p:'Gabriel Santos kommt aus Brasilien. Er wohnt in Deutschland, in Köln. Er spricht Portugiesisch, Deutsch und Englisch.',q:'Wo wohnt Gabriel Santos?',opts:['In Brasilien','In Berlin','In Köln','In Frankfurt'],ans:2},
+  {t:'passage',p:'Gabriel Santos kommt aus Brasilien. Er wohnt in Deutschland, in Köln. Er spricht Portugiesisch, Deutsch und Englisch.',q:'Welche Sprachen spricht Gabriel Santos?',opts:['Nur Portugiesisch','Portugiesisch und Deutsch','Portugiesisch, Deutsch und Englisch','Englisch und Spanisch'],ans:2},
+  {t:'mc',q:'Wie heißt die Konjugation von "sein" für "ich"?',opts:['ist','bist','bin','sind'],ans:2},
+  {t:'mc',q:'Wie heißt die Konjugation von "heißen" für "du"?',opts:['heiße','heißen','heißt','bin'],ans:2},
+  {t:'mc',q:'Wie heißt die Konjugation von "kommen" für "er"?',opts:['komme','kommst','kommen','kommt'],ans:3},
+  {t:'mc',q:'Was ist die richtige Antwort auf "Woher kommst du?"',opts:['Ich wohne in Berlin.','Ich heiße Niklas.','Ich komme aus Spanien.','Ich bin 25 Jahre alt.'],ans:2},
+  {t:'mc',q:'Was bedeutet "Ich heiße Niklas"?',opts:['I am from Niklas','My name is Niklas','I live in Niklas','I speak Niklas'],ans:1},
+  {t:'mc',q:'"Guten Morgen!" sagt man...',opts:['abends','mittags','morgens','nachts'],ans:2},
+  {t:'mc',q:'Welche Länder brauchen "aus der"?',opts:['Deutschland, Spanien','die Türkei, die Schweiz','USA, Japan','Brasilien, Frankreich'],ans:1},
+  {t:'mc',q:'Wie buchstabiert man "@" auf Deutsch?',opts:['Punkt','Unterstrich','at','Minus'],ans:2},
+  {t:'passage',p:'Boris Walder kommt aus Österreich. Er wohnt in Salzburg. Er spricht Deutsch und Englisch. Er lernt Arabisch.',q:'Was lernt Boris Walder?',opts:['Japanisch','Französisch','Arabisch','Spanisch'],ans:2},
+  {t:'passage',p:'Saki Tanaka wohnt in Berlin. Sie kommt aus Japan, aus Tokio. Sie spricht Japanisch und Deutsch. Sie lernt Englisch.',q:'Woher kommt Saki Tanaka?',opts:['Aus Berlin','Aus Deutschland','Aus Japan','Aus China'],ans:2},
+  {t:'mc',q:'Was bedeutet "Wie geht\'s dir?"',opts:['What is your name?','How are you?','Where do you live?','Who are you?'],ans:1},
+  {t:'mc',q:'Die richtige Antwort auf "Wie geht es Ihnen?" ist:',opts:['Ich heiße Anna.','Danke, gut. Und Ihnen?','Ich komme aus Berlin.','Auf Wiedersehen!'],ans:1},
+  {t:'mc',q:'Welche Zahl ist "zwölf"?',opts:['10','11','12','13'],ans:2},
+  {t:'mc',q:'Welche Zahl ist "siebzehn"?',opts:['7','17','70','16'],ans:1},
+  {t:'mc',q:'Wie sagt man "14" auf Deutsch?',opts:['vierzehn','vierzig','vier','viertel'],ans:0},
+  {t:'mc',q:'Wie heißt der Buchstabe "W" auf Deutsch?',opts:['fau','we','ve','doppel-u'],ans:1},
+  {t:'mc',q:'"Unterstrich" bedeutet auf Englisch:',opts:['at sign','hyphen','underscore','comma'],ans:2},
+  {t:'mc',q:'Welches Verb hat einen Vokalwechsel bei du/er?',opts:['heißen','kommen','wohnen','sprechen'],ans:3},
+  {t:'mc',q:'Wie heißt "sprechen" für "du"?',opts:['spreche','sprichst','spricht','sprechen'],ans:1},
+  {t:'passage',p:'Das ist Frau Lang. Sie kommt aus Deutschland. Sie wohnt in Frankfurt. Sie spricht Deutsch, Spanisch und Englisch.',q:'Was macht Frau Lang von Beruf?',opts:['Ärztin','Reiseführerin','Lehrerin','Studentin'],ans:1},
+  {t:'mc',q:'Was ist "das Butterbrot"?',opts:['A sausage','A bread with butter','A cake','A vegetable'],ans:1},
+  {t:'mc',q:'Was ist "der Kindergarten" auf Englisch?',opts:['A flower garden','A park','A nursery/preschool','A playground'],ans:2},
+  {t:'mc',q:'Was bedeutet "die Autobahn"?',opts:['Railway','Motorway/highway','Bicycle path','Subway'],ans:1},
+  {t:'mc',q:'Wie fragt man formal nach dem Namen?',opts:['Wie heißt du?','Wer bist du?','Wie heißen Sie?','Was ist dein Name?'],ans:2},
+  {t:'mc',q:'Was ist die richtige Antwort auf "Wie heißen Sie?"',opts:['Ich bin Frankfurt.','Mein Name ist Nina Weber.','Ich spreche Deutsch.','Ich komme aus Spanien.'],ans:1},
+  {t:'mc',q:'Welches Pronomen benutzt man für eine Frau?',opts:['er','es','sie','Sie'],ans:2},
+  {t:'mc',q:'Welches Pronomen benutzt man für einen Mann?',opts:['sie','er','es','du'],ans:1},
+  {t:'mc',q:'"Bis bald!" bedeutet:',opts:['Good night!','See you soon!','Good morning!','How are you?'],ans:1},
+  {t:'mc',q:'Was ist "null" auf Deutsch?',opts:['1','Zero','Ten','Hundred'],ans:1},
+  {t:'mc',q:'"Auf Wiedersehen" benutzt man...',opts:['informell','formell','für Freunde','beim Sport'],ans:1},
+  {t:'mc',q:'Welche Sprache spricht Alessia Conti?',opts:['Nur Deutsch','Spanisch und Englisch','Italienisch, Französisch und Deutsch','Nur Italienisch'],ans:2},
+  {t:'mc',q:'Wo wohnt Kateb Brahim?',opts:['In Algerien','In Paris','In Köln','In Berlin'],ans:1},
+  {t:'mc',q:'Was ist die WG in "Die Netzwerk-WG"?',opts:['Wohnung für Gäste','Wohngemeinschaft (shared flat)','Werkstattgemeinschaft','Wochenendsgebäude'],ans:1},
+];
+
+const sprechenQ=[
+  {t:'order',q:'Bilde den Satz:',words:['Ich','heiße','Julia.'],correct:'Ich heiße Julia.'},
+  {t:'order',q:'Bilde den Satz:',words:['Ich','komme','aus','Deutschland.'],correct:'Ich komme aus Deutschland.'},
+  {t:'order',q:'Bilde den Satz:',words:['Ich','wohne','in','Frankfurt.'],correct:'Ich wohne in Frankfurt.'},
+  {t:'order',q:'Bilde den Satz:',words:['Wie','heißt','du?'],correct:'Wie heißt du?'},
+  {t:'order',q:'Bilde den Satz:',words:['Woher','kommst','du?'],correct:'Woher kommst du?'},
+  {t:'order',q:'Bilde den Satz:',words:['Wo','wohnst','du?'],correct:'Wo wohnst du?'},
+  {t:'order',q:'Bilde den Satz:',words:['Wie','heißen','Sie?'],correct:'Wie heißen Sie?'},
+  {t:'order',q:'Bilde den Satz:',words:['Mein','Name','ist','Nina','Weber.'],correct:'Mein Name ist Nina Weber.'},
+  {t:'order',q:'Bilde den Satz:',words:['Ich','spreche','Deutsch','und','Englisch.'],correct:'Ich spreche Deutsch und Englisch.'},
+  {t:'order',q:'Bilde den Satz:',words:['Sie','kommt','aus','Japan.'],correct:'Sie kommt aus Japan.'},
+  {t:'order',q:'Bilde den Satz:',words:['Er','wohnt','in','Salzburg.'],correct:'Er wohnt in Salzburg.'},
+  {t:'order',q:'Bilde den Satz:',words:['Welche','Sprachen','sprechen','Sie?'],correct:'Welche Sprachen sprechen Sie?'},
+  {t:'order',q:'Bilde den Satz:',words:['Ich','bin','Niklas.'],correct:'Ich bin Niklas.'},
+  {t:'order',q:'Bilde den Satz:',words:['Wie','geht','es','Ihnen?'],correct:'Wie geht es Ihnen?'},
+  {t:'order',q:'Bilde den Satz:',words:['Danke,','sehr','gut!','Und','dir?'],correct:'Danke, sehr gut! Und dir?'},
+  {t:'order',q:'Bilde den Satz:',words:['Das','ist','Frau','Lang.'],correct:'Das ist Frau Lang.'},
+  {t:'order',q:'Bilde den Satz:',words:['Sie','kommt','aus','Deutschland.'],correct:'Sie kommt aus Deutschland.'},
+  {t:'order',q:'Bilde den Satz:',words:['Er','spricht','Arabisch','und','Deutsch.'],correct:'Er spricht Arabisch und Deutsch.'},
+  {t:'order',q:'Bilde den Satz:',words:['Ich','komme','aus','der','Schweiz.'],correct:'Ich komme aus der Schweiz.'},
+  {t:'order',q:'Bilde den Satz:',words:['Wie','ist','deine','E-Mail-Adresse?'],correct:'Wie ist deine E-Mail-Adresse?'},
+  {t:'order',q:'Bilde den Satz:',words:['Guten','Morgen,','Frau','Weber!'],correct:'Guten Morgen, Frau Weber!'},
+  {t:'order',q:'Bilde den Satz:',words:['Auf','Wiedersehen,','Herr','Hansen!'],correct:'Auf Wiedersehen, Herr Hansen!'},
+  {t:'order',q:'Bilde den Satz:',words:['Ich','lerne','Spanisch.'],correct:'Ich lerne Spanisch.'},
+  {t:'order',q:'Bilde den Satz:',words:['Er','heißt','Gabriel','Santos.'],correct:'Er heißt Gabriel Santos.'},
+  {t:'order',q:'Bilde den Satz:',words:['Wie','ist','Ihre','Telefonnummer?'],correct:'Wie ist Ihre Telefonnummer?'},
+  {t:'order',q:'Bilde den Satz:',words:['Guten','Tag!','Ich','heiße','Oliver','Hansen.'],correct:'Guten Tag! Ich heiße Oliver Hansen.'},
+  {t:'order',q:'Bilde den Satz:',words:['Sie','wohnt','in','Lugano.'],correct:'Sie wohnt in Lugano.'},
+  {t:'order',q:'Bilde den Satz:',words:['Ich','komme','aus','den','USA.'],correct:'Ich komme aus den USA.'},
+  {t:'order',q:'Bilde den Satz:',words:['Er','kommt','aus','der','Türkei.'],correct:'Er kommt aus der Türkei.'},
+  {t:'order',q:'Bilde den Satz:',words:['Das','ist','Bea','R.','Und','wie','ist','deine','Nummer?'],correct:'Das ist Bea R. Und wie ist deine Nummer?'},
+  {t:'order',q:'Bilde den Satz:',words:['Sie','spricht','Japanisch','und','Deutsch.'],correct:'Sie spricht Japanisch und Deutsch.'},
+  {t:'order',q:'Bilde den Satz:',words:['Ich','bin','neu','hier.'],correct:'Ich bin neu hier.'},
+  {t:'order',q:'Bilde den Satz:',words:['Woher','kommen','Sie,','Frau','Lang?'],correct:'Woher kommen Sie, Frau Lang?'},
+  {t:'order',q:'Bilde den Satz:',words:['Ich','spreche','Portugiesisch,','Deutsch','und','Englisch.'],correct:'Ich spreche Portugiesisch, Deutsch und Englisch.'},
+  {t:'order',q:'Bilde den Satz:',words:['Gute','Nacht!'],correct:'Gute Nacht!'},
+  {t:'order',q:'Bilde den Satz:',words:['Wie','geht\'s','dir?'],correct:'Wie geht\'s dir?'},
+  {t:'order',q:'Bilde den Satz:',words:['Entschuldigung,','wie','heißt','du?'],correct:'Entschuldigung, wie heißt du?'},
+  {t:'order',q:'Bilde den Satz:',words:['Er','kommt','aus','Algerien.'],correct:'Er kommt aus Algerien.'},
+  {t:'order',q:'Bilde den Satz:',words:['Olivia','Miller','kommt','aus','den','USA.'],correct:'Olivia Miller kommt aus den USA.'},
+  {t:'order',q:'Bilde den Satz:',words:['Sie','lernt','Spanisch.'],correct:'Sie lernt Spanisch.'},
+];
+
+const schreibenQ=[
+  {t:'fill1',q:'Ergänze: "Ich ___ Julia." (heißen)',b:['heiße']},
+  {t:'fill1',q:'Ergänze: "Wie ___ du?" (heißen)',b:['heißt']},
+  {t:'fill1',q:'Ergänze: "Er ___ Jan." (sein)',b:['ist']},
+  {t:'fill1',q:'Ergänze: "Ich ___ bin." (sein → ich)',b:['bin']},
+  {t:'fill1',q:'Ergänze: "Du ___ Niklas." (sein)',b:['bist']},
+  {t:'fill1',q:'Ergänze: "Sie ___ aus Japan." (kommen → sie/she)',b:['kommt']},
+  {t:'fill1',q:'Ergänze: "Woher ___ du?" (kommen)',b:['kommst']},
+  {t:'fill1',q:'Ergänze: "Ich ___ in Frankfurt." (wohnen)',b:['wohne']},
+  {t:'fill1',q:'Ergänze: "Wo ___ du?" (wohnen)',b:['wohnst']},
+  {t:'fill1',q:'Ergänze: "Er ___ in Salzburg." (wohnen)',b:['wohnt']},
+  {t:'fill1',q:'Ergänze: "Ich ___ Deutsch." (sprechen)',b:['spreche']},
+  {t:'fill1',q:'Ergänze: "Du ___ sehr gut Deutsch." (sprechen)',b:['sprichst']},
+  {t:'fill1',q:'Ergänze: "Sie ___ Japanisch." (sprechen → sie/she)',b:['spricht']},
+  {t:'fill1',q:'Ergänze: "Ich komme ___ Deutschland." (Präposition)',b:['aus']},
+  {t:'fill1',q:'Ergänze: "Ich komme ___ der Schweiz." (Präposition)',b:['aus']},
+  {t:'fill1',q:'Ergänze: "Ich wohne ___ Frankfurt." (Präposition)',b:['in']},
+  {t:'fill1',q:'"Guten ___!" sagt man morgens.',b:['Morgen']},
+  {t:'fill1',q:'"Guten ___!" sagt man abends.',b:['Abend']},
+  {t:'fill1',q:'"Auf ___!" sagt man formell beim Abschied.',b:['Wiedersehen']},
+  {t:'fill1',q:'"Gute ___!" sagt man nachts.',b:['Nacht']},
+  {t:'fill1',q:'Wie heißt 12 auf Deutsch?',b:['zwölf']},
+  {t:'fill1',q:'Wie heißt 17 auf Deutsch?',b:['siebzehn']},
+  {t:'fill1',q:'Wie heißt 20 auf Deutsch?',b:['zwanzig']},
+  {t:'fill1',q:'Wie heißt 0 auf Deutsch?',b:['null']},
+  {t:'fill1',q:'Wie heißt 11 auf Deutsch?',b:['elf']},
+  {t:'fill1',q:'"@" heißt auf Deutsch: ___',b:['at']},
+  {t:'fill1',q:'"." in einer E-Mail heißt: ___',b:['Punkt']},
+  {t:'fill1',q:'"_" in einer E-Mail heißt: ___',b:['Unterstrich']},
+  {t:'fill1',q:'Das formelle "you" auf Deutsch: ___',b:['Sie']},
+  {t:'fill1',q:'Das informelle "you" auf Deutsch: ___',b:['du']},
+  {t:'fill1',q:'Ergänze: "Ich ___ aus den USA." (kommen)',b:['komme']},
+  {t:'fill1',q:'Ergänze: "Sie ___ Frau Weber." (sein → Sie formal)',b:['sind']},
+  {t:'fill1',q:'Wie heißt "Motorway" auf Deutsch?',b:['Autobahn']},
+  {t:'fill1',q:'Wie heißt "preschool/nursery" auf Deutsch?',b:['Kindergarten']},
+  {t:'fill1',q:'Ergänze: "Wie geht ___ Ihnen?" (es)',b:['es']},
+];
+
+/* ── VOCAB DATA ── */
+const vocabData=[
+  {art:'V',w:'heißen',en:'to be called',ex:'Ich heiße Julia. Wie heißt du?'},
+  {art:'V',w:'sein',en:'to be',ex:'Ich bin Niklas. Er ist Jan.'},
+  {art:'V',w:'kommen',en:'to come from',ex:'Ich komme aus Spanien. Woher kommst du?'},
+  {art:'V',w:'wohnen',en:'to live',ex:'Ich wohne in Frankfurt. Wo wohnst du?'},
+  {art:'V',w:'sprechen',en:'to speak',ex:'Ich spreche Deutsch und Englisch.'},
+  {art:'V',w:'lernen',en:'to learn',ex:'Olivia lernt Spanisch. Boris lernt Arabisch.'},
+  {art:'F',w:'die Sprache',en:'language',ex:'Welche Sprachen sprichst du?'},
+  {art:'N',w:'das Land',en:'country',ex:'Welches Land kommt nach Österreich?'},
+  {art:'F',w:'die Stadt',en:'city',ex:'Frankfurt ist eine große Stadt in Deutschland.'},
+  {art:'M',w:'der Name',en:'name',ex:'Mein Name ist Nina Weber.'},
+  {art:'F',w:'die Telefonnummer',en:'phone number',ex:'Wie ist Ihre Telefonnummer?'},
+  {art:'F',w:'die Handynummer',en:'mobile number',ex:'Wie ist deine Handynummer?'},
+  {art:'F',w:'die E-Mail-Adresse',en:'email address',ex:'Wie ist deine E-Mail-Adresse?'},
+  {art:'F',w:'die Zahl',en:'number',ex:'Die Zahlen von null bis zwanzig.'},
+  {art:'M',w:'der Buchstabe',en:'letter (alphabet)',ex:'Das Alphabet hat 26 Buchstaben.'},
+  {art:'N',w:'das Alphabet',en:'alphabet',ex:'Das deutsche Alphabet hat auch Ä, Ö, Ü und ß.'},
+  {art:'F',w:'die WG (Wohngemeinschaft)',en:'shared flat',ex:'In der Netzwerk-WG wohnen Anna, Luca, Bea und Max.'},
+  {art:'N',w:'das Butterbrot',en:'bread and butter',ex:'Das Butterbrot ist ein typisch deutsches Wort.'},
+  {art:'M',w:'der Kindergarten',en:'kindergarten / preschool',ex:'Kindergarten ist ein deutsches Wort, das weltweit bekannt ist.'},
+  {art:'F',w:'die Autobahn',en:'motorway / highway',ex:'Die Autobahn in Deutschland hat kein Tempolimit.'},
+  {art:'N',w:'das Würstchen',en:'sausage (small)',ex:'Das Würstchen ist ein bekanntes deutsches Lebensmittel.'},
+  {art:'F',w:'die Flasche',en:'bottle',ex:'Flasche ist auch in anderen Sprachen bekannt.'},
+  {art:'M',w:'der Koffer',en:'suitcase',ex:'Ich packe meinen Koffer für die Reise.'},
+  {art:'N',w:'das Handtuch',en:'towel',ex:'Handtuch ist das deutsche Wort für towel.'},
+  {art:'F',w:'die Nudeln',en:'pasta / noodles',ex:'Nudeln kommen ursprünglich aus Italien.'},
+  {art:'M',w:'der Kranke',en:'sick person / patient',ex:'Krank bedeutet ill auf Englisch.'},
+  {art:'ADJ',w:'neu',en:'new',ex:'Anna ist neu in der WG.'},
+  {art:'ADJ',w:'gut',en:'good',ex:'Danke, gut! Ganz gut.'},
+  {art:'ADJ',w:'formell',en:'formal',ex:'Guten Tag ist eine formelle Begrüßung.'},
+  {art:'ADJ',w:'informell',en:'informal',ex:'Hallo ist eine informelle Begrüßung.'},
+  {art:'PH',w:'Guten Morgen!',en:'Good morning!',ex:'Guten Morgen, Herr Hansen!'},
+  {art:'PH',w:'Guten Tag!',en:'Good day! / Hello!',ex:'Guten Tag, Frau Kowalski.'},
+  {art:'PH',w:'Guten Abend!',en:'Good evening!',ex:'Guten Abend! Wie geht es Ihnen?'},
+  {art:'PH',w:'Gute Nacht!',en:'Good night!',ex:'Gute Nacht! Bis morgen!'},
+  {art:'PH',w:'Tschüs! / Tschüss!',en:'Bye! (informal)',ex:'Tschüs Julia! Bis bald!'},
+  {art:'PH',w:'Auf Wiedersehen!',en:'Goodbye! (formal)',ex:'Auf Wiedersehen, Herr Hansen!'},
+  {art:'PH',w:'Bis bald!',en:'See you soon!',ex:'Tschüs! Bis bald!'},
+  {art:'PH',w:'Wie geht es Ihnen?',en:'How are you? (formal)',ex:'Guten Tag! Wie geht es Ihnen?'},
+  {art:'PH',w:'Wie geht\'s dir?',en:'How are you? (informal)',ex:'Hallo! Wie geht\'s dir?'},
+  {art:'PH',w:'Danke, sehr gut!',en:'Thank you, very well!',ex:'Wie geht\'s? Danke, sehr gut!'},
+  {art:'PH',w:'Und dir? / Und Ihnen?',en:'And you?',ex:'Danke, gut. Und Ihnen? / Und dir?'},
+  {art:'PH',w:'Entschuldigung',en:'Excuse me / Sorry',ex:'Entschuldigung, wie heißt du?'},
+  {art:'PH',w:'Wie bitte?',en:'Pardon? / Sorry?',ex:'Wie bitte? Ich verstehe nicht.'},
+  {art:'PH',w:'Ich verstehe nicht.',en:'I do not understand.',ex:'Wie bitte? Ich verstehe nicht.'},
+  {art:'PH',w:'Noch einmal, bitte.',en:'Once more, please.',ex:'Bitte noch einmal, langsamer.'},
+  {art:'PH',w:'Ich bin neu hier.',en:'I am new here.',ex:'Hallo! Ich bin neu hier.'},
+  {art:'PH',w:'Das ist ...',en:'This is ...',ex:'Das ist Frau Kowalski.'},
+  {art:'PH',w:'Mein Name ist ...',en:'My name is ...',ex:'Mein Name ist Nina Weber.'},
+  {art:'PH',w:'Woher kommst du?',en:'Where are you from? (informal)',ex:'Hallo! Ich bin Luca. Woher kommst du?'},
+  {art:'PH',w:'aus der Schweiz',en:'from Switzerland',ex:'Alessia Conti kommt aus der Schweiz.'},
+  {art:'PH',w:'aus den USA',en:'from the USA',ex:'Olivia Miller kommt aus den USA.'},
+  {art:'PH',w:'Welche Sprachen sprechen Sie?',en:'Which languages do you speak? (formal)',ex:'Welche Sprachen sprechen Sie, Frau Lang?'},
+  {art:'PH',w:'Ich spreche ein bisschen ...',en:'I speak a little ...',ex:'Ich spreche ein bisschen Spanisch.'},
+  {art:'PH',w:'Wie ist deine Nummer?',en:'What is your number?',ex:'Und wie ist deine Nummer?'},
+  {art:'PH',w:'Wie ist Ihr Name?',en:'What is your name? (formal)',ex:'Wie ist Ihr Name, bitte?'},
+  {art:'PH',w:'Bitte noch einmal langsamer.',en:'Please once more, slowly.',ex:'Wie bitte? Bitte noch einmal langsamer.'},
+  {art:'PH',w:'Ich buchstabiere ...',en:'I spell ...',ex:'Wie bitte? Ich buchstabiere: A-L-E ...'},
+  {art:'F',w:'die Reiseführerin',en:'female tour guide',ex:'Selina Lang ist Reiseführerin in Frankfurt.'},
+  {art:'M',w:'der Reiseführer',en:'male tour guide',ex:'Der Reiseführer zeigt die Sehenswürdigkeiten.'},
+  {art:'F',w:'die Uni (Universität)',en:'university',ex:'Max, Bea und Luca sind an der Uni.'},
+];
+
+/* ── WÖRTERBUCH DATA ── */
+const wbData=[
+  {cat:'Verben',sub:'Hauptverben A1',art:'V',w:'heißen',en:'to be called / to be named',ex:'Ich heiße Julia. Wie heißt du?',extra:'heiße · heißt · heißt · heißen (Präsens)'},
+  {cat:'Verben',sub:'Hauptverben A1',art:'V',w:'sein',en:'to be',ex:'Ich bin Niklas. Sie ist Anna.',extra:'bin · bist · ist · sind (IRREGULAR)'},
+  {cat:'Verben',sub:'Hauptverben A1',art:'V',w:'kommen',en:'to come / to come from',ex:'Ich komme aus Spanien.',extra:'komme · kommst · kommt · kommen'},
+  {cat:'Verben',sub:'Hauptverben A1',art:'V',w:'wohnen',en:'to live / to reside',ex:'Ich wohne in Frankfurt.',extra:'wohne · wohnst · wohnt · wohnen'},
+  {cat:'Verben',sub:'Hauptverben A1',art:'V',w:'sprechen',en:'to speak',ex:'Ich spreche Deutsch und Englisch.',extra:'spreche · sprichst · spricht · sprechen (Vokalwechsel e→i!)'},
+  {cat:'Verben',sub:'Hauptverben A1',art:'V',w:'lernen',en:'to learn / to study',ex:'Sie lernt Spanisch. Er lernt Arabisch.',extra:'lerne · lernst · lernt · lernen'},
+  {cat:'Verben',sub:'Hauptverben A1',art:'V',w:'buchstabieren',en:'to spell (out letters)',ex:'Wie bitte? Ich buchstabiere: A-L-E ...',extra:'buchstabiere · buchstabierst · buchstabiert'},
+  {cat:'Verben',sub:'Hauptverben A1',art:'V',w:'verstehen',en:'to understand',ex:'Ich verstehe nicht. Wie bitte?',extra:'verstehe · verstehst · versteht (unregelm.)'},
+  {cat:'Verben',sub:'Hauptverben A1',art:'V',w:'fragen',en:'to ask',ex:'Er fragt: Woher kommst du?',extra:'frage · fragst · fragt · fragen'},
+  {cat:'Verben',sub:'Hauptverben A1',art:'V',w:'antworten',en:'to answer',ex:'Sie antwortet: Ich komme aus Japan.',extra:'antworte · antwortest · antwortet'},
+  {cat:'Verben',sub:'Hauptverben A1',art:'V',w:'notieren',en:'to note down',ex:'Notieren Sie die Handynummern.',extra:'notiere · notierst · notiert'},
+  {cat:'Verben',sub:'Hauptverben A1',art:'V',w:'ordnen',en:'to sort / to arrange',ex:'Ordnen Sie die Antworten zu.',extra:'ordne · ordnest · ordnet'},
+  {cat:'Nomen',sub:'Personen und Identität',art:'M',w:'der Name',en:'name',ex:'Mein Name ist Nina Weber.'},
+  {cat:'Nomen',sub:'Personen und Identität',art:'M',w:'der Vorname',en:'first name',ex:'Ihr Vorname ist Nina.'},
+  {cat:'Nomen',sub:'Personen und Identität',art:'M',w:'der Nachname',en:'surname / last name',ex:'Ihr Nachname ist Weber.'},
+  {cat:'Nomen',sub:'Personen und Identität',art:'F',w:'die Person',en:'person',ex:'Wie heißen die Personen?'},
+  {cat:'Nomen',sub:'Personen und Identität',art:'F',w:'die Frau',en:'woman / Mrs.',ex:'Das ist Frau Kowalski.'},
+  {cat:'Nomen',sub:'Personen und Identität',art:'M',w:'der Mann',en:'man / Mr.',ex:'Das ist Herr Hansen.'},
+  {cat:'Nomen',sub:'Personen und Identität',art:'N',w:'das Herr / der Herr',en:'Mr. / gentleman',ex:'Guten Tag, Herr Hansen.'},
+  {cat:'Nomen',sub:'Personen und Identität',art:'M',w:'der Student',en:'student (m)',ex:'Luca ist Student an der Uni.'},
+  {cat:'Nomen',sub:'Personen und Identität',art:'F',w:'die Studentin',en:'student (f)',ex:'Bea ist Studentin.'},
+  {cat:'Nomen',sub:'Personen und Identität',art:'F',w:'die Reiseführerin',en:'female tour guide',ex:'Selina Lang ist Reiseführerin.'},
+  {cat:'Nomen',sub:'Personen und Identität',art:'M',w:'der Reiseführer',en:'male tour guide',ex:'Der Reiseführer spricht Deutsch und Englisch.'},
+  {cat:'Nomen',sub:'Länder und Sprachen',art:'N',w:'das Land',en:'country',ex:'Deutschland ist ein Land in Europa.'},
+  {cat:'Nomen',sub:'Länder und Sprachen',art:'F',w:'die Stadt',en:'city',ex:'Frankfurt, Köln und Berlin sind Städte in Deutschland.'},
+  {cat:'Nomen',sub:'Länder und Sprachen',art:'F',w:'die Sprache',en:'language',ex:'Welche Sprachen sprechen Sie?'},
+  {cat:'Nomen',sub:'Länder und Sprachen',art:'N',w:'Deutschland',en:'Germany',ex:'Ich komme aus Deutschland.'},
+  {cat:'Nomen',sub:'Länder und Sprachen',art:'F',w:'die Schweiz',en:'Switzerland',ex:'Alessia kommt aus der Schweiz.'},
+  {cat:'Nomen',sub:'Länder und Sprachen',art:'F',w:'die Türkei',en:'Turkey',ex:'Er kommt aus der Türkei.'},
+  {cat:'Nomen',sub:'Länder und Sprachen',art:'N',w:'Österreich',en:'Austria',ex:'Boris Walder kommt aus Österreich.'},
+  {cat:'Nomen',sub:'Länder und Sprachen',art:'N',w:'Spanien',en:'Spain',ex:'Ich komme aus Spanien. Ich spreche Spanisch.'},
+  {cat:'Nomen',sub:'Länder und Sprachen',art:'N',w:'Frankreich',en:'France',ex:'Er wohnt in Paris. Er kommt aus Frankreich.'},
+  {cat:'Nomen',sub:'Länder und Sprachen',art:'N',w:'Italien',en:'Italy',ex:'Sie kommt aus Italien. Sie spricht Italienisch.'},
+  {cat:'Nomen',sub:'Länder und Sprachen',art:'N',w:'Japan',en:'Japan',ex:'Saki Tanaka kommt aus Japan.'},
+  {cat:'Nomen',sub:'Länder und Sprachen',art:'N',w:'Brasilien',en:'Brazil',ex:'Gabriel Santos kommt aus Brasilien.'},
+  {cat:'Nomen',sub:'Länder und Sprachen',art:'N',w:'Algerien',en:'Algeria',ex:'Kateb Brahim kommt aus Algerien.'},
+  {cat:'Nomen',sub:'Länder und Sprachen',art:'N',w:'Russland',en:'Russia',ex:'Sie kommt aus Russland. Sie spricht Russisch.'},
+  {cat:'Nomen',sub:'Länder und Sprachen',art:'N',w:'Polen',en:'Poland',ex:'Er kommt aus Polen. Er spricht Polnisch.'},
+  {cat:'Nomen',sub:'Länder und Sprachen',art:'N',w:'Deutsch',en:'German (language)',ex:'Ich spreche Deutsch.'},
+  {cat:'Nomen',sub:'Länder und Sprachen',art:'N',w:'Englisch',en:'English (language)',ex:'Sie spricht Englisch und Deutsch.'},
+  {cat:'Nomen',sub:'Länder und Sprachen',art:'N',w:'Spanisch',en:'Spanish (language)',ex:'Olivia lernt Spanisch.'},
+  {cat:'Nomen',sub:'Länder und Sprachen',art:'N',w:'Arabisch',en:'Arabic (language)',ex:'Boris lernt Arabisch.'},
+  {cat:'Nomen',sub:'Länder und Sprachen',art:'N',w:'Japanisch',en:'Japanese (language)',ex:'Saki spricht Japanisch und Deutsch.'},
+  {cat:'Nomen',sub:'Länder und Sprachen',art:'N',w:'Türkisch',en:'Turkish (language)',ex:'Er kommt aus der Türkei und spricht Türkisch.'},
+  {cat:'Nomen',sub:'Kontakt und Kommunikation',art:'F',w:'die Telefonnummer',en:'phone number',ex:'Wie ist Ihre Telefonnummer?'},
+  {cat:'Nomen',sub:'Kontakt und Kommunikation',art:'F',w:'die Handynummer',en:'mobile phone number',ex:'Und wie ist deine Handynummer?'},
+  {cat:'Nomen',sub:'Kontakt und Kommunikation',art:'F',w:'die E-Mail-Adresse',en:'email address',ex:'alexis_barbos@quinnet.com'},
+  {cat:'Nomen',sub:'Kontakt und Kommunikation',art:'N',w:'das Gespräch',en:'conversation / dialogue',ex:'Hören Sie das Gespräch.'},
+  {cat:'Nomen',sub:'Kontakt und Kommunikation',art:'N',w:'das Interview',en:'interview',ex:'Machen Sie zwei Interviews.'},
+  {cat:'Nomen',sub:'Zahlen und Alphabet',art:'F',w:'die Zahl',en:'number',ex:'Die Zahlen von null bis zwanzig.'},
+  {cat:'Nomen',sub:'Zahlen und Alphabet',art:'M',w:'der Buchstabe',en:'letter (of alphabet)',ex:'Buchstabieren Sie Ihren Namen.'},
+  {cat:'Nomen',sub:'Zahlen und Alphabet',art:'N',w:'das Alphabet',en:'alphabet',ex:'Das Deutsche Alphabet hat 30 Zeichen.'},
+  {cat:'Nomen',sub:'Deutsch international (Loanwords)',art:'N',w:'das Butterbrot',en:'bread with butter (German loanword)',ex:'Butterbrot ist ein deutsches Wort, das in andere Sprachen übernommen wurde.'},
+  {cat:'Nomen',sub:'Deutsch international (Loanwords)',art:'M',w:'der Kindergarten',en:'kindergarten (German loanword in English)',ex:'Kindergarten ist auf Englisch auch bekannt.'},
+  {cat:'Nomen',sub:'Deutsch international (Loanwords)',art:'F',w:'die Autobahn',en:'motorway (German loanword)',ex:'Autobahn ist ein bekanntes deutsches Wort.'},
+  {cat:'Nomen',sub:'Deutsch international (Loanwords)',art:'N',w:'das Würstchen',en:'small sausage',ex:'Das Würstchen (wurstel) ist auch im Italienischen bekannt.'},
+  {cat:'Nomen',sub:'Deutsch international (Loanwords)',art:'F',w:'die Flasche',en:'bottle',ex:'Flasche kennen viele Sprachen.'},
+  {cat:'Nomen',sub:'Deutsch international (Loanwords)',art:'M',w:'der Koffer',en:'suitcase',ex:'Koffer kommt im Bulgarischen vor.'},
+  {cat:'Nomen',sub:'Deutsch international (Loanwords)',art:'N',w:'das Handtuch',en:'towel',ex:'Handtuch ist handuk auf Indonesisch.'},
+  {cat:'Nomen',sub:'Deutsch international (Loanwords)',art:'F',w:'die Nudeln',en:'pasta / noodles',ex:'Nudeln sind nudli auf Ungarisch.'},
+  {cat:'Adjektive',sub:'Beschreibung',art:'ADJ',w:'neu',en:'new',ex:'Anna ist neu in der WG.'},
+  {cat:'Adjektive',sub:'Beschreibung',art:'ADJ',w:'gut',en:'good',ex:'Danke, gut! Wie geht\'s? Ganz gut.'},
+  {cat:'Adjektive',sub:'Beschreibung',art:'ADJ',w:'bekannt',en:'well-known / familiar',ex:'Rothenburg ist eine bekannte Stadt.'},
+  {cat:'Adjektive',sub:'Beschreibung',art:'ADJ',w:'typisch',en:'typical',ex:'Das Butterbrot ist ein typisch deutsches Lebensmittel.'},
+  {cat:'Adjektive',sub:'Beschreibung',art:'ADJ',w:'international',en:'international',ex:'Viele deutsche Wörter sind international bekannt.'},
+  {cat:'Adjektive',sub:'Beschreibung',art:'ADJ',w:'formell',en:'formal',ex:'Guten Tag ist eine formelle Begrüßung.'},
+  {cat:'Adjektive',sub:'Beschreibung',art:'ADJ',w:'informell',en:'informal',ex:'Hallo ist informell.'},
+  {cat:'Ausdrücke',sub:'Grüßen und Verabschieden',art:'PH',w:'Guten Morgen!',en:'Good morning!',ex:'Guten Morgen, Herr Hansen!'},
+  {cat:'Ausdrücke',sub:'Grüßen und Verabschieden',art:'PH',w:'Guten Tag!',en:'Good day / Hello (formal)',ex:'Guten Tag! Mein Name ist Oliver Hansen.'},
+  {cat:'Ausdrücke',sub:'Grüßen und Verabschieden',art:'PH',w:'Guten Abend!',en:'Good evening!',ex:'Guten Abend! Wie geht es Ihnen?'},
+  {cat:'Ausdrücke',sub:'Grüßen und Verabschieden',art:'PH',w:'Gute Nacht!',en:'Good night!',ex:'Gute Nacht! Bis morgen!'},
+  {cat:'Ausdrücke',sub:'Grüßen und Verabschieden',art:'PH',w:'Hallo!',en:'Hello! (informal)',ex:'Hallo Nina! Wie geht\'s?'},
+  {cat:'Ausdrücke',sub:'Grüßen und Verabschieden',art:'PH',w:'Tschüs!',en:'Bye! (informal)',ex:'Tschüs! Bis bald!'},
+  {cat:'Ausdrücke',sub:'Grüßen und Verabschieden',art:'PH',w:'Auf Wiedersehen!',en:'Goodbye! (formal)',ex:'Auf Wiedersehen, Herr Hansen!'},
+  {cat:'Ausdrücke',sub:'Grüßen und Verabschieden',art:'PH',w:'Bis bald!',en:'See you soon!',ex:'Tschüs! Bis bald!'},
+  {cat:'Ausdrücke',sub:'Sich vorstellen',art:'PH',w:'Ich heiße ...',en:'My name is ...',ex:'Ich heiße Julia.'},
+  {cat:'Ausdrücke',sub:'Sich vorstellen',art:'PH',w:'Ich bin ...',en:'I am ...',ex:'Ich bin Niklas.'},
+  {cat:'Ausdrücke',sub:'Sich vorstellen',art:'PH',w:'Mein Name ist ...',en:'My name is ... (formal)',ex:'Mein Name ist Nina Weber.'},
+  {cat:'Ausdrücke',sub:'Sich vorstellen',art:'PH',w:'Ich komme aus ...',en:'I come from ...',ex:'Ich komme aus Spanien.'},
+  {cat:'Ausdrücke',sub:'Sich vorstellen',art:'PH',w:'Ich wohne in ...',en:'I live in ...',ex:'Ich wohne in Frankfurt.'},
+  {cat:'Ausdrücke',sub:'Sich vorstellen',art:'PH',w:'Ich spreche ...',en:'I speak ...',ex:'Ich spreche Deutsch und Englisch.'},
+  {cat:'Ausdrücke',sub:'Sich vorstellen',art:'PH',w:'Wie geht es Ihnen?',en:'How are you? (formal)',ex:'Guten Tag! Wie geht es Ihnen?'},
+  {cat:'Ausdrücke',sub:'Sich vorstellen',art:'PH',w:'Wie geht\'s dir?',en:'How are you? (informal)',ex:'Hallo! Wie geht\'s dir?'},
+  {cat:'Ausdrücke',sub:'Sich vorstellen',art:'PH',w:'Danke, sehr gut!',en:'Thank you, very well!',ex:'Wie geht\'s? Danke, sehr gut!'},
+  {cat:'Ausdrücke',sub:'Sich vorstellen',art:'PH',w:'Entschuldigung',en:'Excuse me / Sorry',ex:'Entschuldigung, wie heißt du?'},
+  {cat:'Ausdrücke',sub:'Sich vorstellen',art:'PH',w:'Wie bitte?',en:'Pardon? Come again?',ex:'Wie bitte? Ich verstehe nicht.'},
+  {cat:'Ausdrücke',sub:'Sich vorstellen',art:'PH',w:'Noch einmal, bitte.',en:'Once more, please.',ex:'Bitte noch einmal, langsamer.'},
+  {cat:'Ausdrücke',sub:'Landeskunde',art:'PH',w:'Deutsch international',en:'German words used worldwide',ex:'Kindergarten, Autobahn und Butterbrot sind international bekannte Wörter.'},
+];
+
+/* ── RENDER EXERCISES ── */
+function renderAll(){
+  renderSet(lesenQ,'lesen-set');
+  renderSet(sprechenQ,'sprechen-set');
+  renderSet(schreibenQ,'schreiben-set');
+}
+function renderSet(data,cid){
+  const c=document.getElementById(cid);c.innerHTML='';
+  data.forEach((q,i)=>{
+    const id=cid.split('-')[0]+'-'+i;
+    let inner='';
+    if(q.t==='mc'||q.t==='passage'){
+      const ph=q.p?`<div class="passage">${q.p}</div>`:'';
+      const oh=q.opts.map((o,oi)=>`<button class="opt" id="opt-${id}-${oi}" onclick="checkMC('${id}',${oi},${q.ans})">${o}</button>`).join('');
+      inner=`${ph}<div class="q-text">${q.q}</div><div class="opts">${oh}</div>`;
+    } else if(q.t==='order'){
+      orderState[id]=[];
+      const sh=[...q.words].sort(()=>Math.random()-.5);
+      const ch=sh.map((w,wi)=>`<button class="wchip" id="wc-${id}-${wi}" onclick="pickWord('${id}',${wi},'${w.replace(/'/g,"\\'")}')">${w}</button>`).join('');
+      inner=`<div class="q-text">${q.q}</div><div class="hint-t">Tippe auf die Wörter in der richtigen Reihenfolge:</div><div class="ans-area" id="aa-${id}" style="color:var(--muted);font-style:italic;font-weight:600;">Hier erscheint dein Satz...</div><div class="word-bank" id="wb2-${id}">${ch}</div>`;
+    } else if(q.t==='fill1'){
+      const ih=q.b.map((_,bi)=>`<input class="inline-inp" id="ii-${id}-${bi}" placeholder="?" autocomplete="off" autocorrect="off" spellcheck="false" onkeydown="if(event.key==='Enter')checkFill('${id}',${i},'${cid.split('-')[0]}')">`).join(' ');
+      inner=`<div class="q-text">${q.q}</div><div style="margin-top:6px">${ih}</div>`;
+    }
+    const tl=q.t==='mc'||q.t==='passage'?'Multiple Choice':q.t==='order'?'Wortstellung':'Lückentext';
+    c.innerHTML+=`<div class="qcard" id="card-${id}">
+      <div class="q-meta"><span class="q-num">#${i+1}</span><span class="q-type">${tl}</span><span class="q-status" id="st-${id}"></span></div>
+      ${inner}
+      <div class="fb" id="fb-${id}"></div>
+      <div class="q-actions">
+        ${q.t==='order'?`<button class="btn-check" onclick="checkOrd('${id}',${i},'${cid.split('-')[0]}')">Prüfen ✓</button><button class="btn-reset" onclick="resetOrd('${id}',${i})">↺ Reset</button>`:''}
+        ${q.t==='fill1'?`<button class="btn-check" onclick="checkFill('${id}',${i},'${cid.split('-')[0]}')">Prüfen ✓</button>`:''}
+      </div>
+    </div>`;
+  });
+}
+function checkMC(id,chosen,correct){
+  if(answered.has(id))return;answered.add(id);
+  document.querySelectorAll(`[id^="opt-${id}-"]`).forEach((b,i)=>{b.classList.add('disabled');if(i===correct)b.classList.add('correct');else if(i===chosen&&chosen!==correct)b.classList.add('wrong');});
+  const fb=document.getElementById('fb-'+id),st=document.getElementById('st-'+id);
+  if(chosen===correct){st.textContent='✅';fb.textContent='Richtig! +10 Punkte 🎉';fb.className='fb ok';addScore(10);}
+  else{st.textContent='❌';fb.textContent='Leider falsch. Die richtige Antwort ist markiert.';fb.className='fb err';}
+}
+function pickWord(id,wi,word){
+  const chip=document.getElementById('wc-'+id+'-'+wi);
+  if(chip.classList.contains('used'))return;
+  chip.classList.add('used');
+  orderState[id].push({wi,word});
+  const aa=document.getElementById('aa-'+id);
+  aa.style.color='var(--navy)';aa.style.fontStyle='normal';aa.style.fontWeight='700';
+  aa.textContent=orderState[id].map(x=>x.word).join(' ');
+}
+function checkOrd(id,qi,section){
+  if(answered.has(id))return;
+  const data=section==='lesen'?lesenQ:section==='sprechen'?sprechenQ:schreibenQ;
+  const userAns=orderState[id].map(x=>x.word).join(' ').trim();
+  const correct=data[qi].correct.trim();
+  const fb=document.getElementById('fb-'+id),st=document.getElementById('st-'+id);
+  if(userAns===correct){answered.add(id);st.textContent='✅';fb.textContent='Perfekt! +10 Punkte 🎉';fb.className='fb ok';addScore(10);document.querySelectorAll(`#wb2-${id} .wchip`).forEach(c=>c.disabled=true);}
+  else{st.textContent='❌';fb.innerHTML=`Noch nicht ganz. Richtig: <em>${correct}</em>`;fb.className='fb err';}
+}
+function resetOrd(id){
+  if(answered.has(id))return;
+  orderState[id]=[];
+  const aa=document.getElementById('aa-'+id);
+  aa.style.color='var(--muted)';aa.style.fontStyle='italic';aa.style.fontWeight='600';
+  aa.textContent='Hier erscheint dein Satz...';
+  document.querySelectorAll(`#wb2-${id} .wchip`).forEach(c=>c.classList.remove('used'));
+  document.getElementById('fb-'+id).textContent='';
+}
+function checkFill(id,qi,section){
+  if(answered.has(id))return;
+  const data=section==='lesen'?lesenQ:section==='sprechen'?sprechenQ:schreibenQ;
+  const q=data[qi];let allOk=true;
+  q.b.forEach((ans,bi)=>{
+    const inp=document.getElementById('ii-'+id+'-'+bi);if(!inp)return;
+    if(inp.value.trim().toLowerCase()===ans.toLowerCase())inp.classList.add('correct');
+    else{inp.classList.add('wrong');allOk=false;}
+  });
+  const fb=document.getElementById('fb-'+id),st=document.getElementById('st-'+id);
+  if(allOk){answered.add(id);st.textContent='✅';fb.textContent='Ausgezeichnet! +10 Punkte 🎉';fb.className='fb ok';addScore(10);}
+  else{st.textContent='❌';fb.textContent='Nicht ganz. Richtig: '+q.b.join(', ');fb.className='fb err';}
+}
+
+/* ── VOCAB ── */
+function buildVocab(){
+  const c=document.getElementById('vocab-container');
+  const cats=[
+    {label:'⚡ Wichtige Verben',words:vocabData.filter(v=>v.art==='V')},
+    {label:'🏷️ Nomen',words:vocabData.filter(v=>['M','F','N'].includes(v.art))},
+    {label:'🎨 Adjektive',words:vocabData.filter(v=>v.art==='ADJ')},
+    {label:'💬 Ausdrücke und Phrasen',words:vocabData.filter(v=>v.art==='PH')},
+  ];
+  const artCls={M:'art-m',F:'art-f',N:'art-n',V:'art-v',ADJ:'art-adj',PH:'art-ph'};
+  const artLbl={M:'der',F:'die',N:'das',V:'Verb',ADJ:'Adj',PH:'Ausdruck'};
+  let html='';
+  cats.forEach(cat=>{
+    if(!cat.words.length)return;
+    html+=`<div class="sec-h" style="font-size:.78rem;color:var(--purple);margin:16px 0 8px;">${cat.label}</div><div class="vocab-grid">`;
+    cat.words.forEach(v=>{
+      const ac=artCls[v.art]||'art-n',al=artLbl[v.art]||'';
+      const dw=v.w.replace(/^(der |die |das )/,'');
+      html+=`<div class="vword" onclick="this.classList.toggle('open')">
+        <div class="vw-top"><span class="vw-art ${ac}">${al}</span><span class="vw-word">${dw}</span></div>
+        <div class="vw-details"><div class="vw-en">🇬🇧 ${v.en}</div><div class="vw-ex">${v.ex}</div></div>
+      </div>`;
+    });
+    html+='</div>';
+  });
+  c.innerHTML=html;
+}
+function filterVocab(){
+  const q=document.getElementById('v-search').value.toLowerCase();
+  document.querySelectorAll('#vocab-container .vword').forEach(v=>{v.style.display=v.textContent.toLowerCase().includes(q)?'':'none';});
+}
+
+/* ── LEADERBOARD ── */
+const lbData=[
+  {name:'Sophie',pts:1150,level:'A2 Star'},{name:'Lukas',pts:980,level:'A1 Pro'},
+  {name:'Mei',pts:870,level:'A1 Champ'},{name:'Anshuka',pts:0,level:'A1 Rising',you:true},
+  {name:'Carlos',pts:720,level:'A1 Learner'},{name:'Lena',pts:650,level:'A1 Explorer'},{name:'Hamid',pts:580,level:'A1 Beginner'},
+];
+function buildLB(){
+  const sorted=[...lbData];sorted.find(p=>p.you).pts=score;sorted.sort((a,b)=>b.pts-a.pts);
+  const maxPts=1200;
+  document.getElementById('lb-list').innerHTML=sorted.map((p,i)=>`<div class="lb-row${p.you?' lb-you':''}">
+    <div class="lb-rank">${i+1}</div>
+    <div style="flex:1"><div class="lb-name">${p.name}${p.you?' 👈':''}</div><div class="lb-level">${p.level}</div>
+    <div class="lb-bar-wrap"><div class="lb-bar" style="width:${Math.round((p.pts/maxPts)*100)}%"></div></div></div>
+    <div class="lb-pts">${p.pts}</div>
+  </div>`).join('');
+}
+
+/* ── WÖRTERBUCH ── */
+var wbCurrentCat='all';
+function buildWB(){renderWB(wbCurrentCat,document.getElementById('wb-search').value.toLowerCase());}
+function renderWB(cat,search){
+  const c=document.getElementById('wb-container');
+  let filtered=wbData;
+  if(cat!=='all')filtered=filtered.filter(w=>w.cat===cat);
+  if(search)filtered=filtered.filter(w=>w.w.toLowerCase().includes(search)||w.en.toLowerCase().includes(search)||(w.sub&&w.sub.toLowerCase().includes(search)));
+  const groups={};
+  filtered.forEach(w=>{const k=w.sub||w.cat;if(!groups[k])groups[k]=[];groups[k].push(w);});
+  const artCls={M:'art-m',F:'art-f',N:'art-n',V:'art-v',ADJ:'art-adj',PH:'art-ph'};
+  const artLbl={M:'der',F:'die',N:'das',V:'Verb',ADJ:'Adj',PH:'Ausdruck'};
+  let html=`<div style="font-size:.78rem;color:var(--muted);margin-bottom:12px;font-weight:700;">${filtered.length} Wörter gefunden</div>`;
+  if(!filtered.length){c.innerHTML='<div style="text-align:center;color:var(--muted);padding:40px;font-size:.9rem;">Kein Wort gefunden.</div>';return;}
+  Object.entries(groups).forEach(([sub,words])=>{
+    html+=`<div class="wb-cat-title">${sub} <span style="font-size:.7rem;font-weight:700;color:var(--muted);text-transform:none;letter-spacing:0;">(${words.length})</span></div><div class="wb-grid">`;
+    words.forEach((w,i)=>{
+      const uid='wb-'+w.w.replace(/[^a-zA-Z]/g,'')+i;
+      const ac=artCls[w.art]||'art-n',al=artLbl[w.art]||'';
+      const dw=w.w.replace(/^(der |die |das )/,'');
+      html+=`<div class="wb-item" id="${uid}">
+        <div class="wb-head" onclick="toggleWB('${uid}')">
+          <span class="wb-art-badge ${ac}">${al}</span>
+          <span class="wb-word-text">${dw}</span>
+          <span class="wb-short-en">${w.en.split('/')[0].trim()}</span>
+          <span class="wb-arrow">▶</span>
+        </div>
+        <div class="wb-body">
+          <div class="wb-en-full">🇬🇧 ${w.en}</div>
+          <div class="wb-ex-sent">„${w.ex}"</div>
+          ${w.extra?`<div class="wb-extra">📝 ${w.extra}</div>`:''}
+        </div>
+      </div>`;
+    });
+    html+='</div>';
+  });
+  c.innerHTML=html;
+}
+function toggleWB(id){document.getElementById(id).classList.toggle('open');}
+function filterWBCat(cat,btn){wbCurrentCat=cat;document.querySelectorAll('.wb-filter').forEach(b=>b.classList.remove('active'));btn.classList.add('active');renderWB(cat,document.getElementById('wb-search').value.toLowerCase());}
+function filterWB(){renderWB(wbCurrentCat,document.getElementById('wb-search').value.toLowerCase());}
+
+/* ── SCORE CARD ── */
+function openSubmit(){document.getElementById('sc-overlay').classList.remove('hidden');document.getElementById('sc-modal').classList.remove('hidden');document.getElementById('sr-card').classList.add('hidden');document.getElementById('sc-name-inp').value='';setTimeout(()=>document.getElementById('sc-name-inp').focus(),100);}
+function generateCard(){
+  const name=document.getElementById('sc-name-inp').value.trim();
+  if(!name){document.getElementById('sc-name-inp').style.borderColor='var(--red)';return;}
+  const pct=Math.round((score/1200)*100);
+  const now=new Date();
+  document.getElementById('sr-name').textContent=name;
+  document.getElementById('sr-pts').textContent=score;
+  document.getElementById('sr-answered').textContent=answered.size;
+  document.getElementById('sr-pct').textContent=pct+'%';
+  document.getElementById('sr-date').textContent=now.toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'});
+  document.getElementById('sc-modal').classList.add('hidden');
+  document.getElementById('sr-card').classList.remove('hidden');
+}
+function closeCard(){document.getElementById('sc-overlay').classList.add('hidden');}
+
+/* ── INIT ── */
+renderAll();
+buildVocab();
+buildLB();
+window.addEventListener('load',function(){
+  const ov=document.getElementById('sc-overlay');
+  if(ov)ov.addEventListener('click',function(e){if(e.target===this)closeCard();});
+});
+</script>
+</body>
+</html>

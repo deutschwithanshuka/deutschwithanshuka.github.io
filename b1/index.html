@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Deutsch Meistern · B1</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f0f4ff;--white:#fff;--navy:#0d1b6e;
+  --purple:#7c3aed;--purple2:#a78bfa;
+  --text:#1e1b4b;--muted:#64748b;--border:#c7d2fe;
+  --sh:0 2px 12px rgba(37,99,235,.10);
+  --r:16px;--r2:10px;
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:'Nunito',sans-serif;overflow-x:hidden;min-height:100vh;}
+nav{background:rgba(255,255,255,.97);backdrop-filter:blur(12px);border-bottom:2px solid var(--border);display:flex;align-items:center;padding:11px 16px;gap:10px;position:sticky;top:0;z-index:100;}
+.nav-back{font-size:1.2rem;text-decoration:none;color:var(--navy);font-weight:900;flex-shrink:0;}
+.nav-brand{flex:1;}
+.nav-title{font-size:.95rem;font-weight:900;color:var(--navy);line-height:1.1;}
+.nav-sub{font-size:.6rem;color:var(--muted);font-weight:700;letter-spacing:.5px;}
+.nav-badge{font-family:'Space Mono',monospace;font-size:.7rem;font-weight:700;background:#f3e8ff;color:#6b21a8;border-radius:50px;padding:3px 10px;flex-shrink:0;}
+.main{padding:18px 16px 60px;max-width:480px;margin:0 auto;}
+.hero{background:linear-gradient(135deg,#7c3aed,#6d28d9,#5b21b6);border-radius:18px;padding:24px 20px;text-align:center;color:#fff;margin-bottom:18px;position:relative;overflow:hidden;}
+.hero::before{content:'✈️';font-size:7rem;position:absolute;top:-10px;right:-10px;opacity:.08;}
+.hero-chip{display:inline-block;background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.3);border-radius:50px;padding:3px 12px;font-size:.65rem;font-weight:800;text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;}
+.hero-title{font-size:2.2rem;font-weight:900;line-height:1;margin-bottom:4px;}
+.hero-sub{font-size:.82rem;opacity:.88;line-height:1.5;}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:18px;}
+.stat{background:#fff;border:2px solid var(--border);border-radius:12px;padding:10px 8px;text-align:center;box-shadow:var(--sh);}
+.stat-n{font-family:'Space Mono',monospace;font-size:1.2rem;font-weight:700;color:var(--purple);}
+.stat-l{font-size:.58rem;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;font-weight:800;margin-top:1px;}
+.sec-label{font-size:.68rem;font-weight:900;color:#7c3aed;text-transform:uppercase;letter-spacing:1.2px;margin-bottom:10px;}
+.chapter-list{display:flex;flex-direction:column;gap:10px;margin-bottom:24px;}
+.ch-card{background:#fff;border:2px solid var(--border);border-radius:14px;padding:14px;display:flex;align-items:center;gap:12px;box-shadow:var(--sh);text-decoration:none;color:inherit;transition:transform .12s, border-color .12s;cursor:pointer;}
+.ch-card:active{transform:scale(.98);}
+.ch-card.available{border-color:#e9d5ff;}
+.ch-card.available:hover{border-color:var(--purple);}
+.ch-card.locked{opacity:.55;cursor:not-allowed;}
+.ch-num{font-family:'Space Mono',monospace;font-size:.75rem;font-weight:700;background:linear-gradient(135deg,#7c3aed,#6d28d9);color:#fff;border-radius:8px;padding:6px 8px;min-width:36px;text-align:center;flex-shrink:0;}
+.ch-card.locked .ch-num{background:#e2e8f0;color:var(--muted);}
+.ch-info{flex:1;}
+.ch-title{font-size:.92rem;font-weight:900;color:var(--navy);margin-bottom:2px;}
+.ch-topics{font-size:.68rem;color:var(--muted);font-weight:600;line-height:1.4;}
+.ch-arrow{font-size:.9rem;color:var(--purple);flex-shrink:0;}
+.ch-card.locked .ch-arrow{color:var(--muted);}
+.ch-tag{font-size:.58rem;font-weight:800;border-radius:50px;padding:2px 8px;flex-shrink:0;}
+.tag-live{background:#f3e8ff;color:#6b21a8;}
+.tag-soon{background:#f1f5f9;color:var(--muted);}
+.book-card{background:#fff;border:2px solid var(--border);border-radius:14px;padding:14px 16px;box-shadow:var(--sh);display:flex;align-items:center;gap:12px;}
+.book-icon{font-size:2rem;flex-shrink:0;}
+.book-title{font-size:.88rem;font-weight:900;color:var(--navy);}
+.book-sub{font-size:.7rem;color:var(--muted);font-weight:600;margin-top:2px;line-height:1.4;}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-back" href="../index.html">&#8592;</a>
+  <div class="nav-brand">
+    <div class="nav-title">B1 Intermediate</div>
+    <div class="nav-sub">Deutsch Meistern · by Anshuka</div>
+  </div>
+  <span class="nav-badge">B1</span>
+</nav>
+
+<div class="main">
+
+  <div class="hero">
+    <div class="hero-chip">Netzwerk Neu B1</div>
+    <div class="hero-title">B1 Intermediate</div>
+    <div class="hero-sub">12 Kapitel · Real German for real situations</div>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><div class="stat-n">12</div><div class="stat-l">Kapitel</div></div>
+    <div class="stat"><div class="stat-n">B1</div><div class="stat-l">CEFR Level</div></div>
+    <div class="stat"><div class="stat-n">Free</div><div class="stat-l">Always</div></div>
+  </div>
+
+  <div class="sec-label">📚 Choose a Kapitel</div>
+
+  <div class="chapter-list">
+
+    <a class="ch-card available" href="kapitel1.html">
+      <span class="ch-num">K1</span>
+      <div class="ch-info">
+        <div class="ch-title">Gute Reise!</div>
+        <div class="ch-topics">Travel planning · Infinitiv mit zu · Nebensatz mit da/weil/obwohl</div>
+      </div>
+      <span class="ch-tag tag-live">Live</span>
+      <span class="ch-arrow">&#8250;</span>
+    </a>
+
+    <div class="ch-card locked">
+      <span class="ch-num">K2</span>
+      <div class="ch-info">
+        <div class="ch-title">Zusammen leben</div>
+        <div class="ch-topics">Living together · Community · Relative clauses · Relativpronomen</div>
+      </div>
+      <span class="ch-tag tag-soon">Soon</span>
+      <span class="ch-arrow">🔒</span>
+    </div>
+
+    <div class="ch-card locked">
+      <span class="ch-num">K3</span>
+      <div class="ch-info">
+        <div class="ch-title">Arbeit und Karriere</div>
+        <div class="ch-topics">Work and career · Job interviews · Passiv · Nomen-Verb-Verbindungen</div>
+      </div>
+      <span class="ch-tag tag-soon">Soon</span>
+      <span class="ch-arrow">🔒</span>
+    </div>
+
+    <div class="ch-card locked">
+      <span class="ch-num">K4</span>
+      <div class="ch-info">
+        <div class="ch-title">Medien und Kommunikation</div>
+        <div class="ch-topics">Media · Social media · News · Konjunktiv II · Indirekte Rede</div>
+      </div>
+      <span class="ch-tag tag-soon">Soon</span>
+      <span class="ch-arrow">🔒</span>
+    </div>
+
+    <div class="ch-card locked">
+      <span class="ch-num">K5</span>
+      <div class="ch-info">
+        <div class="ch-title">Gesundheit und Wohlbefinden</div>
+        <div class="ch-topics">Health · Well-being · Medical · Zweiteilige Konnektoren</div>
+      </div>
+      <span class="ch-tag tag-soon">Soon</span>
+      <span class="ch-arrow">🔒</span>
+    </div>
+
+    <div class="ch-card locked">
+      <span class="ch-num">K6</span>
+      <div class="ch-info">
+        <div class="ch-title">Kultur und Kunst</div>
+        <div class="ch-topics">Art · Culture · Museums · Partizipialattribut</div>
+      </div>
+      <span class="ch-tag tag-soon">Soon</span>
+      <span class="ch-arrow">🔒</span>
+    </div>
+
+    <div class="ch-card locked">
+      <span class="ch-num">K7</span>
+      <div class="ch-info">
+        <div class="ch-title">Natur und Umwelt</div>
+        <div class="ch-topics">Environment · Climate · Nature · Finalsätze mit um ... zu</div>
+      </div>
+      <span class="ch-tag tag-soon">Soon</span>
+      <span class="ch-arrow">🔒</span>
+    </div>
+
+    <div class="ch-card locked">
+      <span class="ch-num">K8</span>
+      <div class="ch-info">
+        <div class="ch-title">Geschichte und Gesellschaft</div>
+        <div class="ch-topics">History · Society · Plusquamperfekt · Temporalsätze</div>
+      </div>
+      <span class="ch-tag tag-soon">Soon</span>
+      <span class="ch-arrow">🔒</span>
+    </div>
+
+    <div class="ch-card locked">
+      <span class="ch-num">K9</span>
+      <div class="ch-info">
+        <div class="ch-title">Wissenschaft und Technik</div>
+        <div class="ch-topics">Science · Technology · Innovation · Passiv mit Modalverben</div>
+      </div>
+      <span class="ch-tag tag-soon">Soon</span>
+      <span class="ch-arrow">🔒</span>
+    </div>
+
+    <div class="ch-card locked">
+      <span class="ch-num">K10</span>
+      <div class="ch-info">
+        <div class="ch-title">Globale Themen</div>
+        <div class="ch-topics">Global issues · Opinions · Debate · Konzessivsätze</div>
+      </div>
+      <span class="ch-tag tag-soon">Soon</span>
+      <span class="ch-arrow">🔒</span>
+    </div>
+
+    <div class="ch-card locked">
+      <span class="ch-num">K11</span>
+      <div class="ch-info">
+        <div class="ch-title">Sprache und Lernen</div>
+        <div class="ch-topics">Language learning · Strategies · Indefinitpronomen</div>
+      </div>
+      <span class="ch-tag tag-soon">Soon</span>
+      <span class="ch-arrow">🔒</span>
+    </div>
+
+    <div class="ch-card locked">
+      <span class="ch-num">K12</span>
+      <div class="ch-info">
+        <div class="ch-title">Zukunft und Träume</div>
+        <div class="ch-topics">Future · Dreams · Plans · Futur II · Wünsche ausdrücken</div>
+      </div>
+      <span class="ch-tag tag-soon">Soon</span>
+      <span class="ch-arrow">🔒</span>
+    </div>
+
+  </div>
+
+  <div class="book-card">
+    <span class="book-icon">📗</span>
+    <div>
+      <div class="book-title">Netzwerk Neu B1 Kursbuch</div>
+      <div class="book-sub">All lessons on this platform follow the official Netzwerk Neu B1 curriculum by Klett Verlag.</div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

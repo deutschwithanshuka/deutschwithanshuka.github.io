@@ -146,16 +146,14 @@ footer strong{color:var(--navy);}
     <div class="gate-flag">👤</div>
     <div class="gate-title">Student Login</div>
     <div class="gate-by">Deutsch Meistern</div>
-    <div class="gate-label">Your Name</div>
-    <input class="gate-inp" id="s-name" type="text" placeholder="e.g. Priya Sharma" maxlength="60" autocomplete="off">
-    <div class="gate-label">Student Code</div>
-    <input class="gate-inp" id="s-code" type="text" placeholder="e.g. DM-001" maxlength="20" autocomplete="off" style="text-transform:uppercase;" onkeydown="if(event.key==='Enter')checkStudentLogin()">
+    <div class="gate-label">Email</div>
+    <input class="gate-inp" id="s-email" type="email" placeholder="your@email.com" maxlength="100" autocomplete="email" onkeydown="if(event.key==='Enter')document.getElementById('s-pass').focus()">
     <div class="gate-label">Password</div>
-    <input class="gate-inp" id="s-pass" type="password" placeholder="Your password" maxlength="30" autocomplete="off" onkeydown="if(event.key==='Enter')checkStudentLogin()">
+    <input class="gate-inp" id="s-pass" type="password" placeholder="Your password" maxlength="30" autocomplete="current-password" onkeydown="if(event.key==='Enter')checkStudentLogin()">
     <button class="gate-btn" id="s-btn" onclick="checkStudentLogin()">Login 🚀</button>
     <div class="gate-err" id="gate2-err"></div>
     <div class="gate-loading" id="gate2-loading"></div>
-    <div class="gate-hint">Your teacher Anshuka will give you your<br>student code and password.</div>
+    <div class="gate-hint">Use the email and password Anshuka gave you.</div>
   </div>
 </div>
 
@@ -365,12 +363,11 @@ window.checkSitePass = async function() {
 
 // ── STUDENT LOGIN ──
 window.checkStudentLogin = async function() {
-  const name = document.getElementById('s-name').value.trim();
-  const code = document.getElementById('s-code').value.trim().toUpperCase();
-  const pass = document.getElementById('s-pass').value.trim();
+  const email = document.getElementById('s-email').value.trim().toLowerCase();
+  const pass  = document.getElementById('s-pass').value.trim();
 
-  if (!name || !code || !pass) {
-    document.getElementById('gate2-err').textContent = '❌ Please fill in all fields.';
+  if (!email || !pass) {
+    document.getElementById('gate2-err').textContent = '❌ Please enter your email and password.';
     setTimeout(() => document.getElementById('gate2-err').textContent = '', 2500);
     return;
   }
@@ -384,7 +381,7 @@ window.checkStudentLogin = async function() {
     const passHash = await sha256(pass);
     const q = query(
       collection(db, 'students'),
-      where('code', '==', code),
+      where('email', '==', email),
       where('password', '==', passHash)
     );
     const snap = await getDocs(q);
@@ -396,12 +393,7 @@ window.checkStudentLogin = async function() {
     const studentDoc = snap.docs[0];
     const studentData = studentDoc.data();
 
-    // Name check (case-insensitive)
-    if (studentData.name.toLowerCase() !== name.toLowerCase()) {
-      throw new Error('wrong');
-    }
-
-    // Success — log the login (non-blocking, don't let this fail the login)
+    // Log the login (non-blocking)
     addDoc(collection(db, 'students', studentDoc.id, 'activity'), {
       type: 'login',
       timestamp: serverTimestamp()
@@ -410,7 +402,6 @@ window.checkStudentLogin = async function() {
     // Store session
     sessionStorage.setItem('dm_student_id', studentDoc.id);
     sessionStorage.setItem('dm_student_name', studentData.name);
-    sessionStorage.setItem('dm_student_code', code);
     sessionStorage.setItem('dm_student_level', (studentData.level || 'A1').toUpperCase());
 
     // Show main content
@@ -419,8 +410,8 @@ window.checkStudentLogin = async function() {
 
   } catch (e) {
     document.getElementById('gate2-loading').textContent = '';
-    document.getElementById('gate2-err').textContent = '❌ Name, code or password is incorrect.';
-    const inp = document.getElementById('s-code');
+    document.getElementById('gate2-err').textContent = '❌ Email or password is incorrect.';
+    const inp = document.getElementById('s-email');
     inp.classList.remove('shake'); void inp.offsetWidth; inp.classList.add('shake');
     btn.disabled = false;
     setTimeout(() => document.getElementById('gate2-err').textContent = '', 3000);

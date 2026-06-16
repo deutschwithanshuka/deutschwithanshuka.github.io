@@ -114,8 +114,8 @@ input.inp:focus{border-color:var(--blue);}
         <input class="inp" id="new-name" type="text" placeholder="e.g. Priya Sharma" maxlength="60">
       </div>
       <div>
-        <label>Student Code</label>
-        <input class="inp" id="new-code" type="text" placeholder="e.g. DM-001" maxlength="20" style="text-transform:uppercase;">
+        <label>Student Email</label>
+        <input class="inp" id="new-email" type="email" placeholder="student@email.com" maxlength="100">
       </div>
     </div>
     <div class="form-row">
@@ -198,15 +198,15 @@ window.checkAdmin = async function() {
 };
 
 window.addStudent = async function() {
-  const name = document.getElementById('new-name').value.trim();
-  const code = document.getElementById('new-code').value.trim().toUpperCase();
-  const pass = document.getElementById('new-pass').value.trim();
+  const name  = document.getElementById('new-name').value.trim();
+  const email = document.getElementById('new-email').value.trim().toLowerCase();
+  const pass  = document.getElementById('new-pass').value.trim();
   const level = document.getElementById('new-level').value.trim().toUpperCase() || 'A1';
-  const msg = document.getElementById('add-msg');
+  const msg   = document.getElementById('add-msg');
 
-  if (!name || !code || !pass) {
+  if (!name || !email || !pass) {
     msg.className = 'msg err';
-    msg.textContent = '❌ Please fill in name, code and password.';
+    msg.textContent = '❌ Please fill in name, email and password.';
     return;
   }
 
@@ -217,13 +217,13 @@ window.addStudent = async function() {
   try {
     const passHash = await sha256(pass);
     await addDoc(collection(db, 'students'), {
-      name, code, password: passHash, level,
+      name, email, password: passHash, level,
       createdAt: serverTimestamp()
     });
     msg.className = 'msg ok';
-    msg.textContent = '✅ Student "' + name + '" added! Code: ' + code;
+    msg.textContent = '✅ Student "' + name + '" added! Email: ' + email;
     document.getElementById('new-name').value = '';
-    document.getElementById('new-code').value = '';
+    document.getElementById('new-email').value = '';
     document.getElementById('new-pass').value = '';
     document.getElementById('new-level').value = '';
     loadStudents();
@@ -243,16 +243,15 @@ window.loadStudents = async function() {
       el.innerHTML = '<div class="empty">No students yet. Add your first student above!</div>';
       return;
     }
-    let html = '<table class="student-table"><thead><tr><th>Name</th><th>Code</th><th>Password</th><th>Level</th><th>Activity</th></tr></thead><tbody>';
+    let html = '<table class="student-table"><thead><tr><th>Name</th><th>Email</th><th>Level</th><th>Actions</th></tr></thead><tbody>';
     snap.forEach(d => {
       const s = d.data();
       html += `<tr>
         <td><strong>${s.name}</strong></td>
-        <td><span class="badge-code">${s.code}</span></td>
-        <td style="font-family:monospace;font-size:.78rem;color:#94a3b8;">••••••••</td>
+        <td style="font-size:.78rem;color:#64748b;">${s.email || s.code || '—'}</td>
         <td><span class="badge-level">${s.level || 'A1'}</span></td>
         <td>
-          <button class="btn-view" onclick="viewActivity('${d.id}','${s.name}','${s.code}')">View Activity</button>
+          <button class="btn-view" onclick="viewActivity('${d.id}','${s.name}','${s.email || s.code || ''}')">Activity</button>
           <button class="btn-lvl" data-lvl-id="${d.id}" onclick="changeLevel('${d.id}','${s.name}','${s.level || 'A1'}')">Change Level</button>
           <button class="btn-del" data-del-id="${d.id}" onclick="deleteStudent('${d.id}','${s.name}')">Delete</button>
         </td>

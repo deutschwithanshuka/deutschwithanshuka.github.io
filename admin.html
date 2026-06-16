@@ -65,6 +65,19 @@ input.inp:focus{border-color:var(--blue);}
 .empty{text-align:center;padding:30px;color:var(--muted);font-size:.85rem;font-weight:700;}
 .loading{text-align:center;padding:20px;color:var(--blue);font-weight:800;font-size:.85rem;}
 
+/* LEVEL PICKER */
+#lvl-modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:999;display:none;align-items:center;justify-content:center;padding:16px;}
+#lvl-modal-bg.open{display:flex;}
+#lvl-modal{background:#fff;border-radius:20px;padding:28px 24px;max-width:340px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,.2);}
+#lvl-modal h3{font-size:1rem;font-weight:900;color:var(--navy);margin-bottom:4px;}
+#lvl-modal p{font-size:.75rem;color:var(--muted);font-weight:700;margin-bottom:18px;}
+.lvl-toggles{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px;}
+.lvl-toggle{padding:8px 16px;border-radius:10px;border:2px solid var(--border);background:#f8faff;color:var(--muted);font-family:'Nunito',sans-serif;font-size:.85rem;font-weight:800;cursor:pointer;transition:all .15s;}
+.lvl-toggle.selected{background:#f5f3ff;border-color:#7c3aed;color:#7c3aed;}
+.lvl-modal-actions{display:flex;gap:10px;}
+.lvl-save{flex:1;padding:11px;background:linear-gradient(135deg,var(--blue),var(--purple));color:#fff;border:none;border-radius:11px;font-family:'Nunito',sans-serif;font-size:.9rem;font-weight:900;cursor:pointer;}
+.lvl-cancel{padding:11px 16px;background:#f1f5f9;color:var(--muted);border:none;border-radius:11px;font-family:'Nunito',sans-serif;font-size:.9rem;font-weight:800;cursor:pointer;}
+
 /* MODAL */
 #modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:888;display:none;align-items:center;justify-content:center;padding:16px;}
 #modal-bg.open{display:flex;}
@@ -124,8 +137,8 @@ input.inp:focus{border-color:var(--blue);}
         <input class="inp" id="new-pass" type="text" placeholder="e.g. Priya2024" maxlength="30">
       </div>
       <div>
-        <label>Level (optional)</label>
-        <input class="inp" id="new-level" type="text" placeholder="e.g. A1" maxlength="10">
+        <label>Levels (e.g. A1 or A1,A2)</label>
+        <input class="inp" id="new-level" type="text" placeholder="e.g. A1 or A1,A2" maxlength="30">
       </div>
     </div>
     <button class="add-btn" id="add-btn" onclick="addStudent()">Add Student</button>
@@ -141,6 +154,19 @@ input.inp:focus{border-color:var(--blue);}
     <div id="student-list"><div class="loading">Loading students...</div></div>
   </div>
 
+</div>
+
+<!-- LEVEL PICKER MODAL -->
+<div id="lvl-modal-bg" onclick="if(event.target===this)closeLvlModal()">
+  <div id="lvl-modal">
+    <h3>Set Levels</h3>
+    <p id="lvl-modal-name"></p>
+    <div class="lvl-toggles" id="lvl-toggles"></div>
+    <div class="lvl-modal-actions">
+      <button class="lvl-cancel" onclick="closeLvlModal()">Cancel</button>
+      <button class="lvl-save" onclick="saveLevels()">Save Levels</button>
+    </div>
+  </div>
 </div>
 
 <!-- ACTIVITY MODAL -->
@@ -201,7 +227,8 @@ window.addStudent = async function() {
   const name  = document.getElementById('new-name').value.trim();
   const email = document.getElementById('new-email').value.trim().toLowerCase();
   const pass  = document.getElementById('new-pass').value.trim();
-  const level = document.getElementById('new-level').value.trim().toUpperCase() || 'A1';
+  const levelRaw = document.getElementById('new-level').value.trim().toUpperCase() || 'A1';
+  const levels = levelRaw.split(',').map(l => l.trim()).filter(Boolean);
   const msg   = document.getElementById('add-msg');
 
   if (!name || !email || !pass) {
@@ -217,11 +244,11 @@ window.addStudent = async function() {
   try {
     const passHash = await sha256(pass);
     await addDoc(collection(db, 'students'), {
-      name, email, password: passHash, level,
+      name, email, password: passHash, levels,
       createdAt: serverTimestamp()
     });
     msg.className = 'msg ok';
-    msg.textContent = '✅ Student "' + name + '" added! Email: ' + email;
+    msg.textContent = '✅ Student "' + name + '" added! Levels: ' + levels.join(', ');
     document.getElementById('new-name').value = '';
     document.getElementById('new-email').value = '';
     document.getElementById('new-pass').value = '';
@@ -249,10 +276,10 @@ window.loadStudents = async function() {
       html += `<tr>
         <td><strong>${s.name}</strong></td>
         <td style="font-size:.78rem;color:#64748b;">${s.email || s.code || '—'}</td>
-        <td><span class="badge-level">${s.level || 'A1'}</span></td>
+        <td>${(s.levels || (s.level ? [s.level] : ['A1'])).map(l => `<span class="badge-level">${l}</span>`).join(' ')}</td>
         <td>
           <button class="btn-view" onclick="viewActivity('${d.id}','${s.name}','${s.email || s.code || ''}')">Activity</button>
-          <button class="btn-lvl" data-lvl-id="${d.id}" onclick="changeLevel('${d.id}','${s.name}','${s.level || 'A1'}')">Change Level</button>
+          <button class="btn-lvl" data-lvl-id="${d.id}" onclick="changeLevel('${d.id}','${s.name}',${JSON.stringify(s.levels || (s.level ? [s.level] : ['A1']))})">Levels</button>
           <button class="btn-del" data-del-id="${d.id}" onclick="deleteStudent('${d.id}','${s.name}')">Delete</button>
         </td>
       </tr>`;
@@ -292,27 +319,37 @@ window.deleteStudent = async function(id, name) {
   }
 };
 
-window.changeLevel = async function(id, name, currentLevel) {
-  const LEVELS = ['A1','A2','B1','B2','C1'];
-  const newLevel = prompt(`Change level for ${name}\n\nCurrent level: ${currentLevel}\n\nEnter new level (A1, A2, B1, B2, C1):`);
-  if (!newLevel) return;
-  const clean = newLevel.trim().toUpperCase();
-  if (!LEVELS.includes(clean)) {
-    alert('Invalid level. Please enter one of: A1, A2, B1, B2, C1');
-    return;
-  }
-  if (clean === currentLevel) {
-    alert(`${name} is already on ${clean}.`);
-    return;
-  }
-  const btn = document.querySelector(`[data-lvl-id="${id}"]`);
+let _lvlStudentId = null;
+
+window.changeLevel = function(id, name, currentLevels) {
+  _lvlStudentId = id;
+  const selected = Array.isArray(currentLevels) ? currentLevels : (currentLevels ? [currentLevels] : ['A1']);
+  document.getElementById('lvl-modal-name').textContent = name;
+  const ALL = ['A1','A2','B1','B2','C1'];
+  document.getElementById('lvl-toggles').innerHTML = ALL.map(l =>
+    `<button class="lvl-toggle${selected.includes(l) ? ' selected' : ''}" data-lvl="${l}" onclick="this.classList.toggle('selected')">${l}</button>`
+  ).join('');
+  document.getElementById('lvl-modal-bg').classList.add('open');
+};
+
+window.closeLvlModal = function() {
+  document.getElementById('lvl-modal-bg').classList.remove('open');
+  _lvlStudentId = null;
+};
+
+window.saveLevels = async function() {
+  if (!_lvlStudentId) return;
+  const newLevels = Array.from(document.querySelectorAll('.lvl-toggle.selected')).map(b => b.dataset.lvl);
+  if (!newLevels.length) { alert('Please select at least one level.'); return; }
+  const saveBtn = document.querySelector('.lvl-save');
+  saveBtn.disabled = true; saveBtn.textContent = 'Saving...';
   try {
-    if (btn) { btn.disabled = true; btn.textContent = '...'; }
-    await updateDoc(doc(db, 'students', id), { level: clean });
+    await updateDoc(doc(db, 'students', _lvlStudentId), { levels: newLevels });
+    closeLvlModal();
     loadStudents();
   } catch(e) {
-    if (btn) { btn.disabled = false; btn.textContent = 'Change Level'; }
-    alert('Error updating level: ' + e.message);
+    saveBtn.disabled = false; saveBtn.textContent = 'Save Levels';
+    alert('Error: ' + e.message);
   }
 };
 

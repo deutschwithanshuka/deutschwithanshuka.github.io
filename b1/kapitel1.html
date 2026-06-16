@@ -284,9 +284,10 @@ nav{position:sticky;top:0;z-index:999;background:rgba(255,255,255,.98);backdrop-
 <div class="mehr-sheet" id="mehr-sheet">
   <div class="mehr-handle"></div>
   <div class="mehr-title">Mehr Inhalte</div>
-  <div class="mehr-grid" style="grid-template-columns:repeat(2,1fr);">
+  <div class="mehr-grid" style="grid-template-columns:repeat(3,1fr);">
     <button class="mehr-btn" onclick="closeMehr();goTo('woerterbuch',null)"><span class="mehr-btn-i">🔤</span><span class="mehr-btn-l">Vokabeln & Wb.</span></button>
     <button class="mehr-btn" onclick="closeMehr();goTo('leaderboard',null)"><span class="mehr-btn-i">🏆</span><span class="mehr-btn-l">Rangliste</span></button>
+    <button class="mehr-btn" onclick="closeMehr();goTo('lesen',null)"><span class="mehr-btn-i">📰</span><span class="mehr-btn-l">Lesen</span></button>
   </div>
 </div>
 
@@ -309,8 +310,7 @@ nav{position:sticky;top:0;z-index:999;background:rgba(255,255,255,.98);backdrop-
     <div class="t-row" onclick="goToGram(0)"><span class="t-ico">🔧</span><div class="t-main"><div class="t-name">Infinitiv mit zu</div><div class="t-sub">nach Verben, Adjektiven, Nomen</div></div><span class="t-badge">Grammatik</span></div>
     <div class="t-row" onclick="goToGram(1)"><span class="t-ico">💡</span><div class="t-main"><div class="t-name">Nebensatz mit da / weil</div><div class="t-sub">Kausale Nebensätze erklären</div></div><span class="t-badge">Grammatik</span></div>
     <div class="t-row" onclick="goToGram(2)"><span class="t-ico">⚡</span><div class="t-main"><div class="t-name">Nebensatz mit obwohl</div><div class="t-sub">Konzessivsatz: Gegensätze</div></div><span class="t-badge">Grammatik</span></div>
-    <div class="t-row" onclick="goTo('exercises',document.querySelectorAll('.bn')[2])"><span class="t-ico">✈️</span><div class="t-main"><div class="t-name">Urlaubsplanung</div><div class="t-sub">Anna & Paula planen den Urlaub</div></div><span class="t-badge">Lesen</span></div>
-    <div class="t-row" onclick="goTo('exercises',document.querySelectorAll('.bn')[2])"><span class="t-ico">🏔️</span><div class="t-main"><div class="t-name">Timos Blog von der Alm</div><div class="t-sub">Urlaub oder Arbeit?</div></div><span class="t-badge">Lesen</span></div>
+    <div class="t-row" onclick="goTo('lesen',null)"><span class="t-ico">📰</span><div class="t-main"><div class="t-name">Lesetexte</div><div class="t-sub">3 Texte mit Infinitiv, weil, obwohl</div></div><span class="t-badge">Lesen</span></div>
     <div class="t-row" onclick="goTo('exercises',document.querySelectorAll('.bn')[2])"><span class="t-ico">🌲</span><div class="t-main"><div class="t-name">Ranger im Nationalpark</div><div class="t-sub">Florian Hofmann im Schwarzwald</div></div><span class="t-badge">Film</span></div>
     <div class="t-row" onclick="goTo('vocab',document.querySelectorAll('.bn')[3])"><span class="t-ico">🗺️</span><div class="t-main"><div class="t-name">Reiseziele in Deutschland</div><div class="t-sub">Rothenburg, Rügen, Heringsdorf</div></div><span class="t-badge">Landeskunde</span></div>
   </div>
@@ -488,6 +488,59 @@ nav{position:sticky;top:0;z-index:999;background:rgba(255,255,255,.98);backdrop-
   <div class="ex-panel" id="ep-2"><div id="schreiben-set"></div></div>
 </div>
 
+<!-- ══════════════ LESEN ══════════════ -->
+<div class="screen" id="s-lesen">
+  <div class="sec-h">📰 Lesetexte</div>
+  <p style="font-size:.88rem;color:var(--muted);margin-bottom:16px;line-height:1.6;">Drei originale Texte zum Thema Reisen. Erkenne Infinitiv mit zu, weil/da und obwohl in echten Kontexten!</p>
+
+  <!-- TEXT 1 -->
+  <div class="gcard" style="margin-bottom:18px;">
+    <div class="gcard-title" style="font-size:1rem;">📖 Text 1: Annas Reiseplanung</div>
+    <div style="font-size:.75rem;font-weight:800;color:var(--purple);text-transform:uppercase;letter-spacing:1px;margin-bottom:12px;">Thema: Urlaub in Bayern · Infinitiv mit zu · weil / da · obwohl</div>
+    <div class="passage" style="margin-bottom:14px;">
+      Anna studiert Germanistik in Hamburg und plant, in den Sommerferien nach Bayern zu fahren. Sie hat beschlossen, zwei Wochen in und um München zu verbringen. Es ist ihr erster Besuch in Bayern, aber sie freut sich sehr darauf.<br><br>
+      Zuerst versucht Anna, ein günstiges Hotel zu finden. Da die Sommerferien sehr beliebt sind, sind viele Hotels schon ausgebucht. Obwohl sie schon Wochen vorher anfängt zu suchen, findet sie nur noch wenige freie Zimmer. Schließlich bucht sie ein Zimmer in einer Jugendherberge. Das kostet 35 Euro pro Nacht. Es ist einfach, aber sauber und zentral gelegen.<br><br>
+      Dann plant Anna, mit dem Zug nach München zu fahren. Sie kauft ein Bahnticket, weil der Zug bequemer ist als der Bus. Außerdem ist es schön, die Landschaft aus dem Zugfenster zu beobachten. Obwohl die Zugfahrt von Hamburg nach München fast sechs Stunden dauert, findet Anna das nicht schlimm. Sie hat Bücher und Musik dabei, um die Zeit zu verbringen.<br><br>
+      In München möchte Anna viele Sehenswürdigkeiten besichtigen: das Deutsche Museum, den Englischen Garten und den Marienplatz. Da sie kein großes Budget hat, plant sie vor allem, die Grünflächen und Märkte zu erkunden. Obwohl München als teure Stadt bekannt ist, kann man auch günstig reisen, wenn man gut plant. Anna freut sich sehr, endlich ihren Traumurlaub zu erleben!
+    </div>
+    <div class="section-h">❓ Fragen zum Text 1</div>
+    <div id="b1lesen1-set"></div>
+  </div>
+
+  <!-- TEXT 2 -->
+  <div class="gcard" style="margin-bottom:18px;">
+    <div class="gcard-title" style="font-size:1rem;">📖 Text 2: Am Bahnhof</div>
+    <div style="font-size:.75rem;font-weight:800;color:var(--purple);text-transform:uppercase;letter-spacing:1px;margin-bottom:12px;">Thema: Zugfahrt · Infinitiv mit zu · weil / da · obwohl</div>
+    <div class="passage" style="margin-bottom:14px;">
+      Lukas und Mia stehen am Stuttgarter Hauptbahnhof. Sie wollen nach Heidelberg fahren. Ihr Zug fährt in zwanzig Minuten ab.<br><br>
+      Lukas: "Hast du die Fahrkarten?"<br>
+      Mia: "Ja, ich habe sie schon gestern gekauft. Ich habe vergessen, dir Bescheid zu geben. Tut mir leid!"<br>
+      Lukas: "Kein Problem. Obwohl wir ein bisschen spät angekommen sind, schaffen wir es noch rechtzeitig."<br>
+      Mia: "Sollen wir noch schnell einen Kaffee kaufen? Da drüben gibt es eine Bäckerei."<br>
+      Lukas: "Gute Idee! Aber wir müssen uns beeilen, weil unser Zug bald abfährt."<br><br>
+      Sie gehen zur Bäckerei und versuchen, schnell zu bestellen. Da die Schlange etwas lang ist, dauert es etwas länger als erwartet. Aber sie schaffen es noch rechtzeitig zum Gleis.<br><br>
+      Im Zug finden sie zwei freie Plätze am Fenster. Mia schaut nach draußen und sagt: "Ich liebe es, mit dem Zug zu reisen! Obwohl das Auto manchmal schneller ist, gefällt mir der Zug viel besser. Man kann einfach entspannen und die Landschaft genießen."<br>
+      Lukas nickt: "Das stimmt. Und da wir beide kein Auto haben, ist der Zug sowieso die beste Option für uns. Es macht Spaß, gemeinsam zu fahren!"
+    </div>
+    <div class="section-h">❓ Fragen zum Text 2</div>
+    <div id="b1lesen2-set"></div>
+  </div>
+
+  <!-- TEXT 3 -->
+  <div class="gcard" style="margin-bottom:18px;">
+    <div class="gcard-title" style="font-size:1rem;">📖 Text 3: Mit dem Zug durch Deutschland</div>
+    <div style="font-size:.75rem;font-weight:800;color:var(--purple);text-transform:uppercase;letter-spacing:1px;margin-bottom:12px;">Thema: Bahnreisen in Deutschland · Infinitiv mit zu · weil / da · obwohl</div>
+    <div class="passage" style="margin-bottom:14px;">
+      Deutschland ist bekannt fur sein gutes Bahnnetz. Es ist moglich, fast jeden Teil des Landes per Zug zu erreichen. Die Deutsche Bahn (DB) betreibt taglich Tausende von Verbindungen. Obwohl das Streckennetz sehr groß ist, gibt es manchmal Verspatungen - besonders im Winter.<br><br>
+      Es gibt verschiedene Zugtypen: Der ICE (InterCityExpress) ist der schnellste Zug in Deutschland. Er fahrt bis zu 300 km/h. Da der ICE sehr schnell und komfortabel ist, kostet er auch mehr als normale Regionalzuge. Wer Geld sparen mochte, kann das Deutschlandticket nutzen. Es kostet 49 Euro pro Monat und gilt fur alle Nahverkehrszuge im ganzen Land.<br><br>
+      Viele Reisende versuchen, ihre Tickets im Voraus zu kaufen, um gunstigere Preise zu bekommen. Obwohl spontane Reisen ihren Reiz haben, lohnt es sich, fruher zu buchen. Es ist ratsam, verschiedene Verbindungen zu vergleichen, bevor man ein Ticket kauft.<br><br>
+      Da Deutschland in der Mitte Europas liegt, kann man von hier aus leicht in andere Lander reisen. Wer nach Frankreich, Osterreich oder die Niederlande fahren mochte, nimmt einfach den Zug. Obwohl viele Menschen lieber fliegen, entscheiden sich immer mehr Reisende fur den umweltfreundlicheren Zug. Reisen per Bahn ist bequem, oft preisgunstiger als gedacht - und gut fur die Umwelt!
+    </div>
+    <div class="section-h">❓ Fragen zum Text 3</div>
+    <div id="b1lesen3-set"></div>
+  </div>
+</div>
+
 <!-- ══════════════ VOCABULARY ══════════════ -->
 <div class="screen" id="s-vocab">
   <div class="sec-h">🔤 Vokabeln</div>
@@ -514,6 +567,7 @@ let score=0, answered=new Set(), orderState={};
 function goTo(id,btn){
   if(id==='woerterbuch') setTimeout(buildWB,50);
   if(id==='leaderboard'&&window.loadLeaderboard) window.loadLeaderboard();
+  if(id==='lesen') setTimeout(renderLesenTexts,50);
   document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
   document.querySelectorAll('.bn').forEach(b=>b.classList.remove('active'));
   document.getElementById('s-'+id).classList.add('active');
@@ -793,6 +847,44 @@ function renderSet(data,containerId){
       </div>
     </div>`;
     c.innerHTML+=card;
+  });
+}
+
+/* ── LESEN QUESTIONS ── */
+const b1lesen1Q=[
+  {t:'mc',q:'Warum sind viele Hotels schon ausgebucht?',opts:['Weil Anna zu spät sucht','Da die Sommerferien sehr beliebt sind','Obwohl die Preise günstig sind','Weil München zu klein ist'],ans:1},
+  {t:'mc',q:'Wie viel kostet Annas Zimmer pro Nacht?',opts:['25 Euro','35 Euro','45 Euro','55 Euro'],ans:1},
+  {t:'mc',q:'Warum fährt Anna mit dem Zug und nicht mit dem Bus?',opts:['Weil der Zug günstiger ist','Weil der Bus zu langsam ist','Weil der Zug bequemer ist','Weil der Bus nicht fährt'],ans:2},
+  {t:'mc',q:'Wie lange dauert die Zugfahrt von Hamburg nach München?',opts:['Zwei Stunden','Vier Stunden','Fast sechs Stunden','Acht Stunden'],ans:2},
+  {t:'mc',q:'Welche Grammatikstruktur ist in "Sie hat beschlossen, zwei Wochen in München zu verbringen" enthalten?',opts:['Nebensatz mit obwohl','Infinitiv mit zu','Nebensatz mit weil','Passiv'],ans:1},
+];
+const b1lesen2Q=[
+  {t:'mc',q:'Wohin fahren Lukas und Mia?',opts:['Nach München','Nach Hamburg','Nach Heidelberg','Nach Stuttgart'],ans:2},
+  {t:'mc',q:'Wer hat die Fahrkarten gekauft?',opts:['Lukas','Mia','Beide zusammen','Niemand'],ans:1},
+  {t:'mc',q:'Warum müssen sie sich beeilen?',opts:['Da der Bahnhof weit weg ist','Obwohl sie Zeit haben','Weil ihr Zug bald abfährt','Da die Bäckerei schließt'],ans:2},
+  {t:'mc',q:'Warum bevorzugt Mia den Zug gegenüber dem Auto?',opts:['Weil der Zug günstiger ist','Weil man entspannen und die Landschaft genießen kann','Weil sie kein Auto hat','Weil der Zug schneller ist'],ans:1},
+  {t:'mc',q:'Welcher Satz enthält einen Nebensatz mit "da"?',opts:['"Obwohl das Auto manchmal schneller ist, gefällt mir der Zug viel besser."','"Weil unser Zug bald abfährt."','"Da wir beide kein Auto haben, ist der Zug die beste Option."','"Ich habe vergessen, dir Bescheid zu geben."'],ans:2},
+];
+const b1lesen3Q=[
+  {t:'mc',q:'Wie schnell fährt der ICE maximal?',opts:['150 km/h','200 km/h','300 km/h','400 km/h'],ans:2},
+  {t:'mc',q:'Was kostet das Deutschlandticket pro Monat?',opts:['29 Euro','39 Euro','49 Euro','59 Euro'],ans:2},
+  {t:'mc',q:'Für welche Züge gilt das Deutschlandticket?',opts:['Nur für den ICE','Nur für Fernzüge','Für alle Nahverkehrszüge im ganzen Land','Nur in einem Bundesland'],ans:2},
+  {t:'mc',q:'Warum lohnt es sich, Tickets früh zu buchen?',opts:['Weil die Züge sonst voll sind','Um günstigere Preise zu bekommen','Da der ICE sonst nicht fährt','Obwohl die Preise gleich sind'],ans:1},
+  {t:'mc',q:'Welcher Satz enthält einen Nebensatz mit "obwohl"?',opts:['"Da Deutschland in der Mitte Europas liegt..."','"Es ist möglich, fast jeden Teil des Landes zu erreichen."','"Obwohl viele Menschen lieber fliegen, entscheiden sich immer mehr für den Zug."','"Wer Geld sparen möchte, kann das Deutschlandticket nutzen."'],ans:2},
+];
+
+function renderLesenTexts(){
+  if(document.getElementById('b1lesen1-set').innerHTML) return;
+  renderB1LesenSet(b1lesen1Q,'b1lesen1-set');
+  renderB1LesenSet(b1lesen2Q,'b1lesen2-set');
+  renderB1LesenSet(b1lesen3Q,'b1lesen3-set');
+}
+function renderB1LesenSet(data,cid){
+  const c=document.getElementById(cid);if(!c)return;c.innerHTML='';
+  data.forEach((q,i)=>{
+    const id=cid+'-'+i;
+    const oh=q.opts.map((o,oi)=>`<button class="opt" id="opt-${id}-${oi}" onclick="checkMC('${id}',${oi},${q.ans})">${o}</button>`).join('');
+    c.innerHTML+=`<div class="qcard" id="card-${id}"><div class="q-meta"><span class="q-num">#${i+1}</span><span class="q-type">Multiple Choice</span><span class="q-status" id="st-${id}"></span></div><div class="q-text">${q.q}</div><div class="opts">${oh}</div><div class="fb" id="fb-${id}"></div></div>`;
   });
 }
 

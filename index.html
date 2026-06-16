@@ -396,11 +396,11 @@ window.checkStudentLogin = async function() {
       throw new Error('wrong');
     }
 
-    // Success — log the login
-    await addDoc(collection(db, 'students', studentDoc.id, 'activity'), {
+    // Success — log the login (non-blocking, don't let this fail the login)
+    addDoc(collection(db, 'students', studentDoc.id, 'activity'), {
       type: 'login',
       timestamp: serverTimestamp()
-    });
+    }).catch(() => {});
 
     // Store session
     sessionStorage.setItem('dm_student_id', studentDoc.id);

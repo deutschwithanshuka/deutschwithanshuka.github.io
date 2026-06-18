@@ -142,9 +142,9 @@ window.doLogin = async function() {
     }
 
     // Set session
-    sessionStorage.setItem('dm_student_id', emailId);
-    sessionStorage.setItem('dm_student_name', student.name);
-    sessionStorage.setItem('dm_student_levels', (student.levels || [student.level || 'A1']).join(','));
+    localStorage.setItem('dm_student_id', emailId);
+    localStorage.setItem('dm_student_name', student.name);
+    localStorage.setItem('dm_student_levels', (student.levels || [student.level || 'A1']).join(','));
 
     // Redirect to homepage
     window.location.href = '/';

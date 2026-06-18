@@ -126,36 +126,6 @@ footer strong{color:var(--navy);}
 </head>
 <body>
 
-<!-- GATE 1: SITE PASSWORD -->
-<div class="gate-overlay" id="gate1">
-  <div class="gate-box">
-    <div class="gate-flag">🇩🇪</div>
-    <div class="gate-title">Deutsch Meistern</div>
-    <div class="gate-by">by Anshuka</div>
-    <div class="gate-label">🔒 Enter your access password</div>
-    <input class="gate-inp" id="gate1-inp" type="password" placeholder="Password…" maxlength="30" autocomplete="off" onkeydown="if(event.key==='Enter')checkSitePass()">
-    <button class="gate-btn" onclick="checkSitePass()">Enter ✈️</button>
-    <div class="gate-err" id="gate1-err"></div>
-    <div class="gate-hint">Password provided by your teacher Anshuka.<br>Contact her if you don't have it yet.</div>
-  </div>
-</div>
-
-<!-- GATE 2: STUDENT LOGIN -->
-<div class="gate-overlay hidden" id="gate2">
-  <div class="gate-box">
-    <div class="gate-flag">👤</div>
-    <div class="gate-title">Student Login</div>
-    <div class="gate-by">Deutsch Meistern</div>
-    <div class="gate-label">Email</div>
-    <input class="gate-inp" id="s-email" type="email" placeholder="your@email.com" maxlength="100" autocomplete="email" onkeydown="if(event.key==='Enter')document.getElementById('s-pass').focus()">
-    <div class="gate-label">Password</div>
-    <input class="gate-inp" id="s-pass" type="password" placeholder="Your password" maxlength="30" autocomplete="current-password" onkeydown="if(event.key==='Enter')checkStudentLogin()">
-    <button class="gate-btn" id="s-btn" onclick="checkStudentLogin()">Login 🚀</button>
-    <div class="gate-err" id="gate2-err"></div>
-    <div class="gate-loading" id="gate2-loading"></div>
-    <div class="gate-hint">Use the email and password Anshuka gave you.</div>
-  </div>
-</div>
 
 <!-- NAV -->
 <nav>
@@ -328,131 +298,36 @@ footer strong{color:var(--navy);}
 <!-- Firebase SDK -->
 <script type="module">
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js';
-import { getFirestore, collection, query, where, getDocs, addDoc, serverTimestamp, getDoc, doc }
+import { getFirestore, addDoc, serverTimestamp, getDoc, doc, collection }
   from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js';
 
-const firebaseConfig = {
+const app = initializeApp({
   apiKey: "AIzaSyCuMSWNpOIlnqqxFmy08CfIcbvAUpTXo1E",
   authDomain: "deutschmeistern-abc4d.firebaseapp.com",
   projectId: "deutschmeistern-abc4d",
   storageBucket: "deutschmeistern-abc4d.firebasestorage.app",
   messagingSenderId: "282075407369",
   appId: "1:282075407369:web:4a5587b4eb391e768004d8"
-};
-
-const app = initializeApp(firebaseConfig);
+});
 const db = getFirestore(app);
 
-// ── SHA-256 HASH ──
-async function sha256(msg) {
-  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(msg));
-  return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2,'0')).join('');
-}
-
-// ── SITE PASSWORD (loaded from Firestore, never in source code) ──
-let SITE_PASS_HASH = '';
-(async () => {
-  try {
-    const cfg = await getDoc(doc(db, 'config', 'site'));
-    if (cfg.exists()) SITE_PASS_HASH = cfg.data().sitePass;
-  } catch(e) {}
-})();
-
-window.checkSitePass = async function() {
-  const v = document.getElementById('gate1-inp').value.trim();
-  const hash = await sha256(v);
-  if (hash === SITE_PASS_HASH) {
-    document.getElementById('gate1').classList.add('hidden');
-    document.getElementById('gate2').classList.remove('hidden');
-    setTimeout(() => document.getElementById('s-name').focus(), 100);
-  } else {
-    const inp = document.getElementById('gate1-inp');
-    document.getElementById('gate1-err').textContent = '❌ Wrong password. Try again.';
-    inp.classList.remove('shake'); void inp.offsetWidth; inp.classList.add('shake');
-    inp.value = '';
-    setTimeout(() => document.getElementById('gate1-err').textContent = '', 2500);
-  }
-};
-
-// ── STUDENT LOGIN ──
-window.checkStudentLogin = async function() {
-  const email = document.getElementById('s-email').value.trim().toLowerCase();
-  const pass  = document.getElementById('s-pass').value.trim();
-
-  if (!email || !pass) {
-    document.getElementById('gate2-err').textContent = '❌ Please enter your email and password.';
-    setTimeout(() => document.getElementById('gate2-err').textContent = '', 2500);
-    return;
-  }
-
-  const btn = document.getElementById('s-btn');
-  btn.disabled = true;
-  document.getElementById('gate2-loading').textContent = '⏳ Checking...';
-  document.getElementById('gate2-err').textContent = '';
-
-  try {
-    const passHash = await sha256(pass);
-    const q = query(
-      collection(db, 'students'),
-      where('email', '==', email),
-      where('password', '==', passHash)
-    );
-    const snap = await getDocs(q);
-
-    if (snap.empty) {
-      throw new Error('wrong');
-    }
-
-    const studentDoc = snap.docs[0];
-    const studentData = studentDoc.data();
-
-    // Log the login (non-blocking)
-    addDoc(collection(db, 'students', studentDoc.id, 'activity'), {
-      type: 'login',
-      timestamp: serverTimestamp()
-    }).catch(() => {});
-
-    // Store session
-    sessionStorage.setItem('dm_student_id', studentDoc.id);
-    sessionStorage.setItem('dm_student_name', studentData.name);
-    // Support both old single-level and new multi-level format
-    const rawLevels = studentData.levels || (studentData.level ? [studentData.level] : ['A1']);
-    const myLevels = rawLevels.map(l => l.toUpperCase());
-    sessionStorage.setItem('dm_student_levels', JSON.stringify(myLevels));
-
-    // Show main content
-    document.getElementById('gate2').classList.add('hidden');
-    showStudentUI(studentData.name);
-
-  } catch (e) {
-    document.getElementById('gate2-loading').textContent = '';
-    document.getElementById('gate2-err').textContent = '❌ Email or password is incorrect.';
-    const inp = document.getElementById('s-email');
-    inp.classList.remove('shake'); void inp.offsetWidth; inp.classList.add('shake');
-    btn.disabled = false;
-    setTimeout(() => document.getElementById('gate2-err').textContent = '', 3000);
-  }
-};
-
-function showStudentUI(name) {
+function showStudentUI(name, myLevels) {
   document.getElementById('nav-student').textContent = '👤 ' + name;
   document.getElementById('nav-student').classList.add('visible');
   document.getElementById('student-display-name').textContent = 'Hallo, ' + name + '! 👋';
   document.getElementById('student-strip').classList.add('visible');
-  applyLevelAccess();
+  applyLevelAccess(myLevels);
 }
 
-function applyLevelAccess() {
-  const raw = sessionStorage.getItem('dm_student_levels') || '[]';
-  const myLevels = JSON.parse(raw);
-  if (!myLevels.length) return;
+function applyLevelAccess(myLevels) {
+  if (!myLevels || !myLevels.length) return;
   document.querySelectorAll('.lv-btn[data-level]').forEach(btn => {
     const btnLevel = btn.getAttribute('data-level');
     if (myLevels.includes(btnLevel)) {
       btn.classList.add('lv-mine');
       btn.classList.remove('locked','lv-noaccess');
       const tag = btn.querySelector('[class*="lv-tag"]');
-      if (tag) tag.textContent = '✅ Your Level';
+      if (tag) tag.textContent = 'Your Level';
     } else {
       btn.classList.add('lv-noaccess');
       btn.classList.remove('lv-mine');
@@ -461,7 +336,7 @@ function applyLevelAccess() {
       btn.setAttribute('href', '#');
       btn.onclick = function(e) { e.preventDefault(); showAccessToast(); };
       const tag = btn.querySelector('[class*="lv-tag"]');
-      if (tag) tag.textContent = '🔒 Not in your plan';
+      if (tag) tag.textContent = 'Not in your plan';
     }
   });
 }
@@ -477,7 +352,7 @@ function showAccessToast() {
 
 // ── PROGRESS TRACKING ──
 window.trackClick = async function(level) {
-  const studentId = sessionStorage.getItem('dm_student_id');
+  const studentId = localStorage.getItem('dm_student_id');
   if (!studentId) return;
   try {
     await addDoc(collection(db, 'students', studentId, 'activity'), {
@@ -491,27 +366,43 @@ window.trackClick = async function(level) {
 // ── COMING SOON ──
 window.comingSoon = function(e, level) {
   e.preventDefault();
-  alert('🔒 ' + level + ' is coming soon!\nCheck back later. Viel Geduld! 😊');
+  alert(level + ' is coming soon! Check back later. Viel Geduld!');
 };
 
-// ── AUTO-RESTORE SESSION WITH FRESH LEVELS ──
-// If student already logged in this browser session, re-fetch levels from
-// Firestore so admin changes are reflected immediately (no re-login needed).
+// ── AUTO-RESTORE SESSION ──
+// Check localStorage; if no session, redirect to login page.
+// If session found, re-fetch levels from Firestore so admin changes reflect immediately.
 (async () => {
-  const studentId   = sessionStorage.getItem('dm_student_id');
-  const studentName = sessionStorage.getItem('dm_student_name');
-  if (!studentId || !studentName) return;
+  const studentId   = localStorage.getItem('dm_student_id');
+  const studentName = localStorage.getItem('dm_student_name');
+
+  if (!studentId || !studentName) {
+    // No session -- send to login
+    window.location.href = '/login.html';
+    return;
+  }
+
   try {
     const snap = await getDoc(doc(db, 'students', studentId));
-    if (!snap.exists()) return;
+    if (!snap.exists()) {
+      // Student deleted -- clear and redirect
+      localStorage.removeItem('dm_student_id');
+      localStorage.removeItem('dm_student_name');
+      localStorage.removeItem('dm_student_levels');
+      window.location.href = '/login.html';
+      return;
+    }
     const data = snap.data();
     const rawLevels = data.levels || (data.level ? [data.level] : ['A1']);
     const myLevels  = rawLevels.map(l => l.toUpperCase());
-    sessionStorage.setItem('dm_student_levels', JSON.stringify(myLevels));
-    document.getElementById('gate1').classList.add('hidden');
-    document.getElementById('gate2').classList.add('hidden');
-    showStudentUI(studentName);
-  } catch(e) { /* silent fail */ }
+    localStorage.setItem('dm_student_levels', myLevels.join(','));
+    showStudentUI(studentName, myLevels);
+  } catch(e) {
+    // Firestore error -- still show UI using cached levels
+    const cached = localStorage.getItem('dm_student_levels') || 'A1';
+    const myLevels = cached.split(',').map(l => l.trim().toUpperCase()).filter(Boolean);
+    showStudentUI(studentName, myLevels);
+  }
 })();
 </script>
 </body>

@@ -123,7 +123,7 @@ select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/
 
 <script type="module">
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js';
-import { getFirestore, collection, addDoc, serverTimestamp, query, where, getDocs }
+import { getFirestore, collection, addDoc, serverTimestamp }
   from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js';
 
 const app = initializeApp({
@@ -159,15 +159,6 @@ window.submitForm = async function() {
   btn.textContent = 'Submitting...';
 
   try {
-    // Check if email already registered
-    const existing = await getDocs(query(collection(db, 'registrations'), where('email', '==', email)));
-    if (!existing.empty) {
-      errEl.textContent = 'This email is already registered. Please contact Anshuka.';
-      btn.disabled = false;
-      btn.textContent = 'Submit Registration';
-      return;
-    }
-
     await addDoc(collection(db, 'registrations'), {
       name, email, phone, level, batchTime, batchDate,
       status: 'pending',

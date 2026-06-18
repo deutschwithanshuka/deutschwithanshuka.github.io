@@ -33,7 +33,7 @@
       display:flex; flex-direction:row;
       width:500vw; height:100vh;      /* 5 panels × 100vw */
       transform:translateX(0);
-      transition:transform 0.75s cubic-bezier(0.77,0,0.175,1);
+      transition:transform 0.95s cubic-bezier(0.25,0.46,0.45,0.94);
       will-change:transform;
     }
 
@@ -365,7 +365,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
 /* ───────────────────────────────────────────────────────
-   3D BACKGROUND  --  camera pans right as user scrolls
+   3D BACKGROUND  --  camera lerps smoothly right as user scrolls
 ─────────────────────────────────────────────────────── */
 (function(){
   'use strict';
@@ -373,7 +373,6 @@
   const W = () => window.innerWidth;
   const H = () => window.innerHeight;
 
-  // Renderer
   const renderer = new THREE.WebGLRenderer({ canvas, antialias:true, alpha:false });
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
   renderer.setSize(W(), H());
@@ -381,109 +380,122 @@
   renderer.physicallyCorrectLights = true;
   renderer.outputEncoding = THREE.sRGBEncoding;
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
-  renderer.toneMappingExposure = 1.05;
+  renderer.toneMappingExposure = 1.1;
 
   const scene = new THREE.Scene();
-  scene.fog = new THREE.FogExp2(0x050d2a, 0.018);
+  scene.fog = new THREE.FogExp2(0x050d2a, 0.015);
 
   const camera = new THREE.PerspectiveCamera(52, W()/H(), 0.1, 160);
   camera.position.set(0, 0, 16);
 
   // ── LIGHTS ──
-  scene.add(new THREE.AmbientLight(0x0a1040, 3));
-
-  const key = new THREE.DirectionalLight(0x8ab4f8, 2.5);
+  scene.add(new THREE.AmbientLight(0x0a1040, 3.5));
+  const key = new THREE.DirectionalLight(0x8ab4f8, 3);
   key.position.set(8, 14, 10); scene.add(key);
-
-  const pBlue = new THREE.PointLight(0x3b82f6, 6, 30);
+  const pBlue = new THREE.PointLight(0x3b82f6, 7, 32);
   pBlue.position.set(10, 3, 6); scene.add(pBlue);
-
-  const pGold = new THREE.PointLight(0xc9a84c, 5, 28);
+  const pGold = new THREE.PointLight(0xc9a84c, 6, 30);
   pGold.position.set(-6, -4, 8); scene.add(pGold);
-
-  const pVio = new THREE.PointLight(0x7c3aed, 4, 22);
+  const pVio = new THREE.PointLight(0x7c3aed, 5, 24);
   pVio.position.set(-2, 6, -6); scene.add(pVio);
-
-  // Moving lights (drift with scroll)
-  const dynBlue = new THREE.PointLight(0x60a5fa, 4, 25);
-  scene.add(dynBlue);
-  const dynGold = new THREE.PointLight(0xe8c96a, 4, 25);
-  scene.add(dynGold);
+  const dynBlue = new THREE.PointLight(0x60a5fa, 5, 28); scene.add(dynBlue);
+  const dynGold = new THREE.PointLight(0xe8c96a, 5, 28); scene.add(dynGold);
 
   // ── HELPERS ──
   const std = (color, metal, rough, emissive, ei) =>
-    new THREE.MeshStandardMaterial({ color, metalness:metal??0.85, roughness:rough??0.1, emissive:emissive??0x000000, emissiveIntensity:ei??0 });
-
-  function sphere(r, mat) {
-    return new THREE.Mesh(new THREE.SphereGeometry(r, 64, 64), mat);
-  }
-  function ring(r, tube, mat) {
-    return new THREE.Mesh(new THREE.TorusGeometry(r, tube, 12, 100), mat);
-  }
+    new THREE.MeshStandardMaterial({ color, metalness:metal??0.88, roughness:rough??0.08, emissive:emissive??0x000000, emissiveIntensity:ei??0 });
+  const sphere = (r, mat) => new THREE.Mesh(new THREE.SphereGeometry(r, 64, 64), mat);
+  const ring   = (r, tube, mat) => new THREE.Mesh(new THREE.TorusGeometry(r, tube, 22, 128), mat);
 
   // ─────────────────────────────────────────────────
-  // ZONE 0 (panel 1, x≈0): Main globe + rings
+  // ZONE 0 (panel 1): Armillary sphere — nested rings + crystal gem
   // ─────────────────────────────────────────────────
-  const glob = sphere(2.5, std(0x050c30, 0.9, 0.08, 0x1e3a8a, 0.18));
-  glob.position.set(7, -0.5, -2);
-  scene.add(glob);
+  const pos0 = new THREE.Vector3(7, 0, -2);
 
-  // Atmosphere
-  const atmos = sphere(2.75, new THREE.MeshStandardMaterial({ color:0x1e40af, transparent:true, opacity:0.07, metalness:0, roughness:0 }));
-  atmos.position.copy(glob.position); scene.add(atmos);
+  // Central crystal (octahedron — faceted gem look)
+  const gem = new THREE.Mesh(
+    new THREE.OctahedronGeometry(1.3, 3),
+    std(0x080f28, 0.96, 0.03, 0x2563eb, 0.55)
+  );
+  gem.position.copy(pos0); scene.add(gem);
 
-  // Lat/lon lines
-  for(let i=1;i<7;i++){
-    const lat=-Math.PI/2+(i/7)*Math.PI, r=Math.cos(lat)*2.56, y=Math.sin(lat)*2.56;
-    const m=new THREE.Mesh(new THREE.TorusGeometry(r,0.007,6,64), new THREE.MeshBasicMaterial({color:0x3b82f6,transparent:true,opacity:0.25}));
-    m.position.copy(glob.position); m.position.y+=y; scene.add(m);
-  }
-  for(let i=0;i<8;i++){
-    const m=new THREE.Mesh(new THREE.TorusGeometry(2.56,0.007,6,64), new THREE.MeshBasicMaterial({color:0x60a5fa,transparent:true,opacity:0.18}));
-    m.position.copy(glob.position); m.rotation.y=(i/8)*Math.PI; scene.add(m);
-  }
+  // Glowing wireframe shell
+  const gemWire = new THREE.Mesh(
+    new THREE.OctahedronGeometry(1.42, 3),
+    new THREE.MeshBasicMaterial({color:0x60a5fa, wireframe:true, transparent:true, opacity:0.22})
+  );
+  gemWire.position.copy(pos0); scene.add(gemWire);
 
-  // Orbit rings zone 0
-  const r0a = ring(3.8, 0.04, std(0x3b82f6, 0.9, 0.05, 0x1d4ed8, 0.4));
-  r0a.position.copy(glob.position); r0a.rotation.set(Math.PI/2.5, 0.3, 0); scene.add(r0a);
+  // Armillary rings — 5 rings at different angles and radii
+  const armRings = [];
+  const armDefs = [
+    { r:2.5,  tube:0.045, col:0xc9a84c, rot:[Math.PI/2, 0, 0] },
+    { r:2.5,  tube:0.045, col:0x3b82f6, rot:[0, 0, 0] },
+    { r:2.5,  tube:0.03,  col:0x7c3aed, rot:[Math.PI/3, 0, Math.PI/5] },
+    { r:3.5,  tube:0.025, col:0x60a5fa, rot:[Math.PI/6, Math.PI/4, 0] },
+    { r:4.2,  tube:0.018, col:0xe8c96a, rot:[Math.PI/2.4, Math.PI/3.5, 0.4] },
+  ];
+  armDefs.forEach(d => {
+    const m = ring(d.r, d.tube, std(d.col, 0.92, 0.04, d.col, 0.5));
+    m.position.copy(pos0); m.rotation.set(...d.rot);
+    scene.add(m); armRings.push(m);
+  });
 
-  const r0b = ring(4.6, 0.025, std(0xc9a84c, 0.9, 0.05, 0x92700a, 0.4));
-  r0b.position.copy(glob.position); r0b.rotation.set(Math.PI/3.2, 0.1, Math.PI/3.5); scene.add(r0b);
-
-  // Jewel orbiters
-  const jA = sphere(0.2, std(0x93c5fd, 0.7, 0.05, 0x1d4ed8, 0.9)); scene.add(jA);
-  const jB = sphere(0.16, std(0xfde68a, 0.7, 0.05, 0x92400e, 0.9)); scene.add(jB);
+  // Tiny orbiting gems riding the rings
+  const gemA = sphere(0.22, std(0x93c5fd, 0.75, 0.04, 0x1d4ed8, 1.0)); scene.add(gemA);
+  const gemB = sphere(0.17, std(0xfde68a, 0.75, 0.04, 0x92400e, 1.0)); scene.add(gemB);
+  const gemC = sphere(0.13, std(0xc4b5fd, 0.75, 0.04, 0x4c1d95, 1.0)); scene.add(gemC);
 
   // ─────────────────────────────────────────────────
-  // ZONE 1 (panel 2, x≈16): Medium cluster
+  // ZONE 1 (panel 2): Three interlocking tori
   // ─────────────────────────────────────────────────
   const z1base = 16;
+  const pos1 = new THREE.Vector3(z1base+5, 0, -2);
 
-  const c1 = sphere(1.4, std(0x0d1b6e, 0.85, 0.1, 0x3b82f6, 0.25));
-  c1.position.set(z1base+5, 1.5, -3); scene.add(c1);
+  const toriMats = [
+    std(0x0d1b6e, 0.92, 0.06, 0x3b82f6, 0.42),
+    std(0x7c3300, 0.90, 0.06, 0xc9a84c, 0.48),
+    std(0x3b0764, 0.92, 0.06, 0x7c3aed, 0.42),
+  ];
+  const toriRots = [
+    [Math.PI/2, 0, 0],
+    [0, Math.PI/2, Math.PI/6],
+    [Math.PI/3.5, Math.PI/3.5, 0],
+  ];
+  const tori = toriRots.map((rot, i) => {
+    const t = new THREE.Mesh(new THREE.TorusGeometry(1.95, 0.3, 28, 130), toriMats[i]);
+    t.position.copy(pos1); t.rotation.set(...rot);
+    scene.add(t); return t;
+  });
 
-  const c1r = ring(2.2, 0.035, std(0xc9a84c, 0.9, 0.05, 0x92700a, 0.5));
-  c1r.position.copy(c1.position); c1r.rotation.set(0.5, 0.3, 0.2); scene.add(c1r);
+  // Thin outer halo ring
+  const outerRing1 = ring(3.3, 0.028, std(0xe8c96a, 0.92, 0.04, 0x92700a, 0.45));
+  outerRing1.position.copy(pos1); outerRing1.rotation.set(Math.PI/2, 0, 0.5);
+  scene.add(outerRing1);
 
   // ─────────────────────────────────────────────────
-  // ZONE 2 (panel 3, x≈32): A1-C2 spheres
+  // ZONE 2 (panel 3): A1-C2 spheres with halos
   // ─────────────────────────────────────────────────
   const z2base = 32;
   const lvlColors = [0x3b82f6, 0x60a5fa, 0x7c3aed, 0xc9a84c, 0xe8c96a, 0xfde68a];
   const lvlSpheres = [];
-  lvlColors.forEach((c,i)=>{
-    const s = sphere(0.55 - i*0.04, std(c, 0.85, 0.08, c, 0.35));
-    s.position.set(z2base - 4 + i*3.2, Math.sin(i*1.1)*2.2, -1.5 + Math.cos(i*0.8)*1);
+  const lvlHalos   = [];
+  lvlColors.forEach((c, i) => {
+    const s = sphere(0.62 - i*0.032, std(c, 0.88, 0.06, c, 0.45));
+    s.position.set(z2base - 4 + i*3.2, Math.sin(i*1.1)*2.2, -1.5 + Math.cos(i*0.8));
     scene.add(s); lvlSpheres.push(s);
+
+    const h = ring(0.9 - i*0.04, 0.016, std(c, 0.92, 0.04, c, 0.6));
+    h.position.copy(s.position); h.rotation.x = Math.PI/2 + i*0.25;
+    scene.add(h); lvlHalos.push(h);
   });
 
-  // Connecting rings between level spheres
   for(let i=0;i<5;i++){
-    const mid = lvlSpheres[i].position.clone().lerp(lvlSpheres[i+1].position, 0.5);
+    const mid  = lvlSpheres[i].position.clone().lerp(lvlSpheres[i+1].position, 0.5);
     const dist = lvlSpheres[i].position.distanceTo(lvlSpheres[i+1].position);
     const m = new THREE.Mesh(
-      new THREE.TorusGeometry(dist/2, 0.018, 8, 60),
-      new THREE.MeshBasicMaterial({color:0x3b82f6, transparent:true, opacity:0.15})
+      new THREE.TorusGeometry(dist/2, 0.014, 8, 60),
+      new THREE.MeshBasicMaterial({color:0x3b82f6, transparent:true, opacity:0.18})
     );
     m.position.copy(mid);
     m.lookAt(lvlSpheres[i+1].position);
@@ -492,85 +504,104 @@
   }
 
   // ─────────────────────────────────────────────────
-  // ZONE 3 (panel 4, x≈48): Torus knot
+  // ZONE 3 (panel 4): Luxurious torus knot duo
   // ─────────────────────────────────────────────────
   const z3base = 48;
+  const pos3 = new THREE.Vector3(z3base+5, 0, -2.5);
+
   const tk = new THREE.Mesh(
-    new THREE.TorusKnotGeometry(1.8, 0.45, 128, 20, 2, 3),
-    std(0x1e3a8a, 0.9, 0.08, 0x3b82f6, 0.3)
+    new THREE.TorusKnotGeometry(1.7, 0.42, 220, 30, 2, 3),
+    std(0x0a1530, 0.94, 0.05, 0x1d4ed8, 0.42)
   );
-  tk.position.set(z3base+5, 0, -3); scene.add(tk);
+  tk.position.copy(pos3); scene.add(tk);
 
   const tkGold = new THREE.Mesh(
-    new THREE.TorusKnotGeometry(2.4, 0.12, 100, 16, 3, 5),
-    std(0xc9a84c, 0.9, 0.05, 0x92700a, 0.35)
+    new THREE.TorusKnotGeometry(2.25, 0.1, 180, 18, 3, 5),
+    std(0xc9a84c, 0.94, 0.03, 0x92700a, 0.55)
   );
-  tkGold.position.copy(tk.position); scene.add(tkGold);
+  tkGold.position.copy(pos3); scene.add(tkGold);
+
+  // Subtle wireframe echo
+  const tkWire = new THREE.Mesh(
+    new THREE.TorusKnotGeometry(1.7, 0.43, 120, 20, 2, 3),
+    new THREE.MeshBasicMaterial({color:0x7c3aed, wireframe:true, transparent:true, opacity:0.18})
+  );
+  tkWire.position.copy(pos3); scene.add(tkWire);
 
   // ─────────────────────────────────────────────────
-  // ZONE 4 (panel 5, x≈64): Diamond cluster
+  // ZONE 4 (panel 5): Octahedron diamond + orbiting satellites
   // ─────────────────────────────────────────────────
   const z4base = 64;
+  const pos4 = new THREE.Vector3(z4base+5, 0, -2);
 
-  const bigIco = new THREE.Mesh(
-    new THREE.IcosahedronGeometry(2.2, 1),
-    std(0x050c30, 0.9, 0.06, 0x3b82f6, 0.22)
+  const diamond = new THREE.Mesh(
+    new THREE.OctahedronGeometry(2.1, 2),
+    std(0x060e22, 0.96, 0.03, 0x1d4ed8, 0.32)
   );
-  bigIco.position.set(z4base+5, 0, -2); scene.add(bigIco);
+  diamond.position.copy(pos4); scene.add(diamond);
 
-  const wireIco = new THREE.Mesh(
-    new THREE.IcosahedronGeometry(2.35, 1),
-    new THREE.MeshBasicMaterial({color:0x60a5fa, wireframe:true, transparent:true, opacity:0.18})
+  const diamondWire = new THREE.Mesh(
+    new THREE.OctahedronGeometry(2.22, 2),
+    new THREE.MeshBasicMaterial({color:0x93c5fd, wireframe:true, transparent:true, opacity:0.2})
   );
-  wireIco.position.copy(bigIco.position); scene.add(wireIco);
+  diamondWire.position.copy(pos4); scene.add(diamondWire);
 
-  const goldRingFinal = ring(3.5, 0.04, std(0xc9a84c, 0.9, 0.05, 0x92700a, 0.5));
-  goldRingFinal.position.copy(bigIco.position); goldRingFinal.rotation.set(Math.PI/2.2, 0.4, 0); scene.add(goldRingFinal);
+  const d4r1 = ring(3.5, 0.042, std(0xc9a84c, 0.94, 0.03, 0x92700a, 0.6));
+  d4r1.position.copy(pos4); d4r1.rotation.set(Math.PI/2, 0, 0.35); scene.add(d4r1);
+
+  const d4r2 = ring(4.2, 0.024, std(0x3b82f6, 0.92, 0.04, 0x1d4ed8, 0.5));
+  d4r2.position.copy(pos4); d4r2.rotation.set(Math.PI/2.8, 0.6, 0); scene.add(d4r2);
+
+  // Orbiting satellite gems
+  const satCols = [0x93c5fd, 0xfde68a, 0xc4b5fd];
+  const sats = satCols.map(c => { const s = sphere(0.28, std(c, 0.8, 0.04, c, 0.9)); scene.add(s); return s; });
 
   // ─────────────────────────────────────────────────
-  // FLOATING JEWELS (scattered across all zones)
+  // FLOATING JEWELS
   // ─────────────────────────────────────────────────
   const jewelData = [
-    {x:-3,y:3,z:1,r:0.38,c:0x93c5fd,e:0x1e40af},
-    {x:4,y:-3,z:0,r:0.28,c:0xfde68a,e:0x92400e},
-    {x:12,y:4,z:-1,r:0.32,c:0xc4b5fd,e:0x3b0764},
-    {x:19,y:-2,z:1,r:0.24,c:0x67e8f9,e:0x0c4a6e},
-    {x:26,y:3,z:0,r:0.35,c:0x93c5fd,e:0x1e40af},
-    {x:36,y:-3.5,z:1,r:0.28,c:0xfde68a,e:0x78350f},
-    {x:43,y:4,z:-1.5,r:0.3,c:0xc4b5fd,e:0x4c1d95},
-    {x:52,y:-2.5,z:0.5,r:0.25,c:0x93c5fd,e:0x1e40af},
-    {x:60,y:3.5,z:-1,r:0.38,c:0xfde68a,e:0x92400e},
-    {x:68,y:-3,z:1,r:0.3,c:0x86efac,e:0x14532d},
-    {x:9,y:4.5,z:-2,r:0.22,c:0xfde68a,e:0x92400e},
-    {x:30,y:4,z:-2,r:0.2,c:0x93c5fd,e:0x1e40af},
-    {x:55,y:4.5,z:-1,r:0.26,c:0xc4b5fd,e:0x3b0764},
+    {x:-3,y:3,z:1,r:0.3,c:0x93c5fd,e:0x1e40af},
+    {x:4,y:-3,z:0,r:0.22,c:0xfde68a,e:0x92400e},
+    {x:12,y:4,z:-1,r:0.26,c:0xc4b5fd,e:0x3b0764},
+    {x:19,y:-2,z:1,r:0.19,c:0x67e8f9,e:0x0c4a6e},
+    {x:26,y:3,z:0,r:0.28,c:0x93c5fd,e:0x1e40af},
+    {x:36,y:-3.5,z:1,r:0.22,c:0xfde68a,e:0x78350f},
+    {x:43,y:4,z:-1.5,r:0.24,c:0xc4b5fd,e:0x4c1d95},
+    {x:52,y:-2.5,z:0.5,r:0.19,c:0x93c5fd,e:0x1e40af},
+    {x:60,y:3.5,z:-1,r:0.3,c:0xfde68a,e:0x92400e},
+    {x:68,y:-3,z:1,r:0.24,c:0x86efac,e:0x14532d},
+    {x:9,y:4.5,z:-2,r:0.17,c:0xfde68a,e:0x92400e},
+    {x:30,y:4,z:-2,r:0.15,c:0x93c5fd,e:0x1e40af},
+    {x:55,y:4.5,z:-1,r:0.2,c:0xc4b5fd,e:0x3b0764},
   ];
-  const jewels = jewelData.map(d=>{
-    const m = sphere(d.r, std(d.c, 0.85, 0.08, d.e, 0.75));
+  const jewels = jewelData.map(d => {
+    const m = sphere(d.r, std(d.c, 0.86, 0.06, d.e, 0.8));
     m.position.set(d.x, d.y, d.z);
-    m.userData = { oy:d.y, phase:Math.random()*Math.PI*2, fs:0.3+Math.random()*0.35, fa:0.3+Math.random()*0.4 };
+    m.userData = { oy:d.y, phase:Math.random()*Math.PI*2, fs:0.28+Math.random()*0.28, fa:0.22+Math.random()*0.32 };
     scene.add(m); return m;
   });
 
   // ─────────────────────────────────────────────────
   // STAR FIELD
   // ─────────────────────────────────────────────────
-  const sCount=800, sPos=new Float32Array(sCount*3);
-  for(let i=0;i<sCount;i++){
+  const sCount = 1000, sPos = new Float32Array(sCount*3);
+  for(let i=0; i<sCount; i++){
     sPos[i*3]   = Math.random()*90 - 10;
     sPos[i*3+1] = (Math.random()-0.5)*40;
     sPos[i*3+2] = -10 - Math.random()*25;
   }
-  const sGeo=new THREE.BufferGeometry(); sGeo.setAttribute('position',new THREE.BufferAttribute(sPos,3));
-  scene.add(new THREE.Points(sGeo, new THREE.PointsMaterial({color:0xffffff,size:0.06,transparent:true,opacity:0.6})));
+  const sGeo = new THREE.BufferGeometry();
+  sGeo.setAttribute('position', new THREE.BufferAttribute(sPos, 3));
+  scene.add(new THREE.Points(sGeo, new THREE.PointsMaterial({color:0xffffff, size:0.065, transparent:true, opacity:0.55})));
 
   // ─────────────────────────────────────────────────
-  // PANEL STATE  (transform-based, no scroll container)
+  // PANEL STATE
   // ─────────────────────────────────────────────────
   const PANELS = 5;
   const SCENE_WIDTH = 70;
-  let scrollProgress = 0;
   let currentPanel = 0;
+  let camXTarget  = 0;   // where camera is heading
+  let camXCurrent = 0;   // smoothly lerped current
   let isAnimating = false;
 
   const track = document.getElementById('track');
@@ -578,15 +609,15 @@
 
   function goTo(index) {
     if (index < 0 || index >= PANELS || isAnimating) return;
-    currentPanel   = index;
-    scrollProgress = index / (PANELS - 1);
+    currentPanel = index;
+    camXTarget   = (index / (PANELS - 1)) * SCENE_WIDTH;
     track.style.transform = `translateX(calc(-${index} * 100vw))`;
     dots.forEach((d, i) => d.classList.toggle('active', i === index));
     isAnimating = true;
-    setTimeout(() => { isAnimating = false; }, 850);
+    setTimeout(() => { isAnimating = false; }, 980);
   }
 
-  // ── Mouse wheel (scroll normally — any direction) ──
+  // Wheel
   let wheelAcc = 0, wTimer;
   window.addEventListener('wheel', e => {
     e.preventDefault();
@@ -598,45 +629,41 @@
     if (wheelAcc < -80) { wheelAcc = 0; goTo(currentPanel - 1); }
   }, { passive: false });
 
-  // ── Touch swipe ──
+  // Touch swipe
   let tx0 = 0, ty0 = 0;
-  window.addEventListener('touchstart', e => {
-    tx0 = e.touches[0].clientX; ty0 = e.touches[0].clientY;
-  }, { passive: true });
+  window.addEventListener('touchstart', e => { tx0=e.touches[0].clientX; ty0=e.touches[0].clientY; }, {passive:true});
   window.addEventListener('touchend', e => {
     const dx = tx0 - e.changedTouches[0].clientX;
     const dy = ty0 - e.changedTouches[0].clientY;
     if (Math.abs(dx) < Math.abs(dy) || Math.abs(dx) < 40) return;
-    if (dx > 0) goTo(currentPanel + 1);
-    else        goTo(currentPanel - 1);
-  }, { passive: true });
+    if (dx > 0) goTo(currentPanel + 1); else goTo(currentPanel - 1);
+  }, {passive:true});
 
-  // ── Keyboard ──
+  // Keyboard
   window.addEventListener('keydown', e => {
     if (e.key === 'ArrowRight' || e.key === 'ArrowDown') goTo(currentPanel + 1);
     if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   goTo(currentPanel - 1);
   });
 
-  // ── Dot nav ──
+  // Dots
   dots.forEach(d => d.addEventListener('click', () => goTo(parseInt(d.dataset.i))));
 
   // ─────────────────────────────────────────────────
-  // DRAG ORBIT (left side 3D drag)
+  // DRAG ORBIT
   // ─────────────────────────────────────────────────
   let isDrag=false, prevMX=0, prevMY=0, orbTheta=0.3, orbPhi=1.45, orbR=16;
   let autoTheta=0.3;
-
   canvas.addEventListener('mousedown', e => { isDrag=true; prevMX=e.clientX; prevMY=e.clientY; });
   window.addEventListener('mouseup', () => isDrag=false);
   window.addEventListener('mousemove', e => {
     if(!isDrag) return;
-    orbTheta -= (e.clientX-prevMX)*0.006;
-    orbPhi   -= (e.clientY-prevMY)*0.006;
+    orbTheta -= (e.clientX-prevMX)*0.005;
+    orbPhi   -= (e.clientY-prevMY)*0.005;
     orbPhi = Math.max(0.3, Math.min(Math.PI-0.3, orbPhi));
     prevMX=e.clientX; prevMY=e.clientY;
   });
   canvas.addEventListener('wheel', e => {
-    orbR += e.deltaY*0.01; orbR=Math.max(8,Math.min(28,orbR));
+    orbR += e.deltaY*0.01; orbR=Math.max(8, Math.min(28, orbR));
   }, {passive:true});
 
   // ─────────────────────────────────────────────────
@@ -648,65 +675,79 @@
     requestAnimationFrame(animate);
     const t = clock.getElapsedTime();
 
-    // Camera: pan right by panel + orbit offset
-    const panX = (currentPanel / (PANELS - 1)) * SCENE_WIDTH;
-    if(!isDrag){ autoTheta += 0.0015; orbTheta += (autoTheta-orbTheta)*0.01; }
+    // Smooth camera lerp — the key to silky transitions
+    camXCurrent += (camXTarget - camXCurrent) * 0.055;
+    const panX = camXCurrent;
+
+    if(!isDrag){ autoTheta += 0.0012; orbTheta += (autoTheta - orbTheta)*0.01; }
     else { autoTheta = orbTheta; }
 
-    // Base camera follows scroll, with orbit layered on top
-    const ox = orbR * Math.sin(orbPhi) * Math.sin(orbTheta) * 0.4;
-    const oy = orbR * Math.cos(orbPhi) * 0.25;
+    const ox = orbR * Math.sin(orbPhi) * Math.sin(orbTheta) * 0.35;
+    const oy = orbR * Math.cos(orbPhi) * 0.22;
     camera.position.set(panX + ox, oy, 16);
     camera.lookAt(panX, 0, 0);
 
-    // Globe
-    glob.rotation.y = t*0.10; glob.rotation.x = t*0.035;
-    atmos.rotation.y = -t*0.06;
-    r0a.rotation.z = t*0.28; r0b.rotation.x = t*0.18;
+    // Zone 0: Crystal gem + armillary rings
+    gem.rotation.y = t*0.20; gem.rotation.x = t*0.09;
+    gemWire.rotation.y = -t*0.14; gemWire.rotation.z = t*0.08;
+    armRings[0].rotation.z = t*0.24;
+    armRings[1].rotation.y = t*0.20;
+    armRings[2].rotation.z = -t*0.17; armRings[2].rotation.x = t*0.11;
+    armRings[3].rotation.y = -t*0.15; armRings[3].rotation.z = t*0.10;
+    armRings[4].rotation.x = t*0.12;  armRings[4].rotation.y = -t*0.09;
+    gemA.position.set(pos0.x + Math.cos(t*0.65)*2.5, pos0.y + Math.sin(t*0.65)*2.5, pos0.z + Math.cos(t*0.4)*0.6);
+    gemB.position.set(pos0.x + Math.cos(-t*0.45+2)*2.5*Math.cos(t*0.18), pos0.y + Math.sin(-t*0.45+2)*2.5, pos0.z + Math.sin(t*0.38)*1.4);
+    gemC.position.set(pos0.x + Math.cos(t*0.55+1)*3.5*Math.sin(t*0.12+0.5), pos0.y + Math.cos(t*0.55+1)*3.5*Math.cos(t*0.12), pos0.z + Math.sin(t*0.32)*1.2);
 
-    // Jewel orbiters on globe
-    jA.position.set(
-      glob.position.x + Math.cos(t*0.5)*3.8 * Math.cos(Math.PI/2.5),
-      glob.position.y + Math.sin(t*0.5)*3.8,
-      glob.position.z + Math.cos(t*0.5)*3.8 * Math.sin(Math.PI/2.5)*0.4
-    );
-    jB.position.set(
-      glob.position.x + Math.cos(t*0.3+1)*4.6 * Math.cos(Math.PI/3.2),
-      glob.position.y + Math.sin(t*0.3+1)*4.6 * Math.sin(Math.PI/3.2),
-      glob.position.z + Math.cos(t*0.3)*1.5
-    );
+    // Zone 1: Interlocking tori
+    tori[0].rotation.x = t*0.22; tori[0].rotation.z = t*0.13;
+    tori[1].rotation.y = t*0.20; tori[1].rotation.x = -t*0.11;
+    tori[2].rotation.z = t*0.17; tori[2].rotation.y = -t*0.15;
+    outerRing1.rotation.z = -t*0.09;
 
-    // Zone 1 cluster
-    c1.rotation.y = t*0.12; c1r.rotation.z = t*0.22;
-
-    // Zone 2 level spheres (bob up and down)
-    lvlSpheres.forEach((s,i)=>{ s.position.y = Math.sin(t*0.6+i*0.8)*0.5 + (Math.sin(i*1.1)*2.2); s.rotation.y=t*0.1; });
-
-    // Zone 3 torus knot
-    tk.rotation.y = t*0.18; tk.rotation.x = t*0.12;
-    tkGold.rotation.y = -t*0.12; tkGold.rotation.z = t*0.1;
-
-    // Zone 4 icosahedron
-    bigIco.rotation.y = t*0.14; bigIco.rotation.x = t*0.07;
-    wireIco.rotation.y = -t*0.1; wireIco.rotation.z = t*0.08;
-    goldRingFinal.rotation.z = t*0.25;
-
-    // Floating jewels
-    jewels.forEach(j=>{
-      j.position.y = j.userData.oy + Math.sin(t*j.userData.fs + j.userData.phase)*j.userData.fa;
-      j.rotation.y += 0.008; j.rotation.x += 0.005;
+    // Zone 2: Level spheres bob + halos spin
+    lvlSpheres.forEach((s, i) => {
+      s.position.y = Math.sin(t*0.55 + i*0.85)*0.52 + Math.sin(i*1.1)*2.2;
+      s.rotation.y = t*0.13;
+      lvlHalos[i].position.y = s.position.y;
+      lvlHalos[i].rotation.z = t*(0.18 + i*0.02);
     });
 
-    // Dynamic lights follow camera/scroll
-    dynBlue.position.set(panX+8, 3+Math.sin(t*0.4)*2, 5);
-    dynGold.position.set(panX-6, -3+Math.cos(t*0.35)*2, 7);
+    // Zone 3: Torus knot
+    tk.rotation.y = t*0.19; tk.rotation.x = t*0.12;
+    tkGold.rotation.y = -t*0.14; tkGold.rotation.z = t*0.10;
+    tkWire.rotation.y = t*0.19; tkWire.rotation.x = t*0.12;
+
+    // Zone 4: Diamond + satellites
+    diamond.rotation.y = t*0.15; diamond.rotation.x = t*0.07;
+    diamondWire.rotation.y = -t*0.11; diamondWire.rotation.z = t*0.09;
+    d4r1.rotation.z = t*0.24;
+    d4r2.rotation.x = t*0.15; d4r2.rotation.y = -t*0.11;
+    sats.forEach((s, i) => {
+      const a = t*(0.48 + i*0.14) + i*2.1;
+      s.position.set(
+        pos4.x + Math.cos(a)*3.5,
+        pos4.y + Math.sin(a)*3.5*(i===1?0.55:0.38),
+        pos4.z + Math.sin(a + i)*1.6
+      );
+    });
+
+    // Floating jewels
+    jewels.forEach(j => {
+      j.position.y = j.userData.oy + Math.sin(t*j.userData.fs + j.userData.phase)*j.userData.fa;
+      j.rotation.y += 0.006; j.rotation.x += 0.004;
+    });
+
+    // Dynamic lights follow camera
+    dynBlue.position.set(panX+8, 3+Math.sin(t*0.38)*2, 5);
+    dynGold.position.set(panX-6, -3+Math.cos(t*0.32)*2, 7);
 
     renderer.render(scene, camera);
   }
 
   animate();
 
-  window.addEventListener('resize', ()=>{
+  window.addEventListener('resize', () => {
     camera.aspect = W()/H();
     camera.updateProjectionMatrix();
     renderer.setSize(W(), H());

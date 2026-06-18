@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Deutsch Meistern</title>
+  <style>
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+    :root {
+      --navy:  #050d2a;
+      --blue:  #3b82f6;
+      --gold:  #c9a84c;
+      --goldb: #e8c96a;
+      --white: #ffffff;
+      --dim:   rgba(255,255,255,0.55);
+    }
+
+    html, body { width:100%; height:100%; overflow:hidden; background:var(--navy); font-family:'Segoe UI',system-ui,sans-serif; }
+
+    /* ── CANVAS ─────────────────────────────────────── */
+    #bg { position:fixed; inset:0; z-index:0; cursor:grab; }
+    #bg:active { cursor:grabbing; }
+
+    /* ── VIEWPORT CLIP ──────────────────────────────── */
+    #viewport {
+      position:fixed; inset:0; z-index:10;
+      overflow:hidden;
+    }
+
+    /* ── SLIDING TRACK ──────────────────────────────── */
+    #track {
+      display:flex; flex-direction:row;
+      width:500vw; height:100vh;      /* 5 panels × 100vw */
+      transform:translateX(0);
+      transition:transform 0.75s cubic-bezier(0.77,0,0.175,1);
+      will-change:transform;
+    }
+
+    /* ── PANELS ─────────────────────────────────────── */
+    .panel {
+      width:100vw; height:100vh;
+      flex-shrink:0;
+      display:flex; align-items:center;
+      position:relative;
+      background:transparent;
+    }
+
+    /* ── NAV (fixed, always visible) ────────────────── */
+    nav {
+      position:fixed; top:0; left:0; right:0; z-index:200;
+      display:flex; align-items:center; justify-content:space-between;
+      padding:18px 52px;
+      background:rgba(5,13,42,0.7);
+      backdrop-filter:blur(16px);
+      -webkit-backdrop-filter:blur(16px);
+      border-bottom:1px solid rgba(255,255,255,0.06);
+    }
+    .logo { display:flex; align-items:center; gap:10px; color:#fff; font-weight:900; font-size:15px; text-decoration:none; }
+    .logo-badge { width:30px; height:30px; background:linear-gradient(135deg,#3b82f6,#1d4ed8); border-radius:8px; display:flex; align-items:center; justify-content:center; color:#fff; font-size:11px; font-weight:900; }
+    .nav-r { display:flex; gap:12px; align-items:center; }
+    .btn-o { font-size:13px; font-weight:700; color:rgba(255,255,255,0.7); border:1px solid rgba(255,255,255,0.15); border-radius:50px; padding:8px 18px; text-decoration:none; transition:all .2s; }
+    .btn-o:hover { color:#fff; border-color:rgba(255,255,255,0.4); background:rgba(255,255,255,0.07); }
+    .btn-g { font-size:13px; font-weight:800; color:#050d2a; background:linear-gradient(135deg,var(--gold),var(--goldb)); border-radius:50px; padding:9px 20px; text-decoration:none; transition:all .2s; box-shadow:0 2px 14px rgba(201,168,76,.35); }
+    .btn-g:hover { transform:translateY(-1px); box-shadow:0 5px 22px rgba(201,168,76,.55); }
+
+    /* ── DOT NAV (panel indicator) ──────────────────── */
+    #dot-nav {
+      position:fixed; bottom:32px; left:50%; transform:translateX(-50%);
+      z-index:200; display:flex; gap:10px; align-items:center;
+    }
+    .dot-btn {
+      width:8px; height:8px; border-radius:50%;
+      background:rgba(255,255,255,0.2); border:none; cursor:pointer;
+      transition:all .3s; padding:0;
+    }
+    .dot-btn.active { background:#fff; width:24px; border-radius:4px; }
+
+    /* ── SCROLL HINT ─────────────────────────────────── */
+    #scroll-hint {
+      position:fixed; bottom:68px; right:40px; z-index:200;
+      display:flex; align-items:center; gap:8px;
+      color:rgba(255,255,255,0.35); font-size:11px; font-weight:700; letter-spacing:1px; text-transform:uppercase;
+      animation: hintFade 1s ease 3.5s forwards;
+      pointer-events:none;
+    }
+    #scroll-hint .hint-arrow { animation: nudge 1.2s ease-in-out infinite; display:inline-block; }
+    @keyframes nudge { 0%,100%{transform:translateX(0)} 50%{transform:translateX(5px)} }
+    @keyframes hintFade { to { opacity:0; } }
+
+    /* ── PANEL CONTENT ───────────────────────────────── */
+    .panel-inner { padding:0 72px; max-width:640px; }
+
+    .p-tag {
+      display:inline-flex; align-items:center; gap:8px;
+      background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.12);
+      border-radius:50px; padding:5px 14px; font-size:11px; font-weight:700;
+      color:rgba(255,255,255,0.75); letter-spacing:.5px; margin-bottom:24px;
+    }
+    .live-dot { width:7px; height:7px; background:#4ade80; border-radius:50%; animation:pd 2s infinite; box-shadow:0 0 6px #4ade80; }
+    @keyframes pd { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(1.4)} }
+
+    .p-h1 {
+      font-size:clamp(52px,7vw,96px); font-weight:900; line-height:.92;
+      letter-spacing:-3.5px; color:#fff; margin-bottom:24px;
+    }
+    .p-h1 .bl  { color:#60a5fa; display:block; }
+    .p-h1 .gd  { color:var(--goldb); display:block; font-weight:800; letter-spacing:-2.5px; }
+    .p-h1 .wh  { color:#fff; display:block; }
+
+    .p-sub {
+      font-size:16px; line-height:1.75; color:rgba(255,255,255,0.55);
+      max-width:420px; margin-bottom:36px; font-weight:400;
+    }
+
+    .cta-row { display:flex; gap:12px; flex-wrap:wrap; }
+    .cta-gold {
+      display:inline-flex; align-items:center; gap:8px;
+      background:linear-gradient(135deg,var(--gold),var(--goldb));
+      color:#050d2a; font-size:14px; font-weight:800; padding:14px 28px; border-radius:50px;
+      text-decoration:none; box-shadow:0 4px 24px rgba(201,168,76,.3); transition:all .2s;
+    }
+    .cta-gold:hover { transform:translateY(-2px); box-shadow:0 8px 32px rgba(201,168,76,.5); }
+    .cta-ghost {
+      display:inline-flex; align-items:center; gap:8px;
+      background:rgba(255,255,255,.07); color:rgba(255,255,255,.9);
+      font-size:14px; font-weight:700; padding:14px 28px; border-radius:50px;
+      text-decoration:none; border:1px solid rgba(255,255,255,.16); backdrop-filter:blur(8px); transition:all .2s;
+    }
+    .cta-ghost:hover { background:rgba(255,255,255,.13); border-color:rgba(255,255,255,.35); transform:translateY(-2px); }
+
+    /* ── PANEL 2 -- ABOUT ────────────────────────────── */
+    #p2 .panel-inner { max-width:none; }
+    .big-stat-row { display:flex; gap:48px; margin-bottom:48px; flex-wrap:wrap; }
+    .big-stat { }
+    .big-num { font-size:72px; font-weight:900; line-height:1; letter-spacing:-3px; color:#fff; margin-bottom:4px; }
+    .big-num span { color:var(--goldb); }
+    .big-lbl { font-size:12px; font-weight:700; color:rgba(255,255,255,.4); text-transform:uppercase; letter-spacing:1.5px; }
+
+    /* ── PANEL 3 -- LEVELS ───────────────────────────── */
+    .levels-h-row { display:flex; gap:14px; flex-wrap:wrap; margin-top:8px; }
+    .lvl-card {
+      background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.09);
+      border-radius:18px; padding:22px 20px; min-width:110px; text-align:center;
+      transition:all .3s; cursor:default;
+    }
+    .lvl-card:hover, .lvl-card.hi { background:rgba(59,130,246,.15); border-color:rgba(59,130,246,.4); transform:translateY(-6px); }
+    .lvl-card.hi { background:linear-gradient(135deg,rgba(59,130,246,.2),rgba(201,168,76,.1)); border-color:rgba(201,168,76,.35); }
+    .lvl-n { font-size:32px; font-weight:900; letter-spacing:-1px; color:#fff; margin-bottom:4px; }
+    .lvl-l { font-size:10px; font-weight:700; color:rgba(255,255,255,.35); text-transform:uppercase; letter-spacing:.8px; }
+    .lvl-live { display:inline-block; background:#22c55e; color:#fff; font-size:9px; font-weight:800; padding:2px 8px; border-radius:50px; margin-top:6px; letter-spacing:.5px; }
+
+    /* ── PANEL 4 -- FEATURES ─────────────────────────── */
+    .feat-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; max-width:560px; }
+    .feat-c {
+      background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.08);
+      border-radius:18px; padding:22px 20px; transition:all .25s;
+    }
+    .feat-c:hover { background:rgba(255,255,255,.09); transform:translateY(-3px); border-color:rgba(255,255,255,.16); }
+    .feat-ico { font-size:22px; margin-bottom:10px; }
+    .feat-t { font-size:14px; font-weight:800; color:#fff; margin-bottom:5px; }
+    .feat-s { font-size:12.5px; color:rgba(255,255,255,.45); line-height:1.6; }
+
+    /* ── PANEL 5 -- CTA ──────────────────────────────── */
+    #p5 { justify-content:center; }
+    #p5 .panel-inner { text-align:center; max-width:620px; margin:0 auto; }
+    #p5 .p-h1 { font-size:clamp(44px,6vw,80px); }
+    #p5 .cta-row { justify-content:center; }
+
+    /* ── PANEL TRANSITION NUMBERS ────────────────────── */
+    .panel-num {
+      position:absolute; bottom:72px; right:52px;
+      font-size:120px; font-weight:900; letter-spacing:-5px;
+      color:rgba(255,255,255,.03); line-height:1; user-select:none;
+    }
+
+    /* ── MOBILE ──────────────────────────────────────── */
+    @media(max-width:768px){
+      nav { padding:14px 20px; }
+      .panel-inner { padding:0 24px; }
+      .p-h1 { font-size:46px; letter-spacing:-2px; }
+      .big-num { font-size:52px; }
+      .levels-h-row { gap:8px; }
+      .lvl-card { min-width:80px; padding:16px 12px; }
+      .feat-grid { grid-template-columns:1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- BACKGROUND CANVAS -->
+<canvas id="bg"></canvas>
+
+<!-- NAV -->
+<nav>
+  <a class="logo" href="#">
+    <div class="logo-badge">DM</div>
+    Deutsch Meistern
+  </a>
+  <div class="nav-r">
+    <a class="btn-o" href="login.html">Student login</a>
+    <a class="btn-g" href="register.html">Register now</a>
+  </div>
+</nav>
+
+<!-- SCROLL HINT -->
+<div id="scroll-hint">Scroll to explore <span class="hint-arrow">&#x2192;</span></div>
+
+<!-- HORIZONTAL SLIDE -->
+<div id="viewport"><div id="track">
+
+  <!-- PANEL 1: HERO -->
+  <div class="panel" id="p1">
+    <div class="panel-inner">
+      <div class="p-tag"><span class="live-dot"></span> A1 Live Now &middot; CEFR A1 to C2</div>
+      <h1 class="p-h1">
+        <span class="wh">Learn</span>
+        <span class="bl">German</span>
+        <span class="gd">beautifully.</span>
+      </h1>
+      <p class="p-sub">The #1 self-practice platform for German. Practice at your own pace, track your progress, and get Goethe-ready -- from A1 to C2.</p>
+      <div class="cta-row">
+        <a class="cta-gold" href="register.html">
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" y1="8" x2="19" y2="14"/><line x1="22" y1="11" x2="16" y2="11"/></svg>
+          Register as a student
+        </a>
+        <a class="cta-ghost" href="login.html">
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
+          Student login
+        </a>
+      </div>
+    </div>
+    <div class="panel-num">01</div>
+  </div>
+
+  <!-- PANEL 2: WHAT IS DM -->
+  <div class="panel" id="p2">
+    <div class="panel-inner" style="padding:0 72px;">
+      <div class="p-tag">What is Deutsch Meistern</div>
+      <h2 class="p-h1" style="font-size:clamp(38px,5vw,68px);letter-spacing:-2.5px;margin-bottom:28px;">
+        <span class="wh">Practice German.</span>
+        <span class="bl">Your way.</span>
+        <span class="gd">Your pace.</span>
+      </h2>
+      <p class="p-sub">Deutsch Meistern is a structured self-practice platform -- not a course. You choose when to practice, how much, and at what level. The platform tracks everything.</p>
+      <div class="big-stat-row">
+        <div class="big-stat"><div class="big-num">A1<span style="font-size:40px;color:rgba(255,255,255,.2)"> &rarr; </span>C2</div><div class="big-lbl">Full CEFR coverage</div></div>
+        <div class="big-stat"><div class="big-num" style="color:var(--goldb);">6</div><div class="big-lbl">Levels of practice</div></div>
+        <div class="big-stat"><div class="big-num">&#x1F1E9;&#x1F1EA;</div><div class="big-lbl">Goethe exam ready</div></div>
+      </div>
+    </div>
+    <div class="panel-num">02</div>
+  </div>
+
+  <!-- PANEL 3: LEVELS -->
+  <div class="panel" id="p3">
+    <div class="panel-inner" style="padding:0 72px; max-width:none;">
+      <div class="p-tag">CEFR Roadmap</div>
+      <h2 class="p-h1" style="font-size:clamp(38px,5vw,68px);letter-spacing:-2.5px;margin-bottom:16px;">
+        <span class="wh">Your path</span>
+        <span class="gd">from A1 to C2.</span>
+      </h2>
+      <p class="p-sub" style="margin-bottom:32px;">Six internationally recognised levels. Start wherever you are. Practice at your own speed.</p>
+      <div class="levels-h-row">
+        <div class="lvl-card hi">
+          <div class="lvl-n">A1</div>
+          <div class="lvl-l">Beginner</div>
+          <div class="lvl-live">Live now</div>
+        </div>
+        <div class="lvl-card">
+          <div class="lvl-n">A2</div>
+          <div class="lvl-l">Elementary</div>
+        </div>
+        <div class="lvl-card">
+          <div class="lvl-n">B1</div>
+          <div class="lvl-l">Intermediate</div>
+        </div>
+        <div class="lvl-card">
+          <div class="lvl-n">B2</div>
+          <div class="lvl-l">Upper-Inter.</div>
+        </div>
+        <div class="lvl-card">
+          <div class="lvl-n">C1</div>
+          <div class="lvl-l">Advanced</div>
+        </div>
+        <div class="lvl-card">
+          <div class="lvl-n">C2</div>
+          <div class="lvl-l">Mastery</div>
+        </div>
+      </div>
+    </div>
+    <div class="panel-num">03</div>
+  </div>
+
+  <!-- PANEL 4: FEATURES -->
+  <div class="panel" id="p4">
+    <div class="panel-inner" style="padding:0 72px;">
+      <div class="p-tag">Platform Features</div>
+      <h2 class="p-h1" style="font-size:clamp(36px,4.5vw,62px);letter-spacing:-2px;margin-bottom:28px;">
+        <span class="wh">Built for</span>
+        <span class="gd">real practice.</span>
+      </h2>
+      <div class="feat-grid">
+        <div class="feat-c">
+          <div class="feat-ico">&#x1F3AF;</div>
+          <div class="feat-t">Interactive Quizzes</div>
+          <div class="feat-s">Practice with instant feedback after every chapter. Track your score over time.</div>
+        </div>
+        <div class="feat-c">
+          <div class="feat-ico">&#x1F4CA;</div>
+          <div class="feat-t">Progress Tracking</div>
+          <div class="feat-s">See exactly where you stand with a live score board and chapter-by-chapter progress.</div>
+        </div>
+        <div class="feat-c">
+          <div class="feat-ico">&#x1F3C5;</div>
+          <div class="feat-t">Goethe Exam Ready</div>
+          <div class="feat-s">Every practice module maps directly to what the Goethe exams test at each CEFR level.</div>
+        </div>
+        <div class="feat-c">
+          <div class="feat-ico">&#x1F4DA;</div>
+          <div class="feat-t">CEFR Structured</div>
+          <div class="feat-s">Grammar, vocabulary, reading, listening -- all organised by the official CEFR framework.</div>
+        </div>
+      </div>
+    </div>
+    <div class="panel-num">04</div>
+  </div>
+
+  <!-- PANEL 5: FINAL CTA -->
+  <div class="panel" id="p5">
+    <div class="panel-inner">
+      <div class="p-tag" style="margin:0 auto 24px;">Start practising today</div>
+      <h2 class="p-h1">
+        <span class="wh">Ready to</span>
+        <span class="bl">master</span>
+        <span class="gd">German?</span>
+      </h2>
+      <p class="p-sub" style="margin:0 auto 36px;">Join students already using Deutsch Meistern -- the structured self-practice platform for every CEFR level.</p>
+      <div class="cta-row">
+        <a class="cta-gold" href="register.html">
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" y1="8" x2="19" y2="14"/><line x1="22" y1="11" x2="16" y2="11"/></svg>
+          Register as a student
+        </a>
+        <a class="cta-ghost" href="login.html">
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
+          Already registered? Login
+        </a>
+      </div>
+    </div>
+    <div class="panel-num">05</div>
+  </div>
+
+</div></div><!-- /track /viewport -->
+
+<!-- DOT NAV -->
+<div id="dot-nav">
+  <button class="dot-btn active" data-i="0"></button>
+  <button class="dot-btn" data-i="1"></button>
+  <button class="dot-btn" data-i="2"></button>
+  <button class="dot-btn" data-i="3"></button>
+  <button class="dot-btn" data-i="4"></button>
+</div>
+
+<!-- THREE.JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+/* ───────────────────────────────────────────────────────
+   3D BACKGROUND  --  camera pans right as user scrolls
+─────────────────────────────────────────────────────── */
+(function(){
+  'use strict';
+  const canvas = document.getElementById('bg');
+  const W = () => window.innerWidth;
+  const H = () => window.innerHeight;
+
+  // Renderer
+  const renderer = new THREE.WebGLRenderer({ canvas, antialias:true, alpha:false });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.setSize(W(), H());
+  renderer.setClearColor(0x050d2a, 1);
+  renderer.physicallyCorrectLights = true;
+  renderer.outputEncoding = THREE.sRGBEncoding;
+  renderer.toneMapping = THREE.ACESFilmicToneMapping;
+  renderer.toneMappingExposure = 1.05;
+
+  const scene = new THREE.Scene();
+  scene.fog = new THREE.FogExp2(0x050d2a, 0.018);
+
+  const camera = new THREE.PerspectiveCamera(52, W()/H(), 0.1, 160);
+  camera.position.set(0, 0, 16);
+
+  // ── LIGHTS ──
+  scene.add(new THREE.AmbientLight(0x0a1040, 3));
+
+  const key = new THREE.DirectionalLight(0x8ab4f8, 2.5);
+  key.position.set(8, 14, 10); scene.add(key);
+
+  const pBlue = new THREE.PointLight(0x3b82f6, 6, 30);
+  pBlue.position.set(10, 3, 6); scene.add(pBlue);
+
+  const pGold = new THREE.PointLight(0xc9a84c, 5, 28);
+  pGold.position.set(-6, -4, 8); scene.add(pGold);
+
+  const pVio = new THREE.PointLight(0x7c3aed, 4, 22);
+  pVio.position.set(-2, 6, -6); scene.add(pVio);
+
+  // Moving lights (drift with scroll)
+  const dynBlue = new THREE.PointLight(0x60a5fa, 4, 25);
+  scene.add(dynBlue);
+  const dynGold = new THREE.PointLight(0xe8c96a, 4, 25);
+  scene.add(dynGold);
+
+  // ── HELPERS ──
+  const std = (color, metal, rough, emissive, ei) =>
+    new THREE.MeshStandardMaterial({ color, metalness:metal??0.85, roughness:rough??0.1, emissive:emissive??0x000000, emissiveIntensity:ei??0 });
+
+  function sphere(r, mat) {
+    return new THREE.Mesh(new THREE.SphereGeometry(r, 64, 64), mat);
+  }
+  function ring(r, tube, mat) {
+    return new THREE.Mesh(new THREE.TorusGeometry(r, tube, 12, 100), mat);
+  }
+
+  // ─────────────────────────────────────────────────
+  // ZONE 0 (panel 1, x≈0): Main globe + rings
+  // ─────────────────────────────────────────────────
+  const glob = sphere(2.5, std(0x050c30, 0.9, 0.08, 0x1e3a8a, 0.18));
+  glob.position.set(7, -0.5, -2);
+  scene.add(glob);
+
+  // Atmosphere
+  const atmos = sphere(2.75, new THREE.MeshStandardMaterial({ color:0x1e40af, transparent:true, opacity:0.07, metalness:0, roughness:0 }));
+  atmos.position.copy(glob.position); scene.add(atmos);
+
+  // Lat/lon lines
+  for(let i=1;i<7;i++){
+    const lat=-Math.PI/2+(i/7)*Math.PI, r=Math.cos(lat)*2.56, y=Math.sin(lat)*2.56;
+    const m=new THREE.Mesh(new THREE.TorusGeometry(r,0.007,6,64), new THREE.MeshBasicMaterial({color:0x3b82f6,transparent:true,opacity:0.25}));
+    m.position.copy(glob.position); m.position.y+=y; scene.add(m);
+  }
+  for(let i=0;i<8;i++){
+    const m=new THREE.Mesh(new THREE.TorusGeometry(2.56,0.007,6,64), new THREE.MeshBasicMaterial({color:0x60a5fa,transparent:true,opacity:0.18}));
+    m.position.copy(glob.position); m.rotation.y=(i/8)*Math.PI; scene.add(m);
+  }
+
+  // Orbit rings zone 0
+  const r0a = ring(3.8, 0.04, std(0x3b82f6, 0.9, 0.05, 0x1d4ed8, 0.4));
+  r0a.position.copy(glob.position); r0a.rotation.set(Math.PI/2.5, 0.3, 0); scene.add(r0a);
+
+  const r0b = ring(4.6, 0.025, std(0xc9a84c, 0.9, 0.05, 0x92700a, 0.4));
+  r0b.position.copy(glob.position); r0b.rotation.set(Math.PI/3.2, 0.1, Math.PI/3.5); scene.add(r0b);
+
+  // Jewel orbiters
+  const jA = sphere(0.2, std(0x93c5fd, 0.7, 0.05, 0x1d4ed8, 0.9)); scene.add(jA);
+  const jB = sphere(0.16, std(0xfde68a, 0.7, 0.05, 0x92400e, 0.9)); scene.add(jB);
+
+  // ─────────────────────────────────────────────────
+  // ZONE 1 (panel 2, x≈16): Medium cluster
+  // ─────────────────────────────────────────────────
+  const z1base = 16;
+
+  const c1 = sphere(1.4, std(0x0d1b6e, 0.85, 0.1, 0x3b82f6, 0.25));
+  c1.position.set(z1base+5, 1.5, -3); scene.add(c1);
+
+  const c1r = ring(2.2, 0.035, std(0xc9a84c, 0.9, 0.05, 0x92700a, 0.5));
+  c1r.position.copy(c1.position); c1r.rotation.set(0.5, 0.3, 0.2); scene.add(c1r);
+
+  // ─────────────────────────────────────────────────
+  // ZONE 2 (panel 3, x≈32): A1-C2 spheres
+  // ─────────────────────────────────────────────────
+  const z2base = 32;
+  const lvlColors = [0x3b82f6, 0x60a5fa, 0x7c3aed, 0xc9a84c, 0xe8c96a, 0xfde68a];
+  const lvlSpheres = [];
+  lvlColors.forEach((c,i)=>{
+    const s = sphere(0.55 - i*0.04, std(c, 0.85, 0.08, c, 0.35));
+    s.position.set(z2base - 4 + i*3.2, Math.sin(i*1.1)*2.2, -1.5 + Math.cos(i*0.8)*1);
+    scene.add(s); lvlSpheres.push(s);
+  });
+
+  // Connecting rings between level spheres
+  for(let i=0;i<5;i++){
+    const mid = lvlSpheres[i].position.clone().lerp(lvlSpheres[i+1].position, 0.5);
+    const dist = lvlSpheres[i].position.distanceTo(lvlSpheres[i+1].position);
+    const m = new THREE.Mesh(
+      new THREE.TorusGeometry(dist/2, 0.018, 8, 60),
+      new THREE.MeshBasicMaterial({color:0x3b82f6, transparent:true, opacity:0.15})
+    );
+    m.position.copy(mid);
+    m.lookAt(lvlSpheres[i+1].position);
+    m.rotation.y += Math.PI/2;
+    scene.add(m);
+  }
+
+  // ─────────────────────────────────────────────────
+  // ZONE 3 (panel 4, x≈48): Torus knot
+  // ─────────────────────────────────────────────────
+  const z3base = 48;
+  const tk = new THREE.Mesh(
+    new THREE.TorusKnotGeometry(1.8, 0.45, 128, 20, 2, 3),
+    std(0x1e3a8a, 0.9, 0.08, 0x3b82f6, 0.3)
+  );
+  tk.position.set(z3base+5, 0, -3); scene.add(tk);
+
+  const tkGold = new THREE.Mesh(
+    new THREE.TorusKnotGeometry(2.4, 0.12, 100, 16, 3, 5),
+    std(0xc9a84c, 0.9, 0.05, 0x92700a, 0.35)
+  );
+  tkGold.position.copy(tk.position); scene.add(tkGold);
+
+  // ─────────────────────────────────────────────────
+  // ZONE 4 (panel 5, x≈64): Diamond cluster
+  // ─────────────────────────────────────────────────
+  const z4base = 64;
+
+  const bigIco = new THREE.Mesh(
+    new THREE.IcosahedronGeometry(2.2, 1),
+    std(0x050c30, 0.9, 0.06, 0x3b82f6, 0.22)
+  );
+  bigIco.position.set(z4base+5, 0, -2); scene.add(bigIco);
+
+  const wireIco = new THREE.Mesh(
+    new THREE.IcosahedronGeometry(2.35, 1),
+    new THREE.MeshBasicMaterial({color:0x60a5fa, wireframe:true, transparent:true, opacity:0.18})
+  );
+  wireIco.position.copy(bigIco.position); scene.add(wireIco);
+
+  const goldRingFinal = ring(3.5, 0.04, std(0xc9a84c, 0.9, 0.05, 0x92700a, 0.5));
+  goldRingFinal.position.copy(bigIco.position); goldRingFinal.rotation.set(Math.PI/2.2, 0.4, 0); scene.add(goldRingFinal);
+
+  // ─────────────────────────────────────────────────
+  // FLOATING JEWELS (scattered across all zones)
+  // ─────────────────────────────────────────────────
+  const jewelData = [
+    {x:-3,y:3,z:1,r:0.38,c:0x93c5fd,e:0x1e40af},
+    {x:4,y:-3,z:0,r:0.28,c:0xfde68a,e:0x92400e},
+    {x:12,y:4,z:-1,r:0.32,c:0xc4b5fd,e:0x3b0764},
+    {x:19,y:-2,z:1,r:0.24,c:0x67e8f9,e:0x0c4a6e},
+    {x:26,y:3,z:0,r:0.35,c:0x93c5fd,e:0x1e40af},
+    {x:36,y:-3.5,z:1,r:0.28,c:0xfde68a,e:0x78350f},
+    {x:43,y:4,z:-1.5,r:0.3,c:0xc4b5fd,e:0x4c1d95},
+    {x:52,y:-2.5,z:0.5,r:0.25,c:0x93c5fd,e:0x1e40af},
+    {x:60,y:3.5,z:-1,r:0.38,c:0xfde68a,e:0x92400e},
+    {x:68,y:-3,z:1,r:0.3,c:0x86efac,e:0x14532d},
+    {x:9,y:4.5,z:-2,r:0.22,c:0xfde68a,e:0x92400e},
+    {x:30,y:4,z:-2,r:0.2,c:0x93c5fd,e:0x1e40af},
+    {x:55,y:4.5,z:-1,r:0.26,c:0xc4b5fd,e:0x3b0764},
+  ];
+  const jewels = jewelData.map(d=>{
+    const m = sphere(d.r, std(d.c, 0.85, 0.08, d.e, 0.75));
+    m.position.set(d.x, d.y, d.z);
+    m.userData = { oy:d.y, phase:Math.random()*Math.PI*2, fs:0.3+Math.random()*0.35, fa:0.3+Math.random()*0.4 };
+    scene.add(m); return m;
+  });
+
+  // ─────────────────────────────────────────────────
+  // STAR FIELD
+  // ─────────────────────────────────────────────────
+  const sCount=800, sPos=new Float32Array(sCount*3);
+  for(let i=0;i<sCount;i++){
+    sPos[i*3]   = Math.random()*90 - 10;
+    sPos[i*3+1] = (Math.random()-0.5)*40;
+    sPos[i*3+2] = -10 - Math.random()*25;
+  }
+  const sGeo=new THREE.BufferGeometry(); sGeo.setAttribute('position',new THREE.BufferAttribute(sPos,3));
+  scene.add(new THREE.Points(sGeo, new THREE.PointsMaterial({color:0xffffff,size:0.06,transparent:true,opacity:0.6})));
+
+  // ─────────────────────────────────────────────────
+  // PANEL STATE  (transform-based, no scroll container)
+  // ─────────────────────────────────────────────────
+  const PANELS = 5;
+  const SCENE_WIDTH = 70;
+  let scrollProgress = 0;
+  let currentPanel = 0;
+  let isAnimating = false;
+
+  const track = document.getElementById('track');
+  const dots  = document.querySelectorAll('.dot-btn');
+
+  function goTo(index) {
+    if (index < 0 || index >= PANELS || isAnimating) return;
+    currentPanel   = index;
+    scrollProgress = index / (PANELS - 1);
+    track.style.transform = `translateX(calc(-${index} * 100vw))`;
+    dots.forEach((d, i) => d.classList.toggle('active', i === index));
+    isAnimating = true;
+    setTimeout(() => { isAnimating = false; }, 850);
+  }
+
+  // ── Mouse wheel (scroll normally — any direction) ──
+  let wheelAcc = 0, wTimer;
+  window.addEventListener('wheel', e => {
+    e.preventDefault();
+    wheelAcc += e.deltaY + e.deltaX;
+    clearTimeout(wTimer);
+    wTimer = setTimeout(() => { wheelAcc = 0; }, 300);
+    if (isAnimating) return;
+    if (wheelAcc >  80) { wheelAcc = 0; goTo(currentPanel + 1); }
+    if (wheelAcc < -80) { wheelAcc = 0; goTo(currentPanel - 1); }
+  }, { passive: false });
+
+  // ── Touch swipe ──
+  let tx0 = 0, ty0 = 0;
+  window.addEventListener('touchstart', e => {
+    tx0 = e.touches[0].clientX; ty0 = e.touches[0].clientY;
+  }, { passive: true });
+  window.addEventListener('touchend', e => {
+    const dx = tx0 - e.changedTouches[0].clientX;
+    const dy = ty0 - e.changedTouches[0].clientY;
+    if (Math.abs(dx) < Math.abs(dy) || Math.abs(dx) < 40) return;
+    if (dx > 0) goTo(currentPanel + 1);
+    else        goTo(currentPanel - 1);
+  }, { passive: true });
+
+  // ── Keyboard ──
+  window.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') goTo(currentPanel + 1);
+    if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   goTo(currentPanel - 1);
+  });
+
+  // ── Dot nav ──
+  dots.forEach(d => d.addEventListener('click', () => goTo(parseInt(d.dataset.i))));
+
+  // ─────────────────────────────────────────────────
+  // DRAG ORBIT (left side 3D drag)
+  // ─────────────────────────────────────────────────
+  let isDrag=false, prevMX=0, prevMY=0, orbTheta=0.3, orbPhi=1.45, orbR=16;
+  let autoTheta=0.3;
+
+  canvas.addEventListener('mousedown', e => { isDrag=true; prevMX=e.clientX; prevMY=e.clientY; });
+  window.addEventListener('mouseup', () => isDrag=false);
+  window.addEventListener('mousemove', e => {
+    if(!isDrag) return;
+    orbTheta -= (e.clientX-prevMX)*0.006;
+    orbPhi   -= (e.clientY-prevMY)*0.006;
+    orbPhi = Math.max(0.3, Math.min(Math.PI-0.3, orbPhi));
+    prevMX=e.clientX; prevMY=e.clientY;
+  });
+  canvas.addEventListener('wheel', e => {
+    orbR += e.deltaY*0.01; orbR=Math.max(8,Math.min(28,orbR));
+  }, {passive:true});
+
+  // ─────────────────────────────────────────────────
+  // ANIMATE
+  // ─────────────────────────────────────────────────
+  const clock = new THREE.Clock();
+
+  function animate(){
+    requestAnimationFrame(animate);
+    const t = clock.getElapsedTime();
+
+    // Camera: pan right by panel + orbit offset
+    const panX = (currentPanel / (PANELS - 1)) * SCENE_WIDTH;
+    if(!isDrag){ autoTheta += 0.0015; orbTheta += (autoTheta-orbTheta)*0.01; }
+    else { autoTheta = orbTheta; }
+
+    // Base camera follows scroll, with orbit layered on top
+    const ox = orbR * Math.sin(orbPhi) * Math.sin(orbTheta) * 0.4;
+    const oy = orbR * Math.cos(orbPhi) * 0.25;
+    camera.position.set(panX + ox, oy, 16);
+    camera.lookAt(panX, 0, 0);
+
+    // Globe
+    glob.rotation.y = t*0.10; glob.rotation.x = t*0.035;
+    atmos.rotation.y = -t*0.06;
+    r0a.rotation.z = t*0.28; r0b.rotation.x = t*0.18;
+
+    // Jewel orbiters on globe
+    jA.position.set(
+      glob.position.x + Math.cos(t*0.5)*3.8 * Math.cos(Math.PI/2.5),
+      glob.position.y + Math.sin(t*0.5)*3.8,
+      glob.position.z + Math.cos(t*0.5)*3.8 * Math.sin(Math.PI/2.5)*0.4
+    );
+    jB.position.set(
+      glob.position.x + Math.cos(t*0.3+1)*4.6 * Math.cos(Math.PI/3.2),
+      glob.position.y + Math.sin(t*0.3+1)*4.6 * Math.sin(Math.PI/3.2),
+      glob.position.z + Math.cos(t*0.3)*1.5
+    );
+
+    // Zone 1 cluster
+    c1.rotation.y = t*0.12; c1r.rotation.z = t*0.22;
+
+    // Zone 2 level spheres (bob up and down)
+    lvlSpheres.forEach((s,i)=>{ s.position.y = Math.sin(t*0.6+i*0.8)*0.5 + (Math.sin(i*1.1)*2.2); s.rotation.y=t*0.1; });
+
+    // Zone 3 torus knot
+    tk.rotation.y = t*0.18; tk.rotation.x = t*0.12;
+    tkGold.rotation.y = -t*0.12; tkGold.rotation.z = t*0.1;
+
+    // Zone 4 icosahedron
+    bigIco.rotation.y = t*0.14; bigIco.rotation.x = t*0.07;
+    wireIco.rotation.y = -t*0.1; wireIco.rotation.z = t*0.08;
+    goldRingFinal.rotation.z = t*0.25;
+
+    // Floating jewels
+    jewels.forEach(j=>{
+      j.position.y = j.userData.oy + Math.sin(t*j.userData.fs + j.userData.phase)*j.userData.fa;
+      j.rotation.y += 0.008; j.rotation.x += 0.005;
+    });
+
+    // Dynamic lights follow camera/scroll
+    dynBlue.position.set(panX+8, 3+Math.sin(t*0.4)*2, 5);
+    dynGold.position.set(panX-6, -3+Math.cos(t*0.35)*2, 7);
+
+    renderer.render(scene, camera);
+  }
+
+  animate();
+
+  window.addEventListener('resize', ()=>{
+    camera.aspect = W()/H();
+    camera.updateProjectionMatrix();
+    renderer.setSize(W(), H());
+  });
+})();
+</script>
+
+</body>
+</html>

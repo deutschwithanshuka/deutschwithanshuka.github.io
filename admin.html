@@ -62,6 +62,7 @@ input.inp:focus{border-color:var(--blue);}
 .btn-view{font-size:.7rem;background:#eff6ff;color:var(--blue);border:1.5px solid var(--border);border-radius:7px;padding:3px 9px;cursor:pointer;font-family:'Nunito',sans-serif;font-weight:800;}
 .btn-lvl{font-size:.7rem;background:#f5f3ff;color:#7c3aed;border:1.5px solid #ddd6fe;border-radius:7px;padding:3px 9px;cursor:pointer;font-family:'Nunito',sans-serif;font-weight:800;margin-left:4px;}
 .btn-del{font-size:.7rem;background:#fff1f1;color:var(--red);border:1.5px solid #fecaca;border-radius:7px;padding:3px 9px;cursor:pointer;font-family:'Nunito',sans-serif;font-weight:800;margin-left:4px;}
+.btn-reset{font-size:.7rem;background:#fff7ed;color:#c2410c;border:1.5px solid #fed7aa;border-radius:7px;padding:3px 9px;cursor:pointer;font-family:'Nunito',sans-serif;font-weight:800;margin-left:4px;}
 .empty{text-align:center;padding:30px;color:var(--muted);font-size:.85rem;font-weight:700;}
 .loading{text-align:center;padding:20px;color:var(--blue);font-weight:800;font-size:.85rem;}
 
@@ -114,6 +115,8 @@ input.inp:focus{border-color:var(--blue);}
 .cred-copy{font-size:.68rem;background:var(--border);color:var(--navy);border:none;border-radius:6px;padding:2px 8px;cursor:pointer;font-family:'Nunito',sans-serif;font-weight:800;margin-top:4px;display:block;}
 .cred-note{font-size:.72rem;color:#92400e;background:#fef9c3;border-radius:10px;padding:10px 12px;margin-top:4px;margin-bottom:14px;font-weight:700;line-height:1.5;}
 .cred-close{width:100%;padding:12px;background:linear-gradient(135deg,var(--blue),var(--purple));color:#fff;border:none;border-radius:11px;font-family:'Nunito',sans-serif;font-weight:900;cursor:pointer;font-size:.9rem;}
+#reset-bg{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:999;display:none;align-items:center;justify-content:center;padding:16px;}
+#reset-bg.open{display:flex;}
 </style>
 </head>
 <body>
@@ -187,6 +190,26 @@ input.inp:focus{border-color:var(--blue);}
     <div id="student-list"><div class="loading">Loading students...</div></div>
   </div>
 
+</div>
+
+<!-- RESET PASSWORD POPUP -->
+<div id="reset-bg" onclick="if(event.target===this)closeReset()">
+  <div id="cred-box" style="max-width:380px;">
+    <div class="cred-title" style="color:#c2410c;">🔑 Password Reset</div>
+    <div class="cred-sub">New credentials for <strong id="reset-name-label"></strong>. Copy and send to student.</div>
+    <div class="cred-row">
+      <div class="cred-label">Email (Login ID)</div>
+      <div class="cred-val" id="reset-email-val"></div>
+      <button class="cred-copy" onclick="copyResetText('reset-email-val')">Copy Email</button>
+    </div>
+    <div class="cred-row">
+      <div class="cred-label">New Password</div>
+      <div class="cred-val" id="reset-pass-val"></div>
+      <button class="cred-copy" onclick="copyResetText('reset-pass-val')">Copy Password</button>
+    </div>
+    <div class="cred-note">The old password no longer works. Send these new credentials to the student at their email.</div>
+    <button class="cred-close" onclick="closeReset()">Done</button>
+  </div>
 </div>
 
 <!-- CREDENTIALS POPUP -->
@@ -339,6 +362,7 @@ window.loadStudents = async function() {
         <td>
           <button class="btn-view" onclick="viewActivity('${d.id}','${s.name}','${s.email || s.code || ''}')">Activity</button>
           <button class="btn-lvl" data-lvl-id="${d.id}" onclick="changeLevel('${d.id}','${s.name}','${(s.levels || (s.level ? [s.level] : ['A1'])).join(',')}')">Levels</button>
+          <button class="btn-reset" data-rst-id="${d.id}" onclick="resetPassword('${d.id}','${s.name}','${s.email || ''}')">Reset PW</button>
           <button class="btn-del" data-del-id="${d.id}" onclick="deleteStudent('${d.id}','${s.name}')">Delete</button>
         </td>
       </tr>`;
@@ -547,6 +571,48 @@ window.aktivieren = async function(btn) {
 
 window.closeCred = function() {
   document.getElementById('cred-bg').classList.remove('open');
+};
+
+window.resetPassword = async function(id, name, email) {
+  const btn = document.querySelector(`[data-rst-id="${id}"]`);
+  if (btn && btn.dataset.confirming !== 'yes') {
+    btn.dataset.confirming = 'yes';
+    btn.textContent = 'Sure?';
+    btn.style.background = '#fed7aa';
+    setTimeout(() => {
+      if (btn.dataset.confirming === 'yes') {
+        btn.dataset.confirming = '';
+        btn.textContent = 'Reset PW';
+        btn.style.background = '';
+      }
+    }, 3000);
+    return;
+  }
+  if (btn) { btn.disabled = true; btn.textContent = '...'; }
+  try {
+    const newPass = genPassword();
+    const passHash = await sha256(newPass);
+    await updateDoc(doc(db, 'students', id), { password: passHash });
+    document.getElementById('reset-name-label').textContent = name;
+    document.getElementById('reset-email-val').textContent = email;
+    document.getElementById('reset-pass-val').textContent = newPass;
+    document.getElementById('reset-bg').classList.add('open');
+  } catch(e) {
+    alert('Error resetting password: ' + e.message);
+  }
+  if (btn) { btn.disabled = false; btn.textContent = 'Reset PW'; btn.dataset.confirming = ''; btn.style.background = ''; }
+};
+
+window.closeReset = function() {
+  document.getElementById('reset-bg').classList.remove('open');
+};
+
+window.copyResetText = function(elId) {
+  const text = document.getElementById(elId).textContent;
+  navigator.clipboard.writeText(text).then(() => {
+    const btn = document.querySelector(`[onclick="copyResetText('${elId}')"]`);
+    if (btn) { btn.textContent = 'Copied!'; setTimeout(() => { btn.textContent = elId === 'reset-email-val' ? 'Copy Email' : 'Copy Password'; }, 1500); }
+  });
 };
 
 window.copyText = function(elId) {

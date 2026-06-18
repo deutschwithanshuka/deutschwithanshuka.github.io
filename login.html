@@ -80,7 +80,7 @@ input:focus{border-color:var(--blue);}
 
 <script type="module">
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js';
-import { getFirestore, collection, query, where, getDocs }
+import { getFirestore, doc, getDoc }
   from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js';
 
 const app = initializeApp({
@@ -121,19 +121,17 @@ window.doLogin = async function() {
 
   try {
     const passHash = await sha256(pass);
+    const emailId  = await sha256(email);
 
-    const snap = await getDocs(
-      query(collection(db, 'students'), where('email', '==', email))
-    );
+    const studentDoc = await getDoc(doc(db, 'students', emailId));
 
-    if (snap.empty) {
+    if (!studentDoc.exists()) {
       errEl.textContent = 'No account found with this email. Please contact Anshuka.';
       btn.disabled = false;
       btn.textContent = 'Log In';
       return;
     }
 
-    const studentDoc = snap.docs[0];
     const student = studentDoc.data();
 
     if (student.password !== passHash) {
@@ -144,7 +142,7 @@ window.doLogin = async function() {
     }
 
     // Set session
-    sessionStorage.setItem('dm_student_id', studentDoc.id);
+    sessionStorage.setItem('dm_student_id', emailId);
     sessionStorage.setItem('dm_student_name', student.name);
     sessionStorage.setItem('dm_student_levels', (student.levels || [student.level || 'A1']).join(','));
 

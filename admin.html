@@ -301,7 +301,8 @@ window.addStudent = async function() {
 
   try {
     const passHash = await sha256(pass);
-    await addDoc(collection(db, 'students'), {
+    const emailId  = await sha256(email.toLowerCase());
+    await setDoc(doc(db, 'students', emailId), {
       name, email, password: passHash, levels,
       createdAt: serverTimestamp()
     });
@@ -514,9 +515,10 @@ window.aktivieren = async function(btn) {
 
     const tempPass = genPassword();
     const passHash = await sha256(tempPass);
+    const emailId  = await sha256((r.email || '').toLowerCase());
 
-    // Create student record
-    await addDoc(collection(db, 'students'), {
+    // Create student record (document ID = sha256 of email)
+    await setDoc(doc(db, 'students', emailId), {
       name: r.name, email: (r.email || '').toLowerCase(), password: passHash,
       levels: [r.level || 'A1'], phone: r.phone || '', batchTime: r.batchTime || '', batchDate: r.batchDate || '',
       createdAt: serverTimestamp()

@@ -236,7 +236,7 @@ import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.2/fireba
 import { getFirestore, doc, getDoc } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js';
 
 (async function loadProgress() {
-  const sid = sessionStorage.getItem('dm_student_id');
+  const sid = localStorage.getItem('dm_student_id');
   if (!sid) return;
   try {
     const app = initializeApp({
@@ -269,9 +269,9 @@ import { getFirestore, doc, getDoc } from 'https://www.gstatic.com/firebasejs/10
 
 <script>
 (function() {
-  const raw    = sessionStorage.getItem('dm_student_levels') || '[]';
+  const raw    = localStorage.getItem('dm_student_levels') || '[]';
   const levels = JSON.parse(raw);
-  const name   = sessionStorage.getItem('dm_student_name') || '';
+  const name   = localStorage.getItem('dm_student_name') || '';
   if (!name) {
     window.location.href = '../index.html';
     return;

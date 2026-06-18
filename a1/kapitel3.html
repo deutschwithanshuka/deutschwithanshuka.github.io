@@ -120,15 +120,15 @@ nav{position:sticky;top:0;z-index:999;background:rgba(255,255,255,.98);backdrop-
 .ex-tab{flex:1;padding:10px 4px;border-radius:50px;border:2px solid var(--border);background:#fff;color:var(--muted);font-family:'Nunito',sans-serif;font-size:.8rem;font-weight:800;cursor:pointer;transition:all .15s;text-align:center;}
 .ex-tab.active{background:linear-gradient(135deg,var(--blue),var(--purple));color:#fff;border-color:transparent;}
 .ex-panel{display:none;}.ex-panel.active{display:block;}
-.qcard{background:#fff;border:2px solid var(--border);border-radius:var(--r);padding:18px 16px;margin-bottom:12px;box-shadow:var(--sh);}
+.qcard{background:#fff;border:2px solid var(--border);border-radius:var(--r);padding:22px 18px;margin-bottom:20px;box-shadow:var(--sh);}
 .q-meta{display:flex;align-items:center;gap:7px;margin-bottom:10px;flex-wrap:wrap;}
 .q-num{font-family:'Space Mono',monospace;font-size:.72rem;font-weight:700;background:#e0e7ff;color:var(--blue);border-radius:5px;padding:3px 8px;}
 .q-type{font-size:.66rem;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;}
 .q-status{margin-left:auto;font-size:1rem;}
 .q-text{font-weight:700;font-size:.95rem;color:var(--navy);margin-bottom:12px;line-height:1.6;}
 .passage{background:#f8faff;border:1px solid #e0e7ff;border-radius:10px;padding:14px 16px;font-size:.86rem;line-height:1.7;color:var(--text);margin-bottom:10px;}
-.opts{display:flex;flex-direction:column;gap:8px;}
-.opt{width:100%;padding:12px 16px;border-radius:11px;border:2px solid var(--border);background:#f8faff;font-family:'Nunito',sans-serif;font-size:.9rem;font-weight:700;color:var(--text);cursor:pointer;text-align:left;transition:all .15s;}
+.opts{display:flex;flex-direction:column;gap:12px;}
+.opt{width:100%;padding:14px 16px;border-radius:11px;border:2px solid var(--border);background:#f8faff;font-family:'Nunito',sans-serif;font-size:.9rem;font-weight:700;color:var(--text);cursor:pointer;text-align:left;transition:all .15s;}
 .opt.correct{border-color:var(--green);background:#dcfce7;color:var(--green);}
 .opt.wrong{border-color:var(--red);background:#fff1f2;color:var(--red);}
 .opt.disabled{cursor:default;}
@@ -1046,7 +1046,7 @@ function filterWBCat(cat,btn){filterVocabCat(cat,btn);}
 function filterWB(){filterVocabAll();}
 
 function openSubmit(){document.getElementById('sc-overlay').classList.remove('hidden');document.getElementById('sc-modal').classList.remove('hidden');document.getElementById('sr-card').classList.add('hidden');document.getElementById('sc-name-inp').value='';setTimeout(()=>document.getElementById('sc-name-inp').focus(),100);}
-function generateCard(){const name=document.getElementById('sc-name-inp').value.trim();if(!name){document.getElementById('sc-name-inp').style.borderColor='var(--red)';return;}const pct=Math.round((score/1200)*100);const now=new Date();document.getElementById('sr-name').textContent=name;document.getElementById('sr-pts').textContent=score;document.getElementById('sr-answered').textContent=answered.size;document.getElementById('sr-pct').textContent=pct+'%';document.getElementById('sr-date').textContent=now.toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'});document.getElementById('sc-modal').classList.add('hidden');document.getElementById('sr-card').classList.remove('hidden');const studentId=sessionStorage.getItem('dm_student_id');if(studentId&&window.saveKapitelScore)window.saveKapitelScore(studentId,'a1k3',score);}
+function generateCard(){const name=document.getElementById('sc-name-inp').value.trim();if(!name){document.getElementById('sc-name-inp').style.borderColor='var(--red)';return;}const pct=Math.round((score/1200)*100);const now=new Date();document.getElementById('sr-name').textContent=name;document.getElementById('sr-pts').textContent=score;document.getElementById('sr-answered').textContent=answered.size;document.getElementById('sr-pct').textContent=pct+'%';document.getElementById('sr-date').textContent=now.toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'});document.getElementById('sc-modal').classList.add('hidden');document.getElementById('sr-card').classList.remove('hidden');const studentId=localStorage.getItem('dm_student_id');if(studentId&&window.saveKapitelScore)window.saveKapitelScore(studentId,'a1k3',score);}
 function closeCard(){document.getElementById('sc-overlay').classList.add('hidden');}
 
 renderAll();buildVocab();
@@ -1087,7 +1087,7 @@ window.saveKapitelScore = async function(studentId, kapitelKey, newScore) {
 
 // Show previous best score on page load
 (async function() {
-  const sid = sessionStorage.getItem('dm_student_id');
+  const sid = localStorage.getItem('dm_student_id');
   if (!sid) return;
   try {
     const snap = await getDoc(doc(db, 'students', sid));
@@ -1110,7 +1110,7 @@ window.loadLeaderboard = async function() {
   const p3p = document.getElementById('lb-p3-pts');
   if (listEl) listEl.innerHTML = '<div style="text-align:center;padding:24px;color:var(--muted);font-size:.85rem;">Lade Rangliste...</div>';
   try {
-    const myId = sessionStorage.getItem('dm_student_id');
+    const myId = localStorage.getItem('dm_student_id');
     const q = query(collection(db, 'students'), orderBy('totalScore', 'desc'), limit(20));
     const snap = await getDocs(q);
     const students = [];
@@ -1119,7 +1119,7 @@ window.loadLeaderboard = async function() {
       if ((data.totalScore || 0) > 0) students.push({ id:d.id, name:data.name, total:data.totalScore||0, you:d.id===myId });
     });
     if (myId && !students.find(s=>s.id===myId)) {
-      const mySelf = sessionStorage.getItem('dm_student_name');
+      const mySelf = localStorage.getItem('dm_student_name');
       if (mySelf) students.push({ id:myId, name:mySelf, total:0, you:true });
     }
     students.sort((a,b) => b.total - a.total);

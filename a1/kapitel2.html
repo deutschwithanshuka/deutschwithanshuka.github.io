@@ -237,6 +237,7 @@ nav{position:sticky;top:0;z-index:999;background:rgba(255,255,255,.98);backdrop-
 .sr-close-btn{flex:1;padding:10px;border-radius:10px;border:2px solid var(--border);background:#f8faff;font-family:'Nunito',sans-serif;font-size:.82rem;font-weight:800;color:var(--muted);cursor:pointer;}
 .sr-new-btn{flex:1;padding:10px;border-radius:10px;border:none;background:linear-gradient(135deg,var(--blue),var(--purple));font-family:'Nunito',sans-serif;font-size:.82rem;font-weight:800;color:#fff;cursor:pointer;}
 @media(min-width:900px){.screen{padding:24px 28px 40px;max-width:820px;margin:0 auto;}}
+.prev-best{display:none;background:linear-gradient(90deg,#dcfce7,#f0fdf4);border-bottom:1.5px solid #86efac;padding:6px 16px;font-size:.78rem;font-weight:800;color:#15803d;align-items:center;gap:4px;}
 </style>
 </head>
 <body>
@@ -247,6 +248,7 @@ nav{position:sticky;top:0;z-index:999;background:rgba(255,255,255,.98);backdrop-
   </div>
   <div class="score-pill" id="score-pill">⭐ 0 Pts</div>
 </nav>
+<div class="prev-best" id="prev-best">🏆 Your best: <span id="prev-pts">0</span> pts this chapter</div>
 <div class="float-score" id="float-score">⭐ <span id="float-pts">0</span></div>
 <div class="bnav">
   <button class="bn active" onclick="goTo('home',this)"><span class="bn-i">🏠</span>Home</button>
@@ -1125,9 +1127,28 @@ window.saveKapitelScore = async function(studentId, kapitelKey, newScore) {
       scores[kapitelKey] = newScore;
       const totalScore = Object.values(scores).reduce((a,b) => a+b, 0);
       await updateDoc(ref, { scores, totalScore });
+      const ptEl = document.getElementById('prev-pts');
+      const el = document.getElementById('prev-best');
+      if (el && ptEl) { ptEl.textContent = newScore; el.style.display = 'flex'; }
     }
   } catch(e) { console.log('Score save error:', e); }
 };
+
+// Show previous best score on page load
+(async function() {
+  const sid = sessionStorage.getItem('dm_student_id');
+  if (!sid) return;
+  try {
+    const snap = await getDoc(doc(db, 'students', sid));
+    if (!snap.exists()) return;
+    const best = (snap.data().scores || {})['a1k2'] || 0;
+    if (best > 0) {
+      const el = document.getElementById('prev-best');
+      const ptEl = document.getElementById('prev-pts');
+      if (el && ptEl) { ptEl.textContent = best; el.style.display = 'flex'; }
+    }
+  } catch(e) {}
+})();
 
 window.loadLeaderboard = async function() {
   const listEl = document.getElementById('lb-list');

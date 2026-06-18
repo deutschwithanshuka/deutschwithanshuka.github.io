@@ -231,6 +231,42 @@ nav{background:rgba(255,255,255,.97);backdrop-filter:blur(12px);border-bottom:2p
 
 </div>
 
+<script type="module">
+import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js';
+import { getFirestore, doc, getDoc } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js';
+
+(async function loadProgress() {
+  const sid = sessionStorage.getItem('dm_student_id');
+  if (!sid) return;
+  try {
+    const app = initializeApp({
+      apiKey:"AIzaSyCuMSWNpOIlnqqxFmy08CfIcbvAUpTXo1E",
+      authDomain:"deutschmeistern-abc4d.firebaseapp.com",
+      projectId:"deutschmeistern-abc4d",
+      storageBucket:"deutschmeistern-abc4d.firebasestorage.app",
+      messagingSenderId:"282075407369",
+      appId:"1:282075407369:web:4a5587b4eb391e768004d8"
+    });
+    const db = getFirestore(app);
+    const snap = await getDoc(doc(db, 'students', sid));
+    if (!snap.exists()) return;
+    const scores = snap.data().scores || {};
+    const keyMap = { 'a1k1': 0, 'a1k2': 1, 'a1k3': 2, 'a1k4': 3 };
+    const cards = document.querySelectorAll('.ch-card.available');
+    Object.entries(keyMap).forEach(([key, idx]) => {
+      const pts = scores[key] || 0;
+      if (pts > 0 && cards[idx]) {
+        const badge = document.createElement('span');
+        badge.style.cssText = 'font-family:Space Mono,monospace;font-size:.58rem;font-weight:700;background:#dcfce7;color:#15803d;border-radius:50px;padding:2px 7px;white-space:nowrap;flex-shrink:0;';
+        badge.textContent = pts + ' pts';
+        const arrow = cards[idx].querySelector('.ch-arrow');
+        if (arrow) cards[idx].insertBefore(badge, arrow);
+      }
+    });
+  } catch(e) {}
+})();
+</script>
+
 <script>
 (function() {
   const raw    = sessionStorage.getItem('dm_student_levels') || '[]';

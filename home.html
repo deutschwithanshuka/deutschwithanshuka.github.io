@@ -218,7 +218,7 @@
         <span class="bl">German</span>
         <span class="gd">beautifully.</span>
       </h1>
-      <p class="p-sub">The #1 self-practice platform for German. Practice at your own pace, track your progress, and get Goethe-ready -- from A1 to C2.</p>
+      <p class="p-sub">The #1 self-practice platform for German. Practice at your own pace, track your progress, and get Goethe-ready, from A1 to C2.</p>
       <div class="cta-row">
         <a class="cta-gold" href="register.html">
           <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" y1="8" x2="19" y2="14"/><line x1="22" y1="11" x2="16" y2="11"/></svg>
@@ -242,7 +242,7 @@
         <span class="bl">Your way.</span>
         <span class="gd">Your pace.</span>
       </h2>
-      <p class="p-sub">Deutsch Meistern is a structured self-practice platform -- not a course. You choose when to practice, how much, and at what level. The platform tracks everything.</p>
+      <p class="p-sub">Deutsch Meistern is a structured self-practice platform, not a course. You choose when to practice, how much, and at what level. The platform tracks everything.</p>
       <div class="big-stat-row">
         <div class="big-stat"><div class="big-num">A1<span style="font-size:40px;color:rgba(255,255,255,.2)"> &rarr; </span>C2</div><div class="big-lbl">Full CEFR coverage</div></div>
         <div class="big-stat"><div class="big-num" style="color:var(--goldb);">6</div><div class="big-lbl">Levels of practice</div></div>
@@ -319,7 +319,7 @@
         <div class="feat-c">
           <div class="feat-ico">&#x1F4DA;</div>
           <div class="feat-t">CEFR Structured</div>
-          <div class="feat-s">Grammar, vocabulary, reading, listening -- all organised by the official CEFR framework.</div>
+          <div class="feat-s">Grammar, vocabulary, reading, listening; all organised by the official CEFR framework.</div>
         </div>
       </div>
     </div>
@@ -335,7 +335,7 @@
         <span class="bl">master</span>
         <span class="gd">German?</span>
       </h2>
-      <p class="p-sub" style="margin:0 auto 36px;">Join students already using Deutsch Meistern -- the structured self-practice platform for every CEFR level.</p>
+      <p class="p-sub" style="margin:0 auto 36px;">Join students already using Deutsch Meistern, the structured self-practice platform for every CEFR level.</p>
       <div class="cta-row">
         <a class="cta-gold" href="register.html">
           <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" y1="8" x2="19" y2="14"/><line x1="22" y1="11" x2="16" y2="11"/></svg>
@@ -532,7 +532,7 @@
   // ZONE 4 (panel 5): Octahedron diamond + orbiting satellites
   // ─────────────────────────────────────────────────
   const z4base = 64;
-  const pos4 = new THREE.Vector3(z4base+7, 0, -6);
+  const pos4 = new THREE.Vector3(z4base+15, 0, -9);
 
   const diamond = new THREE.Mesh(
     new THREE.OctahedronGeometry(2.1, 2),
@@ -682,8 +682,8 @@
     if(!isDrag){ autoTheta += 0.0012; orbTheta += (autoTheta - orbTheta)*0.01; }
     else { autoTheta = orbTheta; }
 
-    const ox = orbR * Math.sin(orbPhi) * Math.sin(orbTheta) * 0.35;
-    const oy = orbR * Math.cos(orbPhi) * 0.22;
+    const ox = orbR * Math.sin(orbPhi) * Math.sin(orbTheta) * 0.12;
+    const oy = orbR * Math.cos(orbPhi) * 0.08;
     camera.position.set(panX + ox, oy, 16);
     camera.lookAt(panX, 0, 0);
 

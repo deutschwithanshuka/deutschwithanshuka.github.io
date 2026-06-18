@@ -90,6 +90,30 @@ input.inp:focus{border-color:var(--blue);}
 .modal-time{color:var(--muted);font-size:.7rem;}
 .modal-close{margin-top:14px;width:100%;padding:10px;background:#f1f5f9;border:none;border-radius:10px;font-family:'Nunito',sans-serif;font-weight:900;cursor:pointer;color:var(--navy);}
 .refresh-btn{font-size:.72rem;background:#fff;border:1.5px solid var(--border);color:var(--blue);border-radius:8px;padding:4px 12px;cursor:pointer;font-family:'Nunito',sans-serif;font-weight:800;margin-left:8px;}
+
+/* REGISTRATIONS */
+.reg-table{width:100%;border-collapse:collapse;}
+.reg-table th{font-size:.65rem;font-weight:900;color:var(--muted);text-transform:uppercase;letter-spacing:.8px;padding:8px 10px;text-align:left;border-bottom:2px solid var(--border);}
+.reg-table td{font-size:.78rem;font-weight:700;padding:10px 10px;border-bottom:1px solid #e0e7ff;color:var(--navy);vertical-align:top;}
+.reg-table tr:last-child td{border-bottom:none;}
+.badge-pending{background:#fef9c3;color:#92400e;padding:2px 8px;border-radius:6px;font-size:.68rem;font-weight:900;}
+.badge-activated{background:#dcfce7;color:var(--green);padding:2px 8px;border-radius:6px;font-size:.68rem;font-weight:900;}
+.btn-activate{font-size:.72rem;background:linear-gradient(135deg,var(--green),#15803d);color:#fff;border:none;border-radius:7px;padding:5px 11px;cursor:pointer;font-family:'Nunito',sans-serif;font-weight:900;}
+.btn-activate:disabled{opacity:.5;cursor:not-allowed;}
+.reg-meta{font-size:.68rem;color:var(--muted);margin-top:2px;}
+
+/* CREDENTIALS POPUP */
+#cred-bg{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:999;display:none;align-items:center;justify-content:center;padding:16px;}
+#cred-bg.open{display:flex;}
+#cred-box{background:#fff;border-radius:20px;padding:28px 24px;max-width:380px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,.25);}
+.cred-title{font-size:1.05rem;font-weight:900;color:var(--green);margin-bottom:4px;}
+.cred-sub{font-size:.75rem;color:var(--muted);font-weight:700;margin-bottom:18px;}
+.cred-row{background:#f8faff;border:2px solid var(--border);border-radius:12px;padding:12px 14px;margin-bottom:10px;}
+.cred-label{font-size:.65rem;font-weight:900;color:var(--muted);text-transform:uppercase;letter-spacing:.8px;margin-bottom:4px;}
+.cred-val{font-size:1rem;font-weight:900;color:var(--navy);word-break:break-all;}
+.cred-copy{font-size:.68rem;background:var(--border);color:var(--navy);border:none;border-radius:6px;padding:2px 8px;cursor:pointer;font-family:'Nunito',sans-serif;font-weight:800;margin-top:4px;display:block;}
+.cred-note{font-size:.72rem;color:#92400e;background:#fef9c3;border-radius:10px;padding:10px 12px;margin-top:4px;margin-bottom:14px;font-weight:700;line-height:1.5;}
+.cred-close{width:100%;padding:12px;background:linear-gradient(135deg,var(--blue),var(--purple));color:#fff;border:none;border-radius:11px;font-family:'Nunito',sans-serif;font-weight:900;cursor:pointer;font-size:.9rem;}
 </style>
 </head>
 <body>
@@ -116,6 +140,15 @@ input.inp:focus{border-color:var(--blue);}
 
 <!-- MAIN -->
 <div class="wrap">
+
+  <!-- PENDING REGISTRATIONS -->
+  <div class="section-title">
+    🔔 Neue Anmeldungen
+    <button class="refresh-btn" onclick="loadRegistrations()">↻ Refresh</button>
+  </div>
+  <div class="card" style="padding:0;overflow:hidden;">
+    <div id="reg-list"><div class="loading">Loading registrations...</div></div>
+  </div>
 
   <!-- ADD STUDENT -->
   <div class="section-title">➕ Add New Student</div>
@@ -156,6 +189,30 @@ input.inp:focus{border-color:var(--blue);}
 
 </div>
 
+<!-- CREDENTIALS POPUP -->
+<div id="cred-bg" onclick="if(event.target===this)closeCred()">
+  <div id="cred-box">
+    <div class="cred-title">✅ Student Activated!</div>
+    <div class="cred-sub">Copy these credentials and email them to the student.</div>
+    <div class="cred-row">
+      <div class="cred-label">Student Name</div>
+      <div class="cred-val" id="cred-name"></div>
+    </div>
+    <div class="cred-row">
+      <div class="cred-label">Email (Login ID)</div>
+      <div class="cred-val" id="cred-email"></div>
+      <button class="cred-copy" onclick="copyText('cred-email')">Copy Email</button>
+    </div>
+    <div class="cred-row">
+      <div class="cred-label">Password</div>
+      <div class="cred-val" id="cred-pass"></div>
+      <button class="cred-copy" onclick="copyText('cred-pass')">Copy Password</button>
+    </div>
+    <div class="cred-note">Send these credentials to the student at their registered email. Ask them to log in at deutschwithanshuka.github.io/login</div>
+    <button class="cred-close" onclick="closeCred()">Done</button>
+  </div>
+</div>
+
 <!-- LEVEL PICKER MODAL -->
 <div id="lvl-modal-bg" onclick="if(event.target===this)closeLvlModal()">
   <div id="lvl-modal">
@@ -181,7 +238,7 @@ input.inp:focus{border-color:var(--blue);}
 
 <script type="module">
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js';
-import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, updateDoc, serverTimestamp, orderBy, query, limit, getDoc }
+import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, updateDoc, serverTimestamp, orderBy, query, limit, getDoc, where, setDoc }
   from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js';
 
 const firebaseConfig = {
@@ -216,6 +273,7 @@ window.checkAdmin = async function() {
   const hash = await sha256(v);
   if (hash === ADMIN_PASS_HASH) {
     document.getElementById('gate').classList.add('hidden');
+    loadRegistrations();
     loadStudents();
   } else {
     document.getElementById('admin-err').textContent = '❌ Wrong password.';
@@ -381,6 +439,120 @@ window.viewActivity = async function(id, name, code) {
 
 window.closeModal = function() {
   document.getElementById('modal-bg').classList.remove('open');
+};
+
+// ── REGISTRATIONS ──
+window.loadRegistrations = async function() {
+  const el = document.getElementById('reg-list');
+  el.innerHTML = '<div class="loading">Loading...</div>';
+  try {
+    const snap = await getDocs(
+      query(collection(db, 'registrations'), orderBy('submittedAt', 'desc'))
+    );
+    if (snap.empty) {
+      el.innerHTML = '<div class="empty">No registrations yet.</div>';
+      return;
+    }
+
+    const pending = [];
+    const done = [];
+    snap.forEach(d => {
+      const r = d.data();
+      if (r.status === 'pending') pending.push({id: d.id, ...r});
+      else done.push({id: d.id, ...r});
+    });
+
+    if (pending.length === 0 && done.length === 0) {
+      el.innerHTML = '<div class="empty">No registrations yet.</div>';
+      return;
+    }
+
+    const allRows = [...pending, ...done];
+    let html = '<table class="reg-table"><thead><tr><th>Name</th><th>Email / Phone</th><th>Level</th><th>Batch</th><th>Status</th><th>Action</th></tr></thead><tbody>';
+    allRows.forEach(r => {
+      const date = r.submittedAt ? new Date(r.submittedAt.seconds * 1000).toLocaleDateString('en-IN') : '';
+      const batchStr = [r.batchTime || '', r.batchDate || ''].filter(Boolean).join(' | ');
+      const statusBadge = r.status === 'pending'
+        ? '<span class="badge-pending">Pending</span>'
+        : '<span class="badge-activated">Activated</span>';
+      const actionBtn = r.status === 'pending'
+        ? `<button class="btn-activate" data-reg-id="${r.id}" onclick="aktivieren(this)">Aktivieren</button>`
+        : '<span style="font-size:.7rem;color:var(--muted);font-weight:800;">Done</span>';
+      html += `<tr>
+        <td><strong>${r.name || ''}</strong><div class="reg-meta">${date}</div></td>
+        <td style="font-size:.75rem;">${r.email || ''}<br><span style="color:var(--muted)">${r.phone || ''}</span></td>
+        <td><span class="badge-level">${r.level || ''}</span></td>
+        <td style="font-size:.72rem;color:var(--muted);">${batchStr || '--'}</td>
+        <td>${statusBadge}</td>
+        <td>${actionBtn}</td>
+      </tr>`;
+    });
+    html += '</tbody></table>';
+    el.innerHTML = html;
+  } catch(e) {
+    el.innerHTML = '<div class="empty" style="color:red;">Error: ' + e.message + '</div>';
+  }
+};
+
+function genPassword() {
+  const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZabcdefghjkmnpqrstuvwxyz23456789';
+  let p = 'DM';
+  for (let i = 0; i < 6; i++) p += chars[Math.floor(Math.random() * chars.length)];
+  return p;
+}
+
+window.aktivieren = async function(btn) {
+  const regId = btn.dataset.regId;
+  btn.disabled = true;
+  btn.textContent = '...';
+
+  try {
+    // Fetch registration data fresh from Firestore
+    const regDoc = await getDoc(doc(db, 'registrations', regId));
+    if (!regDoc.exists()) { alert('Registration not found.'); btn.disabled = false; btn.textContent = 'Aktivieren'; return; }
+    const r = regDoc.data();
+
+    const tempPass = genPassword();
+    const passHash = await sha256(tempPass);
+
+    // Create student record
+    await addDoc(collection(db, 'students'), {
+      name: r.name, email: (r.email || '').toLowerCase(), password: passHash,
+      levels: [r.level || 'A1'], phone: r.phone || '', batchTime: r.batchTime || '', batchDate: r.batchDate || '',
+      createdAt: serverTimestamp()
+    });
+
+    // Mark registration as activated
+    await updateDoc(doc(db, 'registrations', regId), {
+      status: 'activated',
+      activatedAt: serverTimestamp()
+    });
+
+    // Show credentials popup
+    document.getElementById('cred-name').textContent = r.name || '';
+    document.getElementById('cred-email').textContent = r.email || '';
+    document.getElementById('cred-pass').textContent = tempPass;
+    document.getElementById('cred-bg').classList.add('open');
+
+    loadRegistrations();
+    loadStudents();
+  } catch(e) {
+    alert('Error activating: ' + e.message);
+    btn.disabled = false;
+    btn.textContent = 'Aktivieren';
+  }
+};
+
+window.closeCred = function() {
+  document.getElementById('cred-bg').classList.remove('open');
+};
+
+window.copyText = function(elId) {
+  const text = document.getElementById(elId).textContent;
+  navigator.clipboard.writeText(text).then(() => {
+    const btn = document.querySelector(`[onclick="copyText('${elId}')"]`);
+    if (btn) { btn.textContent = 'Copied!'; setTimeout(() => { btn.textContent = elId === 'cred-email' ? 'Copy Email' : 'Copy Password'; }, 1500); }
+  });
 };
 </script>
 </body>

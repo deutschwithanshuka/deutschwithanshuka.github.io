@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Join Deutsch Meistern</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#0d1b6e;--blue:#2563eb;--purple:#7c3aed;--green:#16a34a;
+  --red:#dc2626;--muted:#64748b;--border:#c7d2fe;--bg:#f0f4ff;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--bg);font-family:'Nunito',sans-serif;color:var(--navy);min-height:100vh;padding:0 0 60px;}
+
+header{background:linear-gradient(135deg,#1e40af,#6d28d9);color:#fff;padding:28px 24px 24px;text-align:center;}
+.h-flag{font-size:2rem;margin-bottom:6px;}
+.h-title{font-size:1.3rem;font-weight:900;letter-spacing:.3px;}
+.h-sub{font-size:.75rem;opacity:.8;font-weight:700;margin-top:4px;}
+
+.wrap{max-width:480px;margin:0 auto;padding:28px 16px;}
+
+.card{background:#fff;border:2px solid var(--border);border-radius:20px;padding:24px 20px;box-shadow:0 4px 20px rgba(37,99,235,.08);}
+.card-title{font-size:1rem;font-weight:900;color:var(--navy);margin-bottom:4px;}
+.card-sub{font-size:.75rem;color:var(--muted);font-weight:700;margin-bottom:20px;}
+
+.field{margin-bottom:14px;}
+label{font-size:.72rem;font-weight:900;color:var(--navy);display:block;margin-bottom:5px;text-transform:uppercase;letter-spacing:.6px;}
+input, select{
+  width:100%;padding:12px 14px;border:2px solid var(--border);border-radius:12px;
+  font-family:'Nunito',sans-serif;font-size:.93rem;font-weight:700;color:var(--navy);
+  outline:none;background:#fff;appearance:none;-webkit-appearance:none;
+}
+input:focus, select:focus{border-color:var(--blue);}
+select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%230d1b6e' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;padding-right:36px;}
+
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+
+.submit-btn{
+  width:100%;padding:14px;background:linear-gradient(135deg,var(--blue),var(--purple));
+  color:#fff;border:none;border-radius:13px;font-family:'Nunito',sans-serif;
+  font-size:1rem;font-weight:900;cursor:pointer;margin-top:6px;
+  box-shadow:0 4px 14px rgba(37,99,235,.25);
+}
+.submit-btn:disabled{opacity:.6;cursor:not-allowed;}
+
+.err{font-size:.78rem;font-weight:800;color:var(--red);margin-top:10px;min-height:18px;}
+
+/* SUCCESS */
+#success{display:none;text-align:center;padding:40px 20px;}
+.success-icon{font-size:3rem;margin-bottom:12px;}
+.success-title{font-size:1.3rem;font-weight:900;color:var(--green);margin-bottom:8px;}
+.success-sub{font-size:.85rem;font-weight:700;color:var(--muted);line-height:1.6;}
+
+.privacy-note{font-size:.68rem;color:var(--muted);font-weight:700;text-align:center;margin-top:14px;line-height:1.6;}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="h-flag">🇩🇪</div>
+  <div class="h-title">Deutsch Meistern by Anshuka</div>
+  <div class="h-sub">Student Registration</div>
+</header>
+
+<div class="wrap">
+
+  <div class="card" id="form-card">
+    <div class="card-title">Join the Platform</div>
+    <div class="card-sub">Fill in your details and Anshuka will send you your login credentials.</div>
+
+    <div class="field">
+      <label>Full Name</label>
+      <input type="text" id="f-name" placeholder="e.g. Priya Sharma" maxlength="60">
+    </div>
+
+    <div class="field">
+      <label>Email Address</label>
+      <input type="email" id="f-email" placeholder="yourname@email.com" maxlength="100">
+    </div>
+
+    <div class="field">
+      <label>Phone Number</label>
+      <input type="tel" id="f-phone" placeholder="e.g. 9876543210" maxlength="15">
+    </div>
+
+    <div class="row2">
+      <div class="field">
+        <label>Level</label>
+        <select id="f-level">
+          <option value="">Select...</option>
+          <option value="A1">A1 - Beginner</option>
+          <option value="A2">A2 - Elementary</option>
+          <option value="B1">B1 - Intermediate</option>
+          <option value="B2">B2 - Upper Intermediate</option>
+          <option value="C1">C1 - Advanced</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Batch Time</label>
+        <input type="time" id="f-batchtime">
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Batch Start Date</label>
+      <input type="date" id="f-batchdate">
+    </div>
+
+    <button class="submit-btn" id="submit-btn" onclick="submitForm()">Submit Registration</button>
+    <div class="err" id="err-msg"></div>
+
+    <div class="privacy-note">Your information is only shared with your teacher Anshuka and is never sold or shared publicly.</div>
+  </div>
+
+  <div id="success">
+    <div class="success-icon">🎉</div>
+    <div class="success-title">Registration Submitted!</div>
+    <div class="success-sub">Thank you! Anshuka will review your registration and send your login credentials to your email soon.<br><br>Keep an eye on your inbox.</div>
+  </div>
+
+</div>
+
+<script type="module">
+import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js';
+import { getFirestore, collection, addDoc, serverTimestamp, query, where, getDocs }
+  from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js';
+
+const app = initializeApp({
+  apiKey: "AIzaSyCuMSWNpOIlnqqxFmy08CfIcbvAUpTXo1E",
+  authDomain: "deutschmeistern-abc4d.firebaseapp.com",
+  projectId: "deutschmeistern-abc4d",
+  storageBucket: "deutschmeistern-abc4d.firebasestorage.app",
+  messagingSenderId: "282075407369",
+  appId: "1:282075407369:web:4a5587b4eb391e768004d8"
+});
+const db = getFirestore(app);
+
+window.submitForm = async function() {
+  const name      = document.getElementById('f-name').value.trim();
+  const email     = document.getElementById('f-email').value.trim().toLowerCase();
+  const phone     = document.getElementById('f-phone').value.trim();
+  const level     = document.getElementById('f-level').value;
+  const batchTime = document.getElementById('f-batchtime').value;
+  const batchDate = document.getElementById('f-batchdate').value;
+  const errEl     = document.getElementById('err-msg');
+
+  errEl.textContent = '';
+
+  if (!name)  { errEl.textContent = 'Please enter your full name.'; return; }
+  if (!email || !email.includes('@')) { errEl.textContent = 'Please enter a valid email address.'; return; }
+  if (!phone) { errEl.textContent = 'Please enter your phone number.'; return; }
+  if (!level) { errEl.textContent = 'Please select your level.'; return; }
+  if (!batchTime) { errEl.textContent = 'Please select your batch time.'; return; }
+  if (!batchDate) { errEl.textContent = 'Please select your batch start date.'; return; }
+
+  const btn = document.getElementById('submit-btn');
+  btn.disabled = true;
+  btn.textContent = 'Submitting...';
+
+  try {
+    // Check if email already registered
+    const existing = await getDocs(query(collection(db, 'registrations'), where('email', '==', email)));
+    if (!existing.empty) {
+      errEl.textContent = 'This email is already registered. Please contact Anshuka.';
+      btn.disabled = false;
+      btn.textContent = 'Submit Registration';
+      return;
+    }
+
+    await addDoc(collection(db, 'registrations'), {
+      name, email, phone, level, batchTime, batchDate,
+      status: 'pending',
+      submittedAt: serverTimestamp()
+    });
+
+    document.getElementById('form-card').style.display = 'none';
+    document.getElementById('success').style.display = 'block';
+  } catch(e) {
+    errEl.textContent = 'Something went wrong. Please try again.';
+    btn.disabled = false;
+    btn.textContent = 'Submit Registration';
+    console.error(e);
+  }
+};
+</script>
+
+</body>
+</html>

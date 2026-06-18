@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login · Deutsch Meistern</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#0d1b6e;--blue:#2563eb;--purple:#7c3aed;--green:#16a34a;
+  --red:#dc2626;--muted:#64748b;--border:#c7d2fe;--bg:#f0f4ff;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:linear-gradient(135deg,#1e40af,#6d28d9);font-family:'Nunito',sans-serif;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px;}
+
+.box{background:#fff;border-radius:24px;padding:36px 28px;max-width:360px;width:100%;box-shadow:0 24px 60px rgba(0,0,0,.25);}
+
+.logo{text-align:center;margin-bottom:24px;}
+.logo-flag{font-size:2.4rem;margin-bottom:6px;}
+.logo-title{font-size:1.1rem;font-weight:900;color:var(--navy);}
+.logo-sub{font-size:.7rem;font-weight:700;color:var(--muted);margin-top:3px;}
+
+.field{margin-bottom:14px;}
+label{font-size:.72rem;font-weight:900;color:var(--navy);display:block;margin-bottom:5px;text-transform:uppercase;letter-spacing:.6px;}
+input{
+  width:100%;padding:12px 14px;border:2px solid var(--border);border-radius:12px;
+  font-family:'Nunito',sans-serif;font-size:.95rem;font-weight:700;color:var(--navy);outline:none;
+}
+input:focus{border-color:var(--blue);}
+
+.pass-wrap{position:relative;}
+.pass-wrap input{padding-right:44px;}
+.eye-btn{position:absolute;right:12px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;font-size:1.1rem;padding:4px;}
+
+.login-btn{
+  width:100%;padding:14px;background:linear-gradient(135deg,var(--blue),var(--purple));
+  color:#fff;border:none;border-radius:13px;font-family:'Nunito',sans-serif;
+  font-size:1rem;font-weight:900;cursor:pointer;margin-top:6px;
+  box-shadow:0 4px 14px rgba(37,99,235,.3);
+}
+.login-btn:disabled{opacity:.6;cursor:not-allowed;}
+
+.err{font-size:.78rem;font-weight:800;color:var(--red);margin-top:10px;min-height:18px;text-align:center;}
+
+.divider{border:none;border-top:1.5px solid var(--border);margin:20px 0;}
+
+.join-link{text-align:center;font-size:.78rem;font-weight:700;color:var(--muted);}
+.join-link a{color:var(--blue);font-weight:900;text-decoration:none;}
+.join-link a:hover{text-decoration:underline;}
+</style>
+</head>
+<body>
+
+<div class="box">
+  <div class="logo">
+    <div class="logo-flag">🇩🇪</div>
+    <div class="logo-title">Deutsch Meistern</div>
+    <div class="logo-sub">by Anshuka</div>
+  </div>
+
+  <div class="field">
+    <label>Email</label>
+    <input type="email" id="l-email" placeholder="yourname@email.com" maxlength="100" onkeydown="if(event.key==='Enter')doLogin()">
+  </div>
+
+  <div class="field">
+    <label>Password</label>
+    <div class="pass-wrap">
+      <input type="password" id="l-pass" placeholder="Enter your password" maxlength="60" onkeydown="if(event.key==='Enter')doLogin()">
+      <button class="eye-btn" onclick="togglePass()" id="eye-btn" title="Show/hide password">👁</button>
+    </div>
+  </div>
+
+  <button class="login-btn" id="login-btn" onclick="doLogin()">Log In</button>
+  <div class="err" id="err-msg"></div>
+
+  <hr class="divider">
+  <div class="join-link">New student? <a href="/join.html">Register here</a></div>
+</div>
+
+<script type="module">
+import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js';
+import { getFirestore, collection, query, where, getDocs }
+  from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js';
+
+const app = initializeApp({
+  apiKey: "AIzaSyCuMSWNpOIlnqqxFmy08CfIcbvAUpTXo1E",
+  authDomain: "deutschmeistern-abc4d.firebaseapp.com",
+  projectId: "deutschmeistern-abc4d",
+  storageBucket: "deutschmeistern-abc4d.firebasestorage.app",
+  messagingSenderId: "282075407369",
+  appId: "1:282075407369:web:4a5587b4eb391e768004d8"
+});
+const db = getFirestore(app);
+
+async function sha256(msg) {
+  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(msg));
+  return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2,'0')).join('');
+}
+
+window.togglePass = function() {
+  const inp = document.getElementById('l-pass');
+  const btn = document.getElementById('eye-btn');
+  if (inp.type === 'password') { inp.type = 'text'; btn.textContent = '🙈'; }
+  else { inp.type = 'password'; btn.textContent = '👁'; }
+};
+
+window.doLogin = async function() {
+  const email = document.getElementById('l-email').value.trim().toLowerCase();
+  const pass  = document.getElementById('l-pass').value;
+  const errEl = document.getElementById('err-msg');
+  const btn   = document.getElementById('login-btn');
+
+  errEl.textContent = '';
+
+  if (!email) { errEl.textContent = 'Please enter your email.'; return; }
+  if (!pass)  { errEl.textContent = 'Please enter your password.'; return; }
+
+  btn.disabled = true;
+  btn.textContent = 'Logging in...';
+
+  try {
+    const passHash = await sha256(pass);
+
+    const snap = await getDocs(
+      query(collection(db, 'students'), where('email', '==', email))
+    );
+
+    if (snap.empty) {
+      errEl.textContent = 'No account found with this email. Please contact Anshuka.';
+      btn.disabled = false;
+      btn.textContent = 'Log In';
+      return;
+    }
+
+    const studentDoc = snap.docs[0];
+    const student = studentDoc.data();
+
+    if (student.password !== passHash) {
+      errEl.textContent = 'Incorrect password. Please try again.';
+      btn.disabled = false;
+      btn.textContent = 'Log In';
+      return;
+    }
+
+    // Set session
+    sessionStorage.setItem('dm_student_id', studentDoc.id);
+    sessionStorage.setItem('dm_student_name', student.name);
+    sessionStorage.setItem('dm_student_levels', (student.levels || [student.level || 'A1']).join(','));
+
+    // Redirect to homepage
+    window.location.href = '/';
+  } catch(e) {
+    errEl.textContent = 'Something went wrong. Please try again.';
+    btn.disabled = false;
+    btn.textContent = 'Log In';
+    console.error(e);
+  }
+};
+</script>
+
+</body>
+</html>

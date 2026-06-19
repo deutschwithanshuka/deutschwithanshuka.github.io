@@ -55,7 +55,7 @@ input:focus{border-color:var(--blue);}
   <div class="logo">
     <div class="logo-flag">🇩🇪</div>
     <div class="logo-title">Deutsch Meistern</div>
-    <div class="logo-sub">by Anshuka</div>
+    <div class="logo-sub">Student Login</div>
   </div>
 
   <div class="field">
@@ -126,7 +126,7 @@ window.doLogin = async function() {
     const studentDoc = await getDoc(doc(db, 'students', emailId));
 
     if (!studentDoc.exists()) {
-      errEl.textContent = 'No account found with this email. Please contact Anshuka.';
+      errEl.textContent = 'No account found with this email. Please contact Deutsch Meistern.';
       btn.disabled = false;
       btn.textContent = 'Log In';
       return;

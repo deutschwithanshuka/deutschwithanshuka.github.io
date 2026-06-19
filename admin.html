@@ -106,14 +106,13 @@ input.inp:focus{border-color:var(--blue);}
 /* CREDENTIALS POPUP */
 #cred-bg{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:999;display:none;align-items:center;justify-content:center;padding:16px;}
 #cred-bg.open{display:flex;}
-#cred-box{background:#fff;border-radius:20px;padding:28px 24px;max-width:380px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,.25);}
+#cred-box{background:#fff;border-radius:20px;padding:28px 24px;max-width:420px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,.25);}
 .cred-title{font-size:1.05rem;font-weight:900;color:var(--green);margin-bottom:4px;}
-.cred-sub{font-size:.75rem;color:var(--muted);font-weight:700;margin-bottom:18px;}
-.cred-row{background:#f8faff;border:2px solid var(--border);border-radius:12px;padding:12px 14px;margin-bottom:10px;}
-.cred-label{font-size:.65rem;font-weight:900;color:var(--muted);text-transform:uppercase;letter-spacing:.8px;margin-bottom:4px;}
-.cred-val{font-size:1rem;font-weight:900;color:var(--navy);word-break:break-all;}
-.cred-copy{font-size:.68rem;background:var(--border);color:var(--navy);border:none;border-radius:6px;padding:2px 8px;cursor:pointer;font-family:'Nunito',sans-serif;font-weight:800;margin-top:4px;display:block;}
-.cred-note{font-size:.72rem;color:#92400e;background:#fef9c3;border-radius:10px;padding:10px 12px;margin-top:4px;margin-bottom:14px;font-weight:700;line-height:1.5;}
+.cred-sub{font-size:.75rem;color:var(--muted);font-weight:700;margin-bottom:16px;}
+.cred-msg-box{background:#f0f7ff;border:2px solid #bfdbfe;border-radius:14px;padding:16px;margin-bottom:14px;font-size:.82rem;font-weight:700;color:#1e1b4b;line-height:1.75;white-space:pre-wrap;word-break:break-word;font-family:monospace;}
+.cred-copy-all{width:100%;padding:13px;background:linear-gradient(135deg,#16a34a,#15803d);color:#fff;border:none;border-radius:11px;font-family:'Nunito',sans-serif;font-weight:900;cursor:pointer;font-size:.95rem;margin-bottom:10px;}
+.cred-copy-all:active{opacity:.85;}
+.cred-note{font-size:.72rem;color:#92400e;background:#fef9c3;border-radius:10px;padding:10px 12px;margin-bottom:14px;font-weight:700;line-height:1.5;}
 .cred-close{width:100%;padding:12px;background:linear-gradient(135deg,var(--blue),var(--purple));color:#fff;border:none;border-radius:11px;font-family:'Nunito',sans-serif;font-weight:900;cursor:pointer;font-size:.9rem;}
 #reset-bg{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:999;display:none;align-items:center;justify-content:center;padding:16px;}
 #reset-bg.open{display:flex;}
@@ -216,22 +215,10 @@ input.inp:focus{border-color:var(--blue);}
 <div id="cred-bg" onclick="if(event.target===this)closeCred()">
   <div id="cred-box">
     <div class="cred-title">✅ Student Activated!</div>
-    <div class="cred-sub">Copy these credentials and email them to the student.</div>
-    <div class="cred-row">
-      <div class="cred-label">Student Name</div>
-      <div class="cred-val" id="cred-name"></div>
-    </div>
-    <div class="cred-row">
-      <div class="cred-label">Email (Login ID)</div>
-      <div class="cred-val" id="cred-email"></div>
-      <button class="cred-copy" onclick="copyText('cred-email')">Copy Email</button>
-    </div>
-    <div class="cred-row">
-      <div class="cred-label">Password</div>
-      <div class="cred-val" id="cred-pass"></div>
-      <button class="cred-copy" onclick="copyText('cred-pass')">Copy Password</button>
-    </div>
-    <div class="cred-note">Send these credentials to the student at their registered email. Ask them to log in at deutschwithdeutschmeistern.github.io/login</div>
+    <div class="cred-sub">Copy the message below and send it to the student via WhatsApp or email.</div>
+    <div class="cred-msg-box" id="cred-msg"></div>
+    <button class="cred-copy-all" id="cred-copy-btn" onclick="copyCredMsg()">📋 Copy Full Message</button>
+    <div class="cred-note">⚠️ Send this to the student now. Once you close this popup, the password cannot be retrieved.</div>
     <button class="cred-close" onclick="closeCred()">Done</button>
   </div>
 </div>
@@ -568,10 +555,22 @@ window.aktivieren = async function(btn) {
       activatedAt: serverTimestamp()
     });
 
-    // Show credentials popup
-    document.getElementById('cred-name').textContent = r.name || '';
-    document.getElementById('cred-email').textContent = r.email || '';
-    document.getElementById('cred-pass').textContent = tempPass;
+    // Show credentials popup with ready-to-send message
+    const msg = `Hi ${r.name || 'there'}! 👋
+
+Your Deutsch Meistern account is ready. Here are your login details:
+
+🔗 Login here: https://deutschwithanshuka.github.io/login.html
+
+📧 Username (Email): ${r.email || ''}
+🔑 Password: ${tempPass}
+
+Please save this password somewhere safe. You can log in anytime using the link above.
+
+If you ever forget your password, contact your teacher and they will reset it for you.
+
+Viel Erfolg! 🇩🇪`;
+    document.getElementById('cred-msg').textContent = msg;
     document.getElementById('cred-bg').classList.add('open');
 
     loadRegistrations();
@@ -629,11 +628,11 @@ window.copyResetText = function(elId) {
   });
 };
 
-window.copyText = function(elId) {
-  const text = document.getElementById(elId).textContent;
+window.copyCredMsg = function() {
+  const text = document.getElementById('cred-msg').textContent;
   navigator.clipboard.writeText(text).then(() => {
-    const btn = document.querySelector(`[onclick="copyText('${elId}')"]`);
-    if (btn) { btn.textContent = 'Copied!'; setTimeout(() => { btn.textContent = elId === 'cred-email' ? 'Copy Email' : 'Copy Password'; }, 1500); }
+    const btn = document.getElementById('cred-copy-btn');
+    if (btn) { btn.textContent = '✅ Copied! Ready to send.'; btn.style.background = '#0f766e'; setTimeout(() => { btn.textContent = '📋 Copy Full Message'; btn.style.background = ''; }, 2500); }
   });
 };
 </script>

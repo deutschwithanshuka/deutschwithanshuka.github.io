@@ -138,7 +138,7 @@ input.inp:focus{border-color:var(--blue);}
     <div class="h-title">🇩🇪 Deutsch Meistern · Admin</div>
     <div class="h-sub">Teacher Dashboard</div>
   </div>
-  <div class="h-badge">Anshuka</div>
+  <button onclick="adminLogout()" style="background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.3);color:#fff;border-radius:8px;padding:6px 14px;font-family:'Nunito',sans-serif;font-weight:800;font-size:.78rem;cursor:pointer;">🔒 Lock</button>
 </header>
 
 <!-- MAIN -->
@@ -231,7 +231,7 @@ input.inp:focus{border-color:var(--blue);}
       <div class="cred-val" id="cred-pass"></div>
       <button class="cred-copy" onclick="copyText('cred-pass')">Copy Password</button>
     </div>
-    <div class="cred-note">Send these credentials to the student at their registered email. Ask them to log in at deutschwithanshuka.github.io/login</div>
+    <div class="cred-note">Send these credentials to the student at their registered email. Ask them to log in at deutschwithdeutschmeistern.github.io/login</div>
     <button class="cred-close" onclick="closeCred()">Done</button>
   </div>
 </div>
@@ -284,20 +284,34 @@ async function sha256(msg) {
 
 // ── ADMIN PASSWORD (loaded from Firestore, never in source code) ──
 let ADMIN_PASS_HASH = '';
+
+function unlockAdmin() {
+  document.getElementById('gate').classList.add('hidden');
+  loadRegistrations();
+  loadStudents();
+}
+
+window.adminLogout = function() {
+  localStorage.removeItem('dm_admin_session');
+  location.reload();
+};
+
 (async () => {
   try {
     const cfg = await getDoc(doc(db, 'config', 'site'));
     if (cfg.exists()) ADMIN_PASS_HASH = cfg.data().adminPass;
   } catch(e) {}
+  // Auto-unlock if a valid session exists in localStorage
+  const saved = localStorage.getItem('dm_admin_session');
+  if (saved && saved === ADMIN_PASS_HASH) unlockAdmin();
 })();
 
 window.checkAdmin = async function() {
   const v = document.getElementById('admin-inp').value.trim();
   const hash = await sha256(v);
   if (hash === ADMIN_PASS_HASH) {
-    document.getElementById('gate').classList.add('hidden');
-    loadRegistrations();
-    loadStudents();
+    localStorage.setItem('dm_admin_session', hash);
+    unlockAdmin();
   } else {
     document.getElementById('admin-err').textContent = '❌ Wrong password.';
     setTimeout(() => document.getElementById('admin-err').textContent = '', 2000);

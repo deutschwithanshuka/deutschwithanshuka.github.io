@@ -1481,7 +1481,7 @@ function generateCard(){
   document.getElementById('sr-card').classList.remove('hidden');
   const studentId=localStorage.getItem('dm_student_id');
   if(studentId&&window.saveKapitelScore){window.saveKapitelScore(studentId,'a1k1',score);}
-  else{const f=document.getElementById('sr-footer');if(f)f.innerHTML='<span style="color:var(--red);font-weight:800;">Log in to save your score to your profile!</span><br>Platform: <strong>Deutsch Meistern</strong>';}
+  else{const f=document.querySelector('.sr-footer');if(f)f.innerHTML='<span style="color:var(--red);font-weight:800;">Log in to save your score to your profile!</span><br>Platform: <strong>Deutsch Meistern</strong>';}
 }
 function closeCard(){document.getElementById('sc-overlay').classList.add('hidden');}
 

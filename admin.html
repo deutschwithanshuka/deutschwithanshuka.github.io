@@ -543,7 +543,7 @@ window.loadProgress = async function() {
     `;
 
     const KAPITEL_MAX = {
-      'a1k1':1200,'a1k2':1200,'a1k3':1200,'a1k4':1200,'a1k5':1200,'b1k1':1210
+      'a1k1':120,'a1k2':120,'a1k3':120,'a1k4':120,'a1k5':120,'b1k1':1210
     };
     const KAPITEL_NAMES = {
       'a1k1':'A1 Kapitel 1','a1k2':'A1 Kapitel 2','a1k3':'A1 Kapitel 3',
@@ -584,7 +584,7 @@ window.loadProgress = async function() {
         let scoreHtml = '';
         cols.forEach(k => {
           const sc = s.scores[k] || 0;
-          const maxPts = KAPITEL_MAX[k] || 1200;
+          const maxPts = KAPITEL_MAX[k] || 120;
           const pct = sc > 0 ? Math.round(sc / maxPts * 100) : 0;
           if (pct > bestPct) bestPct = pct;
           if (sc === 0) {
@@ -848,7 +848,7 @@ window.closeReset = function() { document.getElementById('reset-bg').classList.r
 
 // ── STUDENT REPORT ──
 const REPORT_KAPITEL_MAX = {
-  'a1k1':1200,'a1k2':1200,'a1k3':1200,'a1k4':1200,'a1k5':1200,'b1k1':1210
+  'a1k1':120,'a1k2':120,'a1k3':120,'a1k4':120,'a1k5':120,'b1k1':1210
 };
 const REPORT_KAPITEL_NAMES = {
   'a1k1':'A1 Kapitel 1 (Begrüßung & Zahlen)',
@@ -872,7 +872,7 @@ window.showReport = function(name, email, scores, cols) {
 
   cols.forEach(k => {
     const sc = scores[k] || 0;
-    const max = REPORT_KAPITEL_MAX[k] || 1200;
+    const max = REPORT_KAPITEL_MAX[k] || 120;
     const pct = sc > 0 ? Math.round(sc / max * 100) : 0;
     const kapName = REPORT_KAPITEL_NAMES[k] || k;
     if (sc > 0) {

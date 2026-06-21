@@ -1305,19 +1305,21 @@ function generateCard(){
   const name=document.getElementById('sc-name-inp').value.trim();
   if(!name){document.getElementById('sc-name-inp').style.borderColor='var(--red)';return;}
   document.getElementById('sc-name-inp').style.borderColor='';
-  const pct=Math.round((score/1200)*100);
-  const ans=answered.size;
+  const totalQ=lesenQ.length+sprechenQ.length+schreibenQ.length;
+  const pct=answered.size>0?Math.min(100,Math.round(score/(answered.size*10)*100)):0;
   const now=new Date();
   const dateStr=now.toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'});
   document.getElementById('sr-name').textContent=name;
   document.getElementById('sr-pts').textContent=score;
-  document.getElementById('sr-answered').textContent=ans;
+  document.getElementById('sr-answered').textContent=answered.size+'/'+totalQ;
   document.getElementById('sr-pct').textContent=pct+'%';
+  document.getElementById('sr-maxpts').textContent=totalQ*10;
   document.getElementById('sr-date').textContent=dateStr;
   document.getElementById('sc-modal').classList.add('hidden');
   document.getElementById('sr-card').classList.remove('hidden');
   const sid=localStorage.getItem('dm_student_id');
-  if(sid&&window.saveKapitelScore) window.saveKapitelScore(sid,'b1k1',score);
+  if(sid&&window.saveKapitelScore){window.saveKapitelScore(sid,'b1k1',score);}
+  else{const f=document.getElementById('sr-footer');if(f)f.innerHTML='<span style="color:var(--red);font-weight:800;">Log in to save your score to your profile!</span><br>Platform: <strong>Deutsch Meistern</strong>';}
 }
 function closeCard(){
   document.getElementById('sc-overlay').classList.add('hidden');
@@ -1379,7 +1381,7 @@ window.addEventListener('load',function(){
     <div class="sr-stats">
       <div class="sr-stat"><div class="sr-stat-n" id="sr-answered">0</div><div class="sr-stat-l">Answered</div></div>
       <div class="sr-stat"><div class="sr-stat-n" id="sr-pct">0%</div><div class="sr-stat-l">Score %</div></div>
-      <div class="sr-stat"><div class="sr-stat-n">120</div><div class="sr-stat-l">Max pts</div></div>
+      <div class="sr-stat"><div class="sr-stat-n" id="sr-maxpts">1200</div><div class="sr-stat-l">Max pts</div></div>
     </div>
     <div class="sr-footer">Completed on <strong id="sr-date"></strong><br>Platform: <strong>Deutsch Meistern</strong></div>
     <div class="sr-actions">
@@ -1418,6 +1420,9 @@ window.saveKapitelScore = async function(studentId, kapitelKey, newScore) {
     const ptEl = document.getElementById('prev-pts');
     const el = document.getElementById('prev-best');
     if (el && ptEl) { ptEl.textContent = newScore; el.style.display = 'flex'; }
+    const toast=document.createElement('div');
+    toast.style.cssText='position:fixed;bottom:90px;left:50%;transform:translateX(-50%);background:#16a34a;color:#fff;padding:10px 22px;border-radius:50px;font-family:Nunito,sans-serif;font-weight:900;font-size:.82rem;z-index:9999;box-shadow:0 4px 20px rgba(0,0,0,.25);white-space:nowrap;';
+    toast.textContent='Score saved to your profile!';document.body.appendChild(toast);setTimeout(()=>toast.remove(),3000);
   } catch(e) { console.log('Score save error:', e); }
 };
 

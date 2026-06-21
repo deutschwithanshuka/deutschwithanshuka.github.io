@@ -89,9 +89,27 @@ input.inp:focus{border-color:var(--blue);}
 .score-low{background:#fee2e2;color:#b91c1c;}
 .score-none{color:#cbd5e1;font-size:.72rem;}
 
+/* LEVEL GROUPS */
+.level-group{margin-bottom:8px;}
+.level-group-header{display:flex;align-items:center;justify-content:space-between;padding:10px 4px 8px;}
+.level-group-title{font-size:.78rem;font-weight:900;color:var(--navy);text-transform:uppercase;letter-spacing:.8px;}
+.level-group-count{font-size:.68rem;font-weight:800;color:var(--muted);background:#f1f5f9;padding:2px 9px;border-radius:20px;}
+
+/* REPORT BUTTON */
+.btn-report{font-size:.7rem;background:linear-gradient(135deg,var(--blue),var(--purple));color:#fff;border:none;border-radius:7px;padding:4px 10px;cursor:pointer;font-family:'Nunito',sans-serif;font-weight:800;white-space:nowrap;}
+
+/* REPORT POPUP */
+#report-bg{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:999;display:none;align-items:center;justify-content:center;padding:16px;}
+#report-bg.open{display:flex;}
+#report-box{background:#fff;border-radius:20px;padding:28px 24px;max-width:440px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,.25);}
+.report-title{font-size:1.05rem;font-weight:900;color:var(--blue);margin-bottom:4px;}
+.report-sub{font-size:.75rem;color:var(--muted);font-weight:700;margin-bottom:14px;}
+.report-msg-box{background:#f0f7ff;border:2px solid #bfdbfe;border-radius:14px;padding:16px;margin-bottom:14px;font-size:.8rem;font-weight:700;color:#1e1b4b;line-height:1.8;white-space:pre-wrap;word-break:break-word;font-family:monospace;max-height:320px;overflow-y:auto;}
+.report-copy-btn{width:100%;padding:13px;background:linear-gradient(135deg,var(--blue),var(--purple));color:#fff;border:none;border-radius:11px;font-family:'Nunito',sans-serif;font-weight:900;cursor:pointer;font-size:.95rem;margin-bottom:10px;}
+.report-close{width:100%;padding:11px;background:#f1f5f9;color:var(--muted);border:none;border-radius:11px;font-family:'Nunito',sans-serif;font-weight:900;cursor:pointer;font-size:.88rem;}
+
 /* BADGES */
 .badge-level{background:#f5f3ff;color:var(--purple);padding:2px 7px;border-radius:6px;font-size:.7rem;font-weight:800;}
-.badge-pending{background:#fef9c3;color:#92400e;padding:2px 8px;border-radius:6px;font-size:.68rem;font-weight:900;}
 .badge-code{font-family:monospace;background:#eff6ff;color:var(--blue);padding:2px 7px;border-radius:6px;font-size:.75rem;}
 
 /* ACTION BUTTONS */
@@ -322,6 +340,17 @@ input.inp:focus{border-color:var(--blue);}
   </div>
 </div>
 
+<!-- REPORT POPUP -->
+<div id="report-bg" onclick="if(event.target===this)closeReport()">
+  <div id="report-box">
+    <div class="report-title">📊 Student Report</div>
+    <div class="report-sub">Copy and send to student via WhatsApp or email.</div>
+    <div class="report-msg-box" id="report-msg"></div>
+    <button class="report-copy-btn" id="report-copy-btn" onclick="copyReport()">📋 Copy Full Report</button>
+    <button class="report-close" onclick="closeReport()">Close</button>
+  </div>
+</div>
+
 <!-- TAB SWITCHING -->
 <script>
 function switchTab(name) {
@@ -389,7 +418,7 @@ window.checkAdmin = async function() {
   }
 };
 
-// ── REGISTRATIONS (pending only) ──
+// -- REGISTRATIONS (pending only) --
 window.loadRegistrations = async function() {
   const el = document.getElementById('reg-list');
   el.innerHTML = '<div class="loading">Loading...</div>';
@@ -397,14 +426,11 @@ window.loadRegistrations = async function() {
     const snap = await getDocs(
       query(collection(db, 'registrations'), orderBy('submittedAt', 'desc'))
     );
-
     const pending = [];
     snap.forEach(d => {
       const r = d.data();
       if (r.status === 'pending') pending.push({id: d.id, ...r});
     });
-
-    // Update badge
     const badge = document.getElementById('pending-count');
     if (pending.length > 0) {
       badge.textContent = pending.length;
@@ -412,12 +438,10 @@ window.loadRegistrations = async function() {
     } else {
       badge.style.display = 'none';
     }
-
     if (pending.length === 0) {
       el.innerHTML = '<div class="empty">No pending requests. All caught up!</div>';
       return;
     }
-
     let html = '<table class="reg-table"><thead><tr><th>Name</th><th>Email</th><th>Phone</th><th>Level</th><th>Batch</th><th>Requested</th><th>Action</th></tr></thead><tbody>';
     pending.forEach(r => {
       const date = r.submittedAt ? new Date(r.submittedAt.seconds * 1000).toLocaleDateString('en-IN') : '--';
@@ -439,7 +463,7 @@ window.loadRegistrations = async function() {
   }
 };
 
-// ── STUDENTS ──
+// -- STUDENTS --
 window.loadStudents = async function() {
   const el = document.getElementById('student-list');
   el.innerHTML = '<div class="loading">Loading...</div>';
@@ -471,7 +495,7 @@ window.loadStudents = async function() {
   }
 };
 
-// ── PROGRESS ──
+// -- PROGRESS --
 const KAPITEL_KEYS = ['a1k1','a1k2','a1k3','a1k4','a1k5','b1k1'];
 const KAPITEL_LABELS = {'a1k1':'A1-K1','a1k2':'A1-K2','a1k3':'A1-K3','a1k4':'A1-K4','a1k5':'A1-K5','b1k1':'B1-K1'};
 
@@ -480,77 +504,68 @@ window.loadProgress = async function() {
   const statsEl = document.getElementById('progress-stats');
   el.innerHTML = '<div class="loading">Loading progress...</div>';
   statsEl.innerHTML = '';
-
   try {
     const snap = await getDocs(collection(db, 'students'));
-    if (snap.empty) {
-      el.innerHTML = '<div class="empty">No students yet.</div>';
-      return;
-    }
-
-    const students = [];
-    let totalActive = 0;
-    let totalScores = 0;
-    let scoreCount = 0;
-
+    if (snap.empty) { el.innerHTML = '<div class="empty">No students yet.</div>'; return; }
+    const groups = {};
+    let totalActive = 0, totalScores = 0, scoreCount = 0;
     snap.forEach(d => {
       const s = d.data();
       const scores = s.scores || {};
-      const attempted = KAPITEL_KEYS.filter(k => scores[k] > 0);
-      if (attempted.length > 0) totalActive++;
-      KAPITEL_KEYS.forEach(k => {
-        if (scores[k] > 0) { totalScores += scores[k]; scoreCount++; }
-      });
-      students.push({id: d.id, name: s.name, email: s.email, scores});
+      const primaryLevel = (s.levels && s.levels[0]) || s.level || 'A1';
+      if (!groups[primaryLevel]) groups[primaryLevel] = [];
+      if (KAPITEL_KEYS.filter(k => scores[k] > 0).length > 0) totalActive++;
+      KAPITEL_KEYS.forEach(k => { if (scores[k] > 0) { totalScores += scores[k]; scoreCount++; } });
+      groups[primaryLevel].push({id: d.id, name: s.name, email: s.email, scores});
     });
-
-    // Sort by name
-    students.sort((a,b) => a.name.localeCompare(b.name));
-
-    // Stats row
+    const totalStudents = snap.size;
     const avgScore = scoreCount > 0 ? Math.round(totalScores / scoreCount) : 0;
     statsEl.innerHTML = `
-      <div class="stat-box"><div class="stat-n">${students.length}</div><div class="stat-l">Total Students</div></div>
+      <div class="stat-box"><div class="stat-n">${totalStudents}</div><div class="stat-l">Total Students</div></div>
       <div class="stat-box"><div class="stat-n">${totalActive}</div><div class="stat-l">Practiced</div></div>
       <div class="stat-box"><div class="stat-n">${scoreCount}</div><div class="stat-l">Total Attempts</div></div>
       <div class="stat-box"><div class="stat-n">${avgScore}</div><div class="stat-l">Avg Score</div></div>
     `;
-
-    // Table
-    let html = '<table class="progress-table"><thead><tr><th>Student</th>';
-    KAPITEL_KEYS.forEach(k => { html += `<th>${KAPITEL_LABELS[k]}</th>`; });
-    html += '<th>Best</th></tr></thead><tbody>';
-
-    students.forEach(s => {
-      let best = 0;
-      let scoreHtml = '';
-      KAPITEL_KEYS.forEach(k => {
-        const sc = s.scores[k] || 0;
-        if (sc > best) best = sc;
-        if (sc === 0) {
-          scoreHtml += '<td><span class="score-none">--</span></td>';
-        } else {
-          const cls = sc >= 900 ? 'score-high' : sc >= 600 ? 'score-mid' : 'score-low';
-          scoreHtml += `<td><span class="score-pill ${cls}">${sc}</span></td>`;
-        }
+    const KAPITEL_MAX = {'a1k1':1200,'a1k2':1200,'a1k3':1200,'a1k4':1200,'a1k5':1200,'b1k1':1210};
+    const LEVEL_KAPITEL = {
+      'A1':['a1k1','a1k2','a1k3','a1k4','a1k5'],
+      'A2':['a1k1','a1k2','a1k3','a1k4','a1k5'],
+      'B1':['a1k1','a1k2','a1k3','a1k4','a1k5','b1k1'],
+      'B2':['a1k1','a1k2','a1k3','a1k4','a1k5','b1k1'],
+      'C2':['a1k1','a1k2','a1k3','a1k4','a1k5','b1k1'],
+    };
+    const LEVEL_ORDER = ['A1','A2','B1','B2','C2'];
+    let html = '';
+    LEVEL_ORDER.forEach(level => {
+      if (!groups[level] || groups[level].length === 0) return;
+      const students = groups[level].sort((a,b) => a.name.localeCompare(b.name));
+      const cols = LEVEL_KAPITEL[level] || KAPITEL_KEYS;
+      html += `<div class="level-group"><div class="level-group-header"><span class="level-group-title">${level} Students</span><span class="level-group-count">${students.length} student${students.length > 1 ? 's' : ''}</span></div><div class="table-scroll" style="margin-bottom:20px;"><table class="progress-table"><thead><tr><th>Student</th>`;
+      cols.forEach(k => { html += `<th>${KAPITEL_LABELS[k] || k}</th>`; });
+      html += `<th>Best %</th><th>Report</th></tr></thead><tbody>`;
+      students.forEach(s => {
+        let bestPct = 0, scoreHtml = '';
+        cols.forEach(k => {
+          const sc = s.scores[k] || 0;
+          const maxPts = KAPITEL_MAX[k] || 1200;
+          const pct = sc > 0 ? Math.round(sc / maxPts * 100) : 0;
+          if (pct > bestPct) bestPct = pct;
+          if (sc === 0) { scoreHtml += '<td><span class="score-none">--</span></td>'; }
+          else { const cls = pct >= 75 ? 'score-high' : pct >= 50 ? 'score-mid' : 'score-low'; scoreHtml += `<td><span class="score-pill ${cls}">${pct}%</span><div style="font-size:.6rem;color:var(--muted);text-align:center;margin-top:1px;">${sc} pts</div></td>`; }
+        });
+        const bestCls = bestPct >= 75 ? 'score-high' : bestPct >= 50 ? 'score-mid' : bestPct > 0 ? 'score-low' : '';
+        const bestHtml = bestPct > 0 ? `<span class="score-pill ${bestCls}">${bestPct}%</span>` : '<span class="score-none">--</span>';
+        html += `<tr><td><strong>${s.name}</strong><div style="font-size:.65rem;color:var(--muted);margin-top:2px;">${s.email || ''}</div></td>${scoreHtml}<td>${bestHtml}</td><td><button class="btn-report" onclick="showReport(${JSON.stringify(s.name)},${JSON.stringify(s.email||'')},${JSON.stringify(s.scores)},${JSON.stringify(cols)})">📋 Report</button></td></tr>`;
       });
-      const bestCls = best >= 900 ? 'score-high' : best >= 600 ? 'score-mid' : best > 0 ? 'score-low' : '';
-      const bestHtml = best > 0 ? `<span class="score-pill ${bestCls}">${best}</span>` : '<span class="score-none">--</span>';
-      html += `<tr>
-        <td><strong>${s.name}</strong><div style="font-size:.65rem;color:var(--muted);margin-top:2px;">${s.email || ''}</div></td>
-        ${scoreHtml}
-        <td>${bestHtml}</td>
-      </tr>`;
+      html += `</tbody></table></div></div>`;
     });
-
-    html += '</tbody></table>';
-    el.innerHTML = html;
+    el.innerHTML = html || '<div class="empty">No students yet.</div>';
   } catch(e) {
     el.innerHTML = '<div class="empty" style="color:red;">Error: ' + e.message + '</div>';
   }
 };
 
-// ── ADD STUDENT ──
+// -- ADD STUDENT --
 window.addStudent = async function() {
   const name  = document.getElementById('new-name').value.trim();
   const email = document.getElementById('new-email').value.trim().toLowerCase();
@@ -558,24 +573,13 @@ window.addStudent = async function() {
   const levelRaw = document.getElementById('new-level').value.trim().toUpperCase() || 'A1';
   const levels = levelRaw.split(',').map(l => l.trim()).filter(Boolean);
   const msg   = document.getElementById('add-msg');
-
-  if (!name || !email || !pass) {
-    msg.className = 'msg err';
-    msg.textContent = 'Please fill in name, email and password.';
-    return;
-  }
-
+  if (!name || !email || !pass) { msg.className = 'msg err'; msg.textContent = 'Please fill in name, email and password.'; return; }
   document.getElementById('add-btn').disabled = true;
-  msg.className = 'msg';
-  msg.textContent = 'Adding...';
-
+  msg.className = 'msg'; msg.textContent = 'Adding...';
   try {
     const passHash = await sha256(pass);
     const emailId  = await sha256(email);
-    await setDoc(doc(db, 'students', emailId), {
-      name, email, password: passHash, levels,
-      createdAt: serverTimestamp()
-    });
+    await setDoc(doc(db, 'students', emailId), { name, email, password: passHash, levels, createdAt: serverTimestamp() });
     msg.className = 'msg ok';
     msg.textContent = 'Student "' + name + '" added! Levels: ' + levels.join(', ');
     document.getElementById('new-name').value = '';
@@ -583,42 +587,27 @@ window.addStudent = async function() {
     document.getElementById('new-pass').value = '';
     document.getElementById('new-level').value = '';
     loadStudents();
-  } catch(e) {
-    msg.className = 'msg err';
-    msg.textContent = 'Error: ' + e.message;
-  }
+  } catch(e) { msg.className = 'msg err'; msg.textContent = 'Error: ' + e.message; }
   document.getElementById('add-btn').disabled = false;
 };
 
-// ── DELETE ──
+// -- DELETE --
 window.deleteStudent = async function(id, name) {
   const btn = document.querySelector(`[data-del-id="${id}"]`);
   if (btn && btn.dataset.confirming !== 'yes') {
-    btn.dataset.confirming = 'yes';
-    btn.textContent = 'Sure?';
-    btn.style.background = '#dc2626';
-    btn.style.color = '#fff';
-    setTimeout(() => {
-      btn.dataset.confirming = '';
-      btn.textContent = 'Delete';
-      btn.style.background = '';
-      btn.style.color = '';
-    }, 3000);
+    btn.dataset.confirming = 'yes'; btn.textContent = 'Sure?'; btn.style.background = '#dc2626'; btn.style.color = '#fff';
+    setTimeout(() => { btn.dataset.confirming = ''; btn.textContent = 'Delete'; btn.style.background = ''; btn.style.color = ''; }, 3000);
     return;
   }
   try {
     if (btn) { btn.disabled = true; btn.textContent = '...'; }
     await deleteDoc(doc(db, 'students', id));
     loadStudents();
-  } catch(e) {
-    alert('Delete error: ' + e.message);
-    if (btn) { btn.disabled = false; btn.textContent = 'Delete'; }
-  }
+  } catch(e) { alert('Delete error: ' + e.message); if (btn) { btn.disabled = false; btn.textContent = 'Delete'; } }
 };
 
-// ── LEVEL PICKER ──
+// -- LEVEL PICKER --
 let _lvlStudentId = null;
-
 window.changeLevel = function(id, name, currentLevels) {
   _lvlStudentId = id;
   const selected = typeof currentLevels === 'string' ? currentLevels.split(',').filter(Boolean) : (Array.isArray(currentLevels) ? currentLevels : ['A1']);
@@ -629,12 +618,7 @@ window.changeLevel = function(id, name, currentLevels) {
   ).join('');
   document.getElementById('lvl-modal-bg').classList.add('open');
 };
-
-window.closeLvlModal = function() {
-  document.getElementById('lvl-modal-bg').classList.remove('open');
-  _lvlStudentId = null;
-};
-
+window.closeLvlModal = function() { document.getElementById('lvl-modal-bg').classList.remove('open'); _lvlStudentId = null; };
 window.saveLevels = async function() {
   if (!_lvlStudentId) return;
   const newLevels = Array.from(document.querySelectorAll('.lvl-toggle.selected')).map(b => b.dataset.lvl);
@@ -643,15 +627,11 @@ window.saveLevels = async function() {
   saveBtn.disabled = true; saveBtn.textContent = 'Saving...';
   try {
     await updateDoc(doc(db, 'students', _lvlStudentId), { levels: newLevels });
-    closeLvlModal();
-    loadStudents();
-  } catch(e) {
-    saveBtn.disabled = false; saveBtn.textContent = 'Save Levels';
-    alert('Error: ' + e.message);
-  }
+    closeLvlModal(); loadStudents();
+  } catch(e) { saveBtn.disabled = false; saveBtn.textContent = 'Save Levels'; alert('Error: ' + e.message); }
 };
 
-// ── ACTIVITY ──
+// -- ACTIVITY --
 window.viewActivity = async function(id, name, code) {
   document.getElementById('modal-title').textContent = name;
   document.getElementById('modal-code').textContent = code;
@@ -660,10 +640,7 @@ window.viewActivity = async function(id, name, code) {
   try {
     const q = query(collection(db, 'students', id, 'activity'), orderBy('timestamp', 'desc'), limit(50));
     const snap = await getDocs(q);
-    if (snap.empty) {
-      document.getElementById('modal-body').innerHTML = '<div class="empty">No activity yet.</div>';
-      return;
-    }
+    if (snap.empty) { document.getElementById('modal-body').innerHTML = '<div class="empty">No activity yet.</div>'; return; }
     let html = '';
     snap.forEach(d => {
       const a = d.data();
@@ -672,14 +649,11 @@ window.viewActivity = async function(id, name, code) {
       html += `<div class="modal-entry"><span class="modal-type">${label}</span><span class="modal-time">${time}</span></div>`;
     });
     document.getElementById('modal-body').innerHTML = html;
-  } catch(e) {
-    document.getElementById('modal-body').innerHTML = '<div class="empty" style="color:red;">Error: ' + e.message + '</div>';
-  }
+  } catch(e) { document.getElementById('modal-body').innerHTML = '<div class="empty" style="color:red;">Error: ' + e.message + '</div>'; }
 };
-
 window.closeModal = function() { document.getElementById('modal-bg').classList.remove('open'); };
 
-// ── AKTIVIEREN ──
+// -- AKTIVIEREN --
 function genPassword() {
   const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZabcdefghjkmnpqrstuvwxyz23456789';
   let p = 'DM';
@@ -689,28 +663,20 @@ function genPassword() {
 
 window.aktivieren = async function(btn) {
   const regId = btn.dataset.regId;
-  btn.disabled = true;
-  btn.textContent = '...';
+  btn.disabled = true; btn.textContent = '...';
   try {
     const regDoc = await getDoc(doc(db, 'registrations', regId));
     if (!regDoc.exists()) { alert('Registration not found.'); btn.disabled = false; btn.textContent = 'Aktivieren'; return; }
     const r = regDoc.data();
-
     const tempPass = genPassword();
     const passHash = await sha256(tempPass);
     const emailId  = await sha256((r.email || '').toLowerCase());
-
     await setDoc(doc(db, 'students', emailId), {
       name: r.name, email: (r.email || '').toLowerCase(), password: passHash,
       levels: [r.level || 'A1'], phone: r.phone || '', batchTime: r.batchTime || '', batchDate: r.batchDate || '',
       createdAt: serverTimestamp()
     });
-
-    await updateDoc(doc(db, 'registrations', regId), {
-      status: 'activated',
-      activatedAt: serverTimestamp()
-    });
-
+    await updateDoc(doc(db, 'registrations', regId), { status: 'activated', activatedAt: serverTimestamp() });
     const msg = `Hi ${r.name || 'there'}! 👋
 
 Your Deutsch Meistern account is ready. Here are your login details:
@@ -727,32 +693,17 @@ If you ever forget your password, contact your teacher and they will reset it fo
 Viel Erfolg! 🇩🇪`;
     document.getElementById('cred-msg').textContent = msg;
     document.getElementById('cred-bg').classList.add('open');
-
-    loadRegistrations();
-    loadStudents();
-  } catch(e) {
-    alert('Error activating: ' + e.message);
-    btn.disabled = false;
-    btn.textContent = 'Aktivieren';
-  }
+    loadRegistrations(); loadStudents();
+  } catch(e) { alert('Error activating: ' + e.message); btn.disabled = false; btn.textContent = 'Aktivieren'; }
 };
-
 window.closeCred = function() { document.getElementById('cred-bg').classList.remove('open'); };
 
-// ── RESET PASSWORD ──
+// -- RESET PASSWORD --
 window.resetPassword = async function(id, name, email) {
   const btn = document.querySelector(`[data-rst-id="${id}"]`);
   if (btn && btn.dataset.confirming !== 'yes') {
-    btn.dataset.confirming = 'yes';
-    btn.textContent = 'Sure?';
-    btn.style.background = '#fed7aa';
-    setTimeout(() => {
-      if (btn.dataset.confirming === 'yes') {
-        btn.dataset.confirming = '';
-        btn.textContent = 'Reset PW';
-        btn.style.background = '';
-      }
-    }, 3000);
+    btn.dataset.confirming = 'yes'; btn.textContent = 'Sure?'; btn.style.background = '#fed7aa';
+    setTimeout(() => { if (btn.dataset.confirming === 'yes') { btn.dataset.confirming = ''; btn.textContent = 'Reset PW'; btn.style.background = ''; } }, 3000);
     return;
   }
   if (btn) { btn.disabled = true; btn.textContent = '...'; }
@@ -764,14 +715,67 @@ window.resetPassword = async function(id, name, email) {
     document.getElementById('reset-email-val').textContent = email;
     document.getElementById('reset-pass-val').textContent = newPass;
     document.getElementById('reset-bg').classList.add('open');
-  } catch(e) {
-    alert('Error resetting password: ' + e.message);
-  }
+  } catch(e) { alert('Error resetting password: ' + e.message); }
   if (btn) { btn.disabled = false; btn.textContent = 'Reset PW'; btn.dataset.confirming = ''; btn.style.background = ''; }
 };
-
 window.closeReset = function() { document.getElementById('reset-bg').classList.remove('open'); };
 
+// -- STUDENT REPORT --
+const REPORT_KAPITEL_MAX = {'a1k1':1200,'a1k2':1200,'a1k3':1200,'a1k4':1200,'a1k5':1200,'b1k1':1210};
+const REPORT_KAPITEL_NAMES = {
+  'a1k1':'A1 Kapitel 1 (Begrüßung & Zahlen)',
+  'a1k2':'A1 Kapitel 2 (Familie & Wohnen)',
+  'a1k3':'A1 Kapitel 3 (Essen & Einkaufen)',
+  'a1k4':'A1 Kapitel 4 (Stadt & Verkehr)',
+  'a1k5':'A1 Kapitel 5 (Alltag & Familie)',
+  'b1k1':'B1 Kapitel 1 (Gesellschaft & Kultur)'
+};
+
+window.showReport = function(name, email, scores, cols) {
+  const now = new Date().toLocaleDateString('en-IN', {day:'numeric', month:'long', year:'numeric'});
+  let attempted = 0, totalPct = 0, lines = '';
+  cols.forEach(k => {
+    const sc = scores[k] || 0;
+    const max = REPORT_KAPITEL_MAX[k] || 1200;
+    const pct = sc > 0 ? Math.round(sc / max * 100) : 0;
+    const kapName = REPORT_KAPITEL_NAMES[k] || k;
+    if (sc > 0) {
+      attempted++; totalPct += pct;
+      const star = pct >= 75 ? '✅' : pct >= 50 ? '📈' : '⚠️';
+      lines += `${star} ${kapName}\n   Score: ${sc}/${max} pts → ${pct}%\n\n`;
+    } else {
+      lines += `⬜ ${kapName}\n   Not attempted yet\n\n`;
+    }
+  });
+  const avgPct = attempted > 0 ? Math.round(totalPct / attempted) : 0;
+  const overall = avgPct >= 75 ? 'Excellent work! 🌟' : avgPct >= 50 ? 'Good progress! Keep going! 💪' : 'Keep practicing, you can do it! 📚';
+  const msg =
+`📊 Progress Report — ${name}
+Date: ${now}
+━━━━━━━━━━━━━━━━━━━━━━
+
+${lines}━━━━━━━━━━━━━━━━━━━━━━
+Chapters attempted: ${attempted}/${cols.length}
+Average score: ${avgPct}%
+
+${overall}
+
+🇩🇪 Deutsch Meistern
+Practice daily at: https://deutschwithanshuka.github.io`;
+  document.getElementById('report-msg').textContent = msg;
+  document.getElementById('report-bg').classList.add('open');
+  const btn = document.getElementById('report-copy-btn');
+  btn.textContent = '📋 Copy Full Report'; btn.style.background = '';
+};
+window.closeReport = function() { document.getElementById('report-bg').classList.remove('open'); };
+window.copyReport = function() {
+  const text = document.getElementById('report-msg').textContent;
+  navigator.clipboard.writeText(text).then(() => {
+    const btn = document.getElementById('report-copy-btn');
+    btn.textContent = '✅ Copied! Ready to send.'; btn.style.background = '#0f766e';
+    setTimeout(() => { btn.textContent = '📋 Copy Full Report'; btn.style.background = ''; }, 2500);
+  });
+};
 window.copyResetText = function(elId) {
   const text = document.getElementById(elId).textContent;
   navigator.clipboard.writeText(text).then(() => {
@@ -779,7 +783,6 @@ window.copyResetText = function(elId) {
     if (btn) { btn.textContent = 'Copied!'; setTimeout(() => { btn.textContent = elId === 'reset-email-val' ? 'Copy Email' : 'Copy Password'; }, 1500); }
   });
 };
-
 window.copyCredMsg = function() {
   const text = document.getElementById('cred-msg').textContent;
   navigator.clipboard.writeText(text).then(() => {

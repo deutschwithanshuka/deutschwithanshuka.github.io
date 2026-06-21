@@ -1319,7 +1319,7 @@ function generateCard(){
   document.getElementById('sr-card').classList.remove('hidden');
   const sid=localStorage.getItem('dm_student_id');
   if(sid&&window.saveKapitelScore){window.saveKapitelScore(sid,'b1k1',score);}
-  else{const f=document.getElementById('sr-footer');if(f)f.innerHTML='<span style="color:var(--red);font-weight:800;">Log in to save your score to your profile!</span><br>Platform: <strong>Deutsch Meistern</strong>';}
+  else{const f=document.querySelector('.sr-footer');if(f)f.innerHTML='<span style="color:var(--red);font-weight:800;">Log in to save your score to your profile!</span><br>Platform: <strong>Deutsch Meistern</strong>';}
 }
 function closeCard(){
   document.getElementById('sc-overlay').classList.add('hidden');

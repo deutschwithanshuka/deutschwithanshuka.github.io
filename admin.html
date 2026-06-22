@@ -590,16 +590,18 @@ window.loadProgress = async function() {
       html += `<div class="level-panel${i===0?' active':''}" id="lp-${level}">`;
       html += `<div class="table-scroll" style="margin-bottom:20px;"><table class="progress-table"><thead><tr><th>Student</th>`;
       cols.forEach(k => { html += `<th>${KAPITEL_LABELS[k] || k}</th>`; });
-      html += `<th>Best %</th><th>Report</th></tr></thead><tbody>`;
+      html += `<th>Best %</th><th>Avg %</th><th>Report</th></tr></thead><tbody>`;
 
       students.forEach(s => {
         let bestPct = 0;
         let scoreHtml = '';
+        let attemptedPcts = [];
         cols.forEach(k => {
           const sc = s.scores[k] || 0;
           const maxPts = KAPITEL_MAX[k] || 1200;
           const pct = sc > 0 ? Math.min(100, Math.round(sc / maxPts * 100)) : 0;
           if (pct > bestPct) bestPct = pct;
+          if (pct > 0) attemptedPcts.push(pct);
           if (sc === 0) {
             scoreHtml += '<td><span class="score-none">--</span></td>';
           } else {
@@ -610,12 +612,16 @@ window.loadProgress = async function() {
         });
         const bestCls = bestPct >= 75 ? 'score-high' : bestPct >= 50 ? 'score-mid' : bestPct > 0 ? 'score-low' : '';
         const bestHtml = bestPct > 0 ? `<span class="score-pill ${bestCls}">${bestPct}%</span>` : '<span class="score-none">--</span>';
+        const avgPct = attemptedPcts.length > 0 ? Math.round(attemptedPcts.reduce((a,b)=>a+b,0) / attemptedPcts.length) : 0;
+        const avgCls = avgPct >= 75 ? 'score-high' : avgPct >= 50 ? 'score-mid' : avgPct > 0 ? 'score-low' : '';
+        const avgHtml = avgPct > 0 ? `<span class="score-pill ${avgCls}">${avgPct}%</span><div style="font-size:.6rem;color:var(--muted);text-align:center;margin-top:1px;">${attemptedPcts.length}/${cols.length} done</div>` : '<span class="score-none">--</span>';
         const rKey = 'r' + (++window._rIdx);
         window._reportCache[rKey] = {name: s.name, email: s.email||'', scores: s.scores, cols};
         html += `<tr>
           <td><strong>${s.name}</strong><div style="font-size:.65rem;color:var(--muted);margin-top:2px;">${s.email || ''}</div></td>
           ${scoreHtml}
           <td>${bestHtml}</td>
+          <td>${avgHtml}</td>
           <td><button class="btn-report" onclick="showReportByKey('${rKey}')">📋 Report</button></td>
         </tr>`;
       });

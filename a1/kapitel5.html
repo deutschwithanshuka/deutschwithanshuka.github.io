@@ -1,0 +1,1314 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Deutsch Meistern · A1 Kapitel 5</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f4f6ff;--white:#fff;--navy:#0f1f6f;
+  --blue:#2563eb;--blue2:#60a5fa;--purple:#7c3aed;
+  --green:#16a34a;--red:#dc2626;--yellow:#d97706;--teal:#0f766e;
+  --orange:#ea580c;
+  --text:#1a1a3e;--muted:#5a6a8a;--border:#c7d2fe;
+  --sh:0 2px 14px rgba(37,99,235,.09);
+  --r:18px;--r2:12px;
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+html{scroll-behavior:smooth;font-size:17px;}
+body{background:var(--bg);color:var(--text);font-family:'Nunito',sans-serif;overflow-x:hidden;line-height:1.6;}
+nav{position:sticky;top:0;z-index:999;background:rgba(255,255,255,.98);backdrop-filter:blur(12px);border-bottom:2px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:12px 16px;}
+.nav-left{display:flex;align-items:center;gap:10px;}
+.nav-icon{width:34px;height:34px;border-radius:8px;background:#1a1a1a;display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0;}
+.nav-title{font-size:1rem;font-weight:900;color:var(--navy);}
+.nav-sub{font-size:.68rem;color:var(--muted);font-weight:700;display:block;margin-top:-1px;}
+.score-pill{background:linear-gradient(135deg,#f59e0b,#ef4444);color:#fff;border-radius:50px;padding:6px 15px;font-weight:900;font-size:.82rem;white-space:nowrap;}
+.bnav{position:fixed;bottom:0;left:0;right:0;z-index:999;background:rgba(255,255,255,.98);backdrop-filter:blur(10px);border-top:2px solid var(--border);display:flex;}
+.bn{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:9px 2px 13px;border:none;background:none;font-family:'Nunito',sans-serif;cursor:pointer;color:var(--muted);font-size:.65rem;font-weight:800;letter-spacing:.2px;gap:4px;transition:color .15s;}
+.bn-i{font-size:1.35rem;}
+.bn.active{color:var(--blue);}
+.mehr-overlay{position:fixed;inset:0;z-index:1100;background:rgba(0,0,0,.4);opacity:0;pointer-events:none;transition:opacity .25s;}
+.mehr-overlay.open{opacity:1;pointer-events:all;}
+.mehr-sheet{position:fixed;bottom:0;left:0;right:0;z-index:1101;background:#fff;border-radius:20px 20px 0 0;padding:14px 16px 36px;transform:translateY(100%);transition:transform .28s cubic-bezier(.32,0,.67,0);}
+.mehr-sheet.open{transform:translateY(0);}
+.mehr-handle{width:40px;height:4px;background:#e2e8f0;border-radius:4px;margin:0 auto 16px;}
+.mehr-title{font-size:.72rem;font-weight:900;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:12px;}
+.mehr-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;}
+.mehr-btn{display:flex;flex-direction:column;align-items:center;gap:5px;padding:12px 4px;background:#f8faff;border:1.5px solid var(--border);border-radius:12px;cursor:pointer;font-family:'Nunito',sans-serif;color:var(--navy);}
+.mehr-btn-i{font-size:1.4rem;}
+.mehr-btn-l{font-size:.62rem;font-weight:800;color:var(--muted);}
+.screen{display:none;padding:18px 16px 100px;min-height:100vh;}
+.screen.active{display:block;}
+.hero{background:linear-gradient(135deg,#1e40af,#6d28d9,#be185d);border-radius:var(--r);padding:26px 18px 28px;text-align:center;color:#fff;margin-bottom:16px;position:relative;overflow:hidden;}
+.hero::before{content:'🏠';font-size:6rem;position:absolute;top:-10px;right:-10px;opacity:.1;}
+.hero-chip{display:inline-block;background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.35);border-radius:50px;padding:3px 14px;font-size:.68rem;font-weight:800;text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;}
+.hero h1{font-size:clamp(1.8rem,6vw,2.6rem);font-weight:900;line-height:1.05;margin-bottom:6px;}
+.hero p{font-size:.9rem;opacity:.9;line-height:1.65;max-width:300px;margin:0 auto;}
+.stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px;}
+.stat-card{background:#fff;border:2px solid var(--border);border-radius:var(--r2);padding:12px;text-align:center;box-shadow:var(--sh);}
+.stat-em{font-size:1.4rem;margin-bottom:2px;}
+.stat-n{font-family:'Space Mono',monospace;font-size:1.3rem;font-weight:700;color:var(--blue);}
+.stat-l{font-size:.64rem;color:var(--muted);text-transform:uppercase;letter-spacing:.7px;font-weight:800;}
+.topic-list{display:flex;flex-direction:column;gap:8px;}
+.t-row{background:#fff;border:2px solid var(--border);border-radius:var(--r2);padding:13px 14px;display:flex;align-items:center;gap:10px;box-shadow:var(--sh);cursor:pointer;transition:transform .12s;}
+.t-row:active{transform:scale(.98);}
+.t-ico{font-size:1.3rem;flex-shrink:0;}
+.t-name{font-weight:900;color:var(--navy);font-size:.96rem;}
+.t-sub{font-size:.78rem;color:var(--muted);font-weight:600;margin-top:1px;}
+.t-badge{background:linear-gradient(135deg,var(--blue),var(--purple));color:#fff;border-radius:50px;padding:3px 10px;font-size:.62rem;font-weight:800;flex-shrink:0;}
+.sec-h{font-size:1.05rem;font-weight:900;color:var(--navy);margin-bottom:14px;display:flex;align-items:center;gap:8px;}
+.sec-h::after{content:'';flex:1;height:2px;background:linear-gradient(90deg,var(--border),transparent);}
+.g-tabs{display:flex;gap:6px;overflow-x:auto;padding-bottom:6px;margin-bottom:14px;-ms-overflow-style:none;scrollbar-width:none;}
+.g-tabs::-webkit-scrollbar{display:none;}
+.g-tab{flex-shrink:0;padding:9px 18px;border-radius:50px;border:2px solid var(--border);background:#fff;color:var(--muted);font-family:'Nunito',sans-serif;font-size:.82rem;font-weight:800;cursor:pointer;transition:all .15s;white-space:nowrap;}
+.g-tab.active{background:linear-gradient(135deg,var(--blue),var(--purple));color:#fff;border-color:transparent;}
+.g-panel{display:none;}
+.g-panel.active{display:block;}
+.gcard{background:#fff;border:2px solid var(--border);border-radius:var(--r);padding:20px 18px;box-shadow:var(--sh);margin-bottom:14px;}
+.gcard-title{font-size:1.2rem;font-weight:900;color:var(--navy);margin-bottom:6px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+.gcard-badge{font-size:.66rem;background:linear-gradient(135deg,var(--blue),var(--purple));color:#fff;border-radius:50px;padding:3px 11px;font-weight:800;}
+.gcard-desc{font-size:.88rem;color:var(--muted);font-weight:600;margin-bottom:14px;line-height:1.65;}
+.rule-box{background:#eff6ff;border-left:4px solid var(--blue);border-radius:0 var(--r2) var(--r2) 0;padding:14px 16px;margin-bottom:12px;font-size:.9rem;font-weight:700;color:var(--navy);line-height:1.65;}
+.tip-box{background:#fef9e7;border-left:4px solid var(--yellow);border-radius:0 var(--r2) var(--r2) 0;padding:14px 16px;margin-bottom:12px;font-size:.88rem;font-weight:700;color:#78350f;line-height:1.65;}
+.warn-box{background:#fff4f4;border-left:4px solid var(--red);border-radius:0 var(--r2) var(--r2) 0;padding:14px 16px;margin-bottom:12px;font-size:.88rem;font-weight:700;color:#9f1239;line-height:1.65;}
+.section-h{font-size:.78rem;font-weight:900;color:var(--purple);text-transform:uppercase;letter-spacing:1px;margin:18px 0 10px;border-bottom:2px solid #e0e7ff;padding-bottom:6px;}
+.conj-table{width:100%;border-collapse:collapse;margin-bottom:14px;font-size:.88rem;}
+.conj-table th{background:linear-gradient(135deg,var(--blue),var(--purple));color:#fff;padding:8px 10px;font-weight:900;text-align:left;font-size:.78rem;}
+.conj-table td{padding:8px 10px;border-bottom:1px solid #e0e7ff;font-weight:700;}
+.conj-table tr:last-child td{border-bottom:none;}
+.conj-table tr:nth-child(even) td{background:#f8faff;}
+.conj-highlight{color:var(--blue);font-weight:900;}
+.struct{background:#f8faff;border:2px solid #e0e7ff;border-radius:var(--r2);padding:14px;margin-bottom:12px;}
+.struct-row{display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin-bottom:8px;}
+.struct-row:last-child{margin-bottom:0;}
+.sb{border-radius:8px;padding:7px 11px;font-size:.82rem;font-weight:800;text-align:center;}
+.sb.s1{background:#dbeafe;color:#1e40af;}
+.sb.s2{background:#fce7f3;color:#9d174d;}
+.sb.s3{background:#dcfce7;color:#166534;}
+.sb.s4{background:#fef3c7;color:#92400e;}
+.sb.s5{background:#f3e8ff;color:#6b21a8;}
+.sb.slbl{background:none;color:var(--muted);font-size:.65rem;letter-spacing:.8px;text-transform:uppercase;padding-left:0;}
+.ex-grid{display:flex;flex-direction:column;gap:8px;margin-bottom:12px;}
+.ex-item{background:#f8faff;border:1px solid #e0e7ff;border-radius:10px;padding:12px 14px;font-size:.88rem;line-height:1.6;}
+.ex-de{font-weight:700;color:var(--navy);margin-bottom:2px;}
+.ex-en{color:var(--muted);font-size:.82rem;font-style:italic;margin-top:2px;}
+.ex-note{color:var(--teal);font-size:.78rem;font-weight:700;margin-top:3px;}
+.dialog-card{background:#fff;border:2px solid var(--border);border-radius:var(--r);padding:18px;margin-bottom:12px;box-shadow:var(--sh);}
+.dialog-title{font-size:.9rem;font-weight:900;color:var(--navy);margin-bottom:12px;display:flex;align-items:center;gap:8px;}
+.d-bubble{display:flex;gap:8px;margin-bottom:8px;align-items:flex-start;}
+.d-bubble:last-child{margin-bottom:0;}
+.d-speaker{font-size:.7rem;font-weight:900;color:#fff;border-radius:50px;padding:3px 10px;white-space:nowrap;flex-shrink:0;margin-top:2px;}
+.sp-a{background:linear-gradient(135deg,var(--blue),var(--purple));}
+.sp-b{background:linear-gradient(135deg,var(--green),var(--teal));}
+.d-text{font-size:.88rem;font-weight:700;color:var(--navy);background:#f8faff;border-radius:10px;padding:8px 12px;line-height:1.5;flex:1;}
+.ex-tabs{display:flex;gap:6px;margin-bottom:14px;}
+.ex-tab{flex:1;padding:10px 4px;border-radius:50px;border:2px solid var(--border);background:#fff;color:var(--muted);font-family:'Nunito',sans-serif;font-size:.8rem;font-weight:800;cursor:pointer;transition:all .15s;text-align:center;}
+.ex-tab.active{background:linear-gradient(135deg,var(--blue),var(--purple));color:#fff;border-color:transparent;}
+.ex-panel{display:none;}
+.ex-panel.active{display:block;}
+.qcard{background:#fff;border:2px solid var(--border);border-radius:var(--r);padding:22px 18px;margin-bottom:20px;box-shadow:var(--sh);}
+.q-meta{display:flex;align-items:center;gap:7px;margin-bottom:10px;flex-wrap:wrap;}
+.q-num{font-family:'Space Mono',monospace;font-size:.72rem;font-weight:700;background:#e0e7ff;color:var(--blue);border-radius:5px;padding:3px 8px;}
+.q-type{font-size:.66rem;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;}
+.q-status{margin-left:auto;font-size:1rem;}
+.q-text{font-weight:700;font-size:.95rem;color:var(--navy);margin-bottom:12px;line-height:1.6;}
+.passage{background:#f8faff;border:1px solid #e0e7ff;border-radius:10px;padding:14px 16px;font-size:.86rem;line-height:1.7;color:var(--text);margin-bottom:10px;}
+.opts{display:flex;flex-direction:column;gap:12px;}
+.opt{width:100%;padding:14px 16px;border-radius:11px;border:2px solid var(--border);background:#f8faff;font-family:'Nunito',sans-serif;font-size:.9rem;font-weight:700;color:var(--text);cursor:pointer;text-align:left;transition:all .15s;}
+.opt.correct{border-color:var(--green);background:#dcfce7;color:var(--green);}
+.opt.wrong{border-color:var(--red);background:#fff1f2;color:var(--red);}
+.opt.disabled{cursor:default;}
+.word-bank{display:flex;flex-wrap:wrap;gap:7px;margin-top:10px;}
+.wchip{padding:9px 14px;border-radius:10px;border:2px solid var(--border);background:#f8faff;font-family:'Nunito',sans-serif;font-size:.88rem;font-weight:700;cursor:pointer;transition:all .15s;color:var(--navy);}
+.wchip.used{opacity:.3;cursor:default;}
+.ans-area{min-height:46px;background:#eff6ff;border:2px dashed var(--blue2);border-radius:11px;padding:10px 14px;font-size:.9rem;font-weight:700;color:var(--navy);margin:10px 0;line-height:1.6;}
+.hint-t{font-size:.82rem;color:var(--muted);font-weight:600;margin-bottom:6px;}
+.inline-inp{border:none;border-bottom:2.5px solid var(--blue);background:transparent;font-family:'Nunito',sans-serif;font-size:.95rem;font-weight:700;color:var(--navy);padding:3px 5px;width:120px;outline:none;}
+.inline-inp.correct{border-color:var(--green);color:var(--green);}
+.inline-inp.wrong{border-color:var(--red);color:var(--red);}
+.fb{font-size:.85rem;font-weight:700;min-height:0;margin-top:8px;line-height:1.5;}
+.fb.ok{color:var(--green);}
+.fb.err{color:var(--red);}
+.q-actions{display:flex;gap:8px;margin-top:10px;}
+.btn-check{background:linear-gradient(135deg,var(--blue),var(--purple));color:#fff;border:none;border-radius:10px;padding:10px 20px;font-family:'Nunito',sans-serif;font-size:.86rem;font-weight:800;cursor:pointer;}
+.btn-reset{background:#f1f5f9;color:var(--muted);border:2px solid var(--border);border-radius:10px;padding:10px 14px;font-family:'Nunito',sans-serif;font-size:.86rem;font-weight:800;cursor:pointer;}
+.search-wrap{position:relative;margin-bottom:12px;}
+.search-inp{width:100%;padding:12px 16px 12px 42px;border-radius:50px;border:2px solid var(--border);background:#fff;font-family:'Nunito',sans-serif;font-size:.92rem;font-weight:700;color:var(--navy);outline:none;}
+.search-inp:focus{border-color:var(--blue);}
+.search-icon{position:absolute;left:14px;top:50%;transform:translateY(-50%);font-size:.95rem;color:var(--muted);}
+.vocab-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-bottom:10px;}
+@media(min-width:500px){.vocab-grid{grid-template-columns:repeat(3,1fr);}}
+.vword{background:#f8faff;border:1px solid #e0e7ff;border-radius:10px;padding:11px 12px;cursor:pointer;transition:border-color .15s;}
+.vword.open{border-color:var(--blue);background:#eff6ff;}
+.vw-top{display:flex;align-items:center;gap:7px;}
+.vw-art{font-size:.64rem;font-weight:900;border-radius:4px;padding:2px 6px;}
+.art-m{background:#dbeafe;color:#1e40af;}
+.art-f{background:#fce7f3;color:#9d174d;}
+.art-n{background:#dcfce7;color:#166534;}
+.art-v{background:#f3e8ff;color:#6b21a8;}
+.art-adj{background:#ffedd5;color:#9a3412;}
+.art-ph{background:#fef3c7;color:#92400e;}
+.vw-word{font-weight:900;color:var(--navy);font-size:.9rem;}
+.vw-details{display:none;margin-top:8px;border-top:1px solid #e0e7ff;padding-top:8px;}
+.vword.open .vw-details{display:block;}
+.vw-en{font-weight:700;color:var(--green);font-size:.86rem;}
+.vw-ex{font-size:.8rem;color:var(--muted);font-style:italic;margin-top:4px;line-height:1.5;}
+.lb-header{background:linear-gradient(135deg,#1e40af,#6d28d9);border-radius:var(--r);padding:20px 16px;text-align:center;color:#fff;margin-bottom:14px;}
+.podium{display:flex;align-items:flex-end;justify-content:center;gap:8px;margin-bottom:16px;height:130px;}
+.pod{display:flex;flex-direction:column;align-items:center;justify-content:flex-end;border-radius:var(--r2) var(--r2) 0 0;}
+.pod-1{width:90px;height:110px;background:linear-gradient(135deg,#f59e0b,#d97706);}
+.pod-2{width:78px;height:85px;background:linear-gradient(135deg,#94a3b8,#64748b);}
+.pod-3{width:70px;height:65px;background:linear-gradient(135deg,#b45309,#92400e);}
+.pod-inner{padding:6px 4px 8px;text-align:center;color:#fff;}
+.pod-rank{font-size:1.2rem;}
+.pod-name{font-size:.65rem;font-weight:900;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:80px;}
+.pod-pts{font-family:'Space Mono',monospace;font-size:.7rem;font-weight:700;}
+.lb-row{background:#fff;border:2px solid var(--border);border-radius:var(--r2);padding:10px 12px;display:flex;align-items:center;gap:10px;margin-bottom:7px;box-shadow:var(--sh);}
+.lb-rank{font-family:'Space Mono',monospace;font-size:.75rem;font-weight:700;color:var(--muted);width:22px;}
+.lb-name{flex:1;font-weight:800;color:var(--navy);font-size:.92rem;}
+.lb-pts{font-family:'Space Mono',monospace;font-size:.88rem;font-weight:700;color:var(--blue);}
+.lb-bar-wrap{width:100%;background:#e0e7ff;border-radius:50px;height:5px;margin-top:3px;}
+.lb-bar{height:5px;background:linear-gradient(90deg,var(--blue),var(--purple));border-radius:50px;}
+.lb-you{border-color:var(--blue);background:#eff6ff;}
+.wb-filter{padding:7px 14px;border-radius:50px;border:2px solid var(--border);background:#fff;color:var(--muted);font-family:'Nunito',sans-serif;font-size:.78rem;font-weight:800;cursor:pointer;transition:all .15s;white-space:nowrap;}
+.wb-filter.active{background:linear-gradient(135deg,var(--blue),var(--purple));color:#fff;border-color:transparent;}
+.wb-cat-title{font-size:.78rem;font-weight:900;color:var(--purple);text-transform:uppercase;letter-spacing:1px;margin:18px 0 10px;border-bottom:2px solid #e0e7ff;padding-bottom:6px;display:flex;align-items:center;gap:6px;}
+.wb-grid{display:flex;flex-direction:column;gap:8px;margin-bottom:4px;}
+.wb-item{background:#fff;border:2px solid var(--border);border-radius:12px;overflow:hidden;box-shadow:var(--sh);cursor:pointer;}
+.wb-item.open{border-color:var(--blue);}
+.wb-head{display:flex;align-items:center;gap:10px;padding:12px 14px;}
+.wb-art-badge{font-size:.64rem;font-weight:900;border-radius:5px;padding:3px 7px;flex-shrink:0;}
+.wb-word-text{font-weight:900;color:var(--navy);font-size:.95rem;flex:1;}
+.wb-short-en{font-size:.78rem;color:var(--muted);font-weight:600;}
+.wb-arrow{font-size:.8rem;color:var(--muted);transition:transform .2s;}
+.wb-item.open .wb-arrow{transform:rotate(90deg);}
+.wb-body{display:none;padding:0 14px 14px;border-top:1px solid var(--border);}
+.wb-item.open .wb-body{display:block;}
+.wb-en-full{font-size:.88rem;font-weight:700;color:var(--green);margin-bottom:6px;padding-top:10px;}
+.wb-ex-sent{font-size:.82rem;color:var(--muted);font-style:italic;line-height:1.6;margin-bottom:4px;}
+.wb-extra{font-size:.78rem;color:var(--teal);font-weight:700;}
+.float-score{position:fixed;bottom:72px;right:14px;z-index:900;background:linear-gradient(135deg,#f59e0b,#ef4444);color:#fff;border-radius:50px;padding:8px 14px;font-weight:900;font-size:.8rem;box-shadow:0 4px 20px rgba(239,68,68,.4);}
+.conf-piece{position:fixed;width:8px;height:8px;border-radius:2px;z-index:9999;pointer-events:none;animation:fall 1.2s ease-in forwards;}
+@keyframes fall{0%{transform:translateY(-20px) rotate(0);opacity:1;}100%{transform:translateY(100vh) rotate(720deg);opacity:0;}}
+.sc-overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:2000;display:flex;align-items:center;justify-content:center;padding:20px;overflow-y:auto;}
+.sc-overlay.hidden{display:none;}
+.sc-modal{background:#fff;border-radius:20px;padding:28px 24px;max-width:360px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,.25);}
+.sc-modal.hidden{display:none;}
+.sc-modal h2{font-size:1.15rem;font-weight:900;color:var(--navy);margin-bottom:4px;}
+.sc-modal p{font-size:.82rem;color:var(--muted);margin-bottom:16px;line-height:1.5;}
+.sc-inp{width:100%;padding:11px 14px;border:2px solid var(--border);border-radius:10px;font-family:'Nunito',sans-serif;font-size:.95rem;font-weight:700;color:var(--navy);outline:none;margin-bottom:12px;}
+.sc-inp:focus{border-color:var(--blue);}
+.sc-btn{width:100%;padding:11px;background:linear-gradient(135deg,var(--blue),var(--purple));color:#fff;border:none;border-radius:10px;font-family:'Nunito',sans-serif;font-size:.9rem;font-weight:900;cursor:pointer;}
+.sr-card{background:#fff;border-radius:20px;padding:24px 22px;max-width:360px;width:100%;text-align:center;}
+.sr-card.hidden{display:none;}
+.sr-logo{display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:14px;}
+.sr-logo-icon{width:36px;height:36px;border-radius:9px;background:#1a1a1a;display:flex;align-items:center;justify-content:center;font-size:1.2rem;}
+.sr-logo-name{font-size:.9rem;font-weight:900;color:var(--navy);}
+.sr-logo-by{font-size:.58rem;color:var(--muted);text-transform:uppercase;letter-spacing:1.5px;font-weight:700;}
+.sr-divider{height:1px;background:var(--border);margin:0 0 14px;}
+.sr-student{font-size:1.1rem;font-weight:900;color:var(--navy);margin-bottom:2px;}
+.sr-label{font-size:.68rem;color:var(--muted);text-transform:uppercase;letter-spacing:1px;font-weight:700;margin-bottom:14px;}
+.sr-score-ring{width:100px;height:100px;border-radius:50%;background:linear-gradient(135deg,var(--blue),var(--purple));display:flex;flex-direction:column;align-items:center;justify-content:center;margin:0 auto 12px;color:#fff;}
+.sr-pts{font-family:'Space Mono',monospace;font-size:1.5rem;font-weight:700;line-height:1;}
+.sr-pts-lbl{font-size:.58rem;text-transform:uppercase;letter-spacing:1px;opacity:.85;margin-top:2px;}
+.sr-chapter{display:inline-block;background:#eff6ff;color:var(--blue);border-radius:50px;padding:4px 14px;font-size:.7rem;font-weight:800;margin-bottom:12px;}
+.sr-stats{display:flex;gap:6px;justify-content:center;margin-bottom:14px;}
+.sr-stat{background:#f8faff;border:1px solid var(--border);border-radius:10px;padding:8px 10px;text-align:center;min-width:72px;}
+.sr-stat-n{font-family:'Space Mono',monospace;font-size:1rem;font-weight:700;color:var(--navy);}
+.sr-stat-l{font-size:.58rem;color:var(--muted);text-transform:uppercase;letter-spacing:.4px;font-weight:700;white-space:nowrap;}
+.sr-footer{font-size:.68rem;color:var(--muted);border-top:1px solid var(--border);padding-top:10px;line-height:1.6;}
+.sr-actions{display:flex;gap:8px;margin-top:10px;}
+.sr-close-btn{flex:1;padding:10px;border-radius:10px;border:2px solid var(--border);background:#f8faff;font-family:'Nunito',sans-serif;font-size:.82rem;font-weight:800;color:var(--muted);cursor:pointer;}
+.sr-new-btn{flex:1;padding:10px;border-radius:10px;border:none;background:linear-gradient(135deg,var(--blue),var(--purple));font-family:'Nunito',sans-serif;font-size:.82rem;font-weight:800;color:#fff;cursor:pointer;}
+.prev-best{display:none;background:linear-gradient(90deg,#dcfce7,#f0fdf4);border-bottom:1.5px solid #86efac;padding:6px 16px;font-size:.78rem;font-weight:800;color:#15803d;align-items:center;gap:4px;}
+@media(min-width:900px){
+  .bnav{display:flex;max-width:820px;left:50%;transform:translateX(-50%);border-radius:16px 16px 0 0;border-left:2px solid var(--border);border-right:2px solid var(--border);}
+  .screen{padding:24px 28px 100px;max-width:820px;margin:0 auto;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-left">
+    <div class="nav-icon">🇩🇪</div>
+    <div>
+      <div class="nav-title">Deutsch Meistern</div>
+      <span class="nav-sub">by Deutsch Meistern · A1 Kapitel 5</span>
+    </div>
+  </div>
+  <div class="score-pill" id="score-pill">&#11088; 0 Pts</div>
+</nav>
+<div class="prev-best" id="prev-best">&#127942; Your best: <span id="prev-pts">0</span> pts this chapter</div>
+
+<!-- FLOAT SCORE -->
+<div class="float-score" id="float-score">&#11088; <span id="float-pts">0</span></div>
+
+<!-- BOTTOM NAV -->
+<div class="bnav">
+  <button class="bn active" onclick="goTo('home',this)"><span class="bn-i">&#127968;</span>Home</button>
+  <button class="bn" onclick="goTo('grammar',this)"><span class="bn-i">&#128218;</span>Grammatik</button>
+  <button class="bn" onclick="goTo('exercises',this)"><span class="bn-i">&#9999;&#65039;</span>Uebungen</button>
+  <button class="bn" onclick="openSubmit()"><span class="bn-i">&#128203;</span>Score</button>
+  <button class="bn" onclick="openMehr()"><span class="bn-i">&bull;&bull;&bull;</span>Mehr</button>
+</div>
+
+<!-- MEHR DRAWER -->
+<div class="mehr-overlay" id="mehr-overlay" onclick="closeMehr()"></div>
+<div class="mehr-sheet" id="mehr-sheet">
+  <div class="mehr-handle"></div>
+  <div class="mehr-title">Mehr Inhalte</div>
+  <div class="mehr-grid" style="grid-template-columns:repeat(3,1fr);">
+    <button class="mehr-btn" onclick="closeMehr();goTo('woerterbuch',null)"><span class="mehr-btn-i">&#128292;</span><span class="mehr-btn-l">Vokabeln &amp; Wb.</span></button>
+    <button class="mehr-btn" onclick="closeMehr();goTo('leaderboard',null)"><span class="mehr-btn-i">&#127942;</span><span class="mehr-btn-l">Rangliste</span></button>
+    <button class="mehr-btn" onclick="closeMehr();goTo('lesen',null)"><span class="mehr-btn-i">&#128240;</span><span class="mehr-btn-l">Lesetexte</span></button>
+  </div>
+</div>
+
+<!-- HOME SCREEN -->
+<div class="screen active" id="s-home">
+  <div class="hero">
+    <div class="hero-chip">Deutsch Meistern · A1 Kapitel 5</div>
+    <h1>Alltag und Familie 🏠</h1>
+    <p>Daily routines, telling time, family, modal verbs and more!</p>
+  </div>
+  <div class="stat-grid">
+    <div class="stat-card"><div class="stat-em">📚</div><div class="stat-n">4</div><div class="stat-l">Grammatik</div></div>
+    <div class="stat-card"><div class="stat-em">✏️</div><div class="stat-n">120</div><div class="stat-l">Übungen</div></div>
+    <div class="stat-card"><div class="stat-em">🔤</div><div class="stat-n">60</div><div class="stat-l">Vokabeln</div></div>
+    <div class="stat-card"><div class="stat-em">👨‍👩‍👧‍👦</div><div class="stat-n">5</div><div class="stat-l">Themen</div></div>
+  </div>
+  <div class="sec-h">📖 Themen dieses Kapitels</div>
+  <div class="topic-list">
+    <div class="t-row" onclick="goToGram(0)"><span class="t-ico">⏰</span><div class="t-main"><div class="t-name">Uhrzeit</div><div class="t-sub">aufstehen, duschen, frühstücken · Viertel nach, halb, Viertel vor</div></div><span class="t-badge">Grammatik</span></div>
+    <div class="t-row" onclick="goToGram(1)"><span class="t-ico">👨‍👩‍👧‍👦</span><div class="t-main"><div class="t-name">Possessivartikel</div><div class="t-sub">mein, dein, sein, ihr, unser, euer · Familie Dobart</div></div><span class="t-badge">Grammatik</span></div>
+    <div class="t-row" onclick="goToGram(2)"><span class="t-ico">💪</span><div class="t-main"><div class="t-name">Modalverben</div><div class="t-sub">müssen, können, wollen · Konjugation</div></div><span class="t-badge">Grammatik</span></div>
+    <div class="t-row" onclick="goToGram(3)"><span class="t-ico">✂️</span><div class="t-main"><div class="t-name">Trennbare Verben</div><div class="t-sub">aufstehen, anziehen, einkaufen, anrufen</div></div><span class="t-badge">Grammatik</span></div>
+    <div class="t-row" onclick="navTo('lesen')"><span class="t-ico">📰</span><div class="t-main"><div class="t-name">Lesetexte</div><div class="t-sub">3 Texte: Tagesablauf, Familie, Termin</div></div><span class="t-badge">Lesen</span></div>
+  </div>
+</div>
+
+<!-- GRAMMAR SCREEN -->
+<div class="screen" id="s-grammar">
+  <div class="sec-h">📚 Grammatik</div>
+  <div class="g-tabs">
+    <button class="g-tab active" onclick="switchGTab(0,this)">⏰ Uhrzeit</button>
+    <button class="g-tab" onclick="switchGTab(1,this)">🔑 Possessivartikel</button>
+    <button class="g-tab" onclick="switchGTab(2,this)">💪 Modalverben</button>
+    <button class="g-tab" onclick="switchGTab(3,this)">✂️ Trennbare Verben</button>
+  </div>
+
+  <!-- PANEL 0: Tagesablauf und Uhrzeit -->
+  <div class="g-panel active" id="gp-0">
+    <div class="gcard">
+      <div class="gcard-title">Uhrzeit <span class="gcard-badge">Telling the Time</span></div>
+      <div class="gcard-desc">Kaan's day: He gets up, showers, has breakfast and goes to university. These daily routine verbs are very common in A1 German.</div>
+      <div class="section-h">🌅 Kaans Tagesablauf</div>
+      <div class="ex-grid">
+        <div class="ex-item"><div class="ex-de">☀️ Kaan <strong>steht</strong> um halb acht <strong>auf</strong>.</div><div class="ex-en">Kaan gets up at half past seven.</div><div class="ex-note">aufstehen = separable verb!</div></div>
+        <div class="ex-item"><div class="ex-de">🚿 Er <strong>duscht</strong> und <strong>frühstückt</strong>.</div><div class="ex-en">He showers and has breakfast.</div></div>
+        <div class="ex-item"><div class="ex-de">🎒 Um Viertel nach neun <strong>fährt</strong> er in die Uni.</div><div class="ex-en">At quarter past nine he goes to university.</div></div>
+        <div class="ex-item"><div class="ex-de">🍽️ In der Mensa trifft er Marie.</div><div class="ex-en">In the canteen he meets Marie.</div></div>
+        <div class="ex-item"><div class="ex-de">📚 Am Nachmittag <strong>lernt</strong> er in der Bibliothek.</div><div class="ex-en">In the afternoon he studies in the library.</div></div>
+        <div class="ex-item"><div class="ex-de">🍝 Abends <strong>kocht</strong> er Nudeln und <strong>ruft</strong> seine Mutter <strong>an</strong>.</div><div class="ex-en">In the evening he cooks pasta and calls his mother.</div></div>
+      </div>
+      <div class="section-h">🕐 Uhrzeit (Telling the time)</div>
+      <div class="rule-box">📌 Informal time (conversational):<br>
+        Es ist <strong>acht Uhr</strong> = 8:00<br>
+        Es ist <strong>Viertel nach acht</strong> = 8:15<br>
+        Es ist <strong>halb neun</strong> = 8:30 (half TO nine!)<br>
+        Es ist <strong>Viertel vor neun</strong> = 8:45<br>
+        Es ist <strong>zwanzig nach acht</strong> = 8:20<br>
+        Es ist <strong>kurz vor neun</strong> = just before 9:00</div>
+      <div class="warn-box">⚠️ "halb neun" = 8:30 NOT 9:30! "Half NINE" means halfway to nine = 8:30</div>
+      <table class="conj-table">
+        <tr><th>Zeit (Uhr)</th><th>Informell</th><th>Formell (24h)</th></tr>
+        <tr><td>8:00</td><td>acht Uhr</td><td>acht Uhr</td></tr>
+        <tr><td>8:15</td><td>Viertel nach acht</td><td>acht Uhr fünfzehn</td></tr>
+        <tr><td>8:30</td><td>halb neun</td><td>acht Uhr dreißig</td></tr>
+        <tr><td>8:45</td><td>Viertel vor neun</td><td>acht Uhr fünfundvierzig</td></tr>
+        <tr><td>8:20</td><td>zwanzig nach acht</td><td>acht Uhr zwanzig</td></tr>
+        <tr><td>8:40</td><td>zwanzig vor neun</td><td>acht Uhr vierzig</td></tr>
+        <tr><td>8:10</td><td>zehn nach acht</td><td>acht Uhr zehn</td></tr>
+        <tr><td>8:50</td><td>zehn vor neun</td><td>acht Uhr fünfzig</td></tr>
+      </table>
+      <div class="tip-box">💡 Fragen und Antworten:<br>
+        "Wie spät ist es?" / "Wie viel Uhr ist es?" = What time is it?<br>
+        "Um wie viel Uhr...?" = At what time...?<br>
+        "Es ist Viertel nach neun." / "Um halb acht."</div>
+      <div class="section-h">🌙 Tageszeiten</div>
+      <div class="ex-grid">
+        <div class="ex-item"><div class="ex-de"><strong>morgens</strong> / am Morgen</div><div class="ex-en">in the morning</div></div>
+        <div class="ex-item"><div class="ex-de"><strong>mittags</strong> / am Mittag</div><div class="ex-en">at midday / noon</div></div>
+        <div class="ex-item"><div class="ex-de"><strong>nachmittags</strong> / am Nachmittag</div><div class="ex-en">in the afternoon</div></div>
+        <div class="ex-item"><div class="ex-de"><strong>abends</strong> / am Abend</div><div class="ex-en">in the evening</div></div>
+        <div class="ex-item"><div class="ex-de"><strong>nachts</strong> / in der Nacht</div><div class="ex-en">at night</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PANEL 1: Familie und Possessivartikel -->
+  <div class="g-panel" id="gp-1">
+    <div class="gcard">
+      <div class="gcard-title">Possessivartikel <span class="gcard-badge">Possessive Articles</span></div>
+      <div class="gcard-desc">Meet the Dobart family from Hamburg. Mara is a doctor, Hannes is a technician, and they have two children: Florian (12) and Lena (14).</div>
+      <div class="section-h">👨‍👩‍👧‍👦 Familienmitglieder</div>
+      <table class="conj-table">
+        <tr><th>Deutsch</th><th>English</th><th>Plural</th></tr>
+        <tr><td>der Vater</td><td>father</td><td>die Väter</td></tr>
+        <tr><td>die Mutter</td><td>mother</td><td>die Mütter</td></tr>
+        <tr><td>der Sohn</td><td>son</td><td>die Söhne</td></tr>
+        <tr><td>die Tochter</td><td>daughter</td><td>die Töchter</td></tr>
+        <tr><td>der Bruder</td><td>brother</td><td>die Brüder</td></tr>
+        <tr><td>die Schwester</td><td>sister</td><td>die Schwestern</td></tr>
+        <tr><td>die Eltern</td><td>parents</td><td>(plural only)</td></tr>
+        <tr><td>die Großmutter (Oma)</td><td>grandmother</td><td>die Großmütter</td></tr>
+        <tr><td>der Großvater (Opa)</td><td>grandfather</td><td>die Großväter</td></tr>
+        <tr><td>das Kind</td><td>child</td><td>die Kinder</td></tr>
+        <tr><td>der Mann</td><td>husband / man</td><td>die Männer</td></tr>
+        <tr><td>die Frau</td><td>wife / woman</td><td>die Frauen</td></tr>
+      </table>
+      <div class="section-h">📌 Possessivartikel (Possessive Pronouns)</div>
+      <div class="rule-box">📌 Possessive articles agree with the NOUN they describe (the thing owned), not the owner.<br>
+      mein<strong>e</strong> Mutter (feminine) · mein Vater (masculine) · mein Kind (neuter)</div>
+      <table class="conj-table">
+        <tr><th>Pronomen</th><th>Maskulin (der)</th><th>Feminin (die)</th><th>Neutrum (das)</th></tr>
+        <tr><td><strong>ich</strong></td><td>mein Vater</td><td>meine Mutter</td><td>mein Kind</td></tr>
+        <tr><td><strong>du</strong></td><td>dein Vater</td><td>deine Mutter</td><td>dein Kind</td></tr>
+        <tr><td><strong>er</strong></td><td>sein Vater</td><td>seine Mutter</td><td>sein Kind</td></tr>
+        <tr><td><strong>sie</strong> (she)</td><td>ihr Vater</td><td>ihre Mutter</td><td>ihr Kind</td></tr>
+        <tr><td><strong>wir</strong></td><td>unser Vater</td><td>unsere Mutter</td><td>unser Kind</td></tr>
+        <tr><td><strong>ihr</strong></td><td>euer Vater</td><td>eure Mutter</td><td>euer Kind</td></tr>
+        <tr><td><strong>sie/Sie</strong></td><td>ihr/Ihr Vater</td><td>ihre/Ihre Mutter</td><td>ihr/Ihr Kind</td></tr>
+      </table>
+      <div class="tip-box">💡 Examples from Familie Dobart:<br>
+        Mara: "Das ist <strong>mein</strong> Mann Hannes. Das sind <strong>meine</strong> Kinder."<br>
+        Hannes: "<strong>Meine</strong> Frau ist Ärztin. <strong>Unser</strong> Sohn heißt Florian."<br>
+        Lena: "Das ist <strong>mein</strong> Bruder. <strong>Seine</strong> Musikschule ist weit."</div>
+    </div>
+  </div>
+
+  <!-- PANEL 2: Modalverben -->
+  <div class="g-panel" id="gp-2">
+    <div class="gcard">
+      <div class="gcard-title">Modalverben <span class="gcard-badge">müssen · können · wollen</span></div>
+      <div class="gcard-desc">Modal verbs change the meaning of the main verb. The modal verb conjugates, and the main verb goes to the END of the sentence as an infinitive.</div>
+      <div class="rule-box">📌 Word order with modals:<br>
+        Subject + <strong>Modal (conjugated)</strong> + ... + <strong>Infinitive (at the end)</strong><br>
+        Ich <strong>muss</strong> jetzt <strong>gehen</strong>. (I have to go now.)<br>
+        Florian <strong>muss</strong> um 16 Uhr zur Musikschule <strong>gehen</strong>.</div>
+      <div class="section-h">🔵 müssen (must / have to)</div>
+      <table class="conj-table">
+        <tr><th>Pronomen</th><th>müssen</th><th>Beispiel</th></tr>
+        <tr><td>ich</td><td><span class="conj-highlight">muss</span></td><td>Ich muss arbeiten.</td></tr>
+        <tr><td>du</td><td><span class="conj-highlight">musst</span></td><td>Du musst lernen.</td></tr>
+        <tr><td>er/sie/es</td><td><span class="conj-highlight">muss</span></td><td>Er muss zur Schule gehen.</td></tr>
+        <tr><td>wir</td><td><span class="conj-highlight">müssen</span></td><td>Wir müssen früh aufstehen.</td></tr>
+        <tr><td>ihr</td><td><span class="conj-highlight">müsst</span></td><td>Ihr müsst pünktlich sein.</td></tr>
+        <tr><td>sie/Sie</td><td><span class="conj-highlight">müssen</span></td><td>Sie müssen das machen.</td></tr>
+      </table>
+      <div class="section-h">🟢 können (can / be able to)</div>
+      <table class="conj-table">
+        <tr><th>Pronomen</th><th>können</th><th>Beispiel</th></tr>
+        <tr><td>ich</td><td><span class="conj-highlight">kann</span></td><td>Ich kann schwimmen.</td></tr>
+        <tr><td>du</td><td><span class="conj-highlight">kannst</span></td><td>Kannst du mir helfen?</td></tr>
+        <tr><td>er/sie/es</td><td><span class="conj-highlight">kann</span></td><td>Sie kann Geige spielen.</td></tr>
+        <tr><td>wir</td><td><span class="conj-highlight">können</span></td><td>Wir können am Freitag kommen.</td></tr>
+        <tr><td>ihr</td><td><span class="conj-highlight">könnt</span></td><td>Ihr könnt jetzt gehen.</td></tr>
+        <tr><td>sie/Sie</td><td><span class="conj-highlight">können</span></td><td>Sie können mich anrufen.</td></tr>
+      </table>
+      <div class="section-h">🟡 wollen (want to)</div>
+      <table class="conj-table">
+        <tr><th>Pronomen</th><th>wollen</th><th>Beispiel</th></tr>
+        <tr><td>ich</td><td><span class="conj-highlight">will</span></td><td>Ich will Deutsch lernen.</td></tr>
+        <tr><td>du</td><td><span class="conj-highlight">willst</span></td><td>Was willst du essen?</td></tr>
+        <tr><td>er/sie/es</td><td><span class="conj-highlight">will</span></td><td>Er will Arzt werden.</td></tr>
+        <tr><td>wir</td><td><span class="conj-highlight">wollen</span></td><td>Wir wollen einen Termin machen.</td></tr>
+        <tr><td>ihr</td><td><span class="conj-highlight">wollt</span></td><td>Was wollt ihr machen?</td></tr>
+        <tr><td>sie/Sie</td><td><span class="conj-highlight">wollen</span></td><td>Sie wollen sich treffen.</td></tr>
+      </table>
+      <div class="section-h">📞 Termin vereinbaren (Making an appointment)</div>
+      <div class="dialog-card">
+        <div class="dialog-title">📅 Johanna und Mara - Wann hast du Zeit?</div>
+        <div class="d-bubble"><span class="d-speaker sp-a">Johanna</span><div class="d-text">Hallo Mara! Hast du am Donnerstag Zeit?</div></div>
+        <div class="d-bubble"><span class="d-speaker sp-b">Mara</span><div class="d-text">Moment... Um 14 Uhr habe ich einen Termin beim Arzt. Und um 16 Uhr muss Florian zur Musikschule.</div></div>
+        <div class="d-bubble"><span class="d-speaker sp-a">Johanna</span><div class="d-text">Und am Freitagabend? Kannst du da?</div></div>
+        <div class="d-bubble"><span class="d-speaker sp-b">Mara</span><div class="d-text">Ja, Freitagabend kann ich! Wollen wir um 19 Uhr ins Restaurant?</div></div>
+        <div class="d-bubble"><span class="d-speaker sp-a">Johanna</span><div class="d-text">Super! Das passt mir gut.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PANEL 3: Trennbare Verben -->
+  <div class="g-panel" id="gp-3">
+    <div class="gcard">
+      <div class="gcard-title">Trennbare Verben <span class="gcard-badge">Separable Verbs</span></div>
+      <div class="gcard-desc">Separable verbs have a prefix that splits off and moves to the END of the sentence in present tense. The prefix carries the main meaning.</div>
+      <div class="rule-box">📌 Rule: Prefix goes to the VERY END.<br>
+        aufstehen: Ich <strong>stehe</strong> um 7 Uhr <strong>auf</strong>.<br>
+        anrufen: Er <strong>ruft</strong> seine Mutter <strong>an</strong>.<br>
+        einkaufen: Wir <strong>kaufen</strong> heute <strong>ein</strong>.</div>
+      <table class="conj-table">
+        <tr><th>Infinitiv</th><th>Bedeutung</th><th>Beispiel (ich-Form)</th></tr>
+        <tr><td><strong>auf</strong>stehen</td><td>to get up</td><td>Ich stehe um halb acht auf.</td></tr>
+        <tr><td><strong>an</strong>ziehen</td><td>to put on (clothes)</td><td>Ich ziehe mich an.</td></tr>
+        <tr><td><strong>ein</strong>kaufen</td><td>to go shopping</td><td>Ich kaufe heute ein.</td></tr>
+        <tr><td><strong>fern</strong>sehen</td><td>to watch TV</td><td>Ich sehe abends fern.</td></tr>
+        <tr><td><strong>an</strong>rufen</td><td>to call (phone)</td><td>Ich rufe meine Mutter an.</td></tr>
+        <tr><td><strong>auf</strong>räumen</td><td>to tidy up</td><td>Ich räume mein Zimmer auf.</td></tr>
+        <tr><td><strong>ab</strong>waschen</td><td>to wash up (dishes)</td><td>Ich wasche ab.</td></tr>
+        <tr><td><strong>mit</strong>kommen</td><td>to come along</td><td>Kommst du mit?</td></tr>
+      </table>
+      <div class="tip-box">💡 How to recognise separable verbs: Most prefixes that are separate words are separable:<br>
+        <strong>auf-, an-, ein-, ab-, mit-, fern-, auf-, aus-, vor-, zu-</strong><br>
+        Prefixes that are NEVER separable: be-, ge-, er-, ver-, ent-, zer-</div>
+      <div class="section-h">❌ Common Mistake</div>
+      <div class="warn-box">Wrong: Ich aufstehe um 7 Uhr.<br>Right: Ich <strong>stehe</strong> um 7 Uhr <strong>auf</strong>.<br><br>Wrong: Er anruft seine Mutter.<br>Right: Er <strong>ruft</strong> seine Mutter <strong>an</strong>.</div>
+    </div>
+  </div>
+</div>
+
+<!-- EXERCISES SCREEN -->
+<div class="screen" id="s-exercises">
+  <div class="ex-tabs">
+    <button class="ex-tab active" onclick="switchExTab(0,this)">📖 Lesen</button>
+    <button class="ex-tab" onclick="switchExTab(1,this)">🗣️ Sprechen</button>
+    <button class="ex-tab" onclick="switchExTab(2,this)">✍️ Schreiben</button>
+  </div>
+  <div class="ex-panel active" id="ep-0"><div id="lesen-set"></div></div>
+  <div class="ex-panel" id="ep-1"><div id="sprechen-set"></div></div>
+  <div class="ex-panel" id="ep-2"><div id="schreiben-set"></div></div>
+</div>
+
+<!-- SCORE SCREEN -->
+<div class="screen" id="s-score">
+  <div style="text-align:center;padding:40px 20px;">
+    <div style="font-size:3rem;margin-bottom:16px;">📋</div>
+    <div style="font-size:1.1rem;font-weight:900;color:var(--navy);margin-bottom:8px;">Submit Your Score</div>
+    <div style="font-size:.88rem;color:var(--muted);margin-bottom:20px;">Click below to generate your score card.</div>
+    <button onclick="openSubmit()" style="background:linear-gradient(135deg,var(--blue),var(--purple));color:#fff;border:none;border-radius:12px;padding:14px 32px;font-family:Nunito,sans-serif;font-size:.95rem;font-weight:900;cursor:pointer;">Generate Score Card ✨</button>
+  </div>
+</div>
+
+<!-- VOCAB + WÖRTERBUCH SCREEN -->
+<div class="screen" id="s-woerterbuch">
+  <div class="sec-h">🔤 Vokabeln</div>
+  <div class="search-wrap">
+    <span class="search-icon">🔍</span>
+    <input class="search-inp" id="v-search" placeholder="Suchen..." oninput="filterVocab()">
+  </div>
+  <div id="vocab-container"></div>
+  <div class="sec-h" style="margin-top:20px;">📖 Wörterbuch</div>
+  <div style="display:flex;gap:6px;overflow-x:auto;padding-bottom:8px;margin-bottom:12px;">
+    <button class="wb-filter active" onclick="filterWBCat('all',this)">Alle</button>
+    <button class="wb-filter" onclick="filterWBCat('Verben',this)">Verben</button>
+    <button class="wb-filter" onclick="filterWBCat('Nomen',this)">Nomen</button>
+    <button class="wb-filter" onclick="filterWBCat('Adjektive',this)">Adjektive</button>
+    <button class="wb-filter" onclick="filterWBCat('Ausdrücke',this)">Ausdrücke</button>
+  </div>
+  <div class="search-wrap">
+    <span class="search-icon">🔍</span>
+    <input class="search-inp" id="wb-search" placeholder="Wörterbuch durchsuchen..." oninput="filterWB()">
+  </div>
+  <div id="wb-container"></div>
+</div>
+
+<!-- LEADERBOARD SCREEN -->
+<div class="screen" id="s-leaderboard">
+  <div class="lb-header">
+    <div style="font-size:2rem;margin-bottom:6px;">&#127942;</div>
+    <div style="font-size:1.1rem;font-weight:900;">Rangliste</div>
+    <div style="font-size:.78rem;opacity:.8;margin-top:4px;">Alle Kapitel · Gesamtpunktzahl</div>
+  </div>
+  <div class="podium" id="podium"></div>
+  <div id="lb-list"><div style="text-align:center;padding:24px;color:var(--muted);font-size:.85rem;">&#9203; Lade Rangliste...</div></div>
+</div>
+
+<!-- LESEN SCREEN -->
+<div class="screen" id="s-lesen">
+  <div class="sec-h">📰 Lesetexte</div>
+  <p style="font-size:.88rem;color:var(--muted);margin-bottom:16px;line-height:1.6;">Drei Texte zum Thema Alltag und Familie. Lese und verstehe: Tagesablauf, Possessivartikel und Modalverben aus Kapitel 5!</p>
+
+  <!-- TEXT 1 -->
+  <div class="gcard" style="margin-bottom:18px;">
+    <div class="gcard-title" style="font-size:1rem;">📖 Text 1: Kaans Morgen</div>
+    <div style="font-size:.75rem;font-weight:800;color:var(--purple);text-transform:uppercase;letter-spacing:1px;margin-bottom:12px;">Thema: Tagesablauf · Trennbare Verben · Uhrzeit</div>
+    <div class="passage" style="margin-bottom:14px;">
+      Kaan ist Student. Er wohnt allein in einer kleinen Wohnung in der Stadt. Sein Tag beginnt immer sehr früh.<br><br>
+      Um halb acht steht Kaan auf. Zuerst duscht er kalt, denn das wacht ihn auf. Dann zieht er sich schnell an. Um Viertel nach acht frühstückt er: Er trinkt einen Tee und isst Toast mit Butter. Er liest dabei die Nachrichten auf seinem Handy.<br><br>
+      Um Viertel nach neun fährt Kaan mit dem Bus in die Uni. Die Fahrt dauert zwanzig Minuten. In der Uni trifft er seine Freundin Marie. Sie essen zusammen in der Mensa zu Mittag: Kaan nimmt die Pasta, Marie isst den Salat.<br><br>
+      Am Nachmittag lernt Kaan in der Bibliothek. Er muss viel lernen, denn er hat morgen eine wichtige Prüfung. Gegen 18 Uhr fährt er nach Hause. Abends kauft er kurz im Supermarkt ein und kocht Nudeln mit Tomatensoße. Um 21 Uhr ruft er seine Mutter in Ankara an. Sie will immer wissen, wie es ihm geht. Um 23 Uhr geht Kaan schlafen. Morgen muss er wieder früh aufstehen!
+    </div>
+    <div class="tip-box">💡 Wichtige Ausdrücke:<br>
+      <strong>allein</strong> = alone · <strong>zuerst</strong> = first · <strong>dann</strong> = then<br>
+      <strong>dabei</strong> = at the same time · <strong>gegen 18 Uhr</strong> = around 6pm<br>
+      <strong>kurz</strong> = briefly / quickly</div>
+    <div style="margin-top:14px;font-size:.8rem;font-weight:800;color:var(--purple);text-transform:uppercase;letter-spacing:1px;">Verständnisfragen</div>
+    <div id="lesen1-set" class="q-set"></div>
+  </div>
+
+  <!-- TEXT 2 -->
+  <div class="gcard" style="margin-bottom:18px;">
+    <div class="gcard-title" style="font-size:1rem;">📖 Text 2: Familie Dobart stellt sich vor</div>
+    <div style="font-size:.75rem;font-weight:800;color:var(--purple);text-transform:uppercase;letter-spacing:1px;margin-bottom:12px;">Thema: Familie · Possessivartikel · Berufe</div>
+    <div class="passage" style="margin-bottom:14px;">
+      Mein Name ist Mara Dobart. Ich bin Ärztin und arbeite in einem Krankenhaus in Hamburg. Mein Mann heißt Hannes. Er ist Techniker bei einer großen Firma. Wir wohnen in Hamburg seit acht Jahren.<br><br>
+      Wir haben zwei Kinder. Unser Sohn heißt Florian, er ist zwölf Jahre alt. Unsere Tochter heißt Lena, sie ist vierzehn. Florian spielt donnerstags Geige in der Musikschule. Seine Lehrerin sagt, er spielt sehr gut! Lena spielt Trompete in der Schulband. Ihre Freundin Jana spielt auch in der Band.<br><br>
+      Am Wochenende besuchen wir oft meine Eltern. Meine Mutter wohnt in der Nähe, mein Vater auch. Wir essen dann zusammen zu Mittag. Meine Eltern lieben ihre Enkelkinder sehr. Florian und Lena freuen sich immer, ihre Oma und ihren Opa zu sehen.<br><br>
+      Hannes kocht am Wochenende immer. Er kocht sehr gern und sehr gut. Sein Lieblingsessen ist Gulasch. Mein Lieblingsessen ist Fischsuppe. Die Kinder wollen immer Pizza!
+    </div>
+    <div class="tip-box">💡 Possessivartikel im Text:<br>
+      <strong>mein Mann</strong> (maskulin) · <strong>meine Tochter</strong> (feminin)<br>
+      <strong>unser Sohn</strong> · <strong>unsere Tochter</strong><br>
+      <strong>seine Lehrerin</strong> (Florians Lehrerin) · <strong>ihre Freundin</strong> (Lenas Freundin)</div>
+    <div style="margin-top:14px;font-size:.8rem;font-weight:800;color:var(--purple);text-transform:uppercase;letter-spacing:1px;">Verständnisfragen</div>
+    <div id="lesen2-set" class="q-set"></div>
+  </div>
+
+  <!-- TEXT 3 -->
+  <div class="gcard" style="margin-bottom:18px;">
+    <div class="gcard-title" style="font-size:1rem;">📖 Text 3: Einen Termin vereinbaren</div>
+    <div style="font-size:.75rem;font-weight:800;color:var(--purple);text-transform:uppercase;letter-spacing:1px;margin-bottom:12px;">Thema: Modalverben · Termine · Wochentage</div>
+    <div class="passage" style="margin-bottom:14px;">
+      Johanna ruft ihre Freundin Mara an. Sie wollen sich treffen, aber beide haben viel zu tun.<br><br>
+      Johanna: "Hallo Mara! Wie geht es dir?"<br>
+      Mara: "Danke, gut! Und dir?"<br>
+      Johanna: "Auch gut. Hast du am Donnerstag Zeit? Ich will mit dir Kaffee trinken."<br>
+      Mara: "Moment, ich schaue in meinen Kalender. Am Donnerstag um 14 Uhr habe ich einen Termin beim Arzt. Und um 16 Uhr muss Florian zur Musikschule. Ich muss ihn fahren, weil er noch klein ist."<br>
+      Johanna: "Kein Problem. Kannst du am Freitagabend? Wir können auch ins Restaurant gehen."<br>
+      Mara: "Freitagabend kann ich sehr gut! Hannes ist zu Hause und kann auf die Kinder aufpassen."<br>
+      Johanna: "Super! Wollen wir um 19 Uhr ins Restaurant Zum Anker gehen? Es ist nicht weit von dir."<br>
+      Mara: "Ja, gerne! Das passt mir sehr gut. Ich freue mich schon!"<br>
+      Johanna: "Ich auch! Bis Freitag!"<br>
+      Mara: "Bis dann! Tschüs!"<br><br>
+      Am Freitag treffen sich Johanna und Mara. Sie essen zusammen und reden zwei Stunden lang. Es ist ein schöner Abend.
+    </div>
+    <div class="tip-box">💡 Modalverben im Dialog:<br>
+      <strong>will</strong> = want to (wollen) · <strong>muss</strong> = have to (müssen)<br>
+      <strong>kann / kannst / können</strong> = can (können)<br>
+      <strong>aufpassen auf</strong> = to look after / watch over</div>
+    <div style="margin-top:14px;font-size:.8rem;font-weight:800;color:var(--purple);text-transform:uppercase;letter-spacing:1px;">Verständnisfragen</div>
+    <div id="lesen3-set" class="q-set"></div>
+  </div>
+</div>
+
+<!-- SCORE CARD OVERLAY -->
+<div class="sc-overlay hidden" id="sc-overlay">
+  <div class="sc-modal" id="sc-modal">
+    <h2>📋 Submit Your Score</h2>
+    <p>Enter your name to generate your score card. Share the screenshot with Deutsch Meistern!</p>
+    <input class="sc-inp" id="sc-name-inp" placeholder="Your name..." maxlength="40" autocomplete="off">
+    <button class="sc-btn" onclick="generateCard()">Generate My Score Card ✨</button>
+  </div>
+  <div class="sr-card hidden" id="sr-card">
+    <div class="sr-logo">
+      <div class="sr-logo-icon">🇩🇪</div>
+      <div><div class="sr-logo-name">Deutsch Meistern</div><div class="sr-logo-by">CEFR A1 to C2</div></div>
+    </div>
+    <div class="sr-divider"></div>
+    <div class="sr-student" id="sr-name">Student</div>
+    <div class="sr-label">Score Card</div>
+    <div class="sr-score-ring"><div class="sr-pts" id="sr-pts">0</div><div class="sr-pts-lbl">points</div></div>
+    <div class="sr-chapter">A1 · Kapitel 5 · Alltag und Familie</div>
+    <div class="sr-stats">
+      <div class="sr-stat" style="border-color:#16a34a"><div class="sr-stat-n" style="color:#16a34a" id="sr-correct">0</div><div class="sr-stat-l">✅ Correct</div></div>
+      <div class="sr-stat" style="border-color:#dc2626"><div class="sr-stat-n" style="color:#dc2626" id="sr-wrong">0</div><div class="sr-stat-l">❌ Wrong</div></div>
+      <div class="sr-stat"><div class="sr-stat-n" id="sr-skipped">0</div><div class="sr-stat-l">Skipped</div></div>
+      <div class="sr-stat"><div class="sr-stat-n" id="sr-maxpts">120</div><div class="sr-stat-l">Max pts</div></div>
+    </div>
+    <div class="sr-footer">Completed on <strong id="sr-date"></strong><br>Platform: <strong>Deutsch Meistern</strong></div>
+    <div class="sr-actions">
+      <button class="sr-close-btn" onclick="closeCard()">✕ Close</button>
+      <button class="sr-new-btn" onclick="closeCard()">Keep Learning 🚀</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* MEHR DRAWER */
+function openMehr(){document.getElementById('mehr-overlay').classList.add('open');document.getElementById('mehr-sheet').classList.add('open');}
+function closeMehr(){document.getElementById('mehr-overlay').classList.remove('open');document.getElementById('mehr-sheet').classList.remove('open');}
+
+/* STATE */
+let score=0, answered=new Set(), correctSet=new Set(), wrongSet=new Set(), orderState={};
+
+/* NAVIGATION */
+function goTo(id,btn){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.bn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('s-'+id).classList.add('active');
+  if(btn) btn.classList.add('active');
+  if(id==='woerterbuch') setTimeout(()=>{buildVocab();buildWB();},50);
+  if(id==='leaderboard'&&window.loadLeaderboard) window.loadLeaderboard();
+}
+function goToGram(idx){
+  goTo('grammar',document.querySelectorAll('.bn')[1]);
+  setTimeout(()=>switchGTab(idx,document.querySelectorAll('.g-tab')[idx]),50);
+}
+function switchGTab(idx,btn){
+  document.querySelectorAll('.g-panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.g-tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('gp-'+idx).classList.add('active');
+  if(btn) btn.classList.add('active');
+}
+function switchExTab(idx,btn){
+  document.querySelectorAll('.ex-panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.ex-tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('ep-'+idx).classList.add('active');
+  if(btn) btn.classList.add('active');
+}
+
+/* SCORE */
+function addScore(pts){
+  score+=pts;
+  document.getElementById('score-pill').textContent='⭐ '+score+' Pts';
+  document.getElementById('float-pts').textContent=score;
+  if(score>0&&score%50===0) confetti();
+}
+function confetti(){
+  const colors=['#ef4444','#f59e0b','#10b981','#3b82f6','#8b5cf6','#ec4899'];
+  for(let i=0;i<30;i++){
+    const d=document.createElement('div');d.className='conf-piece';
+    d.style.cssText=`left:${Math.random()*100}vw;top:0;background:${colors[Math.floor(Math.random()*colors.length)]};animation-delay:${Math.random()*.5}s;animation-duration:${.8+Math.random()*.6}s;`;
+    document.body.appendChild(d);setTimeout(()=>d.remove(),1500);
+  }
+}
+
+/* EXERCISE DATA */
+const lesenQ=[
+  /* Block 1: Kaan's day - passage questions */
+  {t:'passage',p:'Kaan ist Student. Am Morgen steht er um halb acht auf. Zuerst duscht er, dann zieht er sich an. Um Viertel nach acht frühstückt er: Er trinkt Tee und isst Toast.',q:'Um wie viel Uhr steht Kaan auf?',opts:['Um sieben Uhr','Um halb acht','Um Viertel nach acht','Um acht Uhr'],ans:1},
+  {t:'passage',p:'Kaan ist Student. Am Morgen steht er um halb acht auf. Zuerst duscht er, dann zieht er sich an. Um Viertel nach acht frühstückt er: Er trinkt Tee und isst Toast.',q:'Was macht Kaan nach dem Duschen?',opts:['Er frühstückt','Er fährt in die Uni','Er zieht sich an','Er schläft weiter'],ans:2},
+  {t:'passage',p:'Kaan ist Student. Am Morgen steht er um halb acht auf. Zuerst duscht er, dann zieht er sich an. Um Viertel nach acht frühstückt er: Er trinkt Tee und isst Toast.',q:'Was isst Kaan beim Frühstück?',opts:['Nudeln','Müsli','Toast','Brot'],ans:2},
+  {t:'passage',p:'Um Viertel nach neun fährt Kaan mit dem Bus in die Uni. Dort trifft er seine Freundin Marie in der Mensa. Am Nachmittag lernt Kaan in der Bibliothek.',q:'Wie fährt Kaan in die Uni?',opts:['Mit dem Auto','Mit dem Fahrrad','Zu Fuß','Mit dem Bus'],ans:3},
+  {t:'passage',p:'Um Viertel nach neun fährt Kaan mit dem Bus in die Uni. Dort trifft er seine Freundin Marie in der Mensa. Am Nachmittag lernt Kaan in der Bibliothek.',q:'Wo trifft Kaan Marie?',opts:['In der Bibliothek','In der Mensa','In der Uni','Im Bus'],ans:1},
+  {t:'passage',p:'Um Viertel nach neun fährt Kaan mit dem Bus in die Uni. Dort trifft er seine Freundin Marie in der Mensa. Am Nachmittag lernt Kaan in der Bibliothek.',q:'Was macht Kaan am Nachmittag?',opts:['Er schläft','Er kocht','Er lernt in der Bibliothek','Er kauft ein'],ans:2},
+  {t:'passage',p:'Abends kauft Kaan im Supermarkt ein und kocht Nudeln. Um 21 Uhr ruft er seine Mutter an. Sie wohnt in Ankara. Um 23 Uhr geht Kaan schlafen.',q:'Was kocht Kaan abends?',opts:['Reis','Suppe','Pizza','Nudeln'],ans:3},
+  {t:'passage',p:'Abends kauft Kaan im Supermarkt ein und kocht Nudeln. Um 21 Uhr ruft er seine Mutter an. Sie wohnt in Ankara. Um 23 Uhr geht Kaan schlafen.',q:'Wo wohnt Kaans Mutter?',opts:['In Deutschland','In Berlin','In Ankara','In Istanbul'],ans:2},
+  /* Block 2: Uhrzeit */
+  {t:'mc',q:'Was bedeutet "Es ist halb neun"?',opts:['9:30','8:30','9:00','8:00'],ans:1},
+  {t:'mc',q:'Was bedeutet "Viertel nach acht"?',opts:['7:45','8:00','8:15','8:45'],ans:2},
+  {t:'mc',q:'Was bedeutet "Viertel vor neun"?',opts:['8:15','8:30','8:45','9:15'],ans:2},
+  {t:'mc',q:'Wie sagt man 8:20 auf Deutsch (informell)?',opts:['halb neun','zwanzig nach acht','Viertel nach acht','zwanzig vor neun'],ans:1},
+  {t:'mc',q:'Wie sagt man 7:30 auf Deutsch (informell)?',opts:['halb sieben','Viertel vor acht','halb acht','sieben Uhr dreißig'],ans:2},
+  {t:'mc',q:'"Wie spät ist es?" fragt man, wenn man... wissen möchte.',opts:['das Datum','die Uhrzeit','den Namen','die Adresse'],ans:1},
+  {t:'mc',q:'Wie sagt man 9:45 auf Deutsch (informell)?',opts:['Viertel nach neun','halb zehn','Viertel vor zehn','zwanzig vor zehn'],ans:2},
+  {t:'mc',q:'Was bedeutet "Um wie viel Uhr...?"',opts:['How are you?','What time is it?','At what time?','How many hours?'],ans:2},
+  /* Block 3: Familie Dobart - passage questions */
+  {t:'passage',p:'Familie Dobart lebt in Hamburg. Mara Dobart ist Ärztin. Ihr Mann heißt Hannes. Er ist Techniker. Sie haben zwei Kinder: Florian ist 12 Jahre alt, und Lena ist 14 Jahre alt.',q:'Wo lebt Familie Dobart?',opts:['In Berlin','In München','In Hamburg','In Frankfurt'],ans:2},
+  {t:'passage',p:'Familie Dobart lebt in Hamburg. Mara Dobart ist Ärztin. Ihr Mann heißt Hannes. Er ist Techniker. Sie haben zwei Kinder: Florian ist 12 Jahre alt, und Lena ist 14 Jahre alt.',q:'Was ist Mara von Beruf?',opts:['Lehrerin','Ärztin','Technikerin','Studentin'],ans:1},
+  {t:'passage',p:'Familie Dobart lebt in Hamburg. Mara Dobart ist Ärztin. Ihr Mann heißt Hannes. Er ist Techniker. Sie haben zwei Kinder: Florian ist 12 Jahre alt, und Lena ist 14 Jahre alt.',q:'Wie heißt Maras Mann?',opts:['Florian','Lena','Hannes','Klaus'],ans:2},
+  {t:'passage',p:'Familie Dobart lebt in Hamburg. Mara Dobart ist Ärztin. Ihr Mann heißt Hannes. Er ist Techniker. Sie haben zwei Kinder: Florian ist 12 Jahre alt, und Lena ist 14 Jahre alt.',q:'Wie alt ist Lena?',opts:['12','14','16','10'],ans:1},
+  {t:'passage',p:'Am Wochenende besucht Familie Dobart oft Maras Eltern. Florian muss donnerstags zur Musikschule. Er spielt Geige. Lena spielt Trompete in der Schulband.',q:'Was spielt Florian?',opts:['Trompete','Klavier','Geige','Gitarre'],ans:2},
+  {t:'passage',p:'Am Wochenende besucht Familie Dobart oft Maras Eltern. Florian muss donnerstags zur Musikschule. Er spielt Geige. Lena spielt Trompete in der Schulband.',q:'Wann muss Florian zur Musikschule?',opts:['Montags','Dienstags','Mittwochs','Donnerstags'],ans:3},
+  {t:'passage',p:'Am Wochenende besucht Familie Dobart oft Maras Eltern. Florian muss donnerstags zur Musikschule. Er spielt Geige. Lena spielt Trompete in der Schulband.',q:'Was macht Familie Dobart am Wochenende?',opts:['Sie lernt','Sie besucht Maras Eltern','Sie fährt in die Uni','Sie geht einkaufen'],ans:1},
+  {t:'passage',p:'Am Wochenende besucht Familie Dobart oft Maras Eltern. Florian muss donnerstags zur Musikschule. Er spielt Geige. Lena spielt Trompete in der Schulband.',q:'Wo spielt Lena Trompete?',opts:['In der Musikschule','Zu Hause','In der Schulband','Im Konzert'],ans:2},
+  /* Block 4: Possessivartikel */
+  {t:'mc',q:'Mara: "Das ist ___ Mann Hannes." (ihr/mein)',opts:['sein','ihr','mein','dein'],ans:2},
+  {t:'mc',q:'Hannes: "Das ist ___ Frau Mara." (sein/ihr)',opts:['meine','seine','ihre','deine'],ans:1},
+  {t:'mc',q:'"Wir haben zwei Kinder. Das sind ___ Kinder." (unser)',opts:['meine','unsere','eure','seine'],ans:1},
+  {t:'mc',q:'Lena: "Das ist ___ Bruder Florian." (mein)',opts:['sein','ihr','mein','dein'],ans:2},
+  {t:'mc',q:'"Das ist Florian. ___ Mutter ist Ärztin." (sein/ihre)',opts:['Ihr','Seine','Meine','Deine'],ans:1},
+  {t:'mc',q:'Welche Form ist richtig: "Das ist ___ Vater." (ich)',opts:['meine','meinen','mein','meinem'],ans:2}
+];
+
+const lesen1Q=[
+  {t:'mc',q:'Was macht Kaan zuerst, wenn er aufsteht?',opts:['Er frühstückt','Er zieht sich an','Er duscht kalt','Er fährt in die Uni'],ans:2},
+  {t:'mc',q:'Wie lange dauert Kaans Busfahrt zur Uni?',opts:['10 Minuten','20 Minuten','30 Minuten','Eine Stunde'],ans:1},
+  {t:'mc',q:'Was macht Kaan am Nachmittag in der Bibliothek?',opts:['Er schläft','Er lernt für eine Prüfung','Er trifft Marie','Er kocht'],ans:1},
+  {t:'mc',q:'Wen ruft Kaan um 21 Uhr an?',opts:['Marie','Seinen Vater','Seine Mutter','Einen Freund'],ans:2},
+  {t:'mc',q:'Was isst Kaan zum Frühstück?',opts:['Müsli und Obst','Nudeln','Toast mit Butter','Brot mit Käse'],ans:2},
+];
+const lesen2Q=[
+  {t:'mc',q:'Was ist Maras Beruf?',opts:['Lehrerin','Technikerin','Ärztin','Köchin'],ans:2},
+  {t:'mc',q:'Welches Instrument spielt Florian?',opts:['Trompete','Klavier','Geige','Gitarre'],ans:2},
+  {t:'mc',q:'Wer kocht am Wochenende in Familie Dobart?',opts:['Mara','Lena','Florian','Hannes'],ans:3},
+  {t:'mc',q:'Wie alt ist Lena?',opts:['12','13','14','15'],ans:2},
+  {t:'mc',q:'Was ist Hannes von Beruf?',opts:['Arzt','Lehrer','Techniker','Koch'],ans:2},
+];
+const lesen3Q=[
+  {t:'mc',q:'Warum kann Mara am Donnerstag um 14 Uhr nicht?',opts:['Sie muss arbeiten','Sie hat einen Arzttermin','Sie ist krank','Sie schläft'],ans:1},
+  {t:'mc',q:'Wer passt auf die Kinder auf, wenn Mara ausgeht?',opts:['Oma und Opa','Eine Freundin','Hannes','Lena'],ans:2},
+  {t:'mc',q:'Wo wollen Johanna und Mara sich treffen?',opts:['In der Mensa','Im Supermarkt','Im Restaurant Zum Anker','Im Kino'],ans:2},
+  {t:'mc',q:'Was sagt Mara: "Freitagabend ___ ich sehr gut!"',opts:['will','muss','kann','darf'],ans:2},
+  {t:'mc',q:'Wie lange unterhalten sich die Freundinnen im Restaurant?',opts:['Eine Stunde','Zwei Stunden','Drei Stunden','Den ganzen Abend'],ans:1},
+];
+
+const sprechenQ=[
+  {t:'order',q:'Bilde den Satz:',words:['Kaan','steht','um','halb','acht','auf.'],correct:'Kaan steht um halb acht auf.'},
+  {t:'order',q:'Bilde den Satz:',words:['Er','duscht','und','frühstückt.'],correct:'Er duscht und frühstückt.'},
+  {t:'order',q:'Bilde den Satz:',words:['Um','Viertel','nach','neun','fährt','er','in','die','Uni.'],correct:'Um Viertel nach neun fährt er in die Uni.'},
+  {t:'order',q:'Bilde den Satz:',words:['Er','lernt','am','Nachmittag','in','der','Bibliothek.'],correct:'Er lernt am Nachmittag in der Bibliothek.'},
+  {t:'order',q:'Bilde den Satz:',words:['Abends','ruft','er','seine','Mutter','an.'],correct:'Abends ruft er seine Mutter an.'},
+  {t:'order',q:'Bilde den Satz:',words:['Wie','spät','ist','es?'],correct:'Wie spät ist es?'},
+  {t:'order',q:'Bilde den Satz:',words:['Es','ist','Viertel','nach','acht.'],correct:'Es ist Viertel nach acht.'},
+  {t:'order',q:'Bilde den Satz:',words:['Um','wie','viel','Uhr','stehst','du','auf?'],correct:'Um wie viel Uhr stehst du auf?'},
+  {t:'order',q:'Bilde den Satz:',words:['Mara','ist','Ärztin','und','hat','zwei','Kinder.'],correct:'Mara ist Ärztin und hat zwei Kinder.'},
+  {t:'order',q:'Bilde den Satz:',words:['Ihr','Mann','heißt','Hannes.'],correct:'Ihr Mann heißt Hannes.'},
+  {t:'order',q:'Bilde den Satz:',words:['Das','ist','mein','Bruder','Florian.'],correct:'Das ist mein Bruder Florian.'},
+  {t:'order',q:'Bilde den Satz:',words:['Meine','Mutter','ist','Ärztin.'],correct:'Meine Mutter ist Ärztin.'},
+  {t:'order',q:'Bilde den Satz:',words:['Das','sind','unsere','Kinder.'],correct:'Das sind unsere Kinder.'},
+  {t:'order',q:'Bilde den Satz:',words:['Seine','Schwester','wohnt','in','Berlin.'],correct:'Seine Schwester wohnt in Berlin.'},
+  {t:'order',q:'Bilde den Satz:',words:['Ich','muss','jetzt','gehen.'],correct:'Ich muss jetzt gehen.'},
+  {t:'order',q:'Bilde den Satz:',words:['Florian','muss','zur','Musikschule','gehen.'],correct:'Florian muss zur Musikschule gehen.'},
+  {t:'order',q:'Bilde den Satz:',words:['Wir','wollen','uns','treffen.'],correct:'Wir wollen uns treffen.'},
+  {t:'order',q:'Bilde den Satz:',words:['Kannst','du','mir','helfen?'],correct:'Kannst du mir helfen?'},
+  {t:'order',q:'Bilde den Satz:',words:['Ich','kann','Geige','spielen.'],correct:'Ich kann Geige spielen.'},
+  {t:'order',q:'Bilde den Satz:',words:['Was','willst','du','essen?'],correct:'Was willst du essen?'},
+  {t:'order',q:'Bilde den Satz:',words:['Ich','stehe','um','sieben','Uhr','auf.'],correct:'Ich stehe um sieben Uhr auf.'},
+  {t:'order',q:'Bilde den Satz:',words:['Wir','kaufen','heute','ein.'],correct:'Wir kaufen heute ein.'},
+  {t:'order',q:'Bilde den Satz:',words:['Er','ruft','seinen','Vater','an.'],correct:'Er ruft seinen Vater an.'},
+  {t:'order',q:'Bilde den Satz:',words:['Ich','sehe','abends','fern.'],correct:'Ich sehe abends fern.'},
+  {t:'order',q:'Bilde den Satz:',words:['Wann','kommst','du','nach','Hause?'],correct:'Wann kommst du nach Hause?'},
+  {t:'order',q:'Bilde den Satz:',words:['Mara','hat','am','Donnerstag','einen','Termin.'],correct:'Mara hat am Donnerstag einen Termin.'},
+  {t:'order',q:'Bilde den Satz:',words:['Hast','du','am','Freitag','Zeit?'],correct:'Hast du am Freitag Zeit?'},
+  {t:'order',q:'Bilde den Satz:',words:['Sie','frühstückt','um','acht','Uhr.'],correct:'Sie frühstückt um acht Uhr.'},
+  {t:'order',q:'Bilde den Satz:',words:['Morgens','trinkt','er','Kaffee.'],correct:'Morgens trinkt er Kaffee.'},
+  {t:'order',q:'Bilde den Satz:',words:['Ich','räume','mein','Zimmer','auf.'],correct:'Ich räume mein Zimmer auf.'},
+  {t:'order',q:'Bilde den Satz:',words:['Deine','Schwester','kann','sehr','gut','singen.'],correct:'Deine Schwester kann sehr gut singen.'},
+  {t:'order',q:'Bilde den Satz:',words:['Ihr','müsst','jetzt','lernen.'],correct:'Ihr müsst jetzt lernen.'},
+  {t:'order',q:'Bilde den Satz:',words:['Das','ist','euer','Lehrer.'],correct:'Das ist euer Lehrer.'},
+  {t:'order',q:'Bilde den Satz:',words:['Florian','spielt','donnerstags','Geige.'],correct:'Florian spielt donnerstags Geige.'},
+  {t:'order',q:'Bilde den Satz:',words:['Was','machst','du','am','Abend?'],correct:'Was machst du am Abend?'},
+  {t:'order',q:'Bilde den Satz:',words:['Sie','zieht','sich','um','sieben','an.'],correct:'Sie zieht sich um sieben an.'},
+  {t:'order',q:'Bilde den Satz:',words:['Ich','will','morgen','früh','aufstehen.'],correct:'Ich will morgen früh aufstehen.'},
+  {t:'order',q:'Bilde den Satz:',words:['Er','kann','gut','kochen.'],correct:'Er kann gut kochen.'},
+  {t:'order',q:'Bilde den Satz:',words:['Unsere','Oma','wohnt','in','Wien.'],correct:'Unsere Oma wohnt in Wien.'},
+  {t:'order',q:'Bilde den Satz:',words:['Kaan','muss','viel','lernen.'],correct:'Kaan muss viel lernen.'},
+];
+
+const schreibenQ=[
+  {t:'fill1',q:'Ergänze: "Kaan ___ um halb acht auf." (aufstehen)',b:['steht']},
+  {t:'fill1',q:'Ergänze: "Er ___ seine Mutter ___." (anrufen)',b:['ruft','an']},
+  {t:'fill1',q:'Ergänze: "Wir ___ heute im Supermarkt ___." (einkaufen)',b:['kaufen','ein']},
+  {t:'fill1',q:'Ergänze: "Ich ___ abends gern fern." (fernsehen → sehen)',b:['sehe']},
+  {t:'fill1',q:'Ergänze: "Sie ___ ihr Zimmer ___." (aufräumen)',b:['räumt','auf']},
+  {t:'fill1',q:'"Es ist ___." Wie sagt man 8:30 (informell)?',b:['halb neun']},
+  {t:'fill1',q:'"Es ist ___." Wie sagt man 8:15 (informell)?',b:['Viertel nach acht']},
+  {t:'fill1',q:'"Es ist ___." Wie sagt man 8:45 (informell)?',b:['Viertel vor neun']},
+  {t:'fill1',q:'Ergänze: "Das ist ___ Vater." (ich, maskulin)',b:['mein']},
+  {t:'fill1',q:'Ergänze: "Das ist ___ Mutter." (ich, feminin)',b:['meine']},
+  {t:'fill1',q:'Ergänze: "Das ist ___ Kind." (wir, neutrum)',b:['unser']},
+  {t:'fill1',q:'Ergänze: "Das sind ___ Kinder." (wir)',b:['unsere']},
+  {t:'fill1',q:'Ergänze: "Das ist ___ Bruder." (sie = she, maskulin)',b:['ihr']},
+  {t:'fill1',q:'Ergänze: "Das ist ___ Schwester." (er, feminin)',b:['seine']},
+  {t:'fill1',q:'Ergänze: "Das ist ___ Opa." (ihr = you pl.)',b:['euer']},
+  {t:'fill1',q:'Ergänze: "Das ist ___ Oma." (ihr = you pl., feminin)',b:['eure']},
+  {t:'fill1',q:'Ergänze: "Ich ___ jetzt gehen." (müssen)',b:['muss']},
+  {t:'fill1',q:'Ergänze: "Du ___ mir helfen." (müssen)',b:['musst']},
+  {t:'fill1',q:'Ergänze: "Er ___ zur Schule gehen." (müssen)',b:['muss']},
+  {t:'fill1',q:'Ergänze: "Wir ___ früh aufstehen." (müssen)',b:['müssen']},
+  {t:'fill1',q:'Ergänze: "Ich ___ Deutsch lernen." (wollen)',b:['will']},
+  {t:'fill1',q:'Ergänze: "Du ___ Arzt werden." (wollen)',b:['willst']},
+  {t:'fill1',q:'Ergänze: "Ihr ___ mitfahren." (wollen)',b:['wollt']},
+  {t:'fill1',q:'Ergänze: "Ich ___ schwimmen." (können)',b:['kann']},
+  {t:'fill1',q:'Ergänze: "Kannst du ___?" (kommen - infinitiv)',b:['kommen']},
+  {t:'fill1',q:'Ergänze: "Sie ___ Geige spielen." (können, sie=she)',b:['kann']},
+  {t:'fill1',q:'Wie heißt der Vater der Eltern auf Deutsch?',b:['Großvater']},
+  {t:'fill1',q:'Wie heißt die Mutter der Eltern auf Deutsch?',b:['Großmutter']},
+  {t:'fill1',q:'"morgens" bedeutet auf Englisch: ___',b:['in the morning']},
+  {t:'fill1',q:'Trennbares Verb: "aufstehen" - Präfix ist: ___',b:['auf']},
+  {t:'fill1',q:'Ergänze: "Ich ___ um 7 Uhr auf." (aufstehen)',b:['stehe']},
+  {t:'fill1',q:'"Wie ___ ist es?" (spät)',b:['spät']},
+  {t:'fill1',q:'halb acht = ___:30 Uhr',b:['7']},
+  {t:'fill1',q:'Mara ist ___. (Beruf - Ärztin)',b:['Ärztin']},
+  {t:'fill1',q:'Florian spielt ___. (Musikinstrument aus dem Text)',b:['Geige']},
+];
+
+/* VOCAB DATA */
+const vocabData=[
+  {art:'V',w:'aufstehen',en:'to get up',ex:'Kaan steht um halb acht auf.'},
+  {art:'V',w:'anziehen',en:'to get dressed',ex:'Er zieht sich schnell an.'},
+  {art:'V',w:'einkaufen',en:'to go shopping',ex:'Wir kaufen heute ein.'},
+  {art:'V',w:'fernsehen',en:'to watch TV',ex:'Er sieht abends fern.'},
+  {art:'V',w:'anrufen',en:'to call (phone)',ex:'Er ruft seine Mutter an.'},
+  {art:'V',w:'aufraumen',en:'to tidy up',ex:'Ich raume mein Zimmer auf.'},
+  {art:'V',w:'abholen',en:'to pick up / collect',ex:'Mara holt Florian von der Schule ab.'},
+  {art:'V',w:'ausgehen',en:'to go out',ex:'Am Freitag gehen wir aus.'},
+  {art:'V',w:'einschlafen',en:'to fall asleep',ex:'Er schlaeft um 23 Uhr ein.'},
+  {art:'V',w:'aufmachen',en:'to open',ex:'Sie macht das Fenster auf.'},
+  {art:'V',w:'zumachen',en:'to close',ex:'Er macht die Tuer zu.'},
+  {art:'V',w:'mitkommen',en:'to come along',ex:'Kommst du mit?'},
+  {art:'V',w:'duschen',en:'to shower',ex:'Er duscht jeden Morgen.'},
+  {art:'V',w:'fruehstuecken',en:'to have breakfast',ex:'Sie fruehstueckt um acht Uhr.'},
+  {art:'V',w:'kochen',en:'to cook',ex:'Er kocht Nudeln.'},
+  {art:'V',w:'schlafen',en:'to sleep',ex:'Kaan geht um 23 Uhr schlafen.'},
+  {art:'V',w:'treffen',en:'to meet',ex:'Er trifft Marie in der Mensa.'},
+  {art:'V',w:'lernen',en:'to study / learn',ex:'Kaan lernt in der Bibliothek.'},
+  {art:'V',w:'fahren',en:'to travel (by vehicle)',ex:'Er faehrt mit dem Bus in die Uni.'},
+  {art:'V',w:'arbeiten',en:'to work',ex:'Mara arbeitet im Krankenhaus.'},
+  {art:'V',w:'spielen',en:'to play',ex:'Florian spielt Geige.'},
+  {art:'V',w:'besuchen',en:'to visit',ex:'Wir besuchen meine Eltern.'},
+  {art:'V',w:'aufpassen auf',en:'to look after',ex:'Hannes passt auf die Kinder auf.'},
+  {art:'V',w:'sich freuen auf',en:'to look forward to',ex:'Ich freue mich auf den Freitag.'},
+  {art:'V',w:'sich anziehen',en:'to get dressed (reflexive)',ex:'Er zieht sich um 7 Uhr an.'},
+  {art:'V',w:'muessen',en:'must / have to',ex:'Ich muss jetzt gehen.'},
+  {art:'V',w:'koennen',en:'can / be able to',ex:'Ich kann Geige spielen.'},
+  {art:'V',w:'wollen',en:'want to',ex:'Ich will Deutsch lernen.'},
+  {art:'V',w:'duerfen',en:'may / be allowed to',ex:'Darf ich kurz fragen?'},
+  {art:'V',w:'sollen',en:'should / supposed to',ex:'Du sollst um 8 Uhr hier sein.'},
+  {art:'V',w:'moegen',en:'to like',ex:'Ich mag Musik sehr gern.'},
+  {art:'M',w:'der Morgen',en:'morning',ex:'Am Morgen trinkt er Kaffee.'},
+  {art:'M',w:'der Mittag',en:'midday / noon',ex:'Am Mittag essen sie zusammen.'},
+  {art:'M',w:'der Nachmittag',en:'afternoon',ex:'Am Nachmittag lernt er.'},
+  {art:'M',w:'der Abend',en:'evening',ex:'Am Abend kocht er.'},
+  {art:'F',w:'die Nacht',en:'night',ex:'In der Nacht schlaeft er.'},
+  {art:'M',w:'der Wecker',en:'alarm clock',ex:'Der Wecker klingelt um 7 Uhr.'},
+  {art:'F',w:'die Stunde',en:'hour',ex:'Ich lerne zwei Stunden lang.'},
+  {art:'F',w:'die Minute',en:'minute',ex:'Die Fahrt dauert zwanzig Minuten.'},
+  {art:'M',w:'der Tag',en:'day',ex:'Kaan hat einen langen Tag.'},
+  {art:'F',w:'die Woche',en:'week',ex:'Naechste Woche habe ich Zeit.'},
+  {art:'M',w:'der Montag',en:'Monday',ex:'Am Montag gehe ich in die Uni.'},
+  {art:'M',w:'der Dienstag',en:'Tuesday',ex:'Dienstag habe ich frei.'},
+  {art:'M',w:'der Mittwoch',en:'Wednesday',ex:'Am Mittwoch lernen wir Grammatik.'},
+  {art:'M',w:'der Donnerstag',en:'Thursday',ex:'Florian geht donnerstags zur Musikschule.'},
+  {art:'M',w:'der Freitag',en:'Friday',ex:'Freitag abends gehen sie aus.'},
+  {art:'M',w:'der Samstag',en:'Saturday',ex:'Am Samstag schlaeft er lange.'},
+  {art:'M',w:'der Sonntag',en:'Sunday',ex:'Am Sonntag besuchen wir Oma.'},
+  {art:'N',w:'das Fruehstueck',en:'breakfast',ex:'Das Fruehstueck ist um acht Uhr.'},
+  {art:'N',w:'das Mittagessen',en:'lunch',ex:'Das Mittagessen gibt es in der Mensa.'},
+  {art:'N',w:'das Abendessen',en:'dinner / supper',ex:'Das Abendessen kocht Hannes.'},
+  {art:'F',w:'die Mensa',en:'university canteen',ex:'Er trifft Marie in der Mensa.'},
+  {art:'F',w:'die Bibliothek',en:'library',ex:'Kaan lernt in der Bibliothek.'},
+  {art:'M',w:'der Termin',en:'appointment',ex:'Ich habe um 14 Uhr einen Termin.'},
+  {art:'N',w:'das Krankenhaus',en:'hospital',ex:'Mara arbeitet im Krankenhaus.'},
+  {art:'F',w:'die Musikschule',en:'music school',ex:'Florian geht donnerstags zur Musikschule.'},
+  {art:'F',w:'die Schule',en:'school',ex:'Lena geht jeden Tag zur Schule.'},
+  {art:'F',w:'die Firma',en:'company / firm',ex:'Hannes arbeitet bei einer grossen Firma.'},
+  {art:'M',w:'der Vater / Papa',en:'father / dad',ex:'Mein Vater ist Techniker.'},
+  {art:'F',w:'die Mutter / Mama',en:'mother / mum',ex:'Seine Mutter wohnt in Ankara.'},
+  {art:'M',w:'der Sohn',en:'son',ex:'Ihr Sohn heisst Florian.'},
+  {art:'F',w:'die Tochter',en:'daughter',ex:'Ihre Tochter heisst Lena.'},
+  {art:'M',w:'der Bruder',en:'brother',ex:'Das ist mein Bruder.'},
+  {art:'F',w:'die Schwester',en:'sister',ex:'Meine Schwester ist 14.'},
+  {art:'F',w:'die Eltern (Pl.)',en:'parents',ex:'Mara besucht ihre Eltern.'},
+  {art:'F',w:'die Grossmutter / Oma',en:'grandmother',ex:'Unsere Oma wohnt in der Naehe.'},
+  {art:'M',w:'der Grossvater / Opa',en:'grandfather',ex:'Mein Opa ist 75 Jahre alt.'},
+  {art:'F',w:'die Geschwister (Pl.)',en:'siblings',ex:'Florian und Lena sind Geschwister.'},
+  {art:'M',w:'der Onkel',en:'uncle',ex:'Mein Onkel wohnt in Wien.'},
+  {art:'F',w:'die Tante',en:'aunt',ex:'Meine Tante ist Lehrerin.'},
+  {art:'N',w:'das Kind',en:'child',ex:'Mara hat zwei Kinder.'},
+  {art:'N',w:'das Baby',en:'baby',ex:'Das Baby schlaeft.'},
+  {art:'F',w:'die Aerztin / der Arzt',en:'doctor (f/m)',ex:'Mara ist Aerztin.'},
+  {art:'M',w:'der Techniker / die Technikerin',en:'technician (m/f)',ex:'Hannes ist Techniker.'},
+  {art:'M',w:'der Lehrer / die Lehrerin',en:'teacher (m/f)',ex:'Florians Lehrerin spielt Geige.'},
+  {art:'M',w:'der Student / die Studentin',en:'student (m/f)',ex:'Kaan ist Student.'},
+  {art:'M',w:'der Koch / die Koeochin',en:'chef (m/f)',ex:'Der Koch in der Mensa kocht gut.'},
+  {art:'F',w:'die Geige',en:'violin',ex:'Florian spielt Geige.'},
+  {art:'F',w:'die Trompete',en:'trumpet',ex:'Lena spielt Trompete.'},
+  {art:'N',w:'das Instrument',en:'instrument',ex:'Welches Instrument spielst du?'},
+  {art:'ADJ',w:'fruh',en:'early',ex:'Er steht fruh auf.'},
+  {art:'ADJ',w:'spaet',en:'late',ex:'Es ist spaet. Gute Nacht!'},
+  {art:'ADJ',w:'krank',en:'sick / ill',ex:'Er ist krank und bleibt zu Hause.'},
+  {art:'ADJ',w:'gesund',en:'healthy',ex:'Sie ist wieder gesund.'},
+  {art:'ADJ',w:'muede',en:'tired',ex:'Kaan ist sehr muede.'},
+  {art:'ADJ',w:'jung',en:'young',ex:'Florian ist noch jung, erst 12.'},
+  {art:'ADJ',w:'alt',en:'old',ex:'Mein Opa ist alt.'},
+  {art:'ADJ',w:'nett',en:'nice / kind',ex:'Lenas Freundin Jana ist sehr nett.'},
+  {art:'ADV',w:'zuerst',en:'first / at first',ex:'Zuerst duscht er, dann fruehstueckt er.'},
+  {art:'ADV',w:'dann',en:'then / next',ex:'Dann faehrt er in die Uni.'},
+  {art:'ADV',w:'danach',en:'after that',ex:'Danach lernt er in der Bibliothek.'},
+  {art:'ADV',w:'vorher',en:'before that',ex:'Vorher hat er gefruhstueckt.'},
+  {art:'ADV',w:'oft',en:'often',ex:'Er kocht oft Nudeln.'},
+  {art:'ADV',w:'immer',en:'always',ex:'Er duscht immer morgens.'},
+  {art:'ADV',w:'manchmal',en:'sometimes',ex:'Manchmal geht er laufen.'},
+  {art:'ADV',w:'nie',en:'never',ex:'Er fruehstueckt nie ohne Tee.'},
+  {art:'ADV',w:'meistens',en:'mostly / usually',ex:'Er faehrt meistens mit dem Bus.'},
+  {art:'ADV',w:'gegen',en:'around (time)',ex:'Gegen 18 Uhr kommt er nach Hause.'},
+  {art:'PH',w:'Wie spaet ist es?',en:'What time is it?',ex:'Wie spaet ist es? Es ist halb acht.'},
+  {art:'PH',w:'Um wie viel Uhr...?',en:'At what time...?',ex:'Um wie viel Uhr stehst du auf?'},
+  {art:'PH',w:'halb neun',en:'half past eight (8:30)',ex:'Es ist halb neun.'},
+  {art:'PH',w:'Viertel nach acht',en:'quarter past eight (8:15)',ex:'Um Viertel nach acht fruehstueckt er.'},
+  {art:'PH',w:'Viertel vor neun',en:'quarter to nine (8:45)',ex:'Es ist Viertel vor neun.'},
+  {art:'PH',w:'Punkt zehn Uhr',en:'exactly ten o clock',ex:'Der Zug faehrt um Punkt zehn Uhr ab.'},
+  {art:'PH',w:'Hast du Zeit?',en:'Do you have time?',ex:'Hast du am Donnerstag Zeit?'},
+  {art:'PH',w:'Das passt mir gut.',en:'That suits me well.',ex:'Um 19 Uhr? Das passt mir gut!'},
+  {art:'PH',w:'in der Naehe',en:'nearby / close',ex:'Das Restaurant ist in der Naehe.'},
+  {art:'PH',w:'Ich freue mich!',en:'I am looking forward to it!',ex:'Ich freue mich auf Freitag!'},
+  {art:'PH',w:'Bis dann!',en:'See you then!',ex:'Bis dann! Tschuess!'},
+  {art:'PH',w:'auf jemanden aufpassen',en:'to look after someone',ex:'Hannes passt auf die Kinder auf.'},
+  {art:'PH',w:'lange schlafen',en:'to sleep in',ex:'Am Samstag schlaeft er lange.'},
+  {art:'PH',w:'zu Hause',en:'at home',ex:'Er ist zu Hause und lernt.'},
+  {art:'PH',w:'morgens / abends',en:'in the morning / in the evening',ex:'Morgens trinkt er Tee, abends kocht er.'},
+]
+
+/* WÖRTERBUCH DATA */
+const wbData=[
+  {cat:'Verben',sub:'Trennbare Verben',art:'V',w:'aufstehen',en:'to get up',ex:'Ich stehe um 7 Uhr auf.',extra:'steht auf / auf+stehen'},
+  {cat:'Verben',sub:'Trennbare Verben',art:'V',w:'anziehen',en:'to get dressed',ex:'Er zieht sich um 7 Uhr an.',extra:'zieht an / an+ziehen'},
+  {cat:'Verben',sub:'Trennbare Verben',art:'V',w:'einkaufen',en:'to go shopping',ex:'Wir kaufen heute im Supermarkt ein.',extra:'kauft ein / ein+kaufen'},
+  {cat:'Verben',sub:'Trennbare Verben',art:'V',w:'fernsehen',en:'to watch TV',ex:'Er sieht abends gern fern.',extra:'sieht fern / fern+sehen / e to ie (Vokalwechsel)'},
+  {cat:'Verben',sub:'Trennbare Verben',art:'V',w:'anrufen',en:'to call by phone',ex:'Kaan ruft seine Mutter an.',extra:'ruft an / an+rufen'},
+  {cat:'Verben',sub:'Trennbare Verben',art:'V',w:'aufraeumen',en:'to tidy up',ex:'Ich raeume mein Zimmer auf.',extra:'raeumt auf / auf+raeumen'},
+  {cat:'Verben',sub:'Trennbare Verben',art:'V',w:'abholen',en:'to pick up / collect',ex:'Mara holt Florian von der Schule ab.',extra:'holt ab / ab+holen'},
+  {cat:'Verben',sub:'Trennbare Verben',art:'V',w:'ausgehen',en:'to go out',ex:'Am Freitag gehen wir aus.',extra:'geht aus / aus+gehen'},
+  {cat:'Verben',sub:'Trennbare Verben',art:'V',w:'einschlafen',en:'to fall asleep',ex:'Er schlaeft um 23 Uhr ein.',extra:'schlaeft ein / ein+schlafen / a to ae'},
+  {cat:'Verben',sub:'Trennbare Verben',art:'V',w:'mitkommen',en:'to come along',ex:'Kommst du mit?',extra:'kommt mit / mit+kommen'},
+  {cat:'Verben',sub:'Trennbare Verben',art:'V',w:'aufmachen',en:'to open',ex:'Sie macht das Fenster auf.',extra:'macht auf / Gegenteil: zumachen'},
+  {cat:'Verben',sub:'Tagesablauf',art:'V',w:'duschen',en:'to shower',ex:'Er duscht jeden Morgen.',extra:'duscht / geduscht'},
+  {cat:'Verben',sub:'Tagesablauf',art:'V',w:'fruehstuecken',en:'to have breakfast',ex:'Sie fruehstueckt um halb acht.',extra:'fruehstueckt / gefruehstueckt'},
+  {cat:'Verben',sub:'Tagesablauf',art:'V',w:'kochen',en:'to cook',ex:'Er kocht Nudeln.',extra:'kocht / gekocht'},
+  {cat:'Verben',sub:'Tagesablauf',art:'V',w:'schlafen',en:'to sleep',ex:'Kaan geht um 23 Uhr schlafen.',extra:'schlaeft (a to ae) / geschlafen'},
+  {cat:'Verben',sub:'Tagesablauf',art:'V',w:'arbeiten',en:'to work',ex:'Mara arbeitet im Krankenhaus.',extra:'arbeitet / gearbeitet / +et not +t after -t stem'},
+  {cat:'Verben',sub:'Tagesablauf',art:'V',w:'aufpassen auf',en:'to look after',ex:'Hannes passt auf die Kinder auf.',extra:'passt auf / separable: auf + passen'},
+  {cat:'Verben',sub:'Reflexive Verben',art:'V',w:'sich anziehen',en:'to get dressed',ex:'Er zieht sich an. Ich ziehe mich an.',extra:'Akkusativ reflexiv: mich / dich / sich / uns / euch / sich'},
+  {cat:'Verben',sub:'Reflexive Verben',art:'V',w:'sich freuen auf',en:'to look forward to',ex:'Ich freue mich auf den Freitag.',extra:'sich freuen auf + Akkusativ'},
+  {cat:'Verben',sub:'Reflexive Verben',art:'V',w:'sich treffen',en:'to meet each other',ex:'Wir treffen uns in der Mensa.',extra:'reflexiv: uns / euch / sich'},
+  {cat:'Verben',sub:'Modalverben',art:'V',w:'muessen',en:'must / have to',ex:'Ich muss arbeiten. Du musst lernen.',extra:'muss / musst / muss / muessen / muesst / muessen'},
+  {cat:'Verben',sub:'Modalverben',art:'V',w:'koennen',en:'can / be able to',ex:'Ich kann schwimmen. Sie kann Geige spielen.',extra:'kann / kannst / kann / koennen / koennt / koennen'},
+  {cat:'Verben',sub:'Modalverben',art:'V',w:'wollen',en:'want to',ex:'Ich will Deutsch lernen.',extra:'will / willst / will / wollen / wollt / wollen'},
+  {cat:'Verben',sub:'Modalverben',art:'V',w:'duerfen',en:'may / be allowed to',ex:'Darf ich kurz fragen? Hier darf man nicht parken.',extra:'darf / darfst / darf / duerfen / duerft / duerfen'},
+  {cat:'Verben',sub:'Modalverben',art:'V',w:'sollen',en:'should / supposed to',ex:'Du sollst um 8 Uhr hier sein.',extra:'soll / sollst / soll / sollen / sollt / sollen'},
+  {cat:'Verben',sub:'Modalverben',art:'V',w:'moegen',en:'to like',ex:'Ich mag Musik sehr gern.',extra:'mag / magst / mag / moegen / moeght / moegen'},
+  {cat:'Nomen',sub:'Tageszeiten',art:'M',w:'der Morgen',en:'morning',ex:'Am Morgen trinkt er Kaffee.',extra:'morgens = in the morning (adverb)'},
+  {cat:'Nomen',sub:'Tageszeiten',art:'M',w:'der Mittag',en:'midday',ex:'Um Mittag essen sie zusammen.',extra:'mittags = at midday'},
+  {cat:'Nomen',sub:'Tageszeiten',art:'M',w:'der Nachmittag',en:'afternoon',ex:'Am Nachmittag lernt er.',extra:'nachmittags = in the afternoon'},
+  {cat:'Nomen',sub:'Tageszeiten',art:'M',w:'der Abend',en:'evening',ex:'Abends kocht Kaan.',extra:'abends = in the evening'},
+  {cat:'Nomen',sub:'Tageszeiten',art:'F',w:'die Nacht',en:'night',ex:'In der Nacht schlaeft er.',extra:'nachts = at night'},
+  {cat:'Nomen',sub:'Tageszeiten',art:'M',w:'der Wecker',en:'alarm clock',ex:'Der Wecker klingelt um 7 Uhr.',extra:'Plural: die Wecker / klingeln = to ring'},
+  {cat:'Nomen',sub:'Tageszeiten',art:'F',w:'die Stunde',en:'hour',ex:'Die Fahrt dauert eine Stunde.',extra:'Plural: die Stunden'},
+  {cat:'Nomen',sub:'Mahlzeiten',art:'N',w:'das Fruehstueck',en:'breakfast',ex:'Das Fruehstueck ist um 8 Uhr.',extra:'fruehstuecken (V) = to have breakfast'},
+  {cat:'Nomen',sub:'Mahlzeiten',art:'N',w:'das Mittagessen',en:'lunch',ex:'Das Mittagessen gibt es in der Mensa.',extra:'zu Mittag essen = to have lunch'},
+  {cat:'Nomen',sub:'Mahlzeiten',art:'N',w:'das Abendessen',en:'dinner / supper',ex:'Das Abendessen kocht Hannes.',extra:'zu Abend essen = to have dinner'},
+  {cat:'Nomen',sub:'Wochentage',art:'M',w:'der Montag',en:'Monday',ex:'Am Montag gehe ich in die Uni.',extra:'montags = every Monday'},
+  {cat:'Nomen',sub:'Wochentage',art:'M',w:'der Dienstag',en:'Tuesday',ex:'Dienstags habe ich frei.',extra:'dienstags = every Tuesday'},
+  {cat:'Nomen',sub:'Wochentage',art:'M',w:'der Mittwoch',en:'Wednesday',ex:'Am Mittwoch lernen wir Grammatik.',extra:'mittwochs = every Wednesday'},
+  {cat:'Nomen',sub:'Wochentage',art:'M',w:'der Donnerstag',en:'Thursday',ex:'Florian geht donnerstags zur Musikschule.',extra:'donnerstags = every Thursday'},
+  {cat:'Nomen',sub:'Wochentage',art:'M',w:'der Freitag',en:'Friday',ex:'Freitagabend gehen sie aus.',extra:'freitags = every Friday'},
+  {cat:'Nomen',sub:'Wochentage',art:'M',w:'der Samstag',en:'Saturday',ex:'Am Samstag schlaeft er lange.',extra:'samstags = every Saturday'},
+  {cat:'Nomen',sub:'Wochentage',art:'M',w:'der Sonntag',en:'Sunday',ex:'Am Sonntag besuchen wir Oma.',extra:'sonntags = every Sunday'},
+  {cat:'Nomen',sub:'Familie',art:'M',w:'der Vater (Papa)',en:'father (dad)',ex:'Mein Vater ist Techniker.',extra:'Plural: die Vaeter'},
+  {cat:'Nomen',sub:'Familie',art:'F',w:'die Mutter (Mama)',en:'mother (mum)',ex:'Seine Mutter wohnt in Ankara.',extra:'Plural: die Muetter'},
+  {cat:'Nomen',sub:'Familie',art:'M',w:'der Sohn',en:'son',ex:'Ihr Sohn heisst Florian.',extra:'Plural: die Soehne'},
+  {cat:'Nomen',sub:'Familie',art:'F',w:'die Tochter',en:'daughter',ex:'Ihre Tochter heisst Lena.',extra:'Plural: die Toechter'},
+  {cat:'Nomen',sub:'Familie',art:'M',w:'der Bruder',en:'brother',ex:'Das ist mein Bruder.',extra:'Plural: die Brueder'},
+  {cat:'Nomen',sub:'Familie',art:'F',w:'die Schwester',en:'sister',ex:'Meine Schwester ist 14.',extra:'Plural: die Schwestern'},
+  {cat:'Nomen',sub:'Familie',art:'M',w:'der Mann',en:'husband / man',ex:'Ihr Mann heisst Hannes.',extra:'Plural: die Maenner'},
+  {cat:'Nomen',sub:'Familie',art:'F',w:'die Frau',en:'wife / woman',ex:'Meine Frau ist Aerztin.',extra:'Plural: die Frauen'},
+  {cat:'Nomen',sub:'Familie',art:'F',w:'die Eltern (Pl.)',en:'parents',ex:'Mara besucht ihre Eltern.',extra:'Always plural / kein Singular'},
+  {cat:'Nomen',sub:'Familie',art:'F',w:'die Grossmutter / Oma',en:'grandmother',ex:'Unsere Oma wohnt in der Naehe.',extra:'Plural: die Grossmuetter'},
+  {cat:'Nomen',sub:'Familie',art:'M',w:'der Grossvater / Opa',en:'grandfather',ex:'Mein Opa ist 75 Jahre alt.',extra:'Plural: die Grossvaeter'},
+  {cat:'Nomen',sub:'Familie',art:'F',w:'die Geschwister (Pl.)',en:'siblings',ex:'Florian und Lena sind Geschwister.',extra:'Always plural'},
+  {cat:'Nomen',sub:'Familie',art:'M',w:'der Onkel',en:'uncle',ex:'Mein Onkel wohnt in Wien.',extra:'Plural: die Onkel'},
+  {cat:'Nomen',sub:'Familie',art:'F',w:'die Tante',en:'aunt',ex:'Meine Tante ist Lehrerin.',extra:'Plural: die Tanten'},
+  {cat:'Nomen',sub:'Familie',art:'N',w:'das Kind',en:'child',ex:'Mara hat zwei Kinder.',extra:'Plural: die Kinder'},
+  {cat:'Nomen',sub:'Berufe',art:'F',w:'die Aerztin / der Arzt',en:'doctor (f / m)',ex:'Mara ist Aerztin.',extra:'No article after sein: Ich bin Arzt'},
+  {cat:'Nomen',sub:'Berufe',art:'M',w:'der Techniker / die Technikerin',en:'technician (m / f)',ex:'Hannes ist Techniker.',extra:'No article after sein'},
+  {cat:'Nomen',sub:'Berufe',art:'M',w:'der Lehrer / die Lehrerin',en:'teacher (m / f)',ex:'Florians Lehrerin spielt Geige.',extra:'-in suffix = feminine form'},
+  {cat:'Nomen',sub:'Berufe',art:'M',w:'der Student / die Studentin',en:'student (m / f)',ex:'Kaan ist Student.',extra:'Plural: die Studenten / Studentinnen'},
+  {cat:'Nomen',sub:'Berufe',art:'M',w:'der Koch / die Koeochin',en:'chef (m / f)',ex:'Der Koch in der Mensa kocht gut.',extra:'Plural: die Koeche'},
+  {cat:'Nomen',sub:'Orte',art:'F',w:'die Mensa',en:'university canteen',ex:'Er trifft Marie in der Mensa.',extra:'Plural: die Mensen'},
+  {cat:'Nomen',sub:'Orte',art:'F',w:'die Bibliothek',en:'library',ex:'Kaan lernt in der Bibliothek.',extra:'Plural: die Bibliotheken'},
+  {cat:'Nomen',sub:'Orte',art:'M',w:'der Termin',en:'appointment',ex:'Ich habe um 14 Uhr einen Termin.',extra:'Plural: die Termine'},
+  {cat:'Nomen',sub:'Orte',art:'N',w:'das Krankenhaus',en:'hospital',ex:'Mara arbeitet im Krankenhaus.',extra:'Plural: die Krankenhaeuser'},
+  {cat:'Nomen',sub:'Orte',art:'F',w:'die Firma',en:'company / firm',ex:'Hannes arbeitet bei einer grossen Firma.',extra:'Plural: die Firmen'},
+  {cat:'Adjektive',sub:'Beschreibung',art:'ADJ',w:'frueh',en:'early',ex:'Er steht frueh auf.',extra:'Gegenteil: spaet'},
+  {cat:'Adjektive',sub:'Beschreibung',art:'ADJ',w:'spaet',en:'late',ex:'Es ist schon spaet!',extra:'Gegenteil: frueh'},
+  {cat:'Adjektive',sub:'Beschreibung',art:'ADJ',w:'krank',en:'sick / ill',ex:'Er ist krank und bleibt zu Hause.',extra:'Gegenteil: gesund'},
+  {cat:'Adjektive',sub:'Beschreibung',art:'ADJ',w:'gesund',en:'healthy / well',ex:'Sie ist wieder gesund.',extra:'Gegenteil: krank'},
+  {cat:'Adjektive',sub:'Beschreibung',art:'ADJ',w:'muede',en:'tired',ex:'Kaan ist nach dem langen Tag sehr muede.',extra:'Gegenteil: wach / munter'},
+  {cat:'Adjektive',sub:'Beschreibung',art:'ADJ',w:'jung',en:'young',ex:'Florian ist erst 12, er ist noch jung.',extra:'Gegenteil: alt'},
+  {cat:'Adjektive',sub:'Beschreibung',art:'ADJ',w:'nett',en:'nice / kind',ex:'Lenas Freundin Jana ist sehr nett.',extra:'aehnlich: freundlich = friendly'},
+  {cat:'Ausdrücke',sub:'Uhrzeit',art:'PH',w:'Wie spaet ist es?',en:'What time is it?',ex:'Wie spaet ist es? Es ist halb acht.'},
+  {cat:'Ausdrücke',sub:'Uhrzeit',art:'PH',w:'Es ist halb neun.',en:'It is 8:30.',ex:'Halb neun = half to nine = 8:30'},
+  {cat:'Ausdrücke',sub:'Uhrzeit',art:'PH',w:'Viertel nach acht',en:'8:15 (quarter past eight)',ex:'Um Viertel nach acht fruehstueckt er.'},
+  {cat:'Ausdrücke',sub:'Uhrzeit',art:'PH',w:'Viertel vor neun',en:'8:45 (quarter to nine)',ex:'Es ist Viertel vor neun.'},
+  {cat:'Ausdrücke',sub:'Uhrzeit',art:'PH',w:'Punkt zehn Uhr',en:'exactly 10 o clock',ex:'Der Zug faehrt um Punkt zehn Uhr ab.'},
+  {cat:'Ausdrücke',sub:'Uhrzeit',art:'PH',w:'gegen 18 Uhr',en:'around 6pm',ex:'Gegen 18 Uhr kommt er nach Hause.'},
+  {cat:'Ausdrücke',sub:'Termine',art:'PH',w:'Hast du Zeit?',en:'Do you have time?',ex:'Hast du am Donnerstag Zeit?'},
+  {cat:'Ausdrücke',sub:'Termine',art:'PH',w:'Das passt mir gut.',en:'That suits me well.',ex:'Freitagabend? Das passt mir gut!'},
+  {cat:'Ausdrücke',sub:'Termine',art:'PH',w:'Wann hast du Zeit?',en:'When do you have time?',ex:'Wann hast du Zeit? Am Freitag?'},
+  {cat:'Ausdrücke',sub:'Termine',art:'PH',w:'Bis dann! / Bis bald!',en:'See you then! / See you soon!',ex:'Bis dann! Tschuess!'},
+  {cat:'Ausdrücke',sub:'Termine',art:'PH',w:'Ich freue mich schon!',en:'I am already looking forward to it!',ex:'Bis Freitag! Ich freue mich schon!'},
+  {cat:'Ausdrücke',sub:'Tagesablauf',art:'PH',w:'zuerst ... dann ...',en:'first ... then ...',ex:'Zuerst duscht er, dann fruehstueckt er.'},
+  {cat:'Ausdrücke',sub:'Tagesablauf',art:'PH',w:'danach / vorher',en:'after that / before that',ex:'Danach lernt er. Vorher hat er gegessen.'},
+  {cat:'Ausdrücke',sub:'Tagesablauf',art:'PH',w:'zu Hause',en:'at home',ex:'Er ist zu Hause und lernt.'},
+  {cat:'Ausdrücke',sub:'Tagesablauf',art:'PH',w:'in der Naehe',en:'nearby / close by',ex:'Das Restaurant ist in der Naehe.'},
+  {cat:'Ausdrücke',sub:'Tagesablauf',art:'PH',w:'auf jemanden aufpassen',en:'to look after someone',ex:'Hannes passt auf die Kinder auf.'},
+];
+
+
+/* RENDER EXERCISES */
+function renderAll(){
+  renderSet(lesenQ,'lesen-set');
+  renderSet(sprechenQ,'sprechen-set');
+  renderSet(schreibenQ,'schreiben-set');
+  renderSet(lesen1Q,'lesen1-set');
+  renderSet(lesen2Q,'lesen2-set');
+  renderSet(lesen3Q,'lesen3-set');
+}
+function renderSet(data,cid){
+  const c=document.getElementById(cid);c.innerHTML='';
+  data.forEach((q,i)=>{
+    const id=cid.split('-')[0]+'-'+i;
+    let inner='';
+    if(q.t==='mc'||q.t==='passage'){
+      const ph=q.p?`<div class="passage">${q.p}</div>`:'';
+      const oh=q.opts.map((o,oi)=>`<button class="opt" id="opt-${id}-${oi}" onclick="checkMC('${id}',${oi},${q.ans})">${o}</button>`).join('');
+      inner=`${ph}<div class="q-text">${q.q}</div><div class="opts">${oh}</div>`;
+    } else if(q.t==='order'){
+      orderState[id]=[];
+      const sh=[...q.words].sort(()=>Math.random()-.5);
+      const ch=sh.map((w,wi)=>`<button class="wchip" id="wc-${id}-${wi}" onclick="pickWord('${id}',${wi},'${w.replace(/'/g,"\\'")}') ">${w}</button>`).join('');
+      inner=`<div class="q-text">${q.q}</div><div class="hint-t">Tippe auf die Woerter in der richtigen Reihenfolge:</div><div class="ans-area" id="aa-${id}" style="color:var(--muted);font-style:italic;font-weight:600;">Hier erscheint dein Satz...</div><div class="word-bank" id="wb2-${id}">${ch}</div>`;
+    } else if(q.t==='fill1'){
+      const ih=q.b.map((_,bi)=>`<input class="inline-inp" id="ii-${id}-${bi}" placeholder="?" autocomplete="off" autocorrect="off" spellcheck="false" onkeydown="if(event.key==='Enter')checkFill('${id}',${i},'${cid.split('-')[0]}')">`).join(' ');
+      inner=`<div class="q-text">${q.q}</div><div style="margin-top:6px">${ih}</div>`;
+    }
+    const tl=q.t==='mc'||q.t==='passage'?'Multiple Choice':q.t==='order'?'Wortstellung':'Lueckentext';
+    c.innerHTML+=`<div class="qcard" id="card-${id}">
+      <div class="q-meta"><span class="q-num">#${i+1}</span><span class="q-type">${tl}</span><span class="q-status" id="st-${id}"></span></div>
+      ${inner}
+      <div class="fb" id="fb-${id}"></div>
+      <div class="q-actions">
+        ${q.t==='order'?`<button class="btn-check" onclick="checkOrd('${id}',${i},'${cid.split('-')[0]}')">Pruefen &#10003;</button><button class="btn-reset" onclick="resetOrd('${id}')">&#8634; Reset</button>`:''}
+        ${q.t==='fill1'?`<button class="btn-check" onclick="checkFill('${id}',${i},'${cid.split('-')[0]}')">Pruefen &#10003;</button>`:''}
+      </div>
+    </div>`;
+  });
+}
+function checkMC(id,chosen,correct){
+  if(answered.has(id))return;answered.add(id);
+  document.querySelectorAll(`[id^="opt-${id}-"]`).forEach((b,i)=>{b.classList.add('disabled');if(i===correct)b.classList.add('correct');else if(i===chosen&&chosen!==correct)b.classList.add('wrong');});
+  const fb=document.getElementById('fb-'+id),st=document.getElementById('st-'+id);
+  if(chosen===correct){correctSet.add(id);st.textContent='✅';fb.textContent='Richtig! +1 Punkt 🎉';fb.className='fb ok';addScore(1);}
+  else{wrongSet.add(id);st.textContent='❌';fb.textContent='Leider falsch. Die richtige Antwort ist markiert.';fb.className='fb err';}
+}
+function pickWord(id,wi,word){
+  const chip=document.getElementById('wc-'+id+'-'+wi);
+  if(chip.classList.contains('used'))return;
+  chip.classList.add('used');
+  orderState[id].push({wi,word});
+  const aa=document.getElementById('aa-'+id);
+  aa.style.color='var(--navy)';aa.style.fontStyle='normal';aa.style.fontWeight='700';
+  aa.textContent=orderState[id].map(x=>x.word).join(' ');
+}
+function checkOrd(id,qi,section){
+  if(answered.has(id))return;
+  const data=section==='lesen'?lesenQ:section==='sprechen'?sprechenQ:schreibenQ;
+  const userAns=orderState[id].map(x=>x.word).join(' ').trim();
+  const correct=data[qi].correct.trim();
+  const fb=document.getElementById('fb-'+id),st=document.getElementById('st-'+id);
+  if(userAns===correct){answered.add(id);correctSet.add(id);st.textContent='✅';fb.textContent='Perfekt! +1 Punkt 🎉';fb.className='fb ok';addScore(1);document.querySelectorAll(`#wb2-${id} .wchip`).forEach(c=>c.disabled=true);}
+  else{st.textContent='❌';fb.innerHTML=`Noch nicht ganz. Richtig: <em>${correct}</em>`;fb.className='fb err';}
+}
+function resetOrd(id){
+  if(answered.has(id))return;
+  orderState[id]=[];
+  const aa=document.getElementById('aa-'+id);
+  aa.style.color='var(--muted)';aa.style.fontStyle='italic';aa.style.fontWeight='600';
+  aa.textContent='Hier erscheint dein Satz...';
+  document.querySelectorAll(`#wb2-${id} .wchip`).forEach(c=>c.classList.remove('used'));
+  document.getElementById('fb-'+id).textContent='';
+}
+function checkFill(id,qi,section){
+  if(answered.has(id))return;
+  const data=section==='lesen'?lesenQ:section==='sprechen'?sprechenQ:schreibenQ;
+  const q=data[qi];let allOk=true;
+  q.b.forEach((ans,bi)=>{
+    const inp=document.getElementById('ii-'+id+'-'+bi);if(!inp)return;
+    if(inp.value.trim().toLowerCase()===ans.toLowerCase())inp.classList.add('correct');
+    else{inp.classList.add('wrong');allOk=false;}
+  });
+  const fb=document.getElementById('fb-'+id),st=document.getElementById('st-'+id);
+  if(allOk){answered.add(id);correctSet.add(id);st.textContent='✅';fb.textContent='Ausgezeichnet! +1 Punkt 🎉';fb.className='fb ok';addScore(1);}
+  else{st.textContent='❌';fb.textContent='Nicht ganz. Richtig: '+q.b.join(', ');fb.className='fb err';}
+}
+
+/* VOCAB */
+function buildVocab(){
+  const c=document.getElementById('vocab-container');
+  const cats=[
+    {label:'⚡ Wichtige Verben',words:vocabData.filter(v=>v.art==='V')},
+    {label:'🏷️ Nomen',words:vocabData.filter(v=>['M','F','N'].includes(v.art))},
+    {label:'🎨 Adjektive',words:vocabData.filter(v=>v.art==='ADJ')},
+    {label:'💬 Ausdrücke und Phrasen',words:vocabData.filter(v=>v.art==='PH')},
+  ];
+  const artCls={M:'art-m',F:'art-f',N:'art-n',V:'art-v',ADJ:'art-adj',PH:'art-ph'};
+  const artLbl={M:'der',F:'die',N:'das',V:'Verb',ADJ:'Adj',PH:'Ausdruck'};
+  let html='';
+  cats.forEach(cat=>{
+    if(!cat.words.length)return;
+    html+=`<div class="sec-h" style="font-size:.78rem;color:var(--purple);margin:16px 0 8px;">${cat.label}</div><div class="vocab-grid">`;
+    cat.words.forEach(v=>{
+      const ac=artCls[v.art]||'art-n',al=artLbl[v.art]||'';
+      const dw=v.w.replace(/^(der |die |das )/,'');
+      html+=`<div class="vword" onclick="this.classList.toggle('open')">
+        <div class="vw-top"><span class="vw-art ${ac}">${al}</span><span class="vw-word">${dw}</span></div>
+        <div class="vw-details"><div class="vw-en">🇬🇧 ${v.en}</div><div class="vw-ex">${v.ex}</div></div>
+      </div>`;
+    });
+    html+='</div>';
+  });
+  c.innerHTML=html;
+}
+function filterVocab(){
+  const q=document.getElementById('v-search').value.toLowerCase();
+  document.querySelectorAll('#vocab-container .vword').forEach(v=>{v.style.display=v.textContent.toLowerCase().includes(q)?'':'none';});
+}
+
+/* WÖRTERBUCH */
+var wbCurrentCat='all';
+function buildWB(){renderWB(wbCurrentCat,document.getElementById('wb-search').value.toLowerCase());}
+function renderWB(cat,search){
+  const c=document.getElementById('wb-container');
+  let filtered=wbData;
+  if(cat!=='all')filtered=filtered.filter(w=>w.cat===cat);
+  if(search)filtered=filtered.filter(w=>w.w.toLowerCase().includes(search)||w.en.toLowerCase().includes(search)||(w.sub&&w.sub.toLowerCase().includes(search)));
+  const groups={};
+  filtered.forEach(w=>{const k=w.sub||w.cat;if(!groups[k])groups[k]=[];groups[k].push(w);});
+  const artCls={M:'art-m',F:'art-f',N:'art-n',V:'art-v',ADJ:'art-adj',PH:'art-ph'};
+  const artLbl={M:'der',F:'die',N:'das',V:'Verb',ADJ:'Adj',PH:'Ausdruck'};
+  let html=`<div style="font-size:.78rem;color:var(--muted);margin-bottom:12px;font-weight:700;">${filtered.length} Woerter gefunden</div>`;
+  if(!filtered.length){c.innerHTML='<div style="text-align:center;color:var(--muted);padding:40px;">Kein Wort gefunden.</div>';return;}
+  Object.entries(groups).forEach(([sub,words])=>{
+    html+=`<div class="wb-cat-title">${sub} <span style="font-size:.7rem;font-weight:700;color:var(--muted);text-transform:none;letter-spacing:0;">(${words.length})</span></div><div class="wb-grid">`;
+    words.forEach((w,i)=>{
+      const uid='wb-'+w.w.replace(/[^a-zA-Z]/g,'')+i;
+      const ac=artCls[w.art]||'art-n',al=artLbl[w.art]||'';
+      const dw=w.w.replace(/^(der |die |das )/,'');
+      html+=`<div class="wb-item" id="${uid}">
+        <div class="wb-head" onclick="toggleWB('${uid}')">
+          <span class="wb-art-badge ${ac}">${al}</span>
+          <span class="wb-word-text">${dw}</span>
+          <span class="wb-short-en">${w.en.split('/')[0].trim()}</span>
+          <span class="wb-arrow">▶</span>
+        </div>
+        <div class="wb-body">
+          <div class="wb-en-full">🇬🇧 ${w.en}</div>
+          <div class="wb-ex-sent">„${w.ex}"</div>
+          ${w.extra?`<div class="wb-extra">📝 ${w.extra}</div>`:''}
+        </div>
+      </div>`;
+    });
+    html+='</div>';
+  });
+  c.innerHTML=html;
+}
+function toggleWB(id){document.getElementById(id).classList.toggle('open');}
+function filterWBCat(cat,btn){wbCurrentCat=cat;document.querySelectorAll('.wb-filter').forEach(b=>b.classList.remove('active'));btn.classList.add('active');renderWB(cat,document.getElementById('wb-search').value.toLowerCase());}
+function filterWB(){renderWB(wbCurrentCat,document.getElementById('wb-search').value.toLowerCase());}
+
+/* SCORE CARD */
+function openSubmit(){document.getElementById('sc-overlay').classList.remove('hidden');document.getElementById('sc-modal').classList.remove('hidden');document.getElementById('sr-card').classList.add('hidden');document.getElementById('sc-name-inp').value='';setTimeout(()=>document.getElementById('sc-name-inp').focus(),100);}
+function generateCard(){
+  const name=document.getElementById('sc-name-inp').value.trim();
+  if(!name){document.getElementById('sc-name-inp').style.borderColor='var(--red)';return;}
+  const totalQ=lesenQ.length+lesen1Q.length+lesen2Q.length+lesen3Q.length+sprechenQ.length+schreibenQ.length;
+  const now=new Date();
+  document.getElementById('sr-name').textContent=name;
+  document.getElementById('sr-pts').textContent=score;
+  document.getElementById('sr-correct').textContent=correctSet.size+'/'+totalQ;
+  document.getElementById('sr-wrong').textContent=wrongSet.size;
+  document.getElementById('sr-skipped').textContent=totalQ-correctSet.size-wrongSet.size;
+  document.getElementById('sr-maxpts').textContent=totalQ;
+  document.getElementById('sr-date').textContent=now.toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'});
+  document.getElementById('sc-modal').classList.add('hidden');
+  document.getElementById('sr-card').classList.remove('hidden');
+  const studentId=localStorage.getItem('dm_student_id');
+  if(studentId&&window.saveKapitelScore){window.saveKapitelScore(studentId,'a1k5',score);}
+  else{const f=document.querySelector('.sr-footer');if(f)f.innerHTML='<span style="color:var(--red);font-weight:800;">Log in to save your score to your profile!</span><br>Platform: <strong>Deutsch Meistern</strong>';}
+}
+function closeCard(){document.getElementById('sc-overlay').classList.add('hidden');}
+
+/* INIT */
+renderAll();
+buildVocab();
+window.addEventListener('load',function(){
+  const ov=document.getElementById('sc-overlay');
+  if(ov)ov.addEventListener('click',function(e){if(e.target===this)closeCard();});
+});
+</script>
+
+<!-- Firebase: Real Leaderboard + Score Save -->
+<script type="module">
+import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js';
+import { getFirestore, collection, doc, getDoc, updateDoc, getDocs, query, orderBy, limit }
+  from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js';
+
+const app = initializeApp({
+  apiKey:"AIzaSyCuMSWNpOIlnqqxFmy08CfIcbvAUpTXo1E",
+  authDomain:"deutschmeistern-abc4d.firebaseapp.com",
+  projectId:"deutschmeistern-abc4d",
+  storageBucket:"deutschmeistern-abc4d.firebasestorage.app",
+  messagingSenderId:"282075407369",
+  appId:"1:282075407369:web:4a5587b4eb391e768004d8"
+});
+const db = getFirestore(app);
+
+window.saveKapitelScore = async function(studentId, kapitelKey, newScore) {
+  try {
+    const ref = doc(db, 'students', studentId);
+    const snap = await getDoc(ref);
+    if (!snap.exists()) return;
+    const scores = snap.data().scores || {};
+    if (newScore > (scores[kapitelKey] || 0)) {
+      scores[kapitelKey] = newScore;
+      const totalScore = Object.values(scores).reduce((a,b) => a+b, 0);
+      await updateDoc(ref, { scores, totalScore });
+      const ptEl = document.getElementById('prev-pts');
+      const el = document.getElementById('prev-best');
+      if (el && ptEl) { ptEl.textContent = newScore; el.style.display = 'flex'; }
+      const toast=document.createElement('div');
+      toast.style.cssText='position:fixed;bottom:90px;left:50%;transform:translateX(-50%);background:#16a34a;color:#fff;padding:10px 22px;border-radius:50px;font-family:Nunito,sans-serif;font-weight:900;font-size:.82rem;z-index:9999;box-shadow:0 4px 20px rgba(0,0,0,.25);white-space:nowrap;';
+      toast.textContent='Score saved to your profile!';document.body.appendChild(toast);setTimeout(()=>toast.remove(),3000);
+    }
+  } catch(e) { console.log('Score save error:', e); }
+};
+
+// Show previous best score + "already completed" banner on page load
+(async function() {
+  const sid = localStorage.getItem('dm_student_id');
+  if (!sid) return;
+  try {
+    const ref = doc(db, 'students', sid);
+    const snap = await getDoc(ref);
+    if (!snap.exists()) return;
+    const scores = snap.data().scores || {};
+    const prev = scores['a1k5'] || 0;
+    if (prev > 0) {
+      const el = document.getElementById('prev-best');
+      const ptEl = document.getElementById('prev-pts');
+      if (el && ptEl) { ptEl.textContent = prev; el.style.display = 'flex'; }
+    }
+  } catch(e) {}
+})();
+
+// Leaderboard
+window.loadLeaderboard = async function() {
+  const listEl = document.getElementById('lb-list');
+  if(listEl) listEl.innerHTML = '<div style="text-align:center;padding:24px;color:var(--muted);font-size:.85rem;">&#9203; Lade Rangliste...</div>';
+  try {
+    const myId = localStorage.getItem('dm_student_id');
+    const q = query(collection(db,'students'), orderBy('totalScore','desc'), limit(20));
+    const snap = await getDocs(q);
+    const students = [];
+    snap.forEach(d => {
+      const data = d.data();
+      if((data.totalScore||0)>0) students.push({id:d.id, name:data.name||data.studentName||'Student', total:data.totalScore||0, you:d.id===myId});
+    });
+    if(myId && !students.find(s=>s.id===myId)){
+      const mySelf=localStorage.getItem('dm_student_name');
+      if(mySelf) students.push({id:myId,name:mySelf,total:0,you:true});
+    }
+    students.sort((a,b)=>b.total-a.total);
+    const podEl = document.getElementById('podium');
+    const top3 = students.slice(0,3);
+    const order = [top3[1],top3[0],top3[2]].filter(Boolean);
+    const medals = ['&#129352;','&#129351;','&#129353;'];
+    const podH = ['pod-2','pod-1','pod-3'];
+    if(podEl) podEl.innerHTML = order.map((r,i)=>`<div class="pod ${podH[i]}"><div class="pod-inner"><div class="pod-rank">${medals[i]}</div><div class="pod-name">${r.name}</div><div class="pod-pts">${r.total} pts</div></div></div>`).join('');
+    const maxPts = Math.max(...students.map(s=>s.total),1);
+    if(listEl) listEl.innerHTML = students.length===0
+      ? '<div style="text-align:center;padding:30px;color:var(--muted);font-size:.88rem;">Noch keine Punkte! Mach Uebungen und gib deinen Score ab.</div>'
+      : students.map((s,i)=>`<div class="lb-row${s.you?' lb-you':''}"><div class="lb-rank">${i+1}</div><div style="flex:1"><div class="lb-name">${s.name}${s.you?' &#128072;':''}</div><div class="lb-bar-wrap"><div class="lb-bar" style="width:${Math.round(s.total/maxPts*100)}%"></div></div></div><div class="lb-pts">${s.total}</div></div>`).join('');
+  } catch(e){
+    console.log('Leaderboard error:',e);
+    if(listEl) listEl.innerHTML='<div style="text-align:center;padding:20px;color:var(--muted);">Konnte Rangliste nicht laden.</div>';
+  }
+};
+</script>
+</body>
+</html>

@@ -93,8 +93,13 @@ input.inp:focus{border-color:var(--blue);}
 .level-sub-bar{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px;padding:2px 0;}
 .level-sub-btn{padding:6px 16px;border-radius:20px;border:2px solid var(--border);background:#fff;color:var(--muted);font-family:'Nunito',sans-serif;font-size:.78rem;font-weight:800;cursor:pointer;transition:all .15s;white-space:nowrap;}
 .level-sub-btn.active{background:var(--blue);border-color:var(--blue);color:#fff;}
-.level-panel{display:none;}
-.level-panel.active{display:block;}
+.level-panel{display:none;}.level-panel.active{display:block;}
+
+/* LEVEL GROUPS */
+.level-group{margin-bottom:8px;}
+.level-group-header{display:flex;align-items:center;justify-content:space-between;padding:10px 4px 8px;}
+.level-group-title{font-size:.78rem;font-weight:900;color:var(--navy);text-transform:uppercase;letter-spacing:.8px;}
+.level-group-count{font-size:.68rem;font-weight:800;color:var(--muted);background:#f1f5f9;padding:2px 9px;border-radius:20px;}
 
 /* REPORT BUTTON */
 .btn-report{font-size:.7rem;background:linear-gradient(135deg,var(--blue),var(--purple));color:#fff;border:none;border-radius:7px;padding:4px 10px;cursor:pointer;font-family:'Nunito',sans-serif;font-weight:800;white-space:nowrap;}
@@ -111,6 +116,7 @@ input.inp:focus{border-color:var(--blue);}
 
 /* BADGES */
 .badge-level{background:#f5f3ff;color:var(--purple);padding:2px 7px;border-radius:6px;font-size:.7rem;font-weight:800;}
+.badge-pending{background:#fef9c3;color:#92400e;padding:2px 8px;border-radius:6px;font-size:.68rem;font-weight:900;}
 .badge-code{font-family:monospace;background:#eff6ff;color:var(--blue);padding:2px 7px;border-radius:6px;font-size:.75rem;}
 
 /* ACTION BUTTONS */
@@ -433,6 +439,7 @@ window.loadRegistrations = async function() {
       if (r.status === 'pending') pending.push({id: d.id, ...r});
     });
 
+    // Update badge
     const badge = document.getElementById('pending-count');
     if (pending.length > 0) {
       badge.textContent = pending.length;
@@ -516,6 +523,7 @@ window.loadProgress = async function() {
       return;
     }
 
+    // Group students by their primary level
     const groups = {};
     let totalActive = 0, totalScores = 0, scoreCount = 0;
 
@@ -542,14 +550,16 @@ window.loadProgress = async function() {
       <div class="stat-box"><div class="stat-n">${avgScore}</div><div class="stat-l">Avg Score</div></div>
     `;
 
+    // Max points per kapitel
     const KAPITEL_MAX = {
-      'a1k1':120,'a1k2':120,'a1k3':120,'a1k4':120,'a1k5':120,'b1k1':1210
+      'a1k1':120,'a1k2':120,'a1k3':120,'a1k4':120,'a1k5':120,'b1k1':121
     };
     const KAPITEL_NAMES = {
       'a1k1':'A1 Kapitel 1','a1k2':'A1 Kapitel 2','a1k3':'A1 Kapitel 3',
       'a1k4':'A1 Kapitel 4','a1k5':'A1 Kapitel 5','b1k1':'B1 Kapitel 1'
     };
 
+    // Level config: which kapitel columns to show per level
     const LEVEL_KAPITEL = {
       'A1': ['a1k1','a1k2','a1k3','a1k4','a1k5'],
       'A2': ['a1k1','a1k2','a1k3','a1k4','a1k5'],
@@ -560,15 +570,18 @@ window.loadProgress = async function() {
     const LEVEL_ORDER = ['A1','A2','B1','B2','C2'];
     const levelsPresent = LEVEL_ORDER.filter(l => groups[l] && groups[l].length > 0);
 
+    // Reset report cache
     window._reportCache = {};
     window._rIdx = 0;
 
+    // Build sub-tab bar
     const subBar = document.getElementById('level-sub-bar');
     subBar.style.display = 'flex';
     subBar.innerHTML = levelsPresent.map((l, i) =>
       `<button class="level-sub-btn${i===0?' active':''}" onclick="switchLevelTab('${l}')" id="lsb-${l}">${l} <span style="font-size:.65rem;opacity:.8">(${groups[l].length})</span></button>`
     ).join('');
 
+    // Build panels
     let html = '';
     levelsPresent.forEach((level, i) => {
       const students = groups[level].sort((a,b) => a.name.localeCompare(b.name));
@@ -584,7 +597,7 @@ window.loadProgress = async function() {
         let scoreHtml = '';
         cols.forEach(k => {
           const sc = s.scores[k] || 0;
-          const maxPts = KAPITEL_MAX[k] || 120;
+          const maxPts = KAPITEL_MAX[k] || 1200;
           const pct = sc > 0 ? Math.round(sc / maxPts * 100) : 0;
           if (pct > bestPct) bestPct = pct;
           if (sc === 0) {
@@ -848,7 +861,7 @@ window.closeReset = function() { document.getElementById('reset-bg').classList.r
 
 // ── STUDENT REPORT ──
 const REPORT_KAPITEL_MAX = {
-  'a1k1':120,'a1k2':120,'a1k3':120,'a1k4':120,'a1k5':120,'b1k1':1210
+  'a1k1':120,'a1k2':120,'a1k3':120,'a1k4':120,'a1k5':120,'b1k1':121
 };
 const REPORT_KAPITEL_NAMES = {
   'a1k1':'A1 Kapitel 1 (Begrüßung & Zahlen)',
@@ -872,7 +885,7 @@ window.showReport = function(name, email, scores, cols) {
 
   cols.forEach(k => {
     const sc = scores[k] || 0;
-    const max = REPORT_KAPITEL_MAX[k] || 120;
+    const max = REPORT_KAPITEL_MAX[k] || 1200;
     const pct = sc > 0 ? Math.round(sc / max * 100) : 0;
     const kapName = REPORT_KAPITEL_NAMES[k] || k;
     if (sc > 0) {
@@ -886,14 +899,14 @@ window.showReport = function(name, email, scores, cols) {
   });
 
   const avgPct = attempted > 0 ? Math.round(totalPct / attempted) : 0;
-  const overall = avgPct >= 75 ? 'Excellent work! 🌟' : avgPct >= 50 ? 'Good progress! Keep going! 💪' : 'Keep practicing -- you can do it! 📚';
+  const overall = avgPct >= 75 ? 'Excellent work! 🌟' : avgPct >= 50 ? 'Good progress! Keep going! 💪' : 'Keep practicing — you can do it! 📚';
 
   const msg =
-`📊 Progress Report -- ${name}
+`📊 Progress Report — ${name}
 Date: ${now}
-━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━
 
-${lines}━━━━━━━━━━━━━━━━━━━━━━━
+${lines}━━━━━━━━━━━━━━━━━━━━━━
 Chapters attempted: ${attempted}/${cols.length}
 Average score: ${avgPct}%
 

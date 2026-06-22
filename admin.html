@@ -604,7 +604,8 @@ window.loadProgress = async function() {
             scoreHtml += '<td><span class="score-none">--</span></td>';
           } else {
             const cls = pct >= 75 ? 'score-high' : pct >= 50 ? 'score-mid' : 'score-low';
-            scoreHtml += `<td><span class="score-pill ${cls}">${pct}%</span><div style="font-size:.6rem;color:var(--muted);text-align:center;margin-top:1px;">${sc} pts</div></td>`;
+            const displayPts = Math.min(sc, maxPts);
+            scoreHtml += `<td><span class="score-pill ${cls}">${pct}%</span><div style="font-size:.6rem;color:var(--muted);text-align:center;margin-top:1px;">${displayPts} pts</div></td>`;
           }
         });
         const bestCls = bestPct >= 75 ? 'score-high' : bestPct >= 50 ? 'score-mid' : bestPct > 0 ? 'score-low' : '';
@@ -892,7 +893,8 @@ window.showReport = function(name, email, scores, cols) {
       attempted++;
       totalPct += pct;
       const star = pct >= 75 ? '✅' : pct >= 50 ? '📈' : '⚠️';
-      lines += `${star} ${kapName}\n   Score: ${sc}/${max} pts → ${pct}%\n\n`;
+      const displaySc = Math.min(sc, max);
+      lines += `${star} ${kapName}\n   Score: ${displaySc}/${max} pts → ${pct}%\n\n`;
     } else {
       lines += `⬜ ${kapName}\n   Not attempted yet\n\n`;
     }

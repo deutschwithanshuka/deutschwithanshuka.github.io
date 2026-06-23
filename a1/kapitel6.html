@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Deutsch Meistern &middot; A1 Kapitel 6</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f4f6ff;--white:#fff;--navy:#0f1f6f;--blue:#2563eb;--blue2:#60a5fa;--purple:#7c3aed;--green:#16a34a;--red:#dc2626;--yellow:#d97706;--teal:#0f766e;--orange:#ea580c;--text:#1a1a3e;--muted:#5a6a8a;--border:#c7d2fe;--sh:0 2px 14px rgba(37,99,235,.09);--r:18px;--r2:12px;}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+html{scroll-behavior:smooth;font-size:17px;}
+body{background:var(--bg);color:var(--text);font-family:'Nunito',sans-serif;overflow-x:hidden;line-height:1.6;}
+nav{position:sticky;top:0;z-index:999;background:rgba(255,255,255,.98);backdrop-filter:blur(12px);border-bottom:2px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:12px 16px;}
+.nav-left{display:flex;align-items:center;gap:10px;}
+.nav-icon{width:34px;height:34px;border-radius:8px;background:#1a1a1a;display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0;}
+.nav-title{font-size:1rem;font-weight:900;color:var(--navy);}
+.nav-sub{font-size:.68rem;color:var(--muted);font-weight:700;display:block;margin-top:-1px;}
+.score-pill{background:linear-gradient(135deg,#f59e0b,#ef4444);color:#fff;border-radius:50px;padding:6px 15px;font-weight:900;font-size:.82rem;white-space:nowrap;}
+.bnav{position:fixed;bottom:0;left:0;right:0;z-index:999;background:rgba(255,255,255,.98);backdrop-filter:blur(10px);border-top:2px solid var(--border);display:flex;}
+.bn{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:9px 2px 13px;border:none;background:none;font-family:'Nunito',sans-serif;cursor:pointer;color:var(--muted);font-size:.65rem;font-weight:800;letter-spacing:.2px;gap:4px;transition:color .15s;}
+.bn-i{font-size:1.35rem;}
+.bn.active{color:var(--blue);}
+.screen{display:none;padding:18px 16px 100px;min-height:100vh;}
+.screen.active{display:block;}
+.hero{background:linear-gradient(135deg,#1e40af,#6d28d9,#be185d);border-radius:var(--r);padding:26px 18px 28px;text-align:center;color:#fff;margin-bottom:16px;position:relative;overflow:hidden;}
+.hero::before{content:'&#127881;';font-size:6rem;position:absolute;top:-10px;right:-10px;opacity:.1;}
+.hero-chip{display:inline-block;background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.35);border-radius:50px;padding:3px 14px;font-size:.68rem;font-weight:800;text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;}
+.hero h1{font-size:clamp(1.8rem,6vw,2.6rem);font-weight:900;line-height:1.05;margin-bottom:6px;}
+.hero p{font-size:.9rem;opacity:.9;line-height:1.65;max-width:300px;margin:0 auto;}
+.stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px;}
+.stat-card{background:#fff;border:2px solid var(--border);border-radius:var(--r2);padding:12px;text-align:center;box-shadow:var(--sh);}
+.stat-em{font-size:1.4rem;margin-bottom:2px;}
+.stat-n{font-family:'Space Mono',monospace;font-size:1.3rem;font-weight:700;color:var(--blue);}
+.stat-l{font-size:.64rem;color:var(--muted);text-transform:uppercase;letter-spacing:.7px;font-weight:800;}
+.topic-list{display:flex;flex-direction:column;gap:8px;}
+.t-row{background:#fff;border:2px solid var(--border);border-radius:var(--r2);padding:13px 14px;display:flex;align-items:center;gap:10px;box-shadow:var(--sh);cursor:pointer;transition:transform .12s;}
+.t-row:active{transform:scale(.98);}
+.t-ico{font-size:1.3rem;flex-shrink:0;}
+.t-name{font-weight:900;color:var(--navy);font-size:.96rem;}
+.t-sub{font-size:.78rem;color:var(--muted);font-weight:600;margin-top:1px;}
+.t-badge{background:linear-gradient(135deg,var(--blue),var(--purple));color:#fff;border-radius:50px;padding:3px 10px;font-size:.62rem;font-weight:800;flex-shrink:0;}
+.sec-h{font-size:1.05rem;font-weight:900;color:var(--navy);margin-bottom:14px;display:flex;align-items:center;gap:8px;}
+.sec-h::after{content:'';flex:1;height:2px;background:linear-gradient(90deg,var(--border),transparent);}
+.g-tabs{display:flex;gap:6px;overflow-x:auto;padding-bottom:6px;margin-bottom:14px;-ms-overflow-style:none;scrollbar-width:none;}
+.g-tabs::-webkit-scrollbar{display:none;}
+.g-tab{flex-shrink:0;padding:9px 18px;border-radius:50px;border:2px solid var(--border);background:#fff;color:var(--muted);font-family:'Nunito',sans-serif;font-size:.82rem;font-weight:800;cursor:pointer;transition:all .15s;white-space:nowrap;}
+.g-tab.active{background:linear-gradient(135deg,var(--blue),var(--purple));color:#fff;border-color:transparent;}
+.g-panel{display:none;}
+.g-panel.active{display:block;}
+.gcard{background:#fff;border:2px solid var(--border);border-radius:var(--r);padding:20px 18px;box-shadow:var(--sh);margin-bottom:14px;}
+.gcard-title{font-size:1.2rem;font-weight:900;color:var(--navy);margin-bottom:6px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+.gcard-badge{font-size:.66rem;background:linear-gradient(135deg,var(--blue),var(--purple));color:#fff;border-radius:50px;padding:3px 11px;font-weight:800;}
+.gcard-desc{font-size:.88rem;color:var(--muted);font-weight:600;margin-bottom:14px;line-height:1.65;}
+.rule-box{background:#eff6ff;border-left:4px solid var(--blue);border-radius:0 var(--r2) var(--r2) 0;padding:14px 16px;margin-bottom:12px;font-size:.9rem;font-weight:700;color:var(--navy);line-height:1.65;}
+.tip-box{background:#fef9e7;border-left:4px solid var(--yellow);border-radius:0 var(--r2) var(--r2) 0;padding:14px 16px;margin-bottom:12px;font-size:.88rem;font-weight:700;color:#78350f;line-height:1.65;}
+.section-h{font-size:.78rem;font-weight:900;color:var(--purple);text-transform:uppercase;letter-spacing:1px;margin:18px 0 10px;border-bottom:2px solid #e0e7ff;padding-bottom:6px;}
+.conj-table{width:100%;border-collapse:collapse;margin-bottom:14px;font-size:.88rem;}
+.conj-table th{background:linear-gradient(135deg,var(--blue),var(--purple));color:#fff;padding:8px 10px;font-weight:900;text-align:left;font-size:.78rem;}
+.conj-table td{padding:8px 10px;border-bottom:1px solid #e0e7ff;font-weight:700;}
+.conj-table tr:last-child td{border-bottom:none;}
+.conj-table tr:nth-child(even) td{background:#f8faff;}
+.conj-highlight{color:var(--blue);font-weight:900;}
+.ex-grid{display:flex;flex-direction:column;gap:8px;margin-bottom:12px;}
+.ex-item{background:#f8faff;border:1px solid #e0e7ff;border-radius:10px;padding:12px 14px;font-size:.88rem;line-height:1.6;}
+.ex-de{font-weight:700;color:var(--navy);margin-bottom:2px;}
+.ex-en{color:var(--muted);font-size:.82rem;font-style:italic;margin-top:2px;}
+.qcard{background:#fff;border:2px solid var(--border);border-radius:var(--r);padding:22px 18px;margin-bottom:20px;box-shadow:var(--sh);}
+.q-meta{display:flex;align-items:center;gap:7px;margin-bottom:10px;flex-wrap:wrap;}
+.q-num{font-family:'Space Mono',monospace;font-size:.72rem;font-weight:700;background:#e0e7ff;color:var(--blue);border-radius:5px;padding:3px 8px;}
+.q-type{font-size:.66rem;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;}
+.q-status{margin-left:auto;font-size:1rem;}
+.q-text{font-weight:700;font-size:.95rem;color:var(--navy);margin-bottom:12px;line-height:1.6;}
+.passage{background:#f8faff;border:1px solid #e0e7ff;border-radius:10px;padding:14px 16px;font-size:.86rem;line-height:1.7;color:var(--text);margin-bottom:10px;}
+.opts{display:flex;flex-direction:column;gap:12px;}
+.opt{width:100%;padding:14px 16px;border-radius:11px;border:2px solid var(--border);background:#f8faff;font-family:'Nunito',sans-serif;font-size:.9rem;font-weight:700;color:var(--text);cursor:pointer;text-align:left;transition:all .15s;}
+.opt.correct{border-color:var(--green);background:#dcfce7;color:var(--green);}
+.opt.wrong{border-color:var(--red);background:#fff1f2;color:var(--red);}
+.opt.disabled{cursor:default;}
+.word-bank{display:flex;flex-wrap:wrap;gap:7px;margin-top:10px;}
+.wchip{padding:9px 14px;border-radius:10px;border:2px solid var(--border);background:#f8faff;font-family:'Nunito',sans-serif;font-size:.88rem;font-weight:700;cursor:pointer;transition:all .15s;color:var(--navy);}
+.wchip.used{opacity:.3;cursor:default;}
+.ans-area{min-height:46px;background:#eff6ff;border:2px dashed var(--blue2);border-radius:11px;padding:10px 14px;font-size:.9rem;font-weight:700;color:var(--navy);margin:10px 0;line-height:1.6;}
+.inline-inp{border:none;border-bottom:2.5px solid var(--blue);background:transparent;font-family:'Nunito',sans-serif;font-size:.95rem;font-weight:700;color:var(--navy);padding:3px 5px;width:140px;outline:none;}
+.inline-inp.correct{border-color:var(--green);color:var(--green);}
+.inline-inp.wrong{border-color:var(--red);color:var(--red);}
+.fb{font-size:.85rem;font-weight:700;min-height:0;margin-top:8px;line-height:1.5;}
+.fb.ok{color:var(--green);}
+.fb.err{color:var(--red);}
+.q-actions{display:flex;gap:8px;margin-top:10px;}
+.btn-check{background:linear-gradient(135deg,var(--blue),var(--purple));color:#fff;border:none;border-radius:10px;padding:10px 20px;font-family:'Nunito',sans-serif;font-size:.86rem;font-weight:800;cursor:pointer;}
+.btn-reset{background:#f1f5f9;color:var(--muted);border:2px solid var(--border);border-radius:10px;padding:10px 14px;font-family:'Nunito',sans-serif;font-size:.86rem;font-weight:800;cursor:pointer;}
+.wb-filter{padding:7px 14px;border-radius:50px;border:2px solid var(--border);background:#fff;color:var(--muted);font-family:'Nunito',sans-serif;font-size:.78rem;font-weight:800;cursor:pointer;transition:all .15s;white-space:nowrap;}
+.wb-filter.active{background:linear-gradient(135deg,var(--blue),var(--purple));color:#fff;border-color:transparent;}
+.wb-cat-title{font-size:.78rem;font-weight:900;color:var(--purple);text-transform:uppercase;letter-spacing:1px;margin:18px 0 10px;border-bottom:2px solid #e0e7ff;padding-bottom:6px;}
+.wb-grid{display:flex;flex-direction:column;gap:8px;margin-bottom:4px;}
+.wb-item{background:#fff;border:2px solid var(--border);border-radius:12px;overflow:hidden;box-shadow:var(--sh);cursor:pointer;}
+.wb-item.open{border-color:var(--blue);}
+.wb-head{display:flex;align-items:center;gap:10px;padding:12px 14px;}
+.wb-art-badge{font-size:.64rem;font-weight:900;border-radius:5px;padding:3px 7px;flex-shrink:0;}
+.art-m{background:#dbeafe;color:#1e40af;} .art-f{background:#fce7f3;color:#9d174d;} .art-n{background:#dcfce7;color:#166534;} .art-v{background:#f3e8ff;color:#6b21a8;} .art-adj{background:#ffedd5;color:#9a3412;} .art-ph{background:#fef3c7;color:#92400e;}
+.wb-word-text{font-weight:900;color:var(--navy);font-size:.95rem;flex:1;}
+.wb-short-en{font-size:.78rem;color:var(--muted);font-weight:600;}
+.wb-arrow{font-size:.8rem;color:var(--muted);transition:transform .2s;}
+.wb-item.open .wb-arrow{transform:rotate(90deg);}
+.wb-body{display:none;padding:0 14px 14px;border-top:1px solid var(--border);}
+.wb-item.open .wb-body{display:block;}
+.wb-en-full{font-size:.88rem;font-weight:700;color:var(--green);margin-bottom:6px;padding-top:10px;}
+.wb-ex-sent{font-size:.82rem;color:var(--muted);font-style:italic;line-height:1.6;margin-bottom:4px;}
+.lb-header{background:linear-gradient(135deg,#1e40af,#6d28d9);border-radius:var(--r);padding:20px 16px;text-align:center;color:#fff;margin-bottom:14px;}
+.podium{display:flex;align-items:flex-end;justify-content:center;gap:8px;margin-bottom:16px;height:130px;}
+.pod{display:flex;flex-direction:column;align-items:center;justify-content:flex-end;border-radius:var(--r2) var(--r2) 0 0;}
+.pod-1{width:90px;height:110px;background:linear-gradient(135deg,#f59e0b,#d97706);}
+.pod-2{width:78px;height:85px;background:linear-gradient(135deg,#94a3b8,#64748b);}
+.pod-3{width:70px;height:65px;background:linear-gradient(135deg,#b45309,#92400e);}
+.pod-inner{padding:6px 4px 8px;text-align:center;color:#fff;}
+.pod-rank{font-size:1.2rem;} .pod-name{font-size:.65rem;font-weight:900;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:80px;} .pod-pts{font-family:'Space Mono',monospace;font-size:.7rem;font-weight:700;}
+.lb-row{background:#fff;border:2px solid var(--border);border-radius:var(--r2);padding:10px 12px;display:flex;align-items:center;gap:10px;margin-bottom:7px;box-shadow:var(--sh);}
+.lb-rank{font-family:'Space Mono',monospace;font-size:.75rem;font-weight:700;color:var(--muted);width:22px;}
+.lb-name{flex:1;font-weight:800;color:var(--navy);font-size:.92rem;}
+.lb-pts{font-family:'Space Mono',monospace;font-size:.88rem;font-weight:700;color:var(--blue);}
+.lb-bar-wrap{width:100%;background:#e0e7ff;border-radius:50px;height:5px;margin-top:3px;}
+.lb-bar{height:5px;background:linear-gradient(90deg,var(--blue),var(--purple));border-radius:50px;}
+.lb-you{border-color:var(--blue);background:#eff6ff;}
+.search-wrap{position:relative;margin-bottom:12px;}
+.search-inp{width:100%;padding:12px 16px 12px 42px;border-radius:50px;border:2px solid var(--border);background:#fff;font-family:'Nunito',sans-serif;font-size:.92rem;font-weight:700;color:var(--navy);outline:none;}
+.search-inp:focus{border-color:var(--blue);}
+.search-icon{position:absolute;left:14px;top:50%;transform:translateY(-50%);font-size:.95rem;color:var(--muted);}
+.float-score{position:fixed;bottom:72px;right:14px;z-index:900;background:linear-gradient(135deg,#f59e0b,#ef4444);color:#fff;border-radius:50px;padding:8px 14px;font-weight:900;font-size:.8rem;box-shadow:0 4px 20px rgba(239,68,68,.4);}
+.conf-piece{position:fixed;width:8px;height:8px;border-radius:2px;z-index:9999;pointer-events:none;animation:fall 1.2s ease-in forwards;}
+@keyframes fall{0%{transform:translateY(-20px) rotate(0);opacity:1;}100%{transform:translateY(100vh) rotate(720deg);opacity:0;}}
+.sc-overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:2000;display:flex;align-items:center;justify-content:center;padding:20px;overflow-y:auto;}
+.sc-overlay.hidden{display:none;}
+.sc-modal{background:#fff;border-radius:20px;padding:28px 24px;max-width:360px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,.25);}
+.sc-modal.hidden{display:none;}
+.sc-modal h2{font-size:1.15rem;font-weight:900;color:var(--navy);margin-bottom:4px;}
+.sc-modal p{font-size:.82rem;color:var(--muted);margin-bottom:16px;line-height:1.5;}
+.sc-inp{width:100%;padding:14px 16px;border-radius:12px;border:2px solid var(--border);font-family:'Nunito',sans-serif;font-size:1rem;font-weight:700;color:var(--navy);outline:none;margin-bottom:12px;}
+.sc-inp:focus{border-color:var(--blue);}
+.sc-btn{width:100%;padding:14px;background:linear-gradient(135deg,var(--blue),var(--purple));color:#fff;border:none;border-radius:12px;font-family:'Nunito',sans-serif;font-size:1rem;font-weight:900;cursor:pointer;margin-bottom:8px;}
+.sc-close{width:100%;padding:11px;background:#f1f5f9;color:var(--muted);border:none;border-radius:10px;font-family:'Nunito',sans-serif;font-weight:900;cursor:pointer;font-size:.88rem;}
+.sr-card{background:linear-gradient(135deg,#1e40af,#6d28d9,#be185d);border-radius:20px;padding:28px 22px;color:#fff;max-width:360px;width:100%;}
+.sr-card.hidden{display:none;}
+.sr-logo{font-size:.72rem;font-weight:900;opacity:.8;letter-spacing:1px;text-transform:uppercase;margin-bottom:16px;}
+.sr-name{font-size:1.4rem;font-weight:900;margin-bottom:4px;}
+.sr-kapitel{font-size:.82rem;opacity:.85;margin-bottom:20px;}
+.sr-score-big{font-family:'Space Mono',monospace;font-size:3rem;font-weight:700;line-height:1;margin-bottom:4px;}
+.sr-score-lbl{font-size:.75rem;opacity:.8;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:20px;}
+.sr-stats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:20px;}
+.sr-stat{background:rgba(255,255,255,.15);border-radius:12px;padding:10px 8px;text-align:center;}
+.sr-stat-n{font-family:'Space Mono',monospace;font-size:1.1rem;font-weight:700;}
+.sr-stat-l{font-size:.6rem;opacity:.8;font-weight:700;text-transform:uppercase;letter-spacing:.8px;margin-top:2px;}
+.sr-footer{font-size:.72rem;opacity:.75;line-height:1.6;border-top:1px solid rgba(255,255,255,.2);padding-top:14px;}
+.prev-best{background:#eff6ff;border:2px solid var(--border);border-radius:12px;padding:10px 14px;margin-bottom:14px;font-size:.82rem;font-weight:700;display:none;align-items:center;gap:8px;color:var(--navy);}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-left">
+    <div class="nav-icon">&#127881;</div>
+    <div>
+      <div class="nav-title">K6 &#183; Zeit mit Freunden</div>
+      <span class="nav-sub">Deutsch Meistern &#183; CEFR A1</span>
+    </div>
+  </div>
+  <div id="score-pill" class="score-pill">&#11088; 0 Pts</div>
+</nav>
+
+<!-- HOME -->
+<div id="home-screen" class="screen active">
+  <div class="hero">
+    <div class="hero-chip">A1 &#183; Kapitel 6</div>
+    <h1>Zeit mit Freunden</h1>
+    <p>Freizeit &#183; Verabredungen &#183; Geburtstag &#183; Trennbare Verben &#183; Pr&#228;teritum</p>
+  </div>
+  <div class="stat-grid">
+    <div class="stat-card"><div class="stat-em">&#128218;</div><div class="stat-n">120</div><div class="stat-l">Fragen</div></div>
+    <div class="stat-card"><div class="stat-em">&#127881;</div><div class="stat-n">120</div><div class="stat-l">Max Punkte</div></div>
+    <div class="stat-card"><div class="stat-em">&#9986;</div><div class="stat-n">12</div><div class="stat-l">Trennbare Verben</div></div>
+    <div class="stat-card"><div class="stat-em">&#127873;</div><div class="stat-n">31</div><div class="stat-l">Ordinalzahlen</div></div>
+  </div>
+  <div class="prev-best" id="prev-best">&#11088; Dein bisheriges Ergebnis: <strong id="prev-pts">0</strong> Punkte</div>
+  <p class="sec-h">&#128218; Lernziele</p>
+  <div class="topic-list">
+    <div class="t-row" onclick="switchScreen('grammatik-screen');switchGTab(0)">
+      <span class="t-ico">&#9986;</span>
+      <div><div class="t-name">Trennbare Verben</div><div class="t-sub">aufstehen, anrufen, einladen, ausgehen...</div></div>
+      <span class="t-badge">Grammatik</span>
+    </div>
+    <div class="t-row" onclick="switchScreen('grammatik-screen');switchGTab(1)">
+      <span class="t-ico">&#9203;</span>
+      <div><div class="t-name">Pr&#228;teritum von haben &amp; sein</div><div class="t-sub">war, waren, hatte, hatten</div></div>
+      <span class="t-badge">Grammatik</span>
+    </div>
+    <div class="t-row" onclick="switchScreen('grammatik-screen');switchGTab(2)">
+      <span class="t-ico">&#127873;</span>
+      <div><div class="t-name">Ordinalzahlen</div><div class="t-sub">der erste, zweite... f&#252;r Daten &amp; Geburtstage</div></div>
+      <span class="t-badge">Grammatik</span>
+    </div>
+    <div class="t-row" onclick="switchScreen('grammatik-screen');switchGTab(3)">
+      <span class="t-ico">&#127916;</span>
+      <div><div class="t-name">Freizeitausdr&#252;cke</div><div class="t-sub">ins Kino gehen, Geburtstag feiern...</div></div>
+      <span class="t-badge">Wortschatz</span>
+    </div>
+  </div>
+</div>
+
+<!-- GRAMMATIK -->
+<div id="grammatik-screen" class="screen">
+  <p class="sec-h">&#128214; Grammatik</p>
+  <div class="g-tabs">
+    <button class="g-tab active" onclick="switchGTab(0)">&#9986; Trennbare Verben</button>
+    <button class="g-tab" onclick="switchGTab(1)">&#9203; Pr&#228;teritum</button>
+    <button class="g-tab" onclick="switchGTab(2)">&#127873; Ordinalzahlen</button>
+    <button class="g-tab" onclick="switchGTab(3)">&#127916; Freizeit</button>
+  </div>
+
+  <div class="g-panel active">
+    <div class="gcard">
+      <div class="gcard-title">Trennbare Verben <span class="gcard-badge">Separable Verbs</span></div>
+      <div class="gcard-desc">Das Pr&#228;fix trennt sich vom Verb und geht ans Satzende.</div>
+      <div class="rule-box">&#128073; Struktur: <strong>Subjekt + Verbstamm + ... + Pr&#228;fix</strong><br>Ich <strong>stehe</strong> um sieben Uhr <strong>auf</strong>.</div>
+      <div class="section-h">Wichtige Trennbare Verben</div>
+      <table class="conj-table">
+        <tr><th>Infinitiv</th><th>er/sie/es</th><th>Bedeutung</th></tr>
+        <tr><td>auf&#183;stehen</td><td>steht auf</td><td>to get up</td></tr>
+        <tr><td>an&#183;rufen</td><td>ruft an</td><td>to call</td></tr>
+        <tr><td>ein&#183;laden</td><td>l&#228;dt ein</td><td>to invite</td></tr>
+        <tr><td>auf&#183;r&#228;umen</td><td>r&#228;umt auf</td><td>to tidy up</td></tr>
+        <tr><td>fern&#183;sehen</td><td>sieht fern</td><td>to watch TV</td></tr>
+        <tr><td>aus&#183;gehen</td><td>geht aus</td><td>to go out</td></tr>
+        <tr><td>ein&#183;kaufen</td><td>kauft ein</td><td>to shop</td></tr>
+        <tr><td>mit&#183;kommen</td><td>kommt mit</td><td>to come along</td></tr>
+        <tr><td>vor&#183;bereiten</td><td>bereitet vor</td><td>to prepare</td></tr>
+        <tr><td>vorbei&#183;kommen</td><td>kommt vorbei</td><td>to come by</td></tr>
+        <tr><td>an&#183;fangen</td><td>f&#228;ngt an</td><td>to begin</td></tr>
+        <tr><td>mit&#183;bringen</td><td>bringt mit</td><td>to bring along</td></tr>
+      </table>
+      <div class="section-h">Beispiele im Satz</div>
+      <div class="ex-grid">
+        <div class="ex-item"><div class="ex-de">Mo <span class="conj-highlight">ruft</span> Jonas <span class="conj-highlight">an</span>.</div><div class="ex-en">Mo calls Jonas.</div></div>
+        <div class="ex-item"><div class="ex-de">Wir <span class="conj-highlight">r&#228;umen</span> die Wohnung <span class="conj-highlight">auf</span>.</div><div class="ex-en">We tidy up the apartment.</div></div>
+        <div class="ex-item"><div class="ex-de">Er <span class="conj-highlight">l&#228;dt</span> alle Freunde <span class="conj-highlight">ein</span>.</div><div class="ex-en">He invites all friends.</div></div>
+        <div class="ex-item"><div class="ex-de">Die Party <span class="conj-highlight">f&#228;ngt</span> um 8 Uhr <span class="conj-highlight">an</span>.</div><div class="ex-en">The party starts at 8.</div></div>
+        <div class="ex-item"><div class="ex-de">Sie <span class="conj-highlight">bringt</span> Blumen <span class="conj-highlight">mit</span>.</div><div class="ex-en">She brings flowers along.</div></div>
+      </div>
+      <div class="tip-box">&#128161; Imperativ: Pr&#228;fix bleibt hinten! <strong>Ruf</strong> mich <strong>an</strong>! &#183; Komm <strong>mit</strong>! &#183; R&#228;um <strong>auf</strong>!</div>
+    </div>
+  </div>
+
+  <div class="g-panel">
+    <div class="gcard">
+      <div class="gcard-title">Pr&#228;teritum von sein &amp; haben <span class="gcard-badge">Simple Past</span></div>
+      <div class="gcard-desc">Im Alltag benutzen wir f&#252;r sein und haben das Pr&#228;teritum.</div>
+      <div class="section-h">sein (Pr&#228;teritum)</div>
+      <table class="conj-table">
+        <tr><th>Person</th><th>Pr&#228;teritum</th><th>Beispiel</th></tr>
+        <tr><td>ich</td><td><span class="conj-highlight">war</span></td><td>Ich war im Kino.</td></tr>
+        <tr><td>du</td><td><span class="conj-highlight">warst</span></td><td>Du warst m&#252;de.</td></tr>
+        <tr><td>er/sie/es</td><td><span class="conj-highlight">war</span></td><td>Sie war gl&#252;cklich.</td></tr>
+        <tr><td>wir</td><td><span class="conj-highlight">waren</span></td><td>Wir waren zusammen.</td></tr>
+        <tr><td>ihr</td><td><span class="conj-highlight">wart</span></td><td>Ihr wart sp&#228;t.</td></tr>
+        <tr><td>sie/Sie</td><td><span class="conj-highlight">waren</span></td><td>Sie waren lustig.</td></tr>
+      </table>
+      <div class="section-h">haben (Pr&#228;teritum)</div>
+      <table class="conj-table">
+        <tr><th>Person</th><th>Pr&#228;teritum</th><th>Beispiel</th></tr>
+        <tr><td>ich</td><td><span class="conj-highlight">hatte</span></td><td>Ich hatte Hunger.</td></tr>
+        <tr><td>du</td><td><span class="conj-highlight">hattest</span></td><td>Du hattest Gl&#252;ck.</td></tr>
+        <tr><td>er/sie/es</td><td><span class="conj-highlight">hatte</span></td><td>Er hatte Zeit.</td></tr>
+        <tr><td>wir</td><td><span class="conj-highlight">hatten</span></td><td>Wir hatten Spa&#223;.</td></tr>
+        <tr><td>ihr</td><td><span class="conj-highlight">hattet</span></td><td>Ihr hattet Recht.</td></tr>
+        <tr><td>sie/Sie</td><td><span class="conj-highlight">hatten</span></td><td>Sie hatten Angst.</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="g-panel">
+    <div class="gcard">
+      <div class="gcard-title">Ordinalzahlen <span class="gcard-badge">Ordinal Numbers</span></div>
+      <div class="gcard-desc">F&#252;r Daten und Geburtstage brauchen wir Ordinalzahlen.</div>
+      <div class="rule-box">1-19: Stamm + <strong>-te</strong> &#183; 20+: Stamm + <strong>-ste</strong><br>Ausnahmen: <strong>erst-</strong>, <strong>dritt-</strong>, <strong>siebt-</strong>, <strong>acht-</strong></div>
+      <table class="conj-table">
+        <tr><th>Zahl</th><th>Ordinalzahl</th><th>Dativ (am...)</th></tr>
+        <tr><td>1.</td><td>erst-</td><td>am ersten</td></tr>
+        <tr><td>2.</td><td>zweit-</td><td>am zweiten</td></tr>
+        <tr><td>3.</td><td>dritt-</td><td>am dritten</td></tr>
+        <tr><td>5.</td><td>f&#252;nft-</td><td>am f&#252;nften</td></tr>
+        <tr><td>7.</td><td>siebt-</td><td>am siebten</td></tr>
+        <tr><td>8.</td><td>acht-</td><td>am achten</td></tr>
+        <tr><td>20.</td><td>zwanzigst-</td><td>am zwanzigsten</td></tr>
+        <tr><td>31.</td><td>einunddrei&#223;igst-</td><td>am einunddrei&#223;igsten</td></tr>
+      </table>
+      <div class="ex-grid">
+        <div class="ex-item"><div class="ex-de">Ich habe am <span class="conj-highlight">f&#252;nften Mai</span> Geburtstag.</div><div class="ex-en">My birthday is on the 5th of May.</div></div>
+        <div class="ex-item"><div class="ex-de">Heute ist der <span class="conj-highlight">dritte Oktober</span>.</div><div class="ex-en">Today is the 3rd of October.</div></div>
+        <div class="ex-item"><div class="ex-de">Die Party ist am <span class="conj-highlight">zwanzigsten</span>.</div><div class="ex-en">The party is on the 20th.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g-panel">
+    <div class="gcard">
+      <div class="gcard-title">Freizeitausdr&#252;cke <span class="gcard-badge">Leisure</span></div>
+      <div class="gcard-desc">Ausdr&#252;cke f&#252;r Aktivit&#228;ten und Verabredungen.</div>
+      <div class="section-h">Aktivit&#228;ten</div>
+      <div class="ex-grid">
+        <div class="ex-item"><div class="ex-de">ins Kino gehen</div><div class="ex-en">to go to the cinema</div></div>
+        <div class="ex-item"><div class="ex-de">Fu&#223;ball spielen</div><div class="ex-en">to play football</div></div>
+        <div class="ex-item"><div class="ex-de">Musik h&#246;ren</div><div class="ex-en">to listen to music</div></div>
+        <div class="ex-item"><div class="ex-de">spazieren gehen</div><div class="ex-en">to go for a walk</div></div>
+        <div class="ex-item"><div class="ex-de">Geburtstag feiern</div><div class="ex-en">to celebrate a birthday</div></div>
+        <div class="ex-item"><div class="ex-de">eine Party machen</div><div class="ex-en">to have a party</div></div>
+      </div>
+      <div class="section-h">Verabredungen</div>
+      <div class="ex-grid">
+        <div class="ex-item"><div class="ex-de">Hast du am Samstag Zeit?</div><div class="ex-en">Do you have time on Saturday?</div></div>
+        <div class="ex-item"><div class="ex-de">Wo treffen wir uns?</div><div class="ex-en">Where do we meet?</div></div>
+        <div class="ex-item"><div class="ex-de">Ich komme gerne!</div><div class="ex-en">I'd love to come!</div></div>
+        <div class="ex-item"><div class="ex-de">Tut mir leid, ich kann nicht.</div><div class="ex-en">Sorry, I can't make it.</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- UBUNGEN -->
+<div id="ubungen-screen" class="screen">
+  <p class="sec-h">&#9997; &#220;bungen</p>
+  <div style="display:flex;gap:8px;overflow-x:auto;padding-bottom:10px;margin-bottom:14px;">
+    <button class="wb-filter active" onclick="switchExTab(0,this)">&#128218; Lesen</button>
+    <button class="wb-filter" onclick="switchExTab(1,this)">&#128203; Text 1</button>
+    <button class="wb-filter" onclick="switchExTab(2,this)">&#128203; Text 2</button>
+    <button class="wb-filter" onclick="switchExTab(3,this)">&#128203; Text 3</button>
+    <button class="wb-filter" onclick="switchExTab(4,this)">&#127908; Sprechen</button>
+    <button class="wb-filter" onclick="switchExTab(5,this)">&#9997; Schreiben</button>
+  </div>
+  <div id="ex-panel-0"><div id="lesen-set"></div></div>
+  <div id="ex-panel-1" style="display:none">
+    <div class="passage" style="margin-bottom:14px;"><strong>Text 1: Mos Geburtstag</strong><br><br>Mo wird am f&#252;nften Oktober dreiundzwanzig Jahre alt. Er m&#246;chte eine Party machen und l&#228;dt alle seine Freunde ein. Mo ruft seinen Freund Jonas an: "Kannst du am Samstag kommen?" Jonas antwortet: "Ja, ich komme gerne! Was soll ich mitbringen?" Mo sagt: "Bring bitte Getr&#228;nke mit!" Am Samstagabend bereiten Mo und seine Schwester Lina die Wohnung vor. Sie r&#228;umen auf und kaufen Snacks ein. Die Party f&#228;ngt um acht Uhr an und alle haben viel Spa&#223;.</div>
+    <div id="lesen1-set"></div>
+  </div>
+  <div id="ex-panel-2" style="display:none">
+    <div class="passage" style="margin-bottom:14px;"><strong>Text 2: Ein Kinoabend</strong><br><br>Sara und Tom wollen am Freitagabend ins Kino gehen. Sara hat zwei Karten f&#252;r den neuen Animationsfilm gekauft. Der Film beginnt um halb acht. Sara ruft Tom an: "Wo treffen wir uns?" Tom antwortet: "Vor dem Kino, um Viertel nach sieben." Am Freitag kommt Tom zu sp&#228;t. Er entschuldigt sich: "Es tut mir leid! Die Stra&#223;enbahn hatte Versp&#228;tung." Nach dem Film gehen sie in ein Caf&#233; und trinken hei&#223;e Schokolade. Der Abend war sehr sch&#246;n.</div>
+    <div id="lesen2-set"></div>
+  </div>
+  <div id="ex-panel-3" style="display:none">
+    <div class="passage" style="margin-bottom:14px;"><strong>Text 3: Das Wochenende</strong><br><br>Am Samstag spielen Lena und ihre Freundin Julia Tennis im Park. Das Wetter war super und sie hatten viel Spa&#223;. Danach gehen sie in ein Caf&#233; und essen Kuchen. Am Sonntag bereitet Lena das Mittagessen vor. Ihre Eltern kommen zu Besuch. Lenas Mutter bringt einen Blumenstrau&#223; mit. Ihr Vater hatte einen Wein mitgebracht. Lena hatte ein tolles Wochenende.</div>
+    <div id="lesen3-set"></div>
+  </div>
+  <div id="ex-panel-4" style="display:none"><div id="sprechen-set"></div></div>
+  <div id="ex-panel-5" style="display:none"><div id="schreiben-set"></div></div>
+</div>
+
+<!-- SCORE -->
+<div id="score-screen" class="screen">
+  <p class="sec-h">&#127942; Ergebnis &amp; Rangliste</p>
+  <div class="lb-header">
+    <div style="font-size:.75rem;font-weight:800;opacity:.8;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;">Deutsch Meistern</div>
+    <div style="font-size:1.3rem;font-weight:900;margin-bottom:2px;">A1 Kapitel 6</div>
+    <div style="font-size:.82rem;opacity:.85;">Alle Kapitel &#183; Gesamtpunktzahl</div>
+  </div>
+  <div style="text-align:center;margin-bottom:18px;">
+    <button class="btn-check" onclick="openSubmit()">&#127942; Score einreichen</button>
+  </div>
+  <div class="podium" id="podium"></div>
+  <div id="lb-list"><div style="text-align:center;padding:24px;color:var(--muted);font-size:.85rem;">Lade Rangliste...</div></div>
+</div>
+
+<!-- MEHR (Vocab) -->
+<div id="mehr-screen" class="screen">
+  <p class="sec-h">&#128218; Vokabeln</p>
+  <div class="search-wrap"><span class="search-icon">&#128269;</span><input class="search-inp" id="wb-search" oninput="filterWB()" placeholder="Vokabel suchen..."></div>
+  <div style="display:flex;gap:6px;overflow-x:auto;padding-bottom:8px;margin-bottom:12px;">
+    <button class="wb-filter active" onclick="filterWBCat('all',this)">Alle</button>
+    <button class="wb-filter" onclick="filterWBCat('verben',this)">Verben</button>
+    <button class="wb-filter" onclick="filterWBCat('nomen',this)">Nomen</button>
+    <button class="wb-filter" onclick="filterWBCat('ausdr',this)">Ausdr&#252;cke</button>
+    <button class="wb-filter" onclick="filterWBCat('adj',this)">Adjektive</button>
+  </div>
+  <div id="wb-container"></div>
+  <div style="margin-top:24px;text-align:center;">
+    <a href="../a1/index.html" style="font-size:.82rem;color:var(--muted);font-weight:800;text-decoration:none;">&#8592; Zur&#252;ck zur Startseite</a>
+  </div>
+</div>
+
+<!-- Bottom Nav -->
+<div class="bnav">
+  <button class="bn active" id="bn-home" onclick="switchScreen('home-screen','bn-home')"><span class="bn-i">&#127968;</span>Home</button>
+  <button class="bn" id="bn-gram" onclick="switchScreen('grammatik-screen','bn-gram')"><span class="bn-i">&#128214;</span>Grammatik</button>
+  <button class="bn" id="bn-ub" onclick="switchScreen('ubungen-screen','bn-ub')"><span class="bn-i">&#9997;</span>&#220;bungen</button>
+  <button class="bn" id="bn-sc" onclick="switchScreen('score-screen','bn-sc');loadLB()"><span class="bn-i">&#127942;</span>Score</button>
+  <button class="bn" id="bn-vok" onclick="switchScreen('mehr-screen','bn-vok');buildVocab()"><span class="bn-i">&#128218;</span>Mehr</button>
+</div>
+
+<!-- Score Modal -->
+<div class="sc-overlay hidden" id="sc-overlay">
+  <div class="sc-modal" id="sc-modal">
+    <h2>&#127942; Score einreichen</h2>
+    <p>Gib deinen Namen ein, um deinen Score zu speichern.</p>
+    <input class="sc-inp" id="sc-name-inp" placeholder="Dein Name..." maxlength="40">
+    <button class="sc-btn" onclick="generateCard()">Score einreichen &#127881;</button>
+    <button class="sc-close" onclick="closeCard()">Abbrechen</button>
+  </div>
+  <div class="sr-card hidden" id="sr-card">
+    <div class="sr-logo">Deutsch Meistern &#183; A1 Kapitel 6</div>
+    <div class="sr-name" id="sr-name"></div>
+    <div class="sr-kapitel">Zeit mit Freunden &#183; <span id="sr-date"></span></div>
+    <div class="sr-score-big" id="sr-pts">0</div>
+    <div class="sr-score-lbl">Punkte</div>
+    <div class="sr-stats">
+      <div class="sr-stat"><div class="sr-stat-n" id="sr-correct">0</div><div class="sr-stat-l">Richtig</div></div>
+      <div class="sr-stat"><div class="sr-stat-n" id="sr-wrong">0</div><div class="sr-stat-l">Falsch</div></div>
+      <div class="sr-stat"><div class="sr-stat-n" id="sr-skipped">0</div><div class="sr-stat-l">&#220;bersprungen</div></div>
+    </div>
+    <div class="sr-footer">Max: <span id="sr-maxpts">120</span> Punkte &#183; Plattform: <strong>Deutsch Meistern</strong></div>
+    <div style="margin-top:14px;"><button class="sc-close" style="background:rgba(255,255,255,.2);color:#fff;border:none;border-radius:10px;padding:11px;width:100%;font-family:Nunito,sans-serif;font-weight:900;cursor:pointer;" onclick="closeCard()">Schlie&#223;en</button></div>
+  </div>
+</div>
+
+<div class="float-score" id="float-pts">0</div>
+
+<script>
+let score=0,answered=new Set(),correctSet=new Set(),wrongSet=new Set();
+function switchScreen(id,btnId){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  document.querySelectorAll('.bn').forEach(b=>b.classList.remove('active'));
+  if(btnId)document.getElementById(btnId).classList.add('active');
+}
+function switchGTab(i){
+  document.querySelectorAll('.g-tab').forEach((t,j)=>t.classList.toggle('active',i===j));
+  document.querySelectorAll('.g-panel').forEach((p,j)=>p.classList.toggle('active',i===j));
+}
+function switchExTab(i,btn){
+  for(let j=0;j<6;j++)document.getElementById('ex-panel-'+j).style.display=j===i?'block':'none';
+  document.querySelectorAll('#ubungen-screen .wb-filter').forEach(b=>b.classList.remove('active'));
+  if(btn)btn.classList.add('active');
+}
+function addScore(pts){score+=pts;document.getElementById('score-pill').textContent='⭐ '+score+' Pts';document.getElementById('float-pts').textContent=score;if(score>0&&score%50===0)confetti();}
+function confetti(){const cols=['#ef4444','#f59e0b','#10b981','#3b82f6','#8b5cf6','#ec4899'];for(let i=0;i<30;i++){const d=document.createElement('div');d.className='conf-piece';d.style.cssText='left:'+Math.random()*100+'vw;top:0;background:'+cols[Math.floor(Math.random()*cols.length)]+';animation-delay:'+Math.random()*.5+'s;animation-duration:'+(0.8+Math.random()*.6)+'s;position:fixed;width:8px;height:8px;border-radius:2px;z-index:9999;pointer-events:none;animation:fall 1.2s ease-in forwards;';document.body.appendChild(d);setTimeout(()=>d.remove(),1500);}}
+function loadLB(){if(window.loadLeaderboard)window.loadLeaderboard();}
+
+function renderSet(data,cid){
+  const c=document.getElementById(cid);if(!c)return;
+  let h='';
+  data.forEach((q,i)=>{
+    const id=cid+'_'+i;
+    if(q.t==='mc'||q.t==='passage'){
+      const pass=q.p?'<div class="passage">'+q.p+'</div>':'';
+      h+='<div class="qcard"><div class="q-meta"><span class="q-num">#'+(i+1)+'</span><span class="q-type">'+(q.t==='passage'?'Lesetext':'Multiple Choice')+'</span><span class="q-status" id="st-'+id+'"></span></div><div class="q-text">'+q.q+'</div>'+pass+'<div class="opts">';
+      q.opts.forEach((o,j)=>{h+='<button class="opt" id="opt-'+id+'-'+j+'" onclick="checkMC(\''+id+'\','+j+','+q.ans+')">'+o+'</button>';});
+      h+='</div><div class="fb" id="fb-'+id+'"></div></div>';
+    }else if(q.t==='fill'){
+      h+='<div class="qcard"><div class="q-meta"><span class="q-num">#'+(i+1)+'</span><span class="q-type">Lückentext</span><span class="q-status" id="st-'+id+'"></span></div><div class="q-text">'+q.q+'</div><input class="inline-inp" id="inp-'+id+'" placeholder="..."><div class="q-actions"><button class="btn-check" onclick="checkFill(\''+id+'\',\''+q.ans+'\')">Prüfen</button><button class="btn-reset" onclick="resetFill(\''+id+'\')">Reset</button></div><div class="fb" id="fb-'+id+'"></div></div>';
+    }else if(q.t==='order'){
+      const sh=[...q.words].sort(()=>Math.random()-.5);
+      h+='<div class="qcard"><div class="q-meta"><span class="q-num">#'+(i+1)+'</span><span class="q-type">Satzbau</span><span class="q-status" id="st-'+id+'"></span></div><div class="q-text">'+q.q+'</div><div class="ans-area" id="ans-'+id+'"></div><div class="word-bank" id="wb2-'+id+'">';
+      sh.forEach(w=>{h+='<button class="wchip" onclick="addWord(\''+id+'\',\''+w+'\',this)">'+w+'</button>';});
+      h+='</div><div class="q-actions"><button class="btn-check" onclick="checkOrder(\''+id+'\',\''+q.ans+'\')">Prüfen</button><button class="btn-reset" onclick="resetOrder(\''+id+'\')">Reset</button></div><div class="fb" id="fb-'+id+'"></div></div>';
+    }
+  });
+  c.innerHTML=h;
+}
+
+function checkMC(id,chosen,correct){
+  if(answered.has(id))return;
+  answered.add(id);
+  const fb=document.getElementById('fb-'+id),st=document.getElementById('st-'+id);
+  document.querySelectorAll('[id^="opt-'+id+'-"]').forEach((b,j)=>{b.classList.add('disabled');if(j===correct)b.classList.add('correct');else if(j===chosen)b.classList.add('wrong');});
+  if(chosen===correct){correctSet.add(id);st.textContent='✅';fb.textContent='Richtig! +1 Punkt 🎉';fb.className='fb ok';addScore(1);}
+  else{wrongSet.add(id);st.textContent='❌';fb.textContent='Falsch. Die richtige Antwort ist markiert.';fb.className='fb err';}
+}
+let wordOrders={};
+function addWord(id,w,btn){if(btn.classList.contains('used'))return;btn.classList.add('used');(wordOrders[id]=wordOrders[id]||[]).push(w);document.getElementById('ans-'+id).textContent=wordOrders[id].join(' ');}
+function checkOrder(id,ans){
+  if(answered.has(id))return;
+  const user=(wordOrders[id]||[]).join(' ');
+  const fb=document.getElementById('fb-'+id),st=document.getElementById('st-'+id);
+  if(user.toLowerCase()===ans.toLowerCase()){answered.add(id);correctSet.add(id);st.textContent='✅';fb.textContent='Ausgezeichnet! +1 Punkt 🎉';fb.className='fb ok';addScore(1);}
+  else{wrongSet.add(id);st.textContent='❌';fb.textContent='Nicht ganz. Richtig: '+ans;fb.className='fb err';}
+}
+function resetOrder(id){wordOrders[id]=[];document.getElementById('ans-'+id).textContent='';document.querySelectorAll('#wb2-'+id+' .wchip').forEach(c=>c.classList.remove('used'));}
+function checkFill(id,ans){
+  if(answered.has(id))return;
+  const inp=document.getElementById('inp-'+id),val=inp.value.trim();
+  const fb=document.getElementById('fb-'+id),st=document.getElementById('st-'+id);
+  const alts=ans.split('|');
+  if(alts.some(a=>val.toLowerCase()===a.toLowerCase())){answered.add(id);correctSet.add(id);inp.classList.add('correct');st.textContent='✅';fb.textContent='Perfekt! +1 Punkt 🎉';fb.className='fb ok';addScore(1);}
+  else{wrongSet.add(id);inp.classList.add('wrong');st.textContent='❌';fb.textContent='Falsch. Richtig: '+alts[0];fb.className='fb err';}
+}
+function resetFill(id){const inp=document.getElementById('inp-'+id);inp.value='';inp.className='inline-inp';document.getElementById('fb-'+id).textContent='';}
+
+let wbCurrentCat='all';
+function buildVocab(){const c=document.getElementById('wb-container');if(!c||c.dataset.built)return;c.dataset.built='1';renderWB('all','');}
+function renderWB(cat,q){
+  const c=document.getElementById('wb-container');let html='';
+  const allCats=[...new Set(wbData.map(w=>w.cat))];
+  const groups=cat==='all'?allCats:[cat];
+  const labels={verben:'Verben',nomen:'Nomen',ausdr:'Ausdrücke',adj:'Adjektive'};
+  groups.forEach(g=>{
+    const items=wbData.filter(w=>w.cat===g&&(!q||(w.word+w.en).toLowerCase().includes(q)));
+    if(!items.length)return;
+    html+='<div class="wb-cat-title">'+(labels[g]||g)+'</div><div class="wb-grid">';
+    items.forEach((w,i)=>{
+      const bid='wbi-'+g+i;
+      const ac={v:'art-v',m:'art-m',f:'art-f',n:'art-n',adj:'art-adj',ph:'art-ph'}[w.art]||'art-ph';
+      html+=`<div class="wb-item" id="${bid}"><div class="wb-head" onclick="toggleWB('${bid}')"><span class="wb-art-badge ${ac}">${w.art.toUpperCase()}</span><span class="wb-word-text">${w.word}</span><span class="wb-short-en">${w.en.split(';')[0]}</span><span class="wb-arrow">&#8250;</span></div><div class="wb-body"><div class="wb-en-full">&#127468;&#127463; ${w.en}</div><div class="wb-ex-sent">"${w.ex}"</div>${w.extra?'<div style="font-size:.78rem;color:var(--teal);font-weight:700;">&#128221; '+w.extra+'</div>':''}</div></div>`;
+    });
+    html+='</div>';
+  });
+  c.innerHTML=html||'<div style="text-align:center;padding:20px;color:var(--muted);">Keine Ergebnisse.</div>';
+}
+function toggleWB(id){document.getElementById(id).classList.toggle('open');}
+function filterWBCat(cat,btn){wbCurrentCat=cat;document.querySelectorAll('#mehr-screen .wb-filter').forEach(b=>b.classList.remove('active'));btn.classList.add('active');renderWB(cat,document.getElementById('wb-search').value.toLowerCase());}
+function filterWB(){renderWB(wbCurrentCat,document.getElementById('wb-search').value.toLowerCase());}
+
+function openSubmit(){document.getElementById('sc-overlay').classList.remove('hidden');document.getElementById('sc-modal').classList.remove('hidden');document.getElementById('sr-card').classList.add('hidden');document.getElementById('sc-name-inp').value='';setTimeout(()=>document.getElementById('sc-name-inp').focus(),100);}
+function generateCard(){
+  const name=document.getElementById('sc-name-inp').value.trim();
+  if(!name){document.getElementById('sc-name-inp').style.borderColor='var(--red)';return;}
+  const totalQ=lesenQ.length+lesen1Q.length+lesen2Q.length+lesen3Q.length+sprechenQ.length+schreibenQ.length;
+  const now=new Date();
+  document.getElementById('sr-name').textContent=name;
+  document.getElementById('sr-pts').textContent=score;
+  document.getElementById('sr-correct').textContent=correctSet.size+'/'+totalQ;
+  document.getElementById('sr-wrong').textContent=wrongSet.size;
+  document.getElementById('sr-skipped').textContent=totalQ-correctSet.size-wrongSet.size;
+  document.getElementById('sr-maxpts').textContent=totalQ;
+  document.getElementById('sr-date').textContent=now.toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'});
+  document.getElementById('sc-modal').classList.add('hidden');
+  document.getElementById('sr-card').classList.remove('hidden');
+  const sid=localStorage.getItem('dm_student_id');
+  if(sid&&window.saveKapitelScore){window.saveKapitelScore(sid,'a1k6',score);}
+  else{const f=document.querySelector('.sr-footer');if(f)f.innerHTML='<span style="opacity:.7;font-weight:800;">Logge dich ein um deinen Score zu speichern!</span><br>Plattform: <strong>Deutsch Meistern</strong>';}
+}
+function closeCard(){document.getElementById('sc-overlay').classList.add('hidden');}
+
+/* ===== QUESTION DATA ===== */
+const lesenQ=[
+  {t:'passage',p:'Mo wird am fünften Oktober dreiundzwanzig Jahre alt. Er möchte eine Party machen und lädt alle seine Freunde ein. Mo ruft seinen Freund Jonas an: "Kannst du am Samstag kommen?" Jonas antwortet: "Ja, ich komme gerne! Was soll ich mitbringen?" Mo sagt: "Bring bitte Getränke mit!"',q:'Wann hat Mo Geburtstag?',opts:['Am fünften September','Am fünften Oktober','Am dritten Oktober','Am zehnten Oktober'],ans:1},
+  {t:'passage',p:'Mo wird am fünften Oktober dreiundzwanzig Jahre alt. Er möchte eine Party machen und lädt alle seine Freunde ein. Mo ruft seinen Freund Jonas an: "Kannst du am Samstag kommen?" Jonas antwortet: "Ja, ich komme gerne! Was soll ich mitbringen?" Mo sagt: "Bring bitte Getränke mit!"',q:'Wie alt wird Mo?',opts:['Zweiundzwanzig','Dreiundzwanzig','Vierundzwanzig','Einundzwanzig'],ans:1},
+  {t:'passage',p:'Mo wird am fünften Oktober dreiundzwanzig Jahre alt. Er möchte eine Party machen und lädt alle seine Freunde ein. Mo ruft seinen Freund Jonas an: "Kannst du am Samstag kommen?" Jonas antwortet: "Ja, ich komme gerne! Was soll ich mitbringen?" Mo sagt: "Bring bitte Getränke mit!"',q:'Was soll Jonas mitbringen?',opts:['Kuchen','Blumen','Getränke','Pizza'],ans:2},
+  {t:'passage',p:'Am Samstagabend bereiten Mo und seine Schwester Lina die Wohnung vor. Sie räumen auf und kaufen Snacks ein. Die Party fängt um acht Uhr an. Alle Freunde kommen und haben viel Spaß.',q:'Wer hilft Mo bei der Vorbereitung?',opts:['Sein Bruder','Seine Mutter','Seine Schwester Lina','Jonas'],ans:2},
+  {t:'passage',p:'Am Samstagabend bereiten Mo und seine Schwester Lina die Wohnung vor. Sie räumen auf und kaufen Snacks ein. Die Party fängt um acht Uhr an. Alle Freunde kommen und haben viel Spaß.',q:'Wann fängt die Party an?',opts:['Um sieben Uhr','Um halb acht','Um acht Uhr','Um neun Uhr'],ans:2},
+  {t:'passage',p:'Am Samstagabend bereiten Mo und seine Schwester Lina die Wohnung vor. Sie räumen auf und kaufen Snacks ein. Die Party fängt um acht Uhr an. Alle Freunde kommen und haben viel Spaß.',q:'Was kaufen Mo und Lina ein?',opts:['Kuchen','Getränke','Snacks','Pizza'],ans:2},
+  {t:'passage',p:'Sara und Tom wollen am Freitagabend ins Kino gehen. Sara hat zwei Karten für den neuen Animationsfilm. Der Film beginnt um halb acht. Sara ruft Tom an: "Wo treffen wir uns?" Tom antwortet: "Vor dem Kino um Viertel nach sieben."',q:'Was haben Sara und Tom vor?',opts:['Ins Theater gehen','Ins Kino gehen','Ein Konzert besuchen','Zu Hause fernsehen'],ans:1},
+  {t:'passage',p:'Sara und Tom wollen am Freitagabend ins Kino gehen. Sara hat zwei Karten für den neuen Animationsfilm. Der Film beginnt um halb acht. Sara ruft Tom an: "Wo treffen wir uns?" Tom antwortet: "Vor dem Kino um Viertel nach sieben."',q:'Wann beginnt der Film?',opts:['Um sieben Uhr','Um Viertel nach sieben','Um halb acht','Um acht Uhr'],ans:2},
+  {t:'passage',p:'Sara und Tom wollen am Freitagabend ins Kino gehen. Sara hat zwei Karten für den neuen Animationsfilm. Der Film beginnt um halb acht. Sara ruft Tom an: "Wo treffen wir uns?" Tom antwortet: "Vor dem Kino um Viertel nach sieben."',q:'Wo treffen sie sich?',opts:['Im Café','Im Kino','Vor dem Kino','An der Haltestelle'],ans:2},
+  {t:'passage',p:'Am Freitag kommt Tom zu spät. Er entschuldigt sich: "Es tut mir leid! Die Straßenbahn hatte Verspätung." Nach dem Film gehen sie in ein Café und trinken heiße Schokolade. Der Abend war sehr schön.',q:'Warum kommt Tom zu spät?',opts:['Er hat verschlafen','Die Straßenbahn hatte Verspätung','Er hat die Karte vergessen','Er war krank'],ans:1},
+  {t:'passage',p:'Am Freitag kommt Tom zu spät. Er entschuldigt sich: "Es tut mir leid! Die Straßenbahn hatte Verspätung." Nach dem Film gehen sie in ein Café und trinken heiße Schokolade. Der Abend war sehr schön.',q:'Was machen sie nach dem Film?',opts:['Sie gehen tanzen','Sie gehen nach Hause','Sie gehen ins Café','Sie spielen Fußball'],ans:2},
+  {t:'passage',p:'Am Freitag kommt Tom zu spät. Er entschuldigt sich: "Es tut mir leid! Die Straßenbahn hatte Verspätung." Nach dem Film gehen sie in ein Café und trinken heiße Schokolade. Der Abend war sehr schön.',q:'Wie war der Abend?',opts:['Langweilig','Sehr schön','Zu lang','Schlecht'],ans:1},
+  {t:'mc',q:'Was bedeutet "anrufen"?',opts:['to turn off','to call someone','to run away','to arrive'],ans:1},
+  {t:'mc',q:'Was bedeutet "einladen"?',opts:['to shop','to invite','to upload','to tidy up'],ans:1},
+  {t:'mc',q:'Welches Präfix hat "ausgehen"?',opts:['an-','ein-','aus-','auf-'],ans:2},
+  {t:'mc',q:'Ich _____ um 7 Uhr _____. (aufstehen)',opts:['stehe... auf','auf... stehe','aufstehe','steh... auf'],ans:0},
+  {t:'mc',q:'Die Party _____ um 8 Uhr _____. (anfangen)',opts:['anfängt','fängt... an','fangt... an','anfängt... an'],ans:1},
+  {t:'mc',q:'"Ich war gestern im Kino." Was bedeutet "war"?',opts:['Präsens von sein','Präteritum von sein','Präteritum von haben','Futur von sein'],ans:1},
+  {t:'mc',q:'"Wir hatten eine tolle Party." Was bedeutet "hatten"?',opts:['Präsens von haben','Futur von haben','Präteritum von haben','Präteritum von sein'],ans:2},
+  {t:'mc',q:'Wie heißt "the 3rd" auf Deutsch?',opts:['der dritte','der dritt','der drei','der dritten'],ans:0},
+  {t:'mc',q:'Wie sagt man "on the 5th of May"?',opts:['am fünftem Mai','am fünften Mai','den fünften Mai','der fünfte Mai'],ans:1},
+  {t:'mc',q:'Was bedeutet "vorbereiten"?',opts:['to prepare','to pass by','to go before','to pre-cook'],ans:0},
+  {t:'mc',q:'Du _____ gestern sehr müde. (sein - Präteritum)',opts:['warst','waren','wart','bist'],ans:0},
+  {t:'mc',q:'Sie (Plural) _____ keine Zeit. (haben - Präteritum)',opts:['hatte','hattest','hatten','hattet'],ans:2},
+  {t:'mc',q:'"Komm bitte mit!" - Welches Verb ist das?',opts:['kommen','mitkommen','ankommen','vorkommen'],ans:1},
+  {t:'mc',q:'Ihr _____ gestern Abend im Restaurant. (sein - Präteritum)',opts:['war','waren','wart','seid'],ans:2},
+  {t:'mc',q:'"Hast du am Samstag Zeit?" - Richtige Antwort:',opts:['Ja, ich habe Zeit.','Ja, ich Zeit habe.','Ja, habe Zeit ich.','Ja, ich habe Zeits.'],ans:0},
+  {t:'mc',q:'Was ist die Ordinalzahl für 20?',opts:['zwanzigste','zwanzigsten','zwanzigst-','zwanzigte'],ans:2},
+  {t:'mc',q:'"Sie lädt ihre Freunde ein." - Infinitiv?',opts:['laden','einladen','läden','laden ein'],ans:1},
+  {t:'mc',q:'Welcher Ausdruck bedeutet "to have a party"?',opts:['eine Party gehen','eine Party machen','eine Party kommen','eine Party sein'],ans:1},
+];
+
+const lesen1Q=[
+  {t:'mc',q:'Auf welchen Tag fällt Mos Party?',opts:['Freitag','Samstag','Sonntag','Montag'],ans:1},
+  {t:'mc',q:'Was macht Mo, bevor er Jonas anruft?',opts:['Er räumt auf','Er kauft ein','Er plant die Party','Er kocht'],ans:2},
+  {t:'mc',q:'Wer räumt die Wohnung auf?',opts:['Nur Mo','Nur Lina','Mo und Lina','Jonas und Mo'],ans:2},
+  {t:'mc',q:'Was kaufen Mo und Lina für die Party?',opts:['Kuchen und Getränke','Snacks und Getränke','Blumen und Snacks','Pizza und Salat'],ans:1},
+  {t:'mc',q:'Wie antwortet Jonas auf Mos Einladung?',opts:['Er kann nicht kommen','Er kommt gerne','Er fragt später','Er antwortet nicht'],ans:1},
+];
+
+const lesen2Q=[
+  {t:'mc',q:'Was für ein Film läuft im Kino?',opts:['Actionfilm','Horrorfilm','Animationsfilm','Liebesfilm'],ans:2},
+  {t:'mc',q:'Um wie viel Uhr treffen sich Sara und Tom?',opts:['Um sieben Uhr','Um Viertel vor sieben','Um Viertel nach sieben','Um halb sieben'],ans:2},
+  {t:'mc',q:'Wie entschuldigt sich Tom?',opts:['"Ich war müde."','"Es tut mir leid!"','"Kein Problem."','"Die Karte war falsch."'],ans:1},
+  {t:'mc',q:'Was trinken Sara und Tom im Café?',opts:['Kaffee','Tee','Heiße Schokolade','Orangensaft'],ans:2},
+  {t:'mc',q:'Wer hat die Kinokarten gekauft?',opts:['Tom','Sara','Beide zusammen','Ein Freund'],ans:1},
+];
+
+const lesen3Q=[
+  {t:'mc',q:'Wo spielen Lena und Julia Tennis?',opts:['In einer Tennishalle','Im Park','Im Sportzentrum','Zu Hause'],ans:1},
+  {t:'mc',q:'Was essen Lena und Julia im Café?',opts:['Pizza','Pasta','Kuchen','Sandwich'],ans:2},
+  {t:'mc',q:'Was bringt Lenas Mutter mit?',opts:['Wein','Schokolade','Einen Blumenstrauß','Kuchen'],ans:2},
+  {t:'mc',q:'Was hatte Lenas Vater mitgebracht?',opts:['Blumen','Schokolade','Brot','Wein'],ans:3},
+  {t:'mc',q:'Wie findet Lena ihr Wochenende?',opts:['Langweilig','Anstrengend','Toll','Zu kurz'],ans:2},
+];
+
+const sprechenQ=[
+  {t:'fill',q:'Ich _____ jeden Morgen um 7 Uhr auf. (aufstehen - Verbstamm)',ans:'stehe'},
+  {t:'fill',q:'Er _____ seine Mutter jeden Sonntag an. (anrufen - Verbstamm)',ans:'ruft'},
+  {t:'fill',q:'Wir _____ die Küche auf. (aufräumen - Verbstamm)',ans:'räumen'},
+  {t:'fill',q:'Sie _____ ihre Freunde zum Geburtstag ein. (einladen - Verbstamm)',ans:'lädt'},
+  {t:'fill',q:'Ich _____ gerne fern. (fernsehen - Verbstamm)',ans:'sehe'},
+  {t:'fill',q:'Die Party _____ um acht Uhr an. (anfangen - Verbstamm)',ans:'fängt'},
+  {t:'mc',q:'Richtige Wortstellung: Er / kauft / Getränke / ein.',opts:['Er kauft Getränke ein.','Er ein kauft Getränke.','Ein kauft er Getränke.','Kauft er Getränke ein.'],ans:0},
+  {t:'mc',q:'Richtige Wortstellung: Sie / bereitet / das Essen / vor.',opts:['Sie das Essen vor bereitet.','Sie bereitet das Essen vor.','Das Essen bereitet sie vor.','Vor bereitet sie das Essen.'],ans:1},
+  {t:'mc',q:'Präteritum von "sein" - ich:',opts:['bin','war','sei','werde'],ans:1},
+  {t:'mc',q:'Präteritum von "sein" - wir:',opts:['sind','sein','wart','waren'],ans:3},
+  {t:'mc',q:'Präteritum von "haben" - er:',opts:['hat','hatte','hätte','habe'],ans:1},
+  {t:'mc',q:'Präteritum von "haben" - ihr:',opts:['habt','hättet','hattet','hatten'],ans:2},
+  {t:'fill',q:'Gestern _____ ich sehr müde. (sein - Präteritum)',ans:'war'},
+  {t:'fill',q:'Wir _____ gestern eine tolle Party. (haben - Präteritum)',ans:'hatten'},
+  {t:'fill',q:'Das Wetter _____ sehr schön. (sein - Präteritum)',ans:'war'},
+  {t:'fill',q:'Ihr _____ letztes Jahr in Berlin. (sein - Präteritum)',ans:'wart'},
+  {t:'mc',q:'"Am ersten" kommt von welcher Zahl?',opts:['1','11','21','31'],ans:0},
+  {t:'mc',q:'"Am dritten" kommt von welcher Zahl?',opts:['2','3','13','23'],ans:1},
+  {t:'mc',q:'Wie sagt man "on the 20th"?',opts:['Am zwanzigsten','Am zwanzigste','Am zwanzigst','Den zwanzigsten'],ans:0},
+  {t:'fill',q:'Ich habe am _____ Mai Geburtstag. (5th)',ans:'fünften'},
+  {t:'mc',q:'"Wo treffen wir uns?" - Wo steht das Verb?',opts:['Am Anfang','An zweiter Stelle','Am Ende','Es gibt kein Verb'],ans:1},
+  {t:'mc',q:'"Hast du am _____ Samstag Zeit?" - richtige Präposition:',opts:['am','im','an','um'],ans:0},
+  {t:'mc',q:'"Ich komme gerne!" bedeutet:',opts:["I'm not coming.","I'd love to come!","I'm coming late.","I don't know."],ans:1},
+  {t:'fill',q:'Nach dem Film _____ wir ins Café. (gehen - Präteritum: gingen)',ans:'gingen'},
+  {t:'mc',q:'Was ist die Ordinalzahl für 7?',opts:['siebt-','sieben-','siebent-','siebet-'],ans:0},
+  {t:'mc',q:'"Bring bitte Getränke mit!" - Welches Verb?',opts:['bringen','mitbringen','mitkommen','einbringen'],ans:1},
+  {t:'mc',q:'Präteritum von "sein" - du:',opts:['bist','warst','seist','wirst'],ans:1},
+  {t:'mc',q:'Präteritum von "haben" - wir:',opts:['haben','hatte','hatten','hattet'],ans:2},
+  {t:'mc',q:'Welches Verb ist KEIN trennbares Verb?',opts:['aufstehen','anrufen','arbeiten','einladen'],ans:2},
+  {t:'fill',q:'Du _____ kein Geld dabei. (haben - Präteritum)',ans:'hattest'},
+  {t:'fill',q:'Sie (Plural) _____ alle müde nach der Party. (sein - Präteritum)',ans:'waren'},
+  {t:'mc',q:'Ordinalzahl für 8:',opts:['achte-','acht-','achtste-','achtze-'],ans:1},
+  {t:'fill',q:'Ihr _____ letztes Jahr viel Spaß. (haben - Präteritum)',ans:'hattet'},
+  {t:'mc',q:'Was bedeutet "vorbeikommen"?',opts:['to come before','to come by / drop in','to come forward','to come along'],ans:1},
+  {t:'mc',q:'"Sie lädt ihre Freunde ein." - Das Präfix ist:',opts:['lädt','ein','lä-','sie'],ans:1},
+  {t:'fill',q:'Wir _____ gestern im Park. (sein - Präteritum)',ans:'waren'},
+  {t:'mc',q:'Datum: "am _____ Oktober" (3rd)',opts:['dritte','dritten','dritter','drittem'],ans:1},
+  {t:'mc',q:'"Ich stehe um 6 auf." Präteritum:',opts:['Ich stand auf.','Ich stehe auf.','Ich aufstand.','Ich aufstehe.'],ans:0},
+  {t:'fill',q:'Trennbares Verb "fernsehen" - du _____ fern.',ans:'siehst'},
+  {t:'mc',q:'Was bedeutet "Herzlichen Glückwunsch"?',opts:['Have fun!','Congratulations / Happy birthday!','Good luck!','Thank you!'],ans:1},
+];
+
+const schreibenQ=[
+  {t:'order',q:'Bilde einen Satz: Mo / ruft / seinen Freund / an',words:['Mo','ruft','seinen','Freund','an'],ans:'Mo ruft seinen Freund an'},
+  {t:'order',q:'Bilde einen Satz: Wir / räumen / die Wohnung / auf',words:['Wir','räumen','die','Wohnung','auf'],ans:'Wir räumen die Wohnung auf'},
+  {t:'order',q:'Bilde einen Satz: Die Party / fängt / um acht Uhr / an',words:['Die','Party','fängt','um','acht','Uhr','an'],ans:'Die Party fängt um acht Uhr an'},
+  {t:'order',q:'Bilde einen Satz: Ich / lade / alle Freunde / ein',words:['Ich','lade','alle','Freunde','ein'],ans:'Ich lade alle Freunde ein'},
+  {t:'order',q:'Bilde einen Satz: Er / sieht / jeden Abend / fern',words:['Er','sieht','jeden','Abend','fern'],ans:'Er sieht jeden Abend fern'},
+  {t:'order',q:'Bilde einen Satz: Sie / kaufen / Getränke / ein',words:['Sie','kaufen','Getränke','ein'],ans:'Sie kaufen Getränke ein'},
+  {t:'fill',q:'Lücke: Ich _____ gestern krank. (war/hatte)',ans:'war'},
+  {t:'fill',q:'Lücke: Wir _____ keine Zeit für die Party. (war/hatten)',ans:'hatten'},
+  {t:'fill',q:'Lücke: Das Fest _____ sehr schön. (war/hatte)',ans:'war'},
+  {t:'fill',q:'Lücke: Ihr _____ viel Spaß beim Tanzen. (wart/hattet)',ans:'hattet'},
+  {t:'fill',q:'Lücke: Sie (Pl.) _____ alle müde nach der Party. (waren/hatten)',ans:'waren'},
+  {t:'fill',q:'Lücke: Du _____ kein Handy dabei. (warst/hattest)',ans:'hattest'},
+  {t:'mc',q:'Ergänze: "Ich habe am _____ Januar Geburtstag." (1st)',opts:['erste','ersten','erster','erstem'],ans:1},
+  {t:'mc',q:'Ergänze: "Die Party ist am _____ März." (3rd)',opts:['dritte','dritten','dritter','drittem'],ans:1},
+  {t:'mc',q:'Ergänze: "Heute ist der _____ Oktober." (5th)',opts:['fünften','fünfte','fünfter','fünftem'],ans:1},
+  {t:'mc',q:'"Ich _____ gestern zu Hause." Wähle Präteritum:',opts:['hatte','war','bin','habe'],ans:1},
+  {t:'mc',q:'"Der Kuchen _____ sehr lecker." Wähle:',opts:['hatte','war','hat','ist'],ans:1},
+  {t:'mc',q:'"Wir _____ Hunger." Wähle Präteritum:',opts:['waren','hatten','hattet','wart'],ans:1},
+  {t:'order',q:'Bilde: Ich / komme / morgen / vorbei',words:['Ich','komme','morgen','vorbei'],ans:'Ich komme morgen vorbei'},
+  {t:'order',q:'Bilde: Hör / bitte / zu!',words:['Hör','bitte','zu'],ans:'Hör bitte zu'},
+  {t:'fill',q:'Trennbares Verb: "aufstehen" - er _____ auf.',ans:'steht'},
+  {t:'fill',q:'Trennbares Verb: "einladen" - sie _____ ein.',ans:'lädt'},
+  {t:'fill',q:'Trennbares Verb: "aufräumen" - wir _____ auf.',ans:'räumen'},
+  {t:'fill',q:'Trennbares Verb: "anfangen" - es _____ an.',ans:'fängt'},
+  {t:'mc',q:'"Er kommt heute Abend vorbei." bedeutet:',opts:['He comes along.','He comes by tonight.','He comes before.','He leaves tonight.'],ans:1},
+  {t:'mc',q:'Was ist die richtige Form? "Ihr _____ letzte Woche in Hamburg."',opts:['wart','waren','war','seid'],ans:0},
+  {t:'mc',q:'Richtig oder falsch: "Ich anrufe meinen Freund."',opts:['Richtig','Falsch - korrekt: "Ich rufe meinen Freund an."','Falsch - korrekt: "Ich anrufe Freund."','Falsch - korrekt: "Ich anrufe meinen Freunden."'],ans:1},
+  {t:'order',q:'Bilde: Räum / dein / Zimmer / auf!',words:['Räum','dein','Zimmer','auf'],ans:'Räum dein Zimmer auf'},
+  {t:'fill',q:'Präteritum: Sie (Pl.) _____ keine Karten mehr. (haben)',ans:'hatten'},
+  {t:'fill',q:'Datum: "am _____ Dezember" (7th)',ans:'siebten'},
+  {t:'fill',q:'Datum: "am _____ Dezember" (20th)',ans:'zwanzigsten'},
+  {t:'mc',q:'Welcher Satz ist grammatisch richtig?',opts:['Ich kaufe ein Brot ein.','Ich kaufe ein Brot.','Kaufe ich ein Brot ein.','Ein Brot kaufe ein ich.'],ans:0},
+  {t:'mc',q:'"Wir hatten Spaß." Präsens:',opts:['Wir haben Spaß.','Wir haben Späße.','Wir hätten Spaß.','Wir sind Spaß.'],ans:0},
+  {t:'fill',q:'Lücke: Ich _____ gestern meine Oma angerufen. (Perfekt von anrufen mit "habe")',ans:'habe'},
+  {t:'mc',q:'Ordinalzahl für 31:',opts:['einunddreißigst-','einundreißigst-','einunddreist-','einundreißigste-'],ans:0},
+];
+
+const wbData=[
+  {word:'aufstehen',art:'v',en:'to get up',ex:'Ich stehe jeden Morgen um sieben auf.',cat:'verben'},
+  {word:'anrufen',art:'v',en:'to call (by phone)',ex:'Mo ruft seinen Freund Jonas an.',cat:'verben'},
+  {word:'einladen',art:'v',en:'to invite',ex:'Er lädt alle seine Freunde ein.',cat:'verben'},
+  {word:'aufräumen',art:'v',en:'to tidy up',ex:'Wir räumen die Wohnung auf.',cat:'verben'},
+  {word:'fernsehen',art:'v',en:'to watch TV',ex:'Er sieht jeden Abend fern.',cat:'verben'},
+  {word:'ausgehen',art:'v',en:'to go out',ex:'Am Wochenende gehen wir aus.',cat:'verben'},
+  {word:'einkaufen',art:'v',en:'to go shopping',ex:'Sie kauft Getränke ein.',cat:'verben'},
+  {word:'mitkommen',art:'v',en:'to come along',ex:'Kommst du mit ins Kino?',cat:'verben'},
+  {word:'vorbereiten',art:'v',en:'to prepare',ex:'Wir bereiten die Party vor.',cat:'verben'},
+  {word:'vorbeikommen',art:'v',en:'to come by',ex:'Ich komme morgen vorbei.',cat:'verben'},
+  {word:'anfangen',art:'v',en:'to begin; to start',ex:'Die Party fängt um acht an.',cat:'verben'},
+  {word:'mitbringen',art:'v',en:'to bring along',ex:'Was soll ich mitbringen?',cat:'verben'},
+  {word:'feiern',art:'v',en:'to celebrate',ex:'Wir feiern Mos Geburtstag.',cat:'verben'},
+  {word:'treffen',art:'v',en:'to meet',ex:'Wo treffen wir uns?',cat:'verben'},
+  {word:'tanzen',art:'v',en:'to dance',ex:'Sie gehen am Samstag tanzen.',cat:'verben'},
+  {word:'spazieren gehen',art:'v',en:'to go for a walk',ex:'Wir gehen im Park spazieren.',cat:'verben'},
+  {word:'war',art:'v',en:'was (Präteritum von sein)',ex:'Ich war gestern im Kino.',cat:'verben'},
+  {word:'waren',art:'v',en:'were (Präteritum von sein - wir/sie)',ex:'Wir waren sehr glücklich.',cat:'verben'},
+  {word:'hatte',art:'v',en:'had (Präteritum von haben)',ex:'Er hatte viel Spaß.',cat:'verben'},
+  {word:'hatten',art:'v',en:'had (Präteritum - wir/sie)',ex:'Wir hatten eine tolle Party.',cat:'verben'},
+  {word:'der Geburtstag',art:'m',en:'birthday',ex:'Ich habe am fünften Mai Geburtstag.',cat:'nomen'},
+  {word:'die Party',art:'f',en:'party',ex:'Mo macht eine tolle Party.',cat:'nomen'},
+  {word:'das Fest',art:'n',en:'celebration; festival',ex:'Das Fest war sehr schön.',cat:'nomen'},
+  {word:'die Einladung',art:'f',en:'invitation',ex:'Ich habe eine Einladung bekommen.',cat:'nomen'},
+  {word:'der Freund',art:'m',en:'friend (male)',ex:'Mo lädt seinen Freund ein.',cat:'nomen'},
+  {word:'die Freundin',art:'f',en:'friend (female)',ex:'Lena und ihre Freundin Julia.',cat:'nomen'},
+  {word:'das Kino',art:'n',en:'cinema',ex:'Wir gehen ins Kino.',cat:'nomen'},
+  {word:'der Film',art:'m',en:'film; movie',ex:'Der Film beginnt um halb acht.',cat:'nomen'},
+  {word:'die Karte',art:'f',en:'ticket; card',ex:'Sara hat zwei Karten gekauft.',cat:'nomen'},
+  {word:'das Café',art:'n',en:'cafe',ex:'Nach dem Film gehen sie ins Café.',cat:'nomen'},
+  {word:'der Abend',art:'m',en:'evening',ex:'Der Abend war sehr schön.',cat:'nomen'},
+  {word:'das Wochenende',art:'n',en:'weekend',ex:'Was machst du am Wochenende?',cat:'nomen'},
+  {word:'die Verspätung',art:'f',en:'delay; lateness',ex:'Die Straßenbahn hatte Verspätung.',cat:'nomen'},
+  {word:'der Kuchen',art:'m',en:'cake',ex:'Wir essen Kuchen im Café.',cat:'nomen'},
+  {word:'die Getränke (Pl.)',art:'n',en:'drinks; beverages',ex:'Ich kaufe Getränke für die Party.',cat:'nomen'},
+  {word:'der Blumenstrauß',art:'m',en:'bouquet of flowers',ex:'Er bringt einen Blumenstrauß mit.',cat:'nomen'},
+  {word:'der Spaß',art:'m',en:'fun',ex:'Wir haben viel Spaß.',cat:'nomen'},
+  {word:'das Geschenk',art:'n',en:'gift; present',ex:'Sie bringt ein Geschenk mit.',cat:'nomen'},
+  {word:'die Straßenbahn',art:'f',en:'tram; streetcar',ex:'Ich fahre mit der Straßenbahn.',cat:'nomen'},
+  {word:'der Park',art:'m',en:'park',ex:'Wir spielen Tennis im Park.',cat:'nomen'},
+  {word:'das Konzert',art:'n',en:'concert',ex:'Wir gehen heute Abend ins Konzert.',cat:'nomen'},
+  {word:'der Animationsfilm',art:'m',en:'animated film',ex:'Der neue Animationsfilm ist super.',cat:'nomen'},
+  {word:'ins Kino gehen',art:'ph',en:'to go to the cinema',ex:'Am Freitag gehen wir ins Kino.',cat:'ausdr'},
+  {word:'Geburtstag feiern',art:'ph',en:'to celebrate a birthday',ex:'Wir feiern Mos Geburtstag.',cat:'ausdr'},
+  {word:'eine Party machen',art:'ph',en:'to have a party',ex:'Er macht eine große Party.',cat:'ausdr'},
+  {word:'Freunde treffen',art:'ph',en:'to meet friends',ex:'Ich treffe heute meine Freunde.',cat:'ausdr'},
+  {word:'Hast du Zeit?',art:'ph',en:'Do you have time?',ex:'Hast du am Samstag Zeit?',cat:'ausdr'},
+  {word:'Wo treffen wir uns?',art:'ph',en:'Where do we meet?',ex:'Wo treffen wir uns - vor dem Kino?',cat:'ausdr'},
+  {word:'Ich komme gerne!',art:'ph',en:"I'd love to come!",ex:'Natürlich! Ich komme gerne!',cat:'ausdr'},
+  {word:'Es tut mir leid!',art:'ph',en:"I'm sorry!",ex:'Es tut mir leid, ich bin zu spät.',cat:'ausdr'},
+  {word:'Viel Spaß!',art:'ph',en:'Have fun!',ex:'Viel Spaß auf der Party!',cat:'ausdr'},
+  {word:'Herzlichen Glückwunsch!',art:'ph',en:'Happy birthday! / Congratulations!',ex:'Herzlichen Glückwunsch zum Geburtstag!',cat:'ausdr'},
+  {word:'schön',art:'adj',en:'beautiful; nice; great',ex:'Das war ein schöner Abend.',cat:'adj'},
+  {word:'toll',art:'adj',en:'great; fantastic',ex:'Die Party war toll!',cat:'adj'},
+  {word:'lustig',art:'adj',en:'funny; fun',ex:'Der Film war sehr lustig.',cat:'adj'},
+  {word:'langweilig',art:'adj',en:'boring',ex:'Der Abend war leider langweilig.',cat:'adj'},
+  {word:'spät',art:'adj',en:'late',ex:'Tom kommt immer zu spät.',cat:'adj'},
+  {word:'früh',art:'adj',en:'early',ex:'Ich stehe morgens früh auf.',cat:'adj'},
+  {word:'müde',art:'adj',en:'tired',ex:'Nach der Party war ich sehr müde.',cat:'adj'},
+  {word:'glücklich',art:'adj',en:'happy',ex:'Sie war sehr glücklich.',cat:'adj'},
+];
+
+renderSet(lesenQ,'lesen-set');
+renderSet(lesen1Q,'lesen1-set');
+renderSet(lesen2Q,'lesen2-set');
+renderSet(lesen3Q,'lesen3-set');
+renderSet(sprechenQ,'sprechen-set');
+renderSet(schreibenQ,'schreiben-set');
+
+window.addEventListener('load',function(){
+  const ov=document.getElementById('sc-overlay');
+  if(ov)ov.addEventListener('click',function(e){if(e.target===this)closeCard();});
+  loadLB();
+});
+</script>
+
+<script type="module">
+import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js';
+import { getFirestore, collection, doc, getDoc, updateDoc, getDocs, query, orderBy, limit }
+  from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js';
+const app = initializeApp({
+  apiKey:"AIzaSyCuMSWNpOIlnqqxFmy08CfIcbvAUpTXo1E",
+  authDomain:"deutschmeistern-abc4d.firebaseapp.com",
+  projectId:"deutschmeistern-abc4d",
+  storageBucket:"deutschmeistern-abc4d.firebasestorage.app",
+  messagingSenderId:"282075407369",
+  appId:"1:282075407369:web:4a5587b4eb391e768004d8"
+});
+const db = getFirestore(app);
+window.saveKapitelScore = async function(studentId, kapitelKey, newScore) {
+  try {
+    const ref = doc(db,'students',studentId);
+    const snap = await getDoc(ref);
+    if(!snap.exists()) return;
+    const scores = snap.data().scores || {};
+    if(newScore > (scores[kapitelKey]||0)) {
+      scores[kapitelKey] = newScore;
+      const totalScore = Object.values(scores).reduce((a,b)=>a+b,0);
+      await updateDoc(ref,{scores,totalScore});
+      const el=document.getElementById('prev-best'),ptEl=document.getElementById('prev-pts');
+      if(el&&ptEl){ptEl.textContent=newScore;el.style.display='flex';}
+      const t=document.createElement('div');
+      t.style.cssText='position:fixed;bottom:90px;left:50%;transform:translateX(-50%);background:#16a34a;color:#fff;padding:10px 22px;border-radius:50px;font-family:Nunito,sans-serif;font-weight:900;font-size:.82rem;z-index:9999;white-space:nowrap;';
+      t.textContent='Score gespeichert!';document.body.appendChild(t);setTimeout(()=>t.remove(),3000);
+    }
+  } catch(e){console.log(e);}
+};
+(async()=>{
+  const sid=localStorage.getItem('dm_student_id');if(!sid)return;
+  try{const snap=await getDoc(doc(db,'students',sid));if(!snap.exists())return;
+  const prev=(snap.data().scores||{})['a1k6']||0;
+  if(prev>0){const el=document.getElementById('prev-best'),ptEl=document.getElementById('prev-pts');if(el&&ptEl){ptEl.textContent=prev;el.style.display='flex';}}
+  }catch(e){}
+})();
+window.loadLeaderboard = async function() {
+  const listEl=document.getElementById('lb-list');
+  if(listEl)listEl.innerHTML='<div style="text-align:center;padding:24px;color:var(--muted);">Lade Rangliste...</div>';
+  try{
+    const myId=localStorage.getItem('dm_student_id');
+    const snap=await getDocs(query(collection(db,'students'),orderBy('totalScore','desc'),limit(20)));
+    const students=[];
+    snap.forEach(d=>{const data=d.data();if((data.totalScore||0)>0)students.push({id:d.id,name:data.name||'Student',total:data.totalScore||0,you:d.id===myId});});
+    students.sort((a,b)=>b.total-a.total);
+    const podEl=document.getElementById('podium');
+    const top3=students.slice(0,3);
+    const order=[top3[1],top3[0],top3[2]].filter(Boolean);
+    const medals=['&#129352;','&#129351;','&#129353;'];
+    const podH=['pod-2','pod-1','pod-3'];
+    if(podEl)podEl.innerHTML=order.map((r,i)=>`<div class="pod ${podH[i]}"><div class="pod-inner"><div class="pod-rank">${medals[i]}</div><div class="pod-name">${r.name}</div><div class="pod-pts">${r.total} pts</div></div></div>`).join('');
+    const maxPts=Math.max(...students.map(s=>s.total),1);
+    if(listEl)listEl.innerHTML=students.length===0?'<div style="text-align:center;padding:30px;color:var(--muted);">Noch keine Punkte!</div>':students.map((s,i)=>`<div class="lb-row${s.you?' lb-you':''}"><div class="lb-rank">${i+1}</div><div style="flex:1"><div class="lb-name">${s.name}${s.you?' &#128072;':''}</div><div class="lb-bar-wrap"><div class="lb-bar" style="width:${Math.round(s.total/maxPts*100)}%"></div></div></div><div class="lb-pts">${s.total}</div></div>`).join('');
+  }catch(e){if(listEl)listEl.innerHTML='<div style="text-align:center;padding:20px;color:var(--muted);">Rangliste nicht verfügbar.</div>';}
+};
+</script>
+</body>
+</html>

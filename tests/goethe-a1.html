@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<title>Goethe-Zertifikat A1 – Start Deutsch 1 – Modelltest</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  :root{
+    --purple:#a668b0; --purple-dark:#7d4a86; --grey-bg:#f4f2f5; --card:#ffffff;
+    --ok:#2e7d32; --bad:#c62828; --text:#2b2b2b;
+  }
+  *{box-sizing:border-box;}
+  body{font-family:'Segoe UI',Arial,sans-serif;background:var(--grey-bg);margin:0;color:var(--text);line-height:1.5;}
+  header{background:var(--purple);color:#fff;padding:24px 20px;text-align:center;}
+  header h1{margin:0 0 4px;font-size:1.6rem;}
+  header p{margin:0;opacity:.9;}
+  nav{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;background:var(--purple-dark);padding:10px;position:sticky;top:0;z-index:10;}
+  nav button{background:#fff;border:none;padding:8px 16px;border-radius:20px;cursor:pointer;font-weight:600;color:var(--purple-dark);}
+  nav button.active{background:#ffe082;color:#5c3d00;}
+  main{max-width:900px;margin:0 auto;padding:20px;}
+  section.part{display:none;background:var(--card);border-radius:10px;padding:24px;margin-bottom:20px;box-shadow:0 1px 4px rgba(0,0,0,.1);}
+  section.part.active{display:block;}
+  h2{color:var(--purple-dark);border-bottom:2px solid var(--purple);padding-bottom:6px;}
+  h3{color:var(--purple-dark);margin-top:28px;}
+  .item{border:1px solid #e0dbe3;border-radius:8px;padding:14px 16px;margin:14px 0;background:#fafafa;}
+  .item p.q{font-weight:600;margin:0 0 10px;}
+  .opts label{display:block;padding:6px 10px;margin:4px 0;border-radius:6px;cursor:pointer;}
+  .opts label:hover{background:#f0e8f2;}
+  .rf{display:flex;gap:20px;}
+  .audio-btn{background:var(--purple);color:#fff;border:none;padding:6px 14px;border-radius:16px;cursor:pointer;margin-bottom:10px;font-size:.9rem;}
+  .audio-btn:hover{background:var(--purple-dark);}
+  textarea, input[type=text]{width:100%;padding:8px;border:1px solid #ccc;border-radius:6px;font-family:inherit;font-size:1rem;}
+  textarea{min-height:110px;resize:vertical;}
+  .form-grid label{display:block;font-weight:600;margin-top:10px;}
+  .letter-box{background:#fff8e1;border:1px solid #e8d9a0;border-radius:8px;padding:14px;margin:14px 0;white-space:pre-line;}
+  .ad{border:1px solid #ddd;border-radius:8px;padding:10px;background:#fff;}
+  .adgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:10px 0;}
+  .result{font-weight:700;margin-top:8px;}
+  .correct{color:var(--ok);}
+  .incorrect{color:var(--bad);}
+  .submit-btn{background:var(--purple-dark);color:#fff;border:none;padding:10px 22px;border-radius:20px;font-size:1rem;cursor:pointer;margin-top:16px;}
+  .submit-btn:hover{background:#5c3562;}
+  .score-box{background:#eef7ee;border:1px solid #b7dab7;border-radius:8px;padding:14px;margin-top:16px;font-weight:600;}
+  .final-summary{background:var(--purple);color:#fff;border-radius:10px;padding:24px;text-align:center;}
+  .final-summary .big{font-size:2.4rem;font-weight:800;}
+  .note{font-size:.85rem;color:#666;font-style:italic;}
+  .price-tag{display:inline-block;background:#eee;padding:4px 10px;border-radius:4px;font-weight:700;}
+  .voice-panel{background:#f0e8f2;border-radius:8px;padding:10px 14px;display:flex;gap:18px;align-items:center;flex-wrap:wrap;margin-bottom:16px;}
+  .voice-panel select{padding:4px 8px;border-radius:6px;}
+  .doc-image{margin:14px 0;text-align:center;}
+  .doc-image img{max-width:100%;border-radius:6px;box-shadow:0 1px 6px rgba(0,0,0,.15);}
+  .doc-image.small img{max-width:420px;}
+  .opts-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-top:10px;}
+  .opt-card{display:flex;flex-direction:column;align-items:center;gap:6px;border:1px solid #e0dbe3;border-radius:8px;padding:8px;background:#fff;cursor:pointer;text-align:center;}
+  .opt-card:hover{background:#f6effa;}
+  .opt-card img.opt-img{width:100%;max-width:160px;border-radius:4px;}
+  .opt-card img.site-img{width:100%;border-radius:4px;border:1px solid #ccc;}
+  .opt-card span{font-size:.95rem;}
+</style>
+</head>
+<body>
+
+
+<div id="name-banner" style="background:#7d4a86;padding:14px 20px;display:flex;align-items:center;gap:12px;justify-content:center;flex-wrap:wrap;">
+  <label style="color:#fff;font-weight:700;font-size:1rem;">Dein Name:</label>
+  <input id="student-name" type="text" placeholder="Vor- und Nachname eingeben..." maxlength="60"
+    style="padding:8px 14px;border-radius:20px;border:none;font-size:1rem;width:260px;font-family:inherit;">
+  <span style="color:rgba(255,255,255,.8);font-size:.85rem;">(wird mit deinem Ergebnis gespeichert)</span>
+</div>
+<header>
+  <h1>Goethe-Zertifikat A1 – Start Deutsch 1</h1>
+  <p>Modelltest &middot; Hören, Lesen, Schreiben (Sprechen übersprungen)</p>
+</header>
+
+<nav id="tabs">
+  <button data-tab="hoeren" class="active">Hören</button>
+  <button data-tab="lesen">Lesen</button>
+  <button data-tab="schreiben">Schreiben</button>
+  <button data-tab="ergebnis">Ergebnis</button>
+</nav>
+
+<main>
+
+<!-- ================= HÖREN ================= -->
+<section id="hoeren" class="part active">
+  <h2>Hören &middot; circa 20 Minuten</h2>
+  <p class="note">Klicken Sie auf „🔊 Anhören“, um den Text vorlesen zu lassen (synthetische Stimme, da keine Original-Audiodatei vorliegt).</p>
+  <div class="voice-panel">
+    <label>Stimme: <select id="voiceSelect"></select></label>
+    <label>Geschwindigkeit:
+      <input type="range" id="rateSlider" min="0.6" max="1.1" step="0.05" value="0.85">
+      <span id="rateLabel">0.85x</span>
+    </label>
+    <button class="audio-btn" onclick="toggleSpeak('Hallo, das ist ein Test der Stimme.', this)">🔊 Stimme testen</button>
+    <p class="note" id="voiceWarning" style="display:none;color:#c62828;">Es wurde keine deutsche Stimme auf diesem Gerät gefunden. Die Aussprache klingt dadurch möglicherweise falsch. Prüfen Sie in den Systemeinstellungen (Sprachausgabe/Text-to-Speech), ob eine deutsche Stimme installiert werden kann, oder nutzen Sie einen anderen Browser (Chrome hat meist gute deutsche Stimmen vorinstalliert).</p>
+  </div>
+
+  <h3>Teil 1 — Was ist richtig? (a, b oder c)</h3>
+  <div id="hoeren-teil1"></div>
+
+  <h3>Teil 2 — Richtig oder Falsch?</h3>
+  <div id="hoeren-teil2"></div>
+
+  <h3>Teil 3 — Was ist richtig? (a, b oder c)</h3>
+  <div id="hoeren-teil3"></div>
+
+  <button class="submit-btn" onclick="gradeSection('hoeren')">Hören auswerten</button>
+  <div class="score-box" id="score-hoeren" style="display:none;"></div>
+</section>
+
+<!-- ================= LESEN ================= -->
+<section id="lesen" class="part">
+  <h2>Lesen &middot; circa 25 Minuten</h2>
+
+  <h3>Teil 1 — Zwei Texte lesen — Richtig oder Falsch?</h3>
+  <div class="doc-image"><img src="" id="img-email-karin" alt="E-Mail von Karin"></div>
+  <div class="doc-image"><img src="" id="img-letter-ralf" alt="Brief von Ralf"></div>
+  <div id="lesen-teil1"></div>
+
+  <h3>Teil 2 — Wo finden Sie Informationen? (a oder b)</h3>
+  <div id="lesen-teil2"></div>
+
+  <h3>Teil 3 — Schilder/Aushänge — Richtig oder Falsch?</h3>
+  <div id="lesen-teil3"></div>
+
+  <button class="submit-btn" onclick="gradeSection('lesen')">Lesen auswerten</button>
+  <div class="score-box" id="score-lesen" style="display:none;"></div>
+</section>
+
+<!-- ================= SCHREIBEN ================= -->
+<section id="schreiben" class="part">
+  <h2>Schreiben &middot; circa 20 Minuten</h2>
+
+  <h3>Teil 1 — Formular ausfüllen</h3>
+  <p>Ihre Freundin, Eva Kadavy, macht mit ihrem Mann und ihren beiden Söhnen (8 und 11 Jahre alt) Urlaub in Seeheim. Im Reisebüro bucht sie für den nächsten Sonntag eine Busfahrt um den Bodensee. Frau Kadavy hat keine Kreditkarte. In dem Formular fehlen fünf Informationen. Helfen Sie Ihrer Freundin und schreiben Sie die fünf fehlenden Informationen.</p>
+  <div class="doc-image"><img src="" id="img-form-bodensee" alt="Anmeldeformular Bodensee-Rundfahrt"></div>
+  <div class="form-grid">
+    <label>(1) Anzahl der Personen:</label>
+    <input type="text" id="s1">
+    <label>(2) Davon Kinder:</label>
+    <input type="text" id="s2">
+    <label>(3) PLZ, Urlaubsort (Ort):</label>
+    <input type="text" id="s3">
+    <label>(4) Zahlungsweise:</label>
+    <input type="text" id="s4">
+    <label>(5) Reisetermin:</label>
+    <input type="text" id="s5">
+  </div>
+  <button class="submit-btn" onclick="gradeSchreiben1()">Teil 1 auswerten</button>
+  <div class="score-box" id="score-schreiben1" style="display:none;"></div>
+
+  <h3>Teil 2 — Kurzen Text schreiben (circa 30 Wörter)</h3>
+  <p>Sie möchten im August Dresden besuchen. Schreiben Sie an die Touristeninformation:</p>
+  <ul>
+    <li>Warum schreiben Sie?</li>
+    <li>Informationen über Film, Museen usw. (Kulturprogramm)?</li>
+    <li>Hoteladressen?</li>
+  </ul>
+  <p class="note">Schreiben Sie zu jedem Punkt ein bis zwei Sätze. Denken Sie an Anrede und Gruß.</p>
+  <textarea id="schreiben2text" placeholder="Hallo, ..."></textarea>
+  <button class="submit-btn" onclick="gradeSchreiben2()">Teil 2 auswerten</button>
+  <div class="score-box" id="score-schreiben2" style="display:none;"></div>
+</section>
+
+<!-- ================= ERGEBNIS ================= -->
+<section id="ergebnis" class="part">
+  <h2>Gesamtergebnis</h2>
+  <div class="final-summary" id="final-summary">
+    <p>Bearbeiten Sie zuerst Hören, Lesen und Schreiben und werten Sie jeden Teil aus. Klicken Sie dann hier, um Ihr Gesamtergebnis zu sehen.</p>
+  </div>
+  <button class="submit-btn" onclick="showFinal()">Gesamtergebnis anzeigen</button>
+</section>
+
+</main>
+
+<script>
+const IMAGES = {
+  "sign_sprachzentrum": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=",
+  "item9_b": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=",
+  "item9_a": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=",
+  "form_bodensee": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=",
+  "sign_item12": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=",
+  "sign_item13": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=",
+  "sign_item11": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=",
+  "sign_item14": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=",
+  "item8_a": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=",
+  "sign_item15": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=",
+  "item8_b": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=",
+  "item2_3": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=",
+  "item6_a": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=",
+  "email_karin": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=",
+  "item2_2": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=",
+  "item6_b": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=",
+  "item2_1": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=",
+  "item4_3": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=",
+  "item6_1": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=",
+  "item4_2": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=",
+  "item6_2": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=",
+  "item6_3": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=",
+  "item4_1": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=",
+  "item7_b": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=",
+  "item1_2": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=",
+  "item1_3": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=",
+  "item3_1": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=",
+  "item7_a": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=",
+  "item3_3": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=",
+  "item1_1": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=",
+  "item3_2": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=",
+  "item10_a": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=",
+  "item5_1": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=",
+  "item5_3": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=",
+  "item10_b": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=",
+  "item5_2": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=",
+  "letter_ralf": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=",
+};
+
+/* ---------- TAB NAVIGATION ---------- */
+document.getElementById('img-email-karin').src = IMAGES.email_karin;
+document.getElementById('img-letter-ralf').src = IMAGES.letter_ralf;
+document.getElementById('img-form-bodensee').src = IMAGES.form_bodensee;
+
+document.querySelectorAll('nav button').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('nav button').forEach(b=>b.classList.remove('active'));
+    document.querySelectorAll('section.part').forEach(s=>s.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById(btn.dataset.tab).classList.add('active');
+  });
+});
+
+/* ---------- TEXT TO SPEECH ---------- */
+let germanVoices = [];
+let selectedVoiceURI = null;
+
+function populateVoices(){
+  const all = window.speechSynthesis.getVoices();
+  germanVoices = all.filter(v=>v.lang.toLowerCase().startsWith('de'));
+  const select = document.getElementById('voiceSelect');
+  const warning = document.getElementById('voiceWarning');
+  if(!select) return;
+  select.innerHTML='';
+  if(germanVoices.length===0){
+    warning.style.display='block';
+    // fall back to showing all voices so user can still pick something
+    all.forEach(v=>{
+      const opt=document.createElement('option');
+      opt.value=v.voiceURI; opt.textContent=v.name+' ('+v.lang+')';
+      select.appendChild(opt);
+    });
+    if(all.length) selectedVoiceURI = all[0].voiceURI;
+  } else {
+    warning.style.display='none';
+    germanVoices.forEach(v=>{
+      const opt=document.createElement('option');
+      opt.value=v.voiceURI; opt.textContent=v.name+' ('+v.lang+')';
+      select.appendChild(opt);
+    });
+    selectedVoiceURI = germanVoices[0].voiceURI;
+  }
+  select.value = selectedVoiceURI;
+}
+window.speechSynthesis.onvoiceschanged = populateVoices;
+populateVoices();
+setTimeout(populateVoices, 300); // some browsers need a delay on first load
+
+document.addEventListener('change', (e)=>{
+  if(e.target && e.target.id==='voiceSelect'){ selectedVoiceURI = e.target.value; }
+  if(e.target && e.target.id==='rateSlider'){ document.getElementById('rateLabel').textContent = e.target.value+'x'; }
+});
+
+function getSelectedVoice(){
+  const all = window.speechSynthesis.getVoices();
+  return all.find(v=>v.voiceURI===selectedVoiceURI) || all.find(v=>v.lang.toLowerCase().startsWith('de')) || all[0];
+}
+
+let activeSpeakBtn = null;   // the button currently controlling playback
+let activeSpeakState = 'idle'; // 'idle' | 'playing' | 'paused'
+let speakWatchdog = null;
+
+function resetButton(btn){
+  if(btn) btn.textContent = '🔊 Anhören';
+}
+
+function speak(text, btn){
+  // Stop whatever was playing before (and reset its button label).
+  window.speechSynthesis.cancel();
+  if(speakWatchdog) clearInterval(speakWatchdog);
+  resetButton(activeSpeakBtn);
+
+  activeSpeakBtn = btn || null;
+  activeSpeakState = 'playing';
+  if(activeSpeakBtn) activeSpeakBtn.textContent = '⏸ Pause';
+
+  // Split into sentences/speaker turns for clearer, well-paced playback.
+  const rawLines = text.split('\n').map(l=>l.trim()).filter(l=>l.length>0);
+  const voice = getSelectedVoice();
+  const rate = parseFloat(document.getElementById('rateSlider') ? document.getElementById('rateSlider').value : 0.85);
+
+  // Build a queue: speaker name spoken once (softly implied by pause), then the sentence, same natural pitch throughout.
+  let queue = [];
+  rawLines.forEach(line=>{
+    const m = line.match(/^([A-Za-zäöüÄÖÜß.]+):\s*(.*)$/);
+    if(m){
+      queue.push(m[1]+' sagt:');
+      queue.push(m[2]);
+    } else {
+      queue.push(line);
+    }
+  });
+
+  let i=0;
+  function next(){
+    if(i>=queue.length){
+      activeSpeakState='idle';
+      resetButton(activeSpeakBtn);
+      activeSpeakBtn=null;
+      if(speakWatchdog){ clearInterval(speakWatchdog); speakWatchdog=null; }
+      return;
+    }
+    const chunk = queue[i]; i++;
+    const u = new SpeechSynthesisUtterance(chunk);
+    u.lang = voice ? voice.lang : 'de-DE';
+    u.rate = rate;
+    u.pitch = 1;
+    u.volume = 1;
+    if(voice) u.voice = voice;
+    u.onend = ()=> setTimeout(next, 180); // small pause between chunks for clarity
+    u.onerror = next;
+    window.speechSynthesis.speak(u);
+  }
+  next();
+
+  // Some browsers silently drop pause/resume state after a while; keep the engine alive.
+  speakWatchdog = setInterval(()=>{
+    if(!window.speechSynthesis.speaking && !window.speechSynthesis.pending && activeSpeakState==='playing'){
+      // playback finished naturally; nothing to do, next() already resets state
+    }
+  }, 500);
+}
+
+// Toggle play / pause / resume for a given button + text. Used by all "Anhören" buttons.
+function toggleSpeak(text, btn){
+  const isThisOneActive = (activeSpeakBtn === btn);
+
+  if(!isThisOneActive){
+    // Starting fresh (either nothing was playing, or a different clip was).
+    speak(text, btn);
+    return;
+  }
+
+  // This button is the one currently controlling playback.
+  if(activeSpeakState === 'playing'){
+    window.speechSynthesis.pause();
+    activeSpeakState = 'paused';
+    btn.textContent = '▶ Weiter';
+  } else if(activeSpeakState === 'paused'){
+    window.speechSynthesis.resume();
+    activeSpeakState = 'playing';
+    btn.textContent = '⏸ Pause';
+  }
+}
+
+/* ---------- HÖREN DATA ---------- */
+const hoerenT1 = [
+ {n:1, q:"Was kostet der Pullover?", opts:["Dreißig Euro.","Fünfundneunzig Euro.","Neunzehn Euro fünfundneunzig Cent."], correct:2,
+  audio:"Kunde: Entschuldigung, was kostet dieser Pullover jetzt? Da steht 30 Prozent billiger.\nVerkäuferin: Einen Moment bitte ... neunzehnfünfundneunzig.\nKunde: 19,95 Euro?\nVerkäuferin: Ja, Euro natürlich.\nKunde: Hm, ok, den nehme ich."},
+ {n:2, q:"Wie spät ist es?", opts:["15 Uhr.","Gleich 5 Uhr.","Halb 5 Uhr."], correct:1,
+  audio:"Passant: Ach, entschuldigen Sie bitte.\nPassantin: Ja bitte.\nPassant: Haben Sie eine Uhr? Wie spät ist es bitte?\nPassantin: Ja, jetzt ist es gleich 5 Uhr.\nPassant: Was, schon 5. Vielen Dank, Wiedersehen."},
+ {n:3, q:"Was isst die Frau im Restaurant?", opts:["Pommes.","Fisch.","Wurst."], correct:0,
+  audio:"Kellner: Was wünschen Sie bitte?\nGast: Ich hätte gern die Salatplatte und ein...\nKellner: Entschuldigung, die Salatplatte ist leider aus, aber die Bratwurst kann ich Ihnen empfehlen, ganz frisch heute.\nGast: Nein danke, ich esse kein Fleisch. Gibt es etwas ohne Fleisch?\nKellner: Ja, nicht mehr viel: Fisch oder Pommes.\nGast: Fisch... hm... Tja, dann wohl die Pommes."},
+ {n:4, q:"In welche Klasse geht Frau Hegers Sohn?", opts:["In die neunte Klasse.","In die vierte Klasse.","In die dritte Klasse."], correct:2,
+  audio:"Kollege: Haben Sie Kinder, Frau Heger?\nKollegin: Ja, einen Sohn.\nKollege: Und wie alt ist er?\nKollegin: Neun Jahre, seit gestern.\nKollege: Ah, dann geht er ja schon zur Schule?\nKollegin: Ja klar, schon in die dritte Klasse."},
+ {n:5, q:"Wie kommt die Frau in den 2. Stock?", opts:["Mit dem Aufzug.","Mit der Rolltreppe.","Auf der Treppe um die Ecke."], correct:0,
+  audio:"Kundin: Ach, entschuldigen Sie, wie komme ich denn hier in den zweiten Stock? Die Rolltreppe da vorn ist kaputt.\nVerkäufer: Da gehen Sie hier rechts um die Ecke und nehmen den Aufzug.\nKundin: Um die Ecke rechts. Danke."},
+ {n:6, q:"Wohin fährt Herr Albers?", opts:["In Urlaub ans Meer.","Zur Arbeit.","Zur Familie."], correct:2,
+  audio:"Kollegin: Guten Morgen, Herr Albers. So früh schon bei der Arbeit?\nKollege: Ja, ich habe noch viel zu tun. Morgen fahre ich doch für drei Wochen weg.\nKollegin: Ach ja, das hab ich vergessen. Wohin fahren Sie denn?\nKollege: Zu meinen Verwandten nach Polen.\nKollegin: Na dann, schöne Zeit."}
+];
+
+const hoerenT2 = [
+ {n:7, s:"Die Kunden sollen die Weihnachtsfeier besuchen.", correct:false,
+  audio:"Liebe Kunden, zu Weihnachten bieten wir Ihnen Superpreise an, zum Beispiel erstklassiger italienischer Weißwein für 12 Euro 78 die Flasche oder exklusiver argentinischer Rotwein für 9 Euro 68. Besuchen Sie uns im 3. Stock. Frohe Weihnachten."},
+ {n:8, s:"Die Fahrgäste sollen sich im Restaurant treffen.", correct:false,
+  audio:"Liebe Fahrgäste. Wir sind kurz vor Würzburg. Sicherlich haben Sie schon Hunger. An der nächsten Raststätte halten wir für eine Stunde. Wir treffen uns wieder um halb eins am Bus, aber bitte pünktlich sein."},
+ {n:9, s:"Die Fahrgäste sollen im Zug bleiben.", correct:true,
+  audio:"Liebe Fahrgäste! Bitte beachten Sie. Das ist ein außerplanmäßiger Halt. Bitte hier nicht aussteigen. In ein paar Minuten erreichen wir den Bahnhof Bonn-Bad Godesberg."},
+ {n:10, s:"Der Herr soll sofort zum Schalter kommen.", correct:true,
+  audio:"Herr Stefan Janda, gebucht auf dem Flug LH737 nach Warschau, wird zum Schalter F7 gebeten. Der Flug wird in ein paar Minuten geschlossen. Herr Janda, gebucht nach Warschau, bitte nach F7."}
+];
+
+const hoerenT3 = [
+ {n:11, q:"Die Nummer ist:", opts:["11833.","11883.","12833."], correct:0,
+  audio:"Telefonansagedienst der deutschen Telekom. Die Rufnummer des Teilnehmers hat sich geändert. Bitte rufen Sie die Telefon-Auskunft an unter 11833."},
+ {n:12, q:"Wo genau treffen sich die Männer?", opts:["Am Zug.","Am Bahnhof.","An der Information."], correct:2,
+  audio:"Hallo Jan, hier ist Boris. Du, ich bin noch im Zug. Du holst mich doch vom Bahnhof ab? Ich warte an der Information auf dich."},
+ {n:13, q:"Wie lange will der Mann noch warten?", opts:["20 Minuten.","2 Minuten.","10 Minuten."], correct:2,
+  audio:"Mensch Jan, du Penner, hier noch mal Boris. Ich bin jetzt am Bahnhof. Und du? Wo bist du denn? Ich warte schon über 20 Minuten auf dich. Zehn Minuten Zeit hast du noch, bis 2, dann nehme ich ein Taxi."},
+ {n:14, q:"An welchem Tag will die Frau kommen?", opts:["Am Montag.","Am Sonntag.","Am Samstag."], correct:1,
+  audio:"Guten Tag, hier Rogalla. Wir können am Samstag leider nicht zu Ihnen kommen. Am Sonntag haben wir aber Zeit. Rufen Sie uns doch bitte zurück, ob Ihnen das passt. Danke."},
+ {n:15, q:"Was ist kaputt?", opts:["Der Fernseher.","Der Computer.","Das Handy."], correct:1,
+  audio:"Hallo Alex. Walter hier. Kannst du schnell mal rüberkommen? Mein Computer hat einen Fehler. Ich kann nichts drucken. Melde dich doch bitte gleich, wenn du nach Hause kommst."}
+];
+
+function renderMC(container, data, name, withImages){
+  const div = document.getElementById(container);
+  data.forEach(item=>{
+    const el = document.createElement('div');
+    el.className='item';
+    el.innerHTML = `
+      <button class="audio-btn" onclick='toggleSpeak(${JSON.stringify(item.audio)}, this)'>🔊 Anhören</button>
+      <p class="q">${item.n}. ${item.q}</p>
+      <div class="opts opts-grid">
+        ${item.opts.map((o,i)=>{
+          const imgKey = withImages ? `item${item.n}_${i+1}` : null;
+          const img = imgKey && IMAGES[imgKey] ? `<img class="opt-img" src="${IMAGES[imgKey]}" alt="Option ${String.fromCharCode(97+i)}">` : '';
+          return `<label class="opt-card">${img}<span><input type="radio" name="${name}${item.n}" value="${i}"> ${String.fromCharCode(97+i)}) ${o}</span></label>`;
+        }).join('')}
+      </div>
+      <div class="result" id="${name}${item.n}-result"></div>
+    `;
+    div.appendChild(el);
+  });
+}
+function renderRF(container, data, name){
+  const div = document.getElementById(container);
+  data.forEach(item=>{
+    const el = document.createElement('div');
+    el.className='item';
+    el.innerHTML = `
+      ${item.audio?`<button class="audio-btn" onclick='toggleSpeak(${JSON.stringify(item.audio)}, this)'>🔊 Anhören</button>`:''}
+      <p class="q">${item.n}. ${item.s || item.text}</p>
+      <div class="rf">
+        <label><input type="radio" name="${name}${item.n}" value="true"> Richtig</label>
+        <label><input type="radio" name="${name}${item.n}" value="false"> Falsch</label>
+      </div>
+      <div class="result" id="${name}${item.n}-result"></div>
+    `;
+    div.appendChild(el);
+  });
+}
+
+renderMC('hoeren-teil1', hoerenT1, 'h1_', true);
+renderRF('hoeren-teil2', hoerenT2, 'h2_');
+renderMC('hoeren-teil3', hoerenT3, 'h3_', false);
+
+/* ---------- LESEN DATA ---------- */
+const lesenT1 = [
+ {n:1, text:"Lis Zug kommt nach halb eins an.", correct:true},
+ {n:2, text:"Karin wartet den ganzen Vormittag vor der Auskunft.", correct:false},
+ {n:3, text:"Ralf hatte am letzten Wochenende Geburtstag.", correct:false},
+ {n:4, text:"Ralf hat nur zwei oder drei Leute eingeladen.", correct:false},
+ {n:5, text:"Die Party findet draußen statt.", correct:true}
+];
+
+const lesenT2 = [
+ {n:6, q:"Sie möchten mit dem Schiff auf dem Rhein fahren.", imgA:"item6_a", imgB:"item6_b", correct:'b'},
+ {n:7, q:"Sie möchten Deutsch in Deutschland lernen.", imgA:"item7_a", imgB:"item7_b", correct:'a'},
+ {n:8, q:"Sie möchten ein Zugticket im Internet kaufen.", imgA:"item8_a", imgB:"item8_b", correct:'a'},
+ {n:9, q:"Sie möchten Informationen über den Bodensee.", imgA:"item9_a", imgB:"item9_b", correct:'a'},
+ {n:10, q:"Sie sind in Wiesbaden und möchten mit dem Zug am Mittag in Hamburg sein.", imgA:"item10_a", imgB:"item10_b", correct:'b'}
+];
+
+const lesenT3 = [
+ {n:11, label:"In der Sprachschule", text:"In der Sprachschule können Sie etwas zu essen kaufen.", img:"sign_item11", correct:true},
+ {n:12, label:"An der Post", text:"Es ist Samstagnachmittag. Sie können auf der Post Briefmarken kaufen.", img:"sign_item12", correct:false},
+ {n:13, label:"Am Bahnhof", text:"Sie können hier Zigaretten rauchen.", img:"sign_item13", correct:false},
+ {n:14, label:"Eingang Restaurant", text:"Heute Abend können Sie in diesem Restaurant tanzen.", img:"sign_item14", correct:true},
+ {n:15, label:"An der Haltestelle", text:"Von 23 Uhr bis 1 Uhr fährt kein Bus.", img:"sign_item15", correct:true}
+];
+
+function renderRF2(container, data, name){
+  const div = document.getElementById(container);
+  data.forEach(item=>{
+    const el=document.createElement('div');
+    el.className='item';
+    const imgHtml = item.img && IMAGES[item.img] ? `<div class="doc-image small"><img src="${IMAGES[item.img]}" alt="${item.label||''}"></div>` : '';
+    const labelHtml = item.label ? `<p class="q" style="margin-bottom:4px;">${item.label}</p>` : '';
+    el.innerHTML=`
+      ${labelHtml}
+      ${imgHtml}
+      <p class="q">${item.n}. ${item.text}</p>
+      <div class="rf">
+        <label><input type="radio" name="${name}${item.n}" value="true"> Richtig</label>
+        <label><input type="radio" name="${name}${item.n}" value="false"> Falsch</label>
+      </div>
+      <div class="result" id="${name}${item.n}-result"></div>`;
+    div.appendChild(el);
+  });
+}
+function renderAB(container, data, name){
+  const div = document.getElementById(container);
+  data.forEach(item=>{
+    const el=document.createElement('div');
+    el.className='item';
+    const imgA = IMAGES[item.imgA] ? `<img class="site-img" src="${IMAGES[item.imgA]}" alt="Option a">` : '';
+    const imgB = IMAGES[item.imgB] ? `<img class="site-img" src="${IMAGES[item.imgB]}" alt="Option b">` : '';
+    el.innerHTML=`
+      <p class="q">${item.n}. ${item.q}</p>
+      <div class="opts-grid">
+        <label class="opt-card">${imgA}<span><input type="radio" name="${name}${item.n}" value="a"> a)</span></label>
+        <label class="opt-card">${imgB}<span><input type="radio" name="${name}${item.n}" value="b"> b)</span></label>
+      </div>
+      <div class="result" id="${name}${item.n}-result"></div>`;
+    div.appendChild(el);
+  });
+}
+
+renderRF2('lesen-teil1', lesenT1, 'l1_');
+renderAB('lesen-teil2', lesenT2, 'l2_');
+renderRF2('lesen-teil3', lesenT3, 'l3_');
+
+/* ---------- GRADING ---------- */
+let scores = {hoeren:0, lesen:0, schreiben1:0, schreiben2:0};
+const maxScores = {hoeren:15, lesen:15, schreiben1:5, schreiben2:10};
+
+function gradeSection(section){
+  let data, prefix, total=0, correctCount=0;
+  if(section==='hoeren'){
+    total = hoerenT1.length + hoerenT2.length + hoerenT3.length;
+    correctCount += gradeGroup(hoerenT1,'h1_','opts');
+    correctCount += gradeGroup(hoerenT2,'h2_','rf');
+    correctCount += gradeGroup(hoerenT3,'h3_','opts');
+  } else if(section==='lesen'){
+    total = lesenT1.length + lesenT2.length + lesenT3.length;
+    correctCount += gradeGroup(lesenT1,'l1_','rf');
+    correctCount += gradeGroup(lesenT2,'l2_','ab');
+    correctCount += gradeGroup(lesenT3,'l3_','rf');
+  }
+  scores[section] = correctCount;
+  const box = document.getElementById('score-'+section);
+  box.style.display='block';
+  box.innerHTML = `Ergebnis: <strong>${correctCount} von ${total}</strong> richtig (${Math.round(correctCount/total*100)}%).`;
+}
+
+function gradeGroup(data, prefix, type){
+  let correct=0;
+  data.forEach(item=>{
+    const name = prefix+item.n;
+    const sel = document.querySelector(`input[name="${name}"]:checked`);
+    const resultEl = document.getElementById(name+'-result');
+    let isCorrect=false, correctText='';
+    if(type==='opts'){
+      isCorrect = sel && parseInt(sel.value)===item.correct;
+      correctText = String.fromCharCode(97+item.correct)+') '+item.opts[item.correct];
+    } else if(type==='rf'){
+      isCorrect = sel && (sel.value==='true')===item.correct;
+      correctText = item.correct? 'Richtig':'Falsch';
+    } else if(type==='ab'){
+      isCorrect = sel && sel.value===item.correct;
+      correctText = item.correct.toUpperCase();
+    }
+    if(!sel){ resultEl.textContent='Keine Antwort ausgewählt. Richtige Lösung: '+correctText; resultEl.className='result incorrect'; }
+    else if(isCorrect){ resultEl.textContent='✔ Richtig!'; resultEl.className='result correct'; correct++; }
+    else { resultEl.textContent='✘ Falsch. Richtige Lösung: '+correctText; resultEl.className='result incorrect'; }
+  });
+  return correct;
+}
+
+/* Schreiben Teil 1 answers */
+const s1Answers = {
+  s1: ["4","vier"],
+  s2: ["2","zwei"],
+  s3: ["seeheim"],
+  s4: ["bar"],
+  s5: [] // date of next Sunday - accept anything containing "sonntag" or a date
+};
+function gradeSchreiben1(){
+  let correct=0;
+  const checks = [
+    {id:'s1', ok: v=> s1Answers.s1.includes(v.trim().toLowerCase())},
+    {id:'s2', ok: v=> s1Answers.s2.includes(v.trim().toLowerCase())},
+    {id:'s3', ok: v=> v.trim().toLowerCase().includes('seeheim')},
+    {id:'s4', ok: v=> v.trim().toLowerCase().includes('bar')},
+    {id:'s5', ok: v=> /sonntag|so\.?$/i.test(v.trim()) || /\d{1,2}[.\/]\d{1,2}/.test(v.trim())}
+  ];
+  checks.forEach(c=>{
+    const val = document.getElementById(c.id).value || '';
+    if(c.ok(val)) correct++;
+  });
+  scores.schreiben1 = correct;
+  const box = document.getElementById('score-schreiben1');
+  box.style.display='block';
+  box.innerHTML = `Ergebnis: <strong>${correct} von 5</strong> richtig.<br>
+  Musterlösung: (1) 4 Personen &middot; (2) 2 Kinder &middot; (3) Seeheim &middot; (4) bar &middot; (5) [nächster Sonntag / Datum]`;
+}
+
+/* Schreiben Teil 2 - simple heuristic grading */
+function gradeSchreiben2(){
+  const text = document.getElementById('schreiben2text').value.trim();
+  const lower = text.toLowerCase();
+  const wordCount = text.split(/\s+/).filter(w=>w.length>0).length;
+
+  let points = 0;
+  let feedback = [];
+
+  // Anrede + Gruß (communicative shaping) - 1pt each roughly, we scale to 10 total
+  const hasAnrede = /hallo|liebe|sehr geehrte/.test(lower);
+  const hasGruss = /gruß|grüße|tschüs|viele grüße|mit freundlichen/.test(lower);
+  const point1 = /warum|möchte|komme|besuchen|dresden|august/.test(lower);
+  const point2 = /film|museum|museen|kultur|programm|konzert/.test(lower);
+  const point3 = /hotel|adresse|übernachten|zimmer/.test(lower);
+
+  if(hasAnrede){ points+=1.5; feedback.push('✔ Anrede vorhanden'); } else feedback.push('✘ Anrede fehlt (z. B. „Hallo“, „Sehr geehrte Damen und Herren“)');
+  if(hasGruss){ points+=1.5; feedback.push('✔ Grußformel vorhanden'); } else feedback.push('✘ Grußformel fehlt (z. B. „Viele Grüße“)');
+  if(point1){ points+=2.3; feedback.push('✔ Punkt 1 (Grund des Schreibens) angesprochen'); } else feedback.push('✘ Punkt 1 (Warum schreiben Sie?) fehlt/unklar');
+  if(point2){ points+=2.3; feedback.push('✔ Punkt 2 (Kulturprogramm) angesprochen'); } else feedback.push('✘ Punkt 2 (Film/Museen/Kulturprogramm) fehlt');
+  if(point3){ points+=2.4; feedback.push('✔ Punkt 3 (Hoteladressen) angesprochen'); } else feedback.push('✘ Punkt 3 (Hoteladressen) fehlt');
+
+  points = Math.round(points*10)/10;
+  scores.schreiben2 = points;
+
+  const box = document.getElementById('score-schreiben2');
+  box.style.display='block';
+  box.innerHTML = `<strong>Ungefähres Ergebnis: ${points} von 10 Punkten</strong> (${wordCount} Wörter — Ziel: ca. 30 Wörter)<br>
+    <span class="note">Das ist eine grobe automatische Einschätzung nach Inhalt & Form, keine echte Sprachbewertung.</span><br><br>
+    ${feedback.join('<br>')}`;
+}
+
+/* ---------- FINAL SUMMARY ---------- */
+function showFinal(){
+  const hoerenPct = maxScores.hoeren? scores.hoeren/maxScores.hoeren:0;
+  const lesenPct = maxScores.lesen? scores.lesen/maxScores.lesen:0;
+  const schreibenTotal = scores.schreiben1 + scores.schreiben2; // out of 15
+  const schreibenPct = schreibenTotal/15;
+
+  const overallPct = Math.round(((hoerenPct+lesenPct+schreibenPct)/3)*100);
+
+
+  /* Save to Firebase */
+  (async function(){
+    try {
+      const name = (document.getElementById('student-name')?.value || 'Anonym').trim() || 'Anonym';
+      const { initializeApp, getApps } = await import('https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js');
+      const { getFirestore, collection, addDoc, serverTimestamp } = await import('https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js');
+      const cfg = {apiKey:"AIzaSyCuMSWNpOIlnqqxFmy08CfIcbvAUpTXo1E",authDomain:"deutschmeistern-abc4d.firebaseapp.com",projectId:"deutschmeistern-abc4d",storageBucket:"deutschmeistern-abc4d.firebasestorage.app",messagingSenderId:"282075407369",appId:"1:282075407369:web:4a5587b4eb391e768004d8"};
+      const app = getApps().length ? getApps()[0] : initializeApp(cfg);
+      const db = getFirestore(app);
+      await addDoc(collection(db,'goethe_a1_results'), {
+        name, 
+        hoeren: scores.hoeren,
+        lesen: scores.lesen,
+        schreiben1: scores.schreiben1,
+        schreiben2: scores.schreiben2,
+        gesamtProzent: overallPct,
+        timestamp: serverTimestamp()
+      });
+      const saved = document.createElement('p');
+      saved.style.cssText='color:#ffe082;font-weight:700;font-size:.9rem;margin-top:8px;';
+      saved.textContent='✔ Ergebnis gespeichert!';
+      document.getElementById('final-summary').appendChild(saved);
+    } catch(e){ console.log('Save error:', e); }
+  })();
+
+  document.getElementById('final-summary').innerHTML = `
+    <div class="big">${overallPct}%</div>
+    <p>Gesamtergebnis (Hören, Lesen, Schreiben — Sprechen nicht enthalten)</p>
+    <p>Hören: ${scores.hoeren}/${maxScores.hoeren} &nbsp;|&nbsp; Lesen: ${scores.lesen}/${maxScores.lesen} &nbsp;|&nbsp; Schreiben: ${schreibenTotal.toFixed(1)}/15</p>
+    <p style="font-size:.85rem;opacity:.85;">Bestehensgrenze bei der echten Prüfung liegt üblicherweise bei 60%. Zum Bestehen der Gesamtprüfung zählt auch der mündliche Teil (hier nicht enthalten).</p>
+  `;
+}
+</script>
+</body>
+</html>

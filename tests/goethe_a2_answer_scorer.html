@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<title>Goethe-Zertifikat A2 – Antwortbogen &amp; Selbstauswertung</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  :root{
+    --purple:#a668b0; --purple-dark:#7d4a86; --grey-bg:#f4f2f5; --card:#ffffff;
+    --ok:#2e7d32; --bad:#c62828; --text:#2b2b2b;
+  }
+  *{box-sizing:border-box;}
+  body{font-family:'Segoe UI',Arial,sans-serif;background:var(--grey-bg);margin:0;color:var(--text);line-height:1.5;}
+  header{background:var(--purple);color:#fff;padding:22px 20px;text-align:center;}
+  header h1{margin:0 0 6px;font-size:1.5rem;}
+  header p{margin:0;opacity:.9;font-size:.95rem;}
+  .credit{background:#fff3cd;color:#5c4400;font-size:.85rem;text-align:center;padding:8px 16px;border-bottom:1px solid #e6d28a;}
+  main{max-width:900px;margin:0 auto;padding:20px;}
+  section.part{background:var(--card);border-radius:10px;padding:22px;margin-bottom:20px;box-shadow:0 1px 4px rgba(0,0,0,.1);}
+  h2{color:var(--purple-dark);border-bottom:2px solid var(--purple);padding-bottom:6px;margin-top:0;}
+  h3{color:var(--purple-dark);margin-top:24px;margin-bottom:8px;}
+  .grid-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:6px 0;padding:6px 8px;border-radius:6px;}
+  .grid-row:nth-child(odd){background:#faf7fb;}
+  .item-label{min-width:34px;font-weight:700;color:var(--purple-dark);}
+  .opts{display:flex;gap:6px;flex-wrap:wrap;}
+  .opts button{
+    min-width:38px;padding:6px 10px;border:1px solid #ccc;background:#fff;border-radius:6px;
+    cursor:pointer;font-weight:600;color:#555;
+  }
+  .opts button.selected{background:var(--purple);color:#fff;border-color:var(--purple-dark);}
+  .result-icon{font-weight:700;min-width:24px;text-align:center;}
+  .result-icon.correct{color:var(--ok);}
+  .result-icon.incorrect{color:var(--bad);}
+  .submit-btn{background:var(--purple-dark);color:#fff;border:none;padding:10px 24px;border-radius:20px;font-size:1rem;cursor:pointer;margin-top:16px;}
+  .submit-btn:hover{background:#5c3562;}
+  .reset-btn{background:#888;color:#fff;border:none;padding:8px 18px;border-radius:20px;font-size:.9rem;cursor:pointer;margin-left:10px;}
+  .score-box{background:#eef7ee;border:1px solid #b7dab7;border-radius:8px;padding:14px;margin-top:16px;font-weight:600;display:none;}
+  .final-summary{background:var(--purple);color:#fff;border-radius:10px;padding:26px;text-align:center;}
+  .final-summary .big{font-size:2.6rem;font-weight:800;}
+  textarea{width:100%;min-height:70px;padding:8px;border:1px solid #ccc;border-radius:6px;font-family:inherit;font-size:1rem;}
+  .note{font-size:.85rem;color:#666;}
+  .wordcount{font-size:.85rem;color:#777;margin-top:4px;}
+  nav{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;background:var(--purple-dark);padding:10px;position:sticky;top:0;z-index:10;}
+  nav button{background:#fff;border:none;padding:8px 16px;border-radius:20px;cursor:pointer;font-weight:600;color:var(--purple-dark);}
+  nav button.active{background:#ffe082;color:#5c3d00;}
+  .part{display:none;}
+  .part.active{display:block;}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Goethe-Zertifikat A2 – Antwortbogen &amp; Selbstauswertung</h1>
+  <p>Lesen &amp; Hören: automatische Auswertung &middot; Schreiben: Wortanzahl-Check</p>
+</header>
+<div class="credit">
+  Die Prüfungsaufgaben (Texte, Hörtexte, Bilder) stammen aus dem offiziellen, kostenlosen Goethe-Institut A2-Modellsatz
+  (© Goethe-Institut) und sind hier <strong>nicht enthalten</strong> — bitte bearbeiten Sie die Original-PDF-Aufgaben zuerst.
+  Dieses Tool ist nur ein Antwortbogen zur Selbstkontrolle, ähnlich dem offiziellen Antwortbogen.
+</div>
+
+<nav id="tabs">
+  <button data-tab="lesen" class="active">Lesen</button>
+  <button data-tab="hoeren">Hören</button>
+  <button data-tab="schreiben">Schreiben</button>
+  <button data-tab="ergebnis">Ergebnis</button>
+</nav>
+
+<main>
+
+<!-- ================= LESEN ================= -->
+<section id="lesen" class="part active">
+  <h2>Lesen</h2>
+  <p class="note">Bearbeiten Sie zuerst die Original-Aufgaben (Lesen Teil 1–4) auf Papier oder im PDF. Tragen Sie hier nur Ihre Antworten ein.</p>
+
+  <h3>Teil 1 (Items 1–5) — a / b / c</h3>
+  <div id="lesen-t1"></div>
+
+  <h3>Teil 2 (Items 6–10) — a / b / c</h3>
+  <div id="lesen-t2"></div>
+
+  <h3>Teil 3 (Items 11–15) — a / b / c</h3>
+  <div id="lesen-t3"></div>
+
+  <h3>Teil 4 (Items 16–20) — a / b / c / d / e / f / x</h3>
+  <div id="lesen-t4"></div>
+
+  <button class="submit-btn" onclick="gradeSection('lesen')">Lesen auswerten</button>
+  <button class="reset-btn" onclick="resetSection('lesen')">Zurücksetzen</button>
+  <div class="score-box" id="score-lesen"></div>
+</section>
+
+<!-- ================= HÖREN ================= -->
+<section id="hoeren" class="part">
+  <h2>Hören</h2>
+  <p class="note">Hören Sie zuerst die Original-Audiodateien / Transkripte. Tragen Sie hier nur Ihre Antworten ein.</p>
+
+  <h3>Teil 1 (Items 1–5) — a / b / c</h3>
+  <div id="hoeren-t1"></div>
+
+  <h3>Teil 2 (Items 6–10) — a bis i</h3>
+  <div id="hoeren-t2"></div>
+
+  <h3>Teil 3 (Items 11–15) — a / b / c</h3>
+  <div id="hoeren-t3"></div>
+
+  <h3>Teil 4 (Items 16–20) — Ja / Nein</h3>
+  <div id="hoeren-t4"></div>
+
+  <button class="submit-btn" onclick="gradeSection('hoeren')">Hören auswerten</button>
+  <button class="reset-btn" onclick="resetSection('hoeren')">Zurücksetzen</button>
+  <div class="score-box" id="score-hoeren"></div>
+</section>
+
+<!-- ================= SCHREIBEN ================= -->
+<section id="schreiben" class="part">
+  <h2>Schreiben</h2>
+  <p class="note">Schreiben Teil 1 (SMS, ca. 20–30 Wörter) und Teil 2 (E-Mail, ca. 30–40 Wörter). Fügen Sie Ihren Text hier ein — Sie erhalten eine Wortanzahl-Prüfung. Die inhaltliche Bewertung sollte eine Lehrkraft vornehmen.</p>
+
+  <h3>Teil 1 — SMS (Ziel: 20–30 Wörter)</h3>
+  <textarea id="schreiben1" placeholder="Ihre SMS hier..."></textarea>
+  <div class="wordcount" id="wc1"></div>
+
+  <h3>Teil 2 — E-Mail (Ziel: 30–40 Wörter)</h3>
+  <textarea id="schreiben2" placeholder="Ihre E-Mail hier..."></textarea>
+  <div class="wordcount" id="wc2"></div>
+
+  <button class="submit-btn" onclick="checkSchreiben()">Wortanzahl prüfen</button>
+  <div class="score-box" id="score-schreiben"></div>
+</section>
+
+<!-- ================= ERGEBNIS ================= -->
+<section id="ergebnis" class="part">
+  <h2>Gesamtergebnis</h2>
+  <div class="final-summary" id="final-summary">
+    <p>Werten Sie zuerst Lesen und Hören aus. Klicken Sie dann hier für das Gesamtergebnis.</p>
+  </div>
+  <button class="submit-btn" onclick="showFinal()">Gesamtergebnis anzeigen</button>
+</section>
+
+</main>
+
+<script>
+/* ---------- TAB NAVIGATION ---------- */
+document.querySelectorAll('nav button').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('nav button').forEach(b=>b.classList.remove('active'));
+    document.querySelectorAll('section.part').forEach(s=>s.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById(btn.dataset.tab).classList.add('active');
+  });
+});
+
+/* ---------- ANSWER KEY (facts only — official Lösungen, no question text) ---------- */
+const KEY = {
+  lesen: {
+    t1: {1:'c',2:'c',3:'c',4:'a',5:'a'},
+    t2: {6:'c',7:'b',8:'c',9:'b',10:'a'},
+    t3: {11:'c',12:'a',13:'c',14:'b',15:'c'},
+    t4: {16:'f',17:'c',18:'x',19:'b',20:'a'}
+  },
+  hoeren: {
+    t1: {1:'b',2:'b',3:'c',4:'b',5:'a'},
+    t2: {6:'b',7:'g',8:'h',9:'d',10:'e'},
+    t3: {11:'c',12:'a',13:'b',14:'b',15:'b'},
+    t4: {16:'nein',17:'ja',18:'ja',19:'nein',20:'nein'}
+  }
+};
+
+const scores = {lesen:null, hoeren:null};
+
+/* ---------- GENERIC ROW RENDERERS (no question text, item numbers only) ---------- */
+function renderABC(containerId, items, storeKey){
+  const div = document.getElementById(containerId);
+  items.forEach(n=>{
+    const row = document.createElement('div');
+    row.className='grid-row';
+    row.innerHTML = `<span class="item-label">${n}.</span>
+      <div class="opts" data-item="${n}">
+        ${['a','b','c'].map(o=>`<button type="button" onclick="selectOpt(this,'${storeKey}',${n},'${o}')">${o}</button>`).join('')}
+      </div>
+      <span class="result-icon" id="${storeKey}-result-${n}"></span>`;
+    div.appendChild(row);
+  });
+}
+
+function renderMatch(containerId, items, storeKey, letters){
+  const div = document.getElementById(containerId);
+  items.forEach(n=>{
+    const row = document.createElement('div');
+    row.className='grid-row';
+    row.innerHTML = `<span class="item-label">${n}.</span>
+      <div class="opts" data-item="${n}">
+        ${letters.map(o=>`<button type="button" onclick="selectOpt(this,'${storeKey}',${n},'${o}')">${o}</button>`).join('')}
+      </div>
+      <span class="result-icon" id="${storeKey}-result-${n}"></span>`;
+    div.appendChild(row);
+  });
+}
+
+function renderJaNein(containerId, items, storeKey){
+  const div = document.getElementById(containerId);
+  items.forEach(n=>{
+    const row = document.createElement('div');
+    row.className='grid-row';
+    row.innerHTML = `<span class="item-label">${n}.</span>
+      <div class="opts" data-item="${n}">
+        <button type="button" onclick="selectOpt(this,'${storeKey}',${n},'ja')">Ja</button>
+        <button type="button" onclick="selectOpt(this,'${storeKey}',${n},'nein')">Nein</button>
+      </div>
+      <span class="result-icon" id="${storeKey}-result-${n}"></span>`;
+    div.appendChild(row);
+  });
+}
+
+/* ---------- ANSWER STORAGE ---------- */
+const userAnswers = {lesen:{}, hoeren:{}};
+
+function selectOpt(btn, storeKey, item, value){
+  userAnswers[storeKey][item] = value;
+  const row = btn.closest('.opts');
+  row.querySelectorAll('button').forEach(b=>b.classList.remove('selected'));
+  btn.classList.add('selected');
+  // clear any previous result mark once changed
+  const resEl = document.getElementById(storeKey+'-result-'+item);
+  if(resEl) resEl.textContent='';
+}
+
+/* build all rows */
+renderABC('lesen-t1', [1,2,3,4,5], 'lesen');
+renderABC('lesen-t2', [6,7,8,9,10], 'lesen');
+renderABC('lesen-t3', [11,12,13,14,15], 'lesen');
+renderMatch('lesen-t4', [16,17,18,19,20], 'lesen', ['a','b','c','d','e','f','x']);
+
+renderABC('hoeren-t1', [1,2,3,4,5], 'hoeren');
+renderMatch('hoeren-t2', [6,7,8,9,10], 'hoeren', ['a','b','c','d','e','f','g','h','i']);
+renderABC('hoeren-t3', [11,12,13,14,15], 'hoeren');
+renderJaNein('hoeren-t4', [16,17,18,19,20], 'hoeren');
+
+/* ---------- GRADING ---------- */
+function gradeSection(section){
+  const key = KEY[section];
+  let correct = 0, total = 0;
+  Object.keys(key).forEach(teil=>{
+    Object.keys(key[teil]).forEach(itemStr=>{
+      const item = parseInt(itemStr);
+      const correctAns = key[teil][item];
+      const given = userAnswers[section][item];
+      total++;
+      const resEl = document.getElementById(section+'-result-'+item);
+      if(given === undefined){
+        if(resEl){ resEl.textContent='?'; resEl.className='result-icon'; }
+      } else if(given === correctAns){
+        correct++;
+        if(resEl){ resEl.textContent='✔'; resEl.className='result-icon correct'; }
+      } else {
+        if(resEl){ resEl.textContent='✘ ('+correctAns+')'; resEl.className='result-icon incorrect'; }
+      }
+    });
+  });
+  scores[section] = correct;
+  const box = document.getElementById('score-'+section);
+  box.style.display='block';
+  box.innerHTML = `Ergebnis: <strong>${correct} von ${total}</strong> richtig (${Math.round(correct/total*100)}%).`;
+}
+
+function resetSection(section){
+  userAnswers[section] = {};
+  document.querySelectorAll(`#${section} .opts button`).forEach(b=>b.classList.remove('selected'));
+  document.querySelectorAll(`#${section} .result-icon`).forEach(r=>{r.textContent=''; r.className='result-icon';});
+  document.getElementById('score-'+section).style.display='none';
+  scores[section] = null;
+}
+
+/* ---------- SCHREIBEN WORD COUNT ---------- */
+function wordCount(text){
+  return text.trim().split(/\s+/).filter(w=>w.length>0).length;
+}
+document.getElementById('schreiben1').addEventListener('input', e=>{
+  document.getElementById('wc1').textContent = wordCount(e.target.value)+' Wörter (Ziel: 20–30)';
+});
+document.getElementById('schreiben2').addEventListener('input', e=>{
+  document.getElementById('wc2').textContent = wordCount(e.target.value)+' Wörter (Ziel: 30–40)';
+});
+function checkSchreiben(){
+  const w1 = wordCount(document.getElementById('schreiben1').value);
+  const w2 = wordCount(document.getElementById('schreiben2').value);
+  const box = document.getElementById('score-schreiben');
+  box.style.display='block';
+  const ok1 = w1>=20 && w1<=30;
+  const ok2 = w2>=30 && w2<=40;
+  box.innerHTML = `
+    Teil 1: ${w1} Wörter — ${ok1? '✔ im Zielbereich':'⚠ außerhalb 20–30 Wörter'}<br>
+    Teil 2: ${w2} Wörter — ${ok2? '✔ im Zielbereich':'⚠ außerhalb 30–40 Wörter'}<br>
+    <span class="note">Wortanzahl ist nur ein grober Anhaltspunkt. Die inhaltliche und sprachliche Bewertung (Aufgabenerfüllung, Sprache) sollte weiterhin von einer Lehrkraft vorgenommen werden.</span>`;
+}
+
+/* ---------- FINAL SUMMARY ---------- */
+function showFinal(){
+  const lesenPct = scores.lesen!==null ? scores.lesen/20 : null;
+  const hoerenPct = scores.hoeren!==null ? scores.hoeren/20 : null;
+  let msg = '';
+  if(lesenPct===null || hoerenPct===null){
+    msg = '<p>Bitte werten Sie zuerst Lesen und Hören aus (Buttons oben in den jeweiligen Tabs).</p>';
+    document.getElementById('final-summary').innerHTML = msg;
+    return;
+  }
+  const overallPct = Math.round(((lesenPct+hoerenPct)/2)*100);
+  document.getElementById('final-summary').innerHTML = `
+    <div class="big">${overallPct}%</div>
+    <p>Lesen: ${scores.lesen}/20 &nbsp;|&nbsp; Hören: ${scores.hoeren}/20</p>
+    <p style="font-size:.85rem;opacity:.85;">Schreiben wird separat bewertet (siehe Tab „Schreiben"). Zum Bestehen der A2-Gesamtprüfung sind i. d. R. mind. 60% über alle Teile (inkl. Sprechen) nötig.</p>
+  `;
+}
+</script>
+</body>
+</html>
